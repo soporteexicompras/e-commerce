@@ -1,58 +1,101 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# E-Commerce
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistema de tienda en línea desarrollado con **Laravel 12** y **Aimeos**, orientado al mercado colombiano. Permite gestionar productos, categorías, pedidos, clientes y pagos desde un panel de administración completo.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Tecnologías principales
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **PHP 8.3**
+- **Laravel 12** — framework backend
+- **Aimeos** — motor de e-commerce
+- **MySQL** — base de datos
+- **Tailwind CSS v3** — estilos
+- **Alpine.js v3** — interactividad frontend
+- **Vite** — bundler de assets
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Requisitos
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- PHP >= 8.3
+- Composer
+- Node.js >= 18
+- MySQL >= 8.0
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Instalación local
 
 ```bash
-composer require laravel/boost --dev
+# Clonar el repositorio
+git clone https://github.com/soporteexicompras/e-commerce.git
+cd e-commerce
 
-php artisan boost:install
+# Instalar dependencias PHP
+composer install
+
+# Instalar dependencias JS
+npm install
+
+# Configurar variables de entorno
+cp .env.example .env
+php artisan key:generate
+
+# Ejecutar migraciones y seeders
+php artisan migrate --seed
+
+# Compilar assets
+npm run build
+
+# Iniciar servidor de desarrollo
+php artisan serve
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## Variables de entorno relevantes
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+| Variable | Valor por defecto | Descripción |
+|---|---|---|
+| `APP_NAME` | E-Commerce | Nombre de la aplicación |
+| `APP_LOCALE` | es | Idioma de la aplicación |
+| `APP_FAKER_LOCALE` | es_CO | Locale para datos de prueba (Colombia) |
+| `APP_TIMEZONE` | America/Bogota | Zona horaria |
+| `DB_DATABASE` | e_commerce | Base de datos MySQL |
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Comandos útiles
 
-## Security Vulnerabilities
+```bash
+# Ejecutar pruebas
+php artisan test --compact
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# Limpiar caché
+php artisan optimize:clear
 
-## License
+# Panel de administración Aimeos
+php artisan aimeos:setup
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Servidor de desarrollo con Vite
+composer run dev
+```
+
+---
+
+## Acceso al panel de administración
+
+Una vez instalado, el panel de administración de Aimeos está disponible en:
+
+```
+http://localhost:8000/admin
+```
+
+Los roles con acceso son `admin` y `editor`.
+
+---
+
+## Licencia
+
+Este proyecto es software propietario. Todos los derechos reservados.
