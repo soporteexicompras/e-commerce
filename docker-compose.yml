@@ -1,0 +1,150 @@
+services:
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # PHP-FPM Application Server
+  # In dev: source is bind-mounted; vendor lives in a named volume so
+  # PHP extensions installed inside Docker don't clash with the host.
+  # For production: set target: production and remove the bind mounts.
+  # ─────────────────────────────────────────────────────────────────────────
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: base          # lightweight image; volumes provide source + vendor
+    volumes:
+      - .:/var/www/html
+      - vendor:/var/www/html/vendor
+      - node_modules:/var/www/html/node_modules
+    env_file: .env
+    environment:
+      DB_HOST: mysql
+      DB_PORT: "3306"
+      REDIS_HOST: redis
+      SESSION_DRIVER: redis
+      CACHE_STORE: redis
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      # Passes once the entrypoint finishes running migrations & setup
+      test: ["CMD-SHELL", "test -f /tmp/.app-ready"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    networks:
+      - e-commerce
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # Nginx Web Server
+  # ─────────────────────────────────────────────────────────────────────────
+  nginx:
+    image: nginx:1.27-alpine
+    ports:
+      - "${APP_PORT:-80}:80"
+    volumes:
+      - .:/var/www/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      app:
+        condition: service_healthy
+    networks:
+      - e-commerce
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # MySQL 8.0
+  # ─────────────────────────────────────────────────────────────────────────
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD:-secret}"
+      MYSQL_DATABASE: "${DB_DATABASE:-e_commerce}"
+      MYSQL_USER: "${DB_USERNAME:-laravel}"
+      MYSQL_PASSWORD: "${DB_PASSWORD:-secret}"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "${DB_FORWARD_PORT:-3306}:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - e-commerce
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # Redis — cache, sessions & queue backend
+  # ─────────────────────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis-data:/data
+    ports:
+      - "${REDIS_FORWARD_PORT:-6379}:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    networks:
+      - e-commerce
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # Laravel Queue Worker
+  # ─────────────────────────────────────────────────────────────────────────
+  queue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: base
+    command: ["php", "artisan", "queue:work", "--sleep=3", "--tries=3", "--max-time=3600"]
+    restart: unless-stopped
+    volumes:
+      - .:/var/www/html
+      - vendor:/var/www/html/vendor
+    env_file: .env
+    environment:
+      DB_HOST: mysql
+      DB_PORT: "3306"
+      REDIS_HOST: redis
+    depends_on:
+      app:
+        condition: service_healthy
+    networks:
+      - e-commerce
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # Laravel Task Scheduler (replaces cron)
+  # ─────────────────────────────────────────────────────────────────────────
+  scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: base
+    command: ["/bin/sh", "-c", "while true; do php artisan schedule:run --verbose --no-interaction; sleep 60; done"]
+    restart: unless-stopped
+    volumes:
+      - .:/var/www/html
+      - vendor:/var/www/html/vendor
+    env_file: .env
+    environment:
+      DB_HOST: mysql
+      DB_PORT: "3306"
+      REDIS_HOST: redis
+    depends_on:
+      app:
+        condition: service_healthy
+    networks:
+      - e-commerce
+
+volumes:
+  mysql-data:
+  redis-data:
+  vendor:
+  node_modules:
+
+networks:
+  e-commerce:
+    driver: bridge

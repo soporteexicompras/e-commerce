@@ -1,0 +1,41 @@
+# Version control
+.git
+.gitattributes
+
+# Dependencies — installed inside Docker
+node_modules
+vendor
+
+# Environment files — never bake secrets into the image
+.env
+.env.*
+!.env.example
+
+# Laravel runtime / generated files
+storage/app/*
+!storage/app/.gitignore
+storage/framework/cache/data/*
+storage/framework/sessions/*
+storage/framework/testing/*
+storage/framework/views/*
+!storage/framework/cache/.gitignore
+!storage/framework/sessions/.gitignore
+!storage/framework/views/.gitignore
+storage/logs/*
+!storage/logs/.gitignore
+bootstrap/cache/*.php
+
+# Vite build output — rebuilt in the assets stage
+public/build
+public/hot
+
+# Dev tooling
+.phpunit.cache
+.idea
+.vscode
+*.md
+!README.md
+
+# OS artefacts
+.DS_Store
+Thumbs.db
