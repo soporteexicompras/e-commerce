@@ -165,8 +165,8 @@
 			}
 
 			.app-menu-logo img {
-				height: 2rem;
-				width: 2rem;
+				height: 2.75rem;
+				width: 2.75rem;
 				border-radius: 0.375rem;
 				object-fit: cover;
 				flex-shrink: 0;
