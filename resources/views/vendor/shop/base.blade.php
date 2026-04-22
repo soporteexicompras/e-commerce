@@ -6,8 +6,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 
-		<title>Exicompras — Tu tienda en línea</title>
-
 		@if( config('app.debug') !== true )
 			<meta http-equiv="Content-Security-Policy" content="base-uri 'self'; default-src 'self' 'nonce-{{ app( 'aimeos.context' )->get()->nonce() }}'; {{ config( 'shop.csp.frontend', 'style-src \'unsafe-inline\' \'self\'; img-src \'self\' data: https://aimeos.org; frame-src https://www.youtube.com https://player.vimeo.com' ) }}">
 		@endif
@@ -18,7 +16,7 @@
 			<link type="text/css" rel="stylesheet" href="{{ asset('vendor/shop/themes/default/app.css?v=' . config( 'shop.version', 1 ) ) }}">
 		@endif
 		<link type="text/css" rel="stylesheet" href="{{ asset('vendor/shop/themes/default/aimeos.css?v=' . config( 'shop.version', 1 ) ) }}">
-		<link type="text/css" rel="stylesheet" href="{{ asset('vendor/shop/themes/default/exicompras.css?v=' . config( 'shop.version', 1 ) ) }}">
+		<link type="text/css" rel="stylesheet" href="{{ asset('vendor/shop/themes/default/exicompras.css?v=1') }}">
 
 		@yield('aimeos_header')
 
@@ -30,18 +28,16 @@
 			}
 		</style>
 
-		<link rel="icon" href="{{ asset('images/exicompras.jpg') }}">
+		<link rel="icon" href="{{ asset( app( 'aimeos.context' )->get()->config()->get( 'resource/fs-media/baseurl' ) . '/' . ( app( 'aimeos.context' )->get()->locale()->getSiteItem()->getIcon() ?: '../vendor/shop/themes/default/assets/icon.png' ) ) }}">
 
-		<!-- Fonts -->
-		<link rel="preconnect" href="https://fonts.bunny.net">
-		<link href="https://fonts.bunny.net/css?family=inter:300,400,500,600,700&display=swap" rel="stylesheet" />
+		<link rel="preload" href="{{ asset('vendor/shop/themes/default/assets/roboto-condensed-v19-latin-regular.woff2') }}" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="{{ asset('vendor/shop/themes/default/assets/roboto-condensed-v19-latin-700.woff2') }}" as="font" type="font/woff2" crossorigin>
 		<link rel="preload" href="{{ asset('vendor/shop/themes/default/assets/bootstrap-icons.woff2') }}" as="font" type="font/woff2" crossorigin>
 	</head>
 	<body class="{{ $page ?? '' }}">
 		<nav class="navbar navbar-expand-md navbar-top">
 			<a class="navbar-brand" href="/" title="{{ __('To the home page') }}">
-				<img src="{{ asset('images/exicompras.jpg') }}" class="exicompras-logo" alt="Exicompras">
-				<span class="exicompras-name">Exicompras</span>
+				<img src="{{ asset( app( 'aimeos.context' )->get()->config()->get( 'resource/fs-media/baseurl' ) . '/' . ( app( 'aimeos.context' )->get()->locale()->getSiteItem()->getLogo() ?: '../vendor/shop/themes/default/assets/logo.png' ) ) }}" height="40" alt="{{ __('To the home page') }}">
 			</a>
 
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-top" aria-controls="navbar-top" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,6 +78,7 @@
 			</main>
 		</div>
 
+
 		<footer>
 			<div class="container-fluid">
 				<div class="row">
@@ -89,7 +86,7 @@
 						<div class="row">
 							<div class="col-sm-6 footer-left">
 								<div class="footer-block">
-									<h2 aria-label="{{ __('Legal information') }}">{{ __( 'LEGAL' ) }}</h2>
+									<h2 class="pb-3" aria-label="{{ __('Legal information') }}">{{ __( 'LEGAL' ) }}</h2>
 									<p><a href="{{ airoute(config('shop.client.html.cms.page.url.target', 'aimeos_page'), ['path' => 'terms']) }}">{{ __( 'Terms & Conditions' ) }}</a></p>
 									<p><a href="{{ airoute(config('shop.client.html.cms.page.url.target', 'aimeos_page'), ['path' => 'privacy']) }}">{{ __( 'Privacy Notice' ) }}</a></p>
 									<p><a href="{{ airoute(config('shop.client.html.cms.page.url.target', 'aimeos_page'), ['path' => 'cancel']) }}">{{ __( 'Cancellation' ) }}</a></p>
@@ -97,7 +94,7 @@
 							</div>
 							<div class="col-sm-6 footer-center">
 								<div class="footer-block">
-									<h2 aria-label="{{ __('About the company') }}">{{ __( 'ABOUT US' ) }}</h2>
+									<h2 class="pb-3" aria-label="{{ __('About the company') }}">{{ __( 'ABOUT US' ) }}</h2>
 									<p><a href="{{ airoute(config('shop.client.html.cms.page.url.target', 'aimeos_page'), ['path' => 'contact']) }}">{{ __( 'Contact us' ) }}</a></p>
 									<p><a href="{{ airoute(config('shop.client.html.cms.page.url.target', 'aimeos_page'), ['path' => 'about']) }}">{{ __( 'Company' ) }}</a></p>
 								</div>
@@ -106,9 +103,8 @@
 					</div>
 					<div class="col-md-4 footer-right">
 						<div class="footer-block">
-							<a class="logo footer-logo-wrapper" href="/" title="{{ __('To the home page') }}">
-								<img src="{{ asset('images/exicompras.jpg') }}" class="exicompras-logo" alt="Exicompras">
-								<span class="exicompras-name">Exicompras</span>
+							<a class="logo" href="/" title="{{ __('To the home page') }}">
+								<img src="{{ asset( app( 'aimeos.context' )->get()->config()->get( 'resource/fs-media/baseurl' ) . '/' . ( app( 'aimeos.context' )->get()->locale()->getSiteItem()->getLogo() ?: '../vendor/shop/themes/default/assets/logo.png' ) ) }}" height="40" alt="{{ __('To the home page') }}">
 							</a>
 							<div class="social" aria-label="{{ __('Social media links') }}">
 								<p><a href="#" class="sm facebook" title="Facebook" rel="noopener">Facebook</a></p>
@@ -119,11 +115,10 @@
 						</div>
 					</div>
 				</div>
-				<div class="footer-copyright">
-					&copy; {{ date('Y') }} Exicompras. {{ __('All rights reserved.') }}
-				</div>
 			</div>
 		</footer>
+
+
 
 		<a id="toTop" class="back-to-top" href="#" title="{{ __( 'Back to top' ) }}">
 			<div class="top-icon"></div>

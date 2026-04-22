@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="{{ $locale }}" dir="{{ $localeDir }}">
 	<head>
 		<meta charset="utf-8">
@@ -35,48 +35,48 @@
 				--bs-line: #e2e8f0;
 				--bs-line-light: #f1f5f9;
 				--bs-menu: #ffffff;
-				--bs-menu-bg: #0f172a;
+				--bs-menu-bg: #003D8F;
 				--bs-menu-alt: #94a3b8;
-				--bs-menu-alt-bg: #1e293b;
-				--bs-primary: #0f172a;
-				--bs-primary-dark: #020617;
-				--bs-primary-light: #334155;
-				--bs-primary-alt: #0f172a;
-				--bs-primary-alt-dark: #020617;
-				--bs-primary-alt-light: #1e293b;
+				--bs-menu-alt-bg: #002F80;
+				--bs-primary: #003D8F;
+				--bs-primary-dark: #002060;
+				--bs-primary-light: #0064D2;
+				--bs-primary-alt: #003D8F;
+				--bs-primary-alt-dark: #002060;
+				--bs-primary-alt-light: #002F80;
 				--bs-secondary: #475569;
-				--bs-secondary-dark: #0f172a;
+				--bs-secondary-dark: #003D8F;
 				--bs-secondary-light: #94a3b8;
 				--bs-danger: #dc2626;
-				--bs-warning: #f59e0b;
-				--bs-success: #16a34a;
+				--bs-warning: #FF6B00;
+				--bs-success: #00A650;
 				--bs-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
 				font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
 			}
 
 			/* ── Theme tokens (dark) ───────────────────────────────────── */
 			body.dark {
-				--bs-bg: #0f172a;
-				--bs-bg-dark: #020617;
-				--bs-bg-light: #1e293b;
-				--bs-line: #334155;
+				--bs-bg: #003D8F;
+				--bs-bg-dark: #002060;
+				--bs-bg-light: #002F80;
+				--bs-line: #0064D2;
 				--bs-line-light: #475569;
 				--bs-menu: #f1f5f9;
-				--bs-menu-bg: #020617;
+				--bs-menu-bg: #002060;
 				--bs-menu-alt: #94a3b8;
-				--bs-menu-alt-bg: #0f172a;
-				--bs-primary: #f59e0b;
-				--bs-primary-light: #fbbf24;
-				--bs-primary-dark: #d97706;
-				--bs-primary-alt: #f59e0b;
-				--bs-primary-alt-light: #fbbf24;
-				--bs-primary-alt-dark: #d97706;
+				--bs-menu-alt-bg: #003D8F;
+				--bs-primary: #FF6B00;
+				--bs-primary-light: #FF9040;
+				--bs-primary-dark: #CC5500;
+				--bs-primary-alt: #FF6B00;
+				--bs-primary-alt-light: #FF9040;
+				--bs-primary-alt-dark: #CC5500;
 				--bs-secondary: #cbd5e1;
 				--bs-secondary-dark: #f1f5f9;
 				--bs-secondary-light: #64748b;
 				--bs-danger: #ef4444;
-				--bs-warning: #fbbf24;
-				--bs-success: #4ade80;
+				--bs-warning: #FF9040;
+				--bs-success: #00CF63;
 				--bs-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
 			}
 
@@ -88,14 +88,14 @@
 
 			/* ── Top bar ───────────────────────────────────────────────── */
 			.app-menu {
-				background: #0f172a !important;
+				background: #003D8F !important;
 				height: 3.25rem !important;
 				border-bottom: 1px solid rgba(255,255,255,0.06);
 			}
 
 			@media (min-width: 992px) {
 				.app-menu {
-					background: #0f172a !important;
+					background: #003D8F !important;
 				}
 			}
 
@@ -112,8 +112,8 @@
 			}
 
 			.app-menu .icon:hover {
-				color: #f59e0b !important;
-				fill: #f59e0b !important;
+				color: #FF6B00 !important;
+				fill: #FF6B00 !important;
 				opacity: 1;
 			}
 
@@ -133,7 +133,7 @@
 			}
 
 			.app-menu button:hover {
-				color: #f59e0b !important;
+				color: #FF6B00 !important;
 			}
 
 			.app-menu button svg {
@@ -182,14 +182,14 @@
 
 			/* ── Sidebar ───────────────────────────────────────────────── */
 			.aimeos .main-sidebar {
-				background-color: #0f172a !important;
+				background-color: #003D8F !important;
 				top: 3.25rem !important;
 				border-right: 1px solid rgba(255,255,255,0.06);
 			}
 
 			@media (min-width: 992px) {
 				.aimeos .main-sidebar {
-					background: #0f172a !important;
+					background: #003D8F !important;
 				}
 			}
 
@@ -240,8 +240,8 @@
 			body:not(.dark) .aimeos .sidebar-menu > li.active > span,
 			body:not(.dark) .aimeos .main-sidebar .sidebar-menu > li.active > a,
 			body:not(.dark) .aimeos .main-sidebar .sidebar-menu > li.active > span {
-				color: #f59e0b !important;
-				background-color: rgba(245,158,11,0.1) !important;
+				color: #FF6B00 !important;
+				background-color: rgba(255,107,0,0.1) !important;
 				border-radius: 0.5rem;
 				margin: 0.125rem 0.5rem;
 			}
@@ -263,21 +263,57 @@
 				padding: 0.75rem 0.75rem 0.25rem !important;
 			}
 
-			/* Sidebar tree-menu */
+			/* Sidebar tree-menu — el panel tiene fondo claro, texto oscuro */
+			.aimeos .sidebar-menu .tree-menu-wrapper,
+			body:not(.dark) .aimeos .sidebar-menu .tree-menu-wrapper {
+				background-color: #ffffff !important;
+			}
+
 			.aimeos .sidebar-menu .tree-menu a,
-			body:not(.dark) .aimeos .sidebar-menu .tree-menu a {
-				color: rgba(255,255,255,0.6) !important;
+			.aimeos .sidebar-menu li .tree-menu-wrapper .tree-menu a,
+			body:not(.dark) .aimeos .sidebar-menu .tree-menu a,
+			body:not(.dark) .aimeos .sidebar-menu li .tree-menu-wrapper .tree-menu a {
+				color: #374151 !important;
 				font-size: 0.8125rem;
 			}
 
 			.aimeos .sidebar-menu .tree-menu a:hover,
-			body:not(.dark) .aimeos .sidebar-menu .tree-menu a:hover {
-				color: #ffffff !important;
+			.aimeos .sidebar-menu li .tree-menu-wrapper .tree-menu a:hover,
+			body:not(.dark) .aimeos .sidebar-menu .tree-menu a:hover,
+			body:not(.dark) .aimeos .sidebar-menu li .tree-menu-wrapper .tree-menu a:hover {
+				color: #003D8F !important;
+			}
+
+			/* tree-menu en modo oscuro */
+			body.dark .aimeos .sidebar-menu .tree-menu-wrapper {
+				background-color: #002F80 !important;
+			}
+
+			body.dark .aimeos .sidebar-menu .tree-menu a,
+			body.dark .aimeos .sidebar-menu li .tree-menu-wrapper .tree-menu a {
+				color: rgba(255,255,255,0.75) !important;
+			}
+
+			body.dark .aimeos .sidebar-menu .tree-menu a:hover,
+			body.dark .aimeos .sidebar-menu li .tree-menu-wrapper .tree-menu a:hover {
+				color: #FF6B00 !important;
+			}
+
+			/* Ítems del tree-menu */
+			.aimeos .sidebar-menu li .tree-menu li,
+			body:not(.dark) .aimeos .sidebar-menu li .tree-menu li {
+				background-color: #ffffff !important;
+				color: #374151 !important;
+			}
+
+			body.dark .aimeos .sidebar-menu li .tree-menu li {
+				background-color: #002F80 !important;
+				color: rgba(255,255,255,0.75) !important;
 			}
 
 			/* ── Logo area fix ─────────────────────────────────────────── */
 			.aimeos .logo {
-				background-color: #0f172a !important;
+				background-color: #003D8F !important;
 				height: 3.25rem !important;
 			}
 
@@ -292,6 +328,28 @@
 			.main-content {
 				background-color: var(--bs-bg) !important;
 				color: var(--bs-secondary) !important;
+			}
+
+			/* Texto base en área de contenido solo para modo claro */
+			body:not(.dark) .main-content {
+				color: #22292f !important;
+			}
+
+			body:not(.dark) .card,
+			body:not(.dark) .aimeos .card,
+			body:not(.dark) .card-header,
+			body:not(.dark) .dashboard .order-latest table,
+			body:not(.dark) .dashboard .order-latest table td,
+			body:not(.dark) .dashboard .order-latest table th,
+			body:not(.dark) .aimeos .list-items .table,
+			body:not(.dark) .aimeos .list-items .table td,
+			body:not(.dark) .aimeos .list-items .table th {
+				color: #22292f !important;
+			}
+
+			/* Botones y sidebar siguen con texto claro */
+			.btn-primary, .aimeos .btn-primary, .app-menu .icon, .app-menu .menu, .aimeos .sidebar-menu a, .aimeos .sidebar-menu > li > span {
+				color: #fff !important;
 			}
 
 			.main-navbar {
@@ -353,17 +411,17 @@
 
 			/* Progress bar colors — adapt for dark mode */
 			.dashboard .order-quick-counttotal .quick-length {
-				background-color: #0f172a !important;
+				background-color: #003D8F !important;
 			}
 			body.dark .dashboard .order-quick-counttotal .quick-length {
-				background-color: #f59e0b !important;
+				background-color: #FF6B00 !important;
 			}
 
 			.dashboard .order-quick-countcompleted .quick-length {
-				background-color: #16a34a !important;
+				background-color: #00A650 !important;
 			}
 			body.dark .dashboard .order-quick-countcompleted .quick-length {
-				background-color: #4ade80 !important;
+				background-color: #00CF63 !important;
 			}
 
 			.dashboard .order-quick-countunfinished .quick-length {
@@ -374,10 +432,10 @@
 			}
 
 			.dashboard .order-quick-countcustomer .quick-length {
-				background-color: #f59e0b !important;
+				background-color: #FF6B00 !important;
 			}
 			body.dark .dashboard .order-quick-countcustomer .quick-length {
-				background-color: #fbbf24 !important;
+				background-color: #FF9040 !important;
 			}
 
 			/* Quick percent badges */
@@ -388,8 +446,8 @@
 			}
 
 			.dashboard .quick-percent.positive {
-				background-color: #dcfce7 !important;
-				color: #15803d !important;
+				background-color: #D1FAE5 !important;
+				color: #007A3B !important;
 			}
 
 			.dashboard .quick-percent.neutral {
@@ -404,7 +462,7 @@
 
 			body.dark .dashboard .quick-percent.positive {
 				background-color: rgba(22,163,74,0.2) !important;
-				color: #4ade80 !important;
+				color: #00CF63 !important;
 			}
 
 			body.dark .dashboard .quick-percent.neutral {
@@ -514,11 +572,11 @@
 
 			/* Ensure text on primary buttons is always readable */
 			body.dark .btn-primary, body.dark .aimeos .btn-primary {
-				color: #0f172a !important;
+				color: #003D8F !important;
 			}
 
 			body.dark .btn-primary:hover, body.dark .aimeos .btn-primary:hover {
-				color: #0f172a !important;
+				color: #003D8F !important;
 			}
 
 			/* Secondary button */
@@ -599,8 +657,8 @@
 			}
 
 			.form-control:focus, .aimeos .form-control:focus {
-				border-color: #f59e0b !important;
-				box-shadow: 0 0 0 3px rgba(245,158,11,0.1) !important;
+				border-color: #FF6B00 !important;
+				box-shadow: 0 0 0 3px rgba(255,107,0,0.1) !important;
 				outline: none !important;
 			}
 
@@ -617,8 +675,8 @@
 			}
 
 			.form-select:focus {
-				border-color: #f59e0b !important;
-				box-shadow: 0 0 0 3px rgba(245,158,11,0.1) !important;
+				border-color: #FF6B00 !important;
+				box-shadow: 0 0 0 3px rgba(255,107,0,0.1) !important;
 			}
 
 			/* ── Nav tabs ──────────────────────────────────────────────── */
@@ -637,7 +695,7 @@
 			}
 
 			body.dark .nav-tabs .nav-link.active {
-				color: #f59e0b !important;
+				color: #FF6B00 !important;
 			}
 
 			/* ── Modal dialogs ─────────────────────────────────────────── */
@@ -683,7 +741,7 @@
 			}
 
 			body.dark .pagination .active .page-link {
-				color: #0f172a !important;
+				color: #003D8F !important;
 			}
 
 			/* ── Badges ────────────────────────────────────────────────── */
@@ -750,7 +808,7 @@
 
 			/* ── Selection ─────────────────────────────────────────────── */
 			::selection {
-				background-color: rgba(245,158,11,0.2);
+				background-color: rgba(255,107,0,0.2);
 				color: var(--bs-secondary-dark);
 			}
 
@@ -784,9 +842,16 @@
 				background-color: currentColor;
 			}
 
+			.aimeos .list-items th .btn.icon,
+			.aimeos .list-items th .btn.icon::after,
+			.aimeos .list-items th .icon-menu::after {
+				color: var(--bs-menu) !important;
+				background-color: currentColor !important;
+			}
+
 			.aimeos .list-items th a:hover,
 			.aimeos .list-items th button:hover {
-				color: #f59e0b !important;
+				color: #FF6B00 !important;
 			}
 
 			/* ── New-row action buttons (white icons on white bg) ───── */
@@ -800,7 +865,7 @@
 			}
 
 			.aimeos table .list-item-new .actions .btn:hover {
-				color: #f59e0b !important;
+				color: #FF6B00 !important;
 			}
 
 			/* ── Btn-secondary hover/active/focus — vendor: color: var(--bs-bg-light) = white */
@@ -823,7 +888,7 @@
 			}
 
 			body.dark .aimeos .list-page .page-item:not(.disabled) .page-link:hover {
-				color: #0f172a !important;
+				color: #003D8F !important;
 			}
 
 			/* Page-limit dropdown active state — vendor: color: var(--bs-menu) = white */
@@ -845,19 +910,19 @@
 			body:not(.dark) .aimeos .sidebar-menu .active > span .icon,
 			body:not(.dark) .aimeos .sidebar-menu li.active > :not(.tree-menu-wrapper) > .title,
 			body:not(.dark) .aimeos .sidebar-menu li.active > :not(.tree-menu-wrapper) > .icon {
-				color: #f59e0b !important;
+				color: #FF6B00 !important;
 			}
 
 			.aimeos .sidebar-menu li.active > :not(.tree-menu-wrapper) > .icon::after,
 			body:not(.dark) .aimeos .sidebar-menu li.active > :not(.tree-menu-wrapper) > .icon::after {
-				background-color: #f59e0b !important;
+				background-color: #FF6B00 !important;
 			}
 
-			/* Sidebar non-active icons — always white (both modes) */
-			.aimeos .sidebar-menu li:not(.active) > a .icon,
-			.aimeos .sidebar-menu li:not(.active) > span .icon,
-			body:not(.dark) .aimeos .sidebar-menu li:not(.active) > a .icon,
-			body:not(.dark) .aimeos .sidebar-menu li:not(.active) > span .icon {
+			/* Sidebar non-active icons — always white (both modes), excepto dentro del tree-menu-wrapper */
+			.aimeos .sidebar-menu li:not(.active) > a:not(.tree-menu-wrapper a) .icon,
+			.aimeos .sidebar-menu li:not(.active) > span:not(.tree-menu-wrapper span) .icon,
+			body:not(.dark) .aimeos .sidebar-menu li:not(.active) > a:not(.tree-menu-wrapper a) .icon,
+			body:not(.dark) .aimeos .sidebar-menu li:not(.active) > span:not(.tree-menu-wrapper span) .icon {
 				color: rgba(255,255,255,0.7) !important;
 			}
 
@@ -866,6 +931,78 @@
 			body:not(.dark) .aimeos .sidebar-menu li:not(.active) > a .icon::after,
 			body:not(.dark) .aimeos .sidebar-menu li:not(.active) > span .icon::after {
 				background-color: rgba(255,255,255,0.7) !important;
+			}
+
+			/* Iconos dentro del tree-menu-wrapper (panel lateral) — oscuros en modo claro */
+			/* Todo el texto dentro del tree-menu-wrapper — modo claro */
+			body:not(.dark) .aimeos .sidebar-menu li .tree-menu-wrapper,
+			body:not(.dark) .aimeos .sidebar-menu li .tree-menu-wrapper * {
+				color: #374151 !important;
+			}
+
+			/* Excepciones: el header del panel conserva fondo azul con texto blanco */
+			body:not(.dark) .aimeos .sidebar-menu li .tree-menu-wrapper .menu-header,
+			body:not(.dark) .aimeos .sidebar-menu li .tree-menu-wrapper .menu-header *,
+			body:not(.dark) .aimeos .sidebar-menu li .tree-menu-wrapper .menu-header a {
+				color: #ffffff !important;
+			}
+
+			/* Iconos dentro del tree-menu-wrapper (panel lateral) — oscuros en modo claro */
+			body:not(.dark) .aimeos .sidebar-menu li .tree-menu-wrapper .icon,
+			body:not(.dark) .aimeos .sidebar-menu li .tree-menu-wrapper a .icon,
+			body:not(.dark) .aimeos .sidebar-menu li .tree-menu-wrapper .icon-open,
+			body:not(.dark) .aimeos .sidebar-menu li .tree-menu-wrapper .icon-close,
+			body:not(.dark) .aimeos .sidebar-menu li .tree-menu-wrapper .icon-loading {
+				color: #374151 !important;
+			}
+
+			body:not(.dark) .aimeos .sidebar-menu li .tree-menu-wrapper .icon::after,
+			body:not(.dark) .aimeos .sidebar-menu li .tree-menu-wrapper a .icon::after,
+			body:not(.dark) .aimeos .sidebar-menu li .tree-menu-wrapper .icon-open:after,
+			body:not(.dark) .aimeos .sidebar-menu li .tree-menu-wrapper .icon-close:after,
+			body:not(.dark) .aimeos .sidebar-menu li .tree-menu-wrapper .icon-loading:after {
+				background-color: #374151 !important;
+			}
+
+			/* Iconos dentro del tree-menu-wrapper en modo oscuro — blancos */
+			body.dark .aimeos .sidebar-menu li .tree-menu-wrapper .icon,
+			body.dark .aimeos .sidebar-menu li .tree-menu-wrapper a .icon,
+			body.dark .aimeos .sidebar-menu li .tree-menu-wrapper .icon-open,
+			body.dark .aimeos .sidebar-menu li .tree-menu-wrapper .icon-close,
+			body.dark .aimeos .sidebar-menu li .tree-menu-wrapper .icon-loading {
+				color: rgba(255,255,255,0.75) !important;
+			}
+
+			body.dark .aimeos .sidebar-menu li .tree-menu-wrapper .icon::after,
+			body.dark .aimeos .sidebar-menu li .tree-menu-wrapper a .icon::after,
+			body.dark .aimeos .sidebar-menu li .tree-menu-wrapper .icon-open:after,
+			body.dark .aimeos .sidebar-menu li .tree-menu-wrapper .icon-close:after,
+			body.dark .aimeos .sidebar-menu li .tree-menu-wrapper .icon-loading:after {
+				background-color: rgba(255,255,255,0.75) !important;
+			}
+
+			/* Input y texto dentro del tree-menu-wrapper — modo claro */
+			body:not(.dark) .aimeos .sidebar-menu li .tree-menu-wrapper .filter input,
+			body:not(.dark) .aimeos .sidebar-menu li .tree-menu-wrapper input {
+				color: #374151 !important;
+				background-color: #f9fafb !important;
+				border: 1px solid #d1d5db !important;
+			}
+
+			body:not(.dark) .aimeos .sidebar-menu li .tree-menu-wrapper .filter input::placeholder {
+				color: #9ca3af !important;
+			}
+
+			/* Input y texto dentro del tree-menu-wrapper — modo oscuro */
+			body.dark .aimeos .sidebar-menu li .tree-menu-wrapper .filter input,
+			body.dark .aimeos .sidebar-menu li .tree-menu-wrapper input {
+				color: rgba(255,255,255,0.85) !important;
+				background-color: rgba(255,255,255,0.08) !important;
+				border: 1px solid rgba(255,255,255,0.15) !important;
+			}
+
+			body.dark .aimeos .sidebar-menu li .tree-menu-wrapper .filter input::placeholder {
+				color: rgba(255,255,255,0.45) !important;
 			}
 
 			/* ── Content area icons — ensure visible in light mode ───── */
@@ -918,7 +1055,7 @@
 			body.dark .aimeos .main-navbar a.active,
 			body.dark .aimeos .item-navbar a.active,
 			body.dark .aimeos .item-navbar .nav-link.active {
-				color: #f59e0b !important;
+				color: #FF6B00 !important;
 			}
 
 			/* ── Column config dropdown & popover ──────────────────────── */
@@ -972,6 +1109,35 @@
 			.aimeos .list-items td .btn.act-delete {
 				color: var(--bs-danger) !important;
 			}
+
+			/* Contraste de iconos/acciones en filas de listas (CMS y similares) */
+			body:not(.dark) .aimeos .list-items td.actions .btn,
+			body:not(.dark) .aimeos .list-items tr.list-search td .btn {
+				color: #475569 !important;
+			}
+
+			body:not(.dark) .aimeos .list-items td.actions .btn.act-delete {
+				color: #dc2626 !important;
+			}
+
+			body:not(.dark) .aimeos .list-items td.actions .btn:hover,
+			body:not(.dark) .aimeos .list-items tr.list-search td .btn:hover {
+				color: #003D8F !important;
+			}
+
+			body.dark .aimeos .list-items td.actions .btn,
+			body.dark .aimeos .list-items tr.list-search td .btn {
+				color: #cbd5e1 !important;
+			}
+
+			body.dark .aimeos .list-items td.actions .btn.act-delete {
+				color: #f87171 !important;
+			}
+
+			body.dark .aimeos .list-items td.actions .btn:hover,
+			body.dark .aimeos .list-items tr.list-search td .btn:hover {
+				color: #FF9040 !important;
+			}
 		</style>
 	</head>
 	<body class="{{ $theme }}">
@@ -998,3 +1164,4 @@
 
 	</body>
 </html>
+
