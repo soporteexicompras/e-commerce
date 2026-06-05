@@ -33,18 +33,48 @@
 					{{ $key }}: {{ $value }};
 				@endforeach
 			}
-			/* Logo navbar — responsive basado en el tamaño configurado en el panel */
-			.navbar-logo { height: {{ $logoMobile }}px; width: auto; max-width: 100%; }
-			@media (min-width: 576px)  { .navbar-logo { height: {{ $logoTablet }}px; } }
-			@media (min-width: 992px)  { .navbar-logo { height: {{ $logoBase }}px; } }
-			@media (min-width: 1400px) { .navbar-logo { height: {{ $logoXl }}px; } }
 		/* ── Responsive global ── */
 		*, *::before, *::after { box-sizing: border-box; }
 		html { scroll-behavior: smooth; }
 		body { overflow-x: hidden; }
 		img { max-width: 100%; height: auto; }
-		/* Navbar: altura mínima consistente en móvil */
-		.navbar { min-height: 56px; }
+
+		/* ── Navbar altura: override del min-height:10rem de aimeos.css ── */
+		/* Desktop: usar la altura del logo + padding vertical */
+		@media (min-width: 992px) {
+			.navbar { min-height: calc({{ $logoBase }}px + 1.25rem) !important; }
+		}
+		/* Tablet */
+		@media (min-width: 576px) and (max-width: 991px) {
+			.navbar { min-height: calc({{ $logoTablet }}px + 1rem) !important; }
+		}
+		/* Móvil */
+		@media (max-width: 575px) {
+			.navbar { min-height: calc({{ $logoMobile }}px + 0.875rem) !important; }
+		}
+
+		/* ── Logo: override del width:120px;height:auto de aimeos.css ── */
+		/* Se usa .navbar-brand .navbar-logo para mayor especificidad */
+		.navbar-brand .navbar-logo { height: {{ $logoMobile }}px !important; width: auto !important; max-width: 180px; }
+		@media (min-width: 576px)  { .navbar-brand .navbar-logo { height: {{ $logoTablet }}px !important; max-width: 220px; } }
+		@media (min-width: 992px)  { .navbar-brand .navbar-logo { height: {{ $logoBase }}px !important; max-width: 280px; } }
+		@media (min-width: 1400px) { .navbar-brand .navbar-logo { height: {{ $logoXl }}px !important; max-width: 320px; } }
+
+		/* ── body margin-top: compensar navbar fija ── */
+		body > .content, body .main-section {
+			margin-top: calc({{ $logoMobile }}px + 0.875rem) !important;
+		}
+		@media (min-width: 576px) {
+			body > .content, body .main-section {
+				margin-top: calc({{ $logoTablet }}px + 1rem) !important;
+			}
+		}
+		@media (min-width: 992px) {
+			body > .content, body .main-section {
+				margin-top: calc({{ $logoBase }}px + 1.25rem) !important;
+			}
+		}
+
 		/* Footer responsive */
 		footer .container-fluid { padding-left: clamp(.875rem,4vw,1.5rem); padding-right: clamp(.875rem,4vw,1.5rem); }
 		footer .row { row-gap: 1.5rem; }

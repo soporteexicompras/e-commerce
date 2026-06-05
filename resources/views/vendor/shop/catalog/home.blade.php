@@ -150,10 +150,10 @@ function fakeOldPrice($price) {
     {{-- Controles del slider --}}
     <button class="exihero-prev" onclick="heroSlide(-1)" aria-label="Anterior slide">&#8592;</button>
     <button class="exihero-next" onclick="heroSlide(1)" aria-label="Siguiente slide">&#8594;</button>
-    <div class="exihero-dots" role="tablist" aria-label="Slides">
-        <span class="exidot active" onclick="heroGoTo(0)" role="tab" aria-label="Slide 1" tabindex="0"></span>
-        <span class="exidot" onclick="heroGoTo(1)" role="tab" aria-label="Slide 2" tabindex="0"></span>
-        <span class="exidot" onclick="heroGoTo(2)" role="tab" aria-label="Slide 3" tabindex="0"></span>
+    <div class="exihero-dots" role="group" aria-label="Navegación de slides">
+        <button class="exidot active" onclick="heroGoTo(0)" aria-label="Slide 1" aria-pressed="true" type="button"></button>
+        <button class="exidot" onclick="heroGoTo(1)" aria-label="Slide 2" aria-pressed="false" type="button"></button>
+        <button class="exidot" onclick="heroGoTo(2)" aria-label="Slide 3" aria-pressed="false" type="button"></button>
     </div>
 </section>
 
@@ -379,9 +379,11 @@ function fakeOldPrice($price) {
     function goTo(n) {
         slides[current].classList.remove('active');
         dots[current].classList.remove('active');
+        dots[current].setAttribute('aria-pressed', 'false');
         current = (n + slides.length) % slides.length;
         slides[current].classList.add('active');
         dots[current].classList.add('active');
+        dots[current].setAttribute('aria-pressed', 'true');
     }
 
     window.heroSlide = function(dir) { clearInterval(timer); goTo(current + dir); startAuto(); };
