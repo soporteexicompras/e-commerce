@@ -66,9 +66,6 @@ services:
     image: nginx:1.27-alpine
     container_name: exicompras-nginx
     restart: unless-stopped
-    ports:
-      - "${HTTP_PORT:-80}:80"
-      - "${HTTPS_PORT:-443}:443"
     volumes:
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
@@ -167,8 +164,6 @@ services:
     volumes:
       - dbdata:/var/lib/mysql
       - ./docker/mysql/init:/docker-entrypoint-initdb.d:ro
-    ports:
-      - "${DB_PORT:-3306}:3306"     # exponer solo si necesitas acceso externo
     networks: [exicompras]
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p${DB_ROOT_PASSWORD:-rootpass}"]
