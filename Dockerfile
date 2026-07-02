@@ -92,6 +92,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libxml2-dev \
         libonig-dev \
         libssl-dev \
+        libsqlite3-dev \
         tzdata \
     && rm -rf /var/lib/apt/lists/*
 
