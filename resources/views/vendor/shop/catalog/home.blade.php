@@ -27,12 +27,15 @@
 @php
 use Illuminate\Support\Facades\DB;
 
-$themeVars = app('aimeos.context')->get()->locale()->getSiteItem()->getConfigValue('theme/default', []);
-$primary   = $themeVars['--ai-primary']   ?? '#f0f2ff';
-$secondary = $themeVars['--ai-secondary'] ?? '#ff6b35';
-$tertiary  = $themeVars['--ai-tertiary']  ?? '#4a7eff';
-$bg        = $themeVars['--ai-bg']        ?? '#1a1f36';
-$bgAlt     = $themeVars['--ai-bg-alt']    ?? '#141828';
+$_site       = app('aimeos.context')->get()->locale()->getSiteItem();
+$_presets    = config('shop.client.html.theme-presets.default', []);
+$_overrides  = $_site->getConfigValue('theme/default', []);
+$themeVars   = array_merge($_presets ?? [], $_overrides ?? []);
+$primary   = $themeVars['--ai-primary']   ?? '#1A1F36';
+$secondary = $themeVars['--ai-secondary'] ?? '#FF6B35';
+$tertiary  = $themeVars['--ai-tertiary']  ?? '#4A7EFF';
+$bg        = $themeVars['--ai-bg']        ?? '#E3E7EB';
+$bgAlt     = $themeVars['--ai-bg-alt']    ?? '#FFFFFF';
 
 // Fetch products with price and category
 $products = DB::table('mshop_product as p')
@@ -83,26 +86,20 @@ function fakeOldPrice($price) {
 <section class="exihome-hero">
     <div class="exihero-slider" id="heroSlider">
 
-        {{-- Slide 1 --}}
-        <div class="exihero-slide active" style="background: linear-gradient(135deg, #0f1629 0%, #1a2744 50%, #0d1f4a 100%);">
-            <div class="exihero-content">
-                <div class="exihero-text">
-                    <span class="exihero-badge">🔥 Oferta del día</span>
-                    <h1>Tecnología<br><span style="color:{{ $tertiary }}">al mejor precio</span></h1>
-                    <p>Smartphones, tablets y accesorios con envío rápido a toda Colombia</p>
-                    <a href="{{ route('aimeos_shop_tree', ['f_name'=>'electronica', 'f_catid'=>2]) }}" class="exihero-btn">
-                        Ver Electrónica →
-                    </a>
-                </div>
-                <div class="exihero-visual">
-                    <div class="exihero-mockup tech">
-                        <div class="mock-phone">
-                            <div class="mock-screen">📱</div>
-                        </div>
-                        <div class="mock-badge" style="background:{{ $secondary }}">-30% OFF</div>
-                    </div>
-                </div>
-            </div>
+        {{-- Slide 1 — imagen banner-1.webp --}}
+        <div class="exihero-slide active exihero-slide--image" style="padding: 0;">
+            <img
+                src="{{ asset('images/banner-1.webp') }}"
+                srcset="{{ asset('images/banner-1.webp') }} 1584w"
+                sizes="(max-width: 768px) 100vw, (max-width: 1400px) 100vw, 1400px"
+                alt="Repara y renueva tu piel con nuestra crema premium"
+                width="1584"
+                height="672"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+                class="exihero-img"
+            >
         </div>
 
         {{-- Slide 2 --}}
@@ -158,43 +155,61 @@ function fakeOldPrice($price) {
 </section>
 
 {{-- ═══════════════════════════════════════════════════════════
-     BARRA DE CONFIANZA — tipo Amazon
+     BARRA DE CONFIANZA — reinterpretación premium minimalista
 ════════════════════════════════════════════════════════════════ --}}
 <section class="exihome-trust">
-    <div class="exitrust-grid">
+    <div class="exitrust-rail">
         <div class="exitrust-item">
-            <span class="exitrust-icon">🚚</span>
-            <div>
-                <strong>Envío Gratis</strong>
-                <small>En compras +$150.000</small>
+            <div class="exitrust-mark">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M3 7h11v8H3z"/><path d="M14 10h4l3 3v2h-7"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>
+                </svg>
+            </div>
+            <div class="exitrust-text">
+                <strong>Envío gratis desde $150.000</strong>
+                <small>Cobertura nacional 2 a 5 días hábiles</small>
             </div>
         </div>
+
+        <div class="exitrust-divider" aria-hidden="true"></div>
+
         <div class="exitrust-item">
-            <span class="exitrust-icon">🔒</span>
-            <div>
-                <strong>Pago Seguro</strong>
-                <small>Tus datos protegidos</small>
+            <div class="exitrust-mark">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/>
+                </svg>
+            </div>
+            <div class="exitrust-text">
+                <strong>Paga como prefieras</strong>
+                <small>PSE, Nequi, Daviplata y tarjetas</small>
             </div>
         </div>
+
+        <div class="exitrust-divider" aria-hidden="true"></div>
+
         <div class="exitrust-item">
-            <span class="exitrust-icon">↩️</span>
-            <div>
-                <strong>Devoluciones</strong>
-                <small>30 días sin preguntas</small>
+            <div class="exitrust-mark">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/>
+                </svg>
+            </div>
+            <div class="exitrust-text">
+                <strong>Cambios sin complicaciones</strong>
+                <small>30 días para arrepentirte, sin preguntas</small>
             </div>
         </div>
+
+        <div class="exitrust-divider" aria-hidden="true"></div>
+
         <div class="exitrust-item">
-            <span class="exitrust-icon">🎧</span>
-            <div>
-                <strong>Soporte 24/7</strong>
-                <small>Estamos para ayudarte</small>
+            <div class="exitrust-mark">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"/><path d="M9 12l2 2 4-4"/>
+                </svg>
             </div>
-        </div>
-        <div class="exitrust-item">
-            <span class="exitrust-icon">⭐</span>
-            <div>
-                <strong>+10.000 Clientes</strong>
-                <small>Satisfechos en Colombia</small>
+            <div class="exitrust-text">
+                <strong>Compra siempre protegida</strong>
+                <small>Productos originales con garantía oficial</small>
             </div>
         </div>
     </div>
@@ -270,7 +285,7 @@ function fakeOldPrice($price) {
      BANNER DOBLE — tipo MercadoLibre mid-page
 ════════════════════════════════════════════════════════════════ --}}
 <section class="exihome-banners">
-    <a href="{{ route('aimeos_shop_tree', ['f_name'=>'deportes-y-fitness', 'f_catid'=>5]) }}" class="exibanner-card" style="background: linear-gradient(135deg, #1a2a0a 0%, #2d4a14 100%);">
+    <a href="{{ route('aimeos_shop_tree', ['f_name'=>'deportes-y-fitness', 'f_catid'=>5]) }}" class="exibanner-card" style="background: linear-gradient(135deg, #2a0a1a 0%, #4a1430 100%);">
         <div class="exibanner-text">
             <span class="exibanner-tag">💪 Actívate</span>
             <h3>Deportes<br>&amp; Fitness</h3>

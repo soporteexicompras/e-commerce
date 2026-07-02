@@ -23,4 +23,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile/me', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Favoritos / Wishlist (accesible para guests y autenticados)
+Route::middleware(['web'])->prefix('favorites')->name('favorites.')->group(function () {
+    Route::get('/',         [\App\Http\Controllers\FavoriteController::class, 'index'])->name('index');
+    Route::post('/',        [\App\Http\Controllers\FavoriteController::class, 'store'])->name('store');
+    Route::delete('/{product}', [\App\Http\Controllers\FavoriteController::class, 'destroy'])->name('destroy');
+    Route::post('/sync',    [\App\Http\Controllers\FavoriteController::class, 'sync'])->middleware('auth')->name('sync');
+});
+
 require __DIR__.'/auth.php';

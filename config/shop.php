@@ -125,6 +125,12 @@ return [
 				'customer' => ['groups' => ['admin', 'super']],
 				'users'    => ['groups' => ['admin', 'super']],
 			],
+			// Override del subpart Tema: usa nuestra clase que bumpa theme_version al guardar
+			'settings' => [
+				'theme' => [
+					'name' => 'Exicompras',
+				],
+			],
 		],
 	],
 
@@ -133,17 +139,17 @@ return [
 			'theme-presets' => [
 				'default' => [
 					// ── Frontend ──────────────────────────────
-					'--ai-bg'            => '#1A1F36',
-					'--ai-bg-alt'        => '#141828',
-					'--ai-primary'       => '#F0F2FF',
-					'--ai-primary-alt'   => '#A8B0CC',
+					'--ai-bg'            => '#E3E7EB',
+					'--ai-bg-alt'        => '#FFFFFF',
+					'--ai-primary'       => '#1A1F36',
+					'--ai-primary-alt'   => '#5A6378',
 					'--ai-secondary'     => '#FF6B35',
-					'--ai-secondary-alt' => '#FF8C5A',
+					'--ai-secondary-alt' => '#E0552B',
 					'--ai-tertiary'      => '#4A7EFF',
-					'--ai-tertiary-alt'  => '#7AA3FF',
+					'--ai-tertiary-alt'  => '#3A6AE0',
 					'--ai-danger'        => '#E53E3E',
-					'--ai-success'       => '#38A169',
-					'--ai-warning'       => '#D69E2E',
+					'--ai-success'       => '#2F855A',
+					'--ai-warning'       => '#B7791F',
 					'--ai-radius'        => '8',
 					// ── Panel admin (navbar/sidebar) ──────────
 					'--bs-menu-bg'       => '#1A1F36',
@@ -151,12 +157,13 @@ return [
 					'--bs-menu'          => '#F0F2FF',
 					'--bs-menu-alt'      => '#A8B0CC',
 					// ── Navbar tienda ─────────────────────────
-					'--ai-nav-bg'             => '#1A1F36',
-					'--ai-nav-text'           => '#F0F2FF',
+					'--ai-nav-bg'             => '#FFFFFF',
+					'--ai-nav-text'           => '#1A1F36',
 					'--ai-nav-text-hover'     => '#4A7EFF',
-					'--ai-nav-icon'           => '#F0F2FF',
-					'--ai-nav-dropdown-bg'    => '#1A1F36',
-					'--ai-nav-dropdown-text'  => '#F0F2FF',
+					'--ai-nav-icon'           => '#1A1F36',
+					'--ai-nav-dropdown-bg'    => '#FFFFFF',
+					'--ai-nav-dropdown-text'  => '#1A1F36',
+					'--ai-nav-logo-height'    => '64',
 				],
 			],
 			'basket' => [

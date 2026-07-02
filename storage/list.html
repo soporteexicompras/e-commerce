@@ -1,0 +1,4640 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+		<meta name="csrf-token" content="LvYssUFDoRcN24uXnrkRnntexT77oQjt3cwzhuwW">
+		<meta name="theme-color" content="#E3E7EB">
+
+		
+							<link type="text/css" rel="stylesheet" href="http://exicompras.test/vendor/shop/themes/default/app.css?v=12">
+				<link type="text/css" rel="stylesheet" href="http://exicompras.test/vendor/shop/themes/default/aimeos.css?v=12">
+
+				<link rel="stylesheet" href="/vendor/shop/themes/default/locale-select.css?v=1">
+<script defer src="/vendor/shop/themes/default/locale-select.js?v=1"></script>
+	<link rel="stylesheet" href="/vendor/shop/themes/default/basket-mini.css?v=1">
+<script defer src="/vendor/shop/themes/default/basket-mini.js?v=1"></script>
+
+	<link rel="stylesheet" href="http://127.0.0.1:8000/vendor/shop/themes/default/catalog-filter.css?v=2">
+<script defer src="http://127.0.0.1:8000/vendor/shop/themes/default/catalog-filter.js?v=2"></script>
+	<link rel="stylesheet" href="/vendor/shop/themes/default/catalog-filter.css?v=1">
+<script defer src="/vendor/shop/themes/default/catalog-filter.js?v=1"></script>
+	<link rel="stylesheet" href="http://127.0.0.1:8000/vendor/shop/themes/default/catalog-filter.css?v=2">
+<script defer src="http://127.0.0.1:8000/vendor/shop/themes/default/catalog-filter.js?v=2"></script>
+	<link rel="stylesheet" href="/vendor/shop/themes/default/catalog-stage.css?v=1">
+<script defer src="/vendor/shop/themes/default/catalog-stage.js?v=1"></script>
+	<link rel="stylesheet" href="/vendor/shop/themes/default/catalog-session.css?v=1">
+<script defer src="/vendor/shop/themes/default/catalog-session.js?v=1"></script>
+	
+<title>Productos encontrados | Exicompras</title>
+<link rel="canonical" href="http://exicompras.test/shop/search?site=default">
+
+
+
+
+
+
+<meta name="application-name" content="Aimeos">
+
+
+<link rel="stylesheet" href="/vendor/shop/themes/default/catalog-lists.css?v=1">
+<script defer src="/vendor/shop/themes/default/catalog-lists.js?v=1"></script>
+
+<script class="items-stock" nonce="2fneiYUFc3sgpwRZeHK43Q==" defer src="/shop/stock?st_pid%5B0%5D=3&st_pid%5B1%5D=4&st_pid%5B2%5D=5&st_pid%5B3%5D=6&st_pid%5B4%5D=7&st_pid%5B5%5D=8&st_pid%5B6%5D=9&st_pid%5B7%5D=10&st_pid%5B8%5D=11&st_pid%5B9%5D=12&st_pid%5B10%5D=13&st_pid%5B11%5D=14&st_pid%5B12%5D=15&st_pid%5B13%5D=16&st_pid%5B14%5D=17&st_pid%5B15%5D=18&st_pid%5B16%5D=19&st_pid%5B17%5D=20&st_pid%5B18%5D=21&st_pid%5B19%5D=22&st_pid%5B20%5D=23&st_pid%5B21%5D=24&st_pid%5B22%5D=25&st_pid%5B23%5D=26&site=default"></script>
+	<link type="text/css" rel="stylesheet" href="http://exicompras.test/css/exicatalog.css?v=12">
+
+				<style nonce="2fneiYUFc3sgpwRZeHK43Q==">
+			:root {
+									--ai-bg: #E3E7EB;
+									--ai-bg-alt: #FFFFFF;
+									--ai-primary: #1A1F36;
+									--ai-primary-alt: #5A6378;
+									--ai-secondary: #FF6B35;
+									--ai-secondary-alt: #E0552B;
+									--ai-tertiary: #4A7EFF;
+									--ai-tertiary-alt: #3A6AE0;
+									--ai-danger: #E53E3E;
+									--ai-success: #2F855A;
+									--ai-warning: #B7791F;
+									--ai-radius: 8;
+									--bs-menu-bg: #1A1F36;
+									--bs-menu-alt-bg: #141828;
+									--bs-menu: #F0F2FF;
+									--bs-menu-alt: #A8B0CC;
+									--ai-nav-bg: #FFFFFF;
+									--ai-nav-text: #1A1F36;
+									--ai-nav-text-hover: #4A7EFF;
+									--ai-nav-icon: #1A1F36;
+									--ai-nav-dropdown-bg: #FFFFFF;
+									--ai-nav-dropdown-text: #1A1F36;
+							}
+		/* ── Responsive global ── */
+		*, *::before, *::after { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+		body { overflow-x: hidden; }
+		img { max-width: 100%; height: auto; }
+
+		/* ── Navbar: forzar layout horizontal en desktop ── */
+		/* (Respaldo si Bootstrap navbar-expand-md no aplica por algún motivo) */
+		@media (min-width: 768px) {
+			.navbar.navbar-expand-md .navbar-collapse { display: flex !important; flex-basis: auto !important; }
+			.navbar.navbar-expand-md .navbar-toggler { display: none !important; }
+			.navbar.navbar-expand-md .navbar-nav { flex-direction: row !important; }
+		}
+
+		/* ── Navbar altura: override del min-height:10rem de aimeos.css ── */
+		/* Desktop: usar la altura del logo + padding vertical */
+		@media (min-width: 992px) {
+			.navbar { min-height: calc(64px + 1.25rem) !important; }
+		}
+		/* Tablet */
+		@media (min-width: 576px) and (max-width: 991px) {
+			.navbar { min-height: calc(51px + 1rem) !important; }
+		}
+		/* Móvil */
+		@media (max-width: 575px) {
+			.navbar { min-height: calc(42px + 0.875rem) !important; }
+		}
+
+		/* ── Logo: override del width:120px;height:auto de aimeos.css ── */
+		/* Se usa .navbar-brand .navbar-logo para mayor especificidad */
+		.navbar-brand .navbar-logo { height: 42px !important; width: auto !important; max-width: 180px; }
+		@media (min-width: 576px)  { .navbar-brand .navbar-logo { height: 51px !important; max-width: 220px; } }
+		@media (min-width: 992px)  { .navbar-brand .navbar-logo { height: 64px !important; max-width: 280px; } }
+		@media (min-width: 1400px) { .navbar-brand .navbar-logo { height: 74px !important; max-width: 320px; } }
+
+		/* ── body margin-top: compensar navbar fija ── */
+		body > .content, body .main-section {
+			margin-top: calc(42px + 0.875rem) !important;
+		}
+		@media (min-width: 576px) {
+			body > .content, body .main-section {
+				margin-top: calc(51px + 1rem) !important;
+			}
+		}
+		@media (min-width: 992px) {
+			body > .content, body .main-section {
+				margin-top: calc(64px + 1.25rem) !important;
+			}
+		}
+
+		/* ── Logo footer — tamaño fijo independiente del navbar ── */
+		.footer-logo { height: 48px; width: auto; max-width: 160px; display: block; margin-bottom: .75rem; }
+		@media (min-width: 576px)  { .footer-logo { height: 56px; max-width: 180px; } }
+		@media (min-width: 992px)  { .footer-logo { height: 60px; max-width: 200px; } }
+
+		/* Footer responsive */
+		footer .container-fluid { padding-left: clamp(.875rem,4vw,1.5rem); padding-right: clamp(.875rem,4vw,1.5rem); }
+		footer .row { row-gap: 1.5rem; }
+		@media (max-width: 767px) {
+			footer .col-md-8, footer .col-md-4 { width: 100%; }
+			footer .col-sm-6 { width: 50%; }
+		}
+		@media (max-width: 400px) {
+			footer .col-sm-6 { width: 100%; }
+		}
+		/* Safe area insets para notch/island en iOS */
+		.navbar { padding-left: max(.75rem, env(safe-area-inset-left)); padding-right: max(.75rem, env(safe-area-inset-right)); }
+		footer   { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
+
+						body { background-image: none; background-color: #FFFFFF; }
+		.navbar { background-color: #FFFFFF !important; }
+		.navbar.scroll { background-color: #FFFFFF !important; }
+			.navbar-light .navbar-nav .nav-link,
+			.navbar-default .navbar-nav .nav-link,
+			.navbar-default-transition .navbar-nav .nav-link { color: #1A1F36 !important; }
+			.navbar-light .navbar-nav .nav-link:hover,
+			.navbar-default .navbar-nav .nav-link:hover,
+			.navbar-default-transition .navbar-nav .nav-link:hover { color: #4A7EFF !important; }
+			/* Iconos navbar: login, register, profile, carrito */
+			.navbar-nav .login > .nav-link::before,
+			.navbar-nav .register > .nav-link::before,
+			.navbar-nav .profile > .nav-link::before { color: #1A1F36 !important; }
+			.basket-mini .menu:after { color: #1A1F36 !important; }
+			/* Lupa de búsqueda */
+			.navbar .catalog-filter-search .input-group .btn-search { color: #1A1F36 !important; }
+			/* Selector idioma / moneda — texto visible */
+			.locale-select ul.select-menu a,
+			.locale-select ul.select-menu a:link,
+			.locale-select ul.select-menu a:visited { color: #1A1F36 !important; }
+			/* Dropdown Cuenta — fondo y texto */
+						.navbar-nav .dropdown-menu { background-color: #FFFFFF !important; border-color: #1A1F36 !important; }
+			.navbar-nav .dropdown-menu,
+			.navbar-nav .dropdown-menu .nav-link,
+			.navbar-nav .dropdown-item,
+			.navbar-nav .dropdown-menu button { color: #1A1F36 !important; }
+			.navbar-nav .dropdown-item:hover,
+			.navbar-nav .dropdown-item:focus { background-color: #FF6B35 !important; color: #1A1F36 !important; }
+			/* Dropdown idioma / moneda — fondo y texto */
+			.locale-select ul.select-menu ul { background-color: #FFFFFF !important; border-color: #1A1F36 !important; }
+			.locale-select ul.select-menu ul a,
+			.locale-select ul.select-menu ul a:link,
+			.locale-select ul.select-menu ul a:visited { color: #1A1F36 !important; }
+			.locale-select li.select-dropdown ul.select-dropdown li:hover a { color: #1A1F36 !important; }
+						/* ── Categorías en el menú (catalog-filter-tree) ── */
+						.catalog-filter-tree a.cat-link,
+			.catalog-filter-tree a.cat-link:link,
+			.catalog-filter-tree a.cat-link:visited { color: #1A1F36 !important; }
+			.catalog-filter-tree a.cat-link:hover,
+			.catalog-filter-tree a.cat-link:link:hover,
+			.catalog-filter-tree a.cat-link:visited:hover { color: #4A7EFF !important; }
+			.catalog-filter-tree .list-container,
+			.catalog-filter-tree .zeynep { background-color: #FFFFFF !important; }
+			.catalog-filter-tree .row.header,
+			.catalog-filter-tree .row.header .name { color: #1A1F36 !important; }
+		</style>
+
+		
+		<link rel="icon" href="http://exicompras.test/aimeos/1.d/icon.png">
+
+		<link rel="preload" href="http://exicompras.test/vendor/shop/themes/default/assets/roboto-condensed-v19-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="http://exicompras.test/vendor/shop/themes/default/assets/roboto-condensed-v19-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="http://exicompras.test/vendor/shop/themes/default/assets/bootstrap-icons.woff2" as="font" type="font/woff2" crossorigin>
+	</head>
+	<body class="page-catalog-list">
+		<nav class="navbar navbar-expand-md navbar-top">
+			<a class="navbar-brand" href="/" title="To the home page">
+				<img src="http://exicompras.test/aimeos/1.d/logo1528.webp" class="navbar-logo" alt="To the home page">
+			</a>
+
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-top" aria-controls="navbar-top" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbar-top">
+					<div class="section aimeos catalog-filter" data-jsonurl="http://127.0.0.1:8000/jsonapi?site=default">
+
+<nav class="container-xxl">
+<form method="GET" action="/shop/search?site=default">
+
+
+
+<div class="section catalog-filter-tree catalog-filter-count"
+aria-label="Categorías del producto"
+data-counturl="/shop/count?count=tree&site=default">
+
+<div class="aimeos-overlay-offscreen"></div>
+<a class="menu" href="#" title="Categorías"><span class="icon"></span></a>
+<div class="zeynep list-container level-0 catcode-home ">
+
+<div class="row header">
+<div class="col-2"></div>
+<div class="col-8 name">Categorías</div>
+<div class="col-2 close" data-submenu-close="1"></div>
+</div>
+
+
+<div class="list-container level-1">
+
+
+<div class="cat-item catid-2 nochild catcode-electronica "
+data-id="2">
+
+<div class="item-links row">
+<a class="col-10 cat-link name "
+href="/shop/electronica~2?site=default">
+<div class="media-list">
+</div>
+<span class="cat-name">Electrónica</span>
+</a>
+<div class="col-2"></div>
+</div>
+
+
+</div>
+
+<div class="cat-item catid-3 nochild catcode-ropa "
+data-id="3">
+
+<div class="item-links row">
+<a class="col-10 cat-link name "
+href="/shop/ropa-y-accesorios~3?site=default">
+<div class="media-list">
+</div>
+<span class="cat-name">Ropa y Accesorios</span>
+</a>
+<div class="col-2"></div>
+</div>
+
+
+</div>
+
+<div class="cat-item catid-4 nochild catcode-hogar "
+data-id="4">
+
+<div class="item-links row">
+<a class="col-10 cat-link name "
+href="/shop/hogar-y-decoracion~4?site=default">
+<div class="media-list">
+</div>
+<span class="cat-name">Hogar y Decoración</span>
+</a>
+<div class="col-2"></div>
+</div>
+
+
+</div>
+
+<div class="cat-item catid-5 nochild catcode-deportes "
+data-id="5">
+
+<div class="item-links row">
+<a class="col-10 cat-link name "
+href="/shop/deportes-y-fitness~5?site=default">
+<div class="media-list">
+</div>
+<span class="cat-name">Deportes y Fitness</span>
+</a>
+<div class="col-2"></div>
+</div>
+
+
+</div>
+
+<div class="cat-item catid-6 nochild catcode-belleza "
+data-id="6">
+
+<div class="item-links row">
+<a class="col-10 cat-link name "
+href="/shop/belleza-y-cuidado~6?site=default">
+<div class="media-list">
+</div>
+<span class="cat-name">Belleza y Cuidado</span>
+</a>
+<div class="col-2"></div>
+</div>
+
+
+</div>
+
+<div class="cat-item catid-9 nochild catcode-salud "
+data-id="9">
+
+<div class="item-links row">
+<a class="col-10 cat-link name "
+href="/shop/salud-y-suplementos~9?site=default">
+<div class="media-list">
+</div>
+<span class="cat-name">Salud y Suplementos</span>
+</a>
+<div class="col-2"></div>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+
+
+</form>
+</nav>
+
+</div>
+			</div>
+
+				<div class="section aimeos locale-select" data-jsonurl="http://exicompras.test/jsonapi?site=default">
+
+<div class="locale-select-language">
+<h2 class="header">Seleccionar idioma</h2>
+
+<ul class="select-menu">
+<li class="select-dropdown select-current"><a href="#">es</a>
+<ul class="select-dropdown">
+
+<li class="select-item active">
+<a href="/shop/search?locale=es&currency=COP&site=default"
+title="es">
+Español</a>
+</li>
+<li class="select-item ">
+<a href="/shop/search?locale=en&currency=USD&site=default"
+title="en">
+Inglés</a>
+</li>
+
+</ul>
+</li>
+</ul>
+
+</div>
+<div class="locale-select-currency">
+<h2 class="header">Seleccionar divisa</h2>
+
+<ul class="select-menu">
+<li class="select-dropdown select-current"><a href="#">COP</a>
+<ul class="select-dropdown">
+
+<li class="select-item active">
+<a href="/shop/search?locale=es&currency=COP&site=default"
+title="COP">
+COL$</a>
+</li>
+
+</ul>
+</li>
+</ul>
+
+</div>
+
+</div>
+				<div class="section aimeos catalog-filter" data-jsonurl="http://127.0.0.1:8000/jsonapi?site=default">
+
+<nav class="container-xxl">
+<form method="GET" action="/shop/search?site=default">
+
+
+<div class="section catalog-filter-search" aria-label="Búsqueda de producto">
+
+<div class="header-name">Buscar</div>
+<div class="search-lists">
+<div class="input-group">
+<input class="form-control value" autocomplete="off"
+name="f_search"
+title="Buscar"
+placeholder="Buscar"
+value=""
+data-url="/shop/suggest?f_search=_term_&site=default"
+data-hint="Por favor, introduzca al menos tres caracteres"
+><!--
+--><button class="btn reset" type="reset" title="Reiniciar"><span class="symbol"></span></button><!--
+--><button class="btn btn-search" type="submit" title="Buscar"></button>
+</div>
+</div>
+</div>
+
+</form>
+</nav>
+
+</div>
+
+			<ul class="navbar-nav">
+													<li class="nav-item login"><a class="nav-link" href="http://exicompras.test/login" title="Iniciar sesión"><span class="name">Iniciar sesión</span></a></li>
+							</ul>
+
+				
+<div class="section aimeos basket-mini" data-jsonurl="http://exicompras.test/jsonapi?site=default">
+
+
+<div class="aimeos-overlay-offscreen"></div>
+
+<a class="basket-mini-main menu" href="#">
+<span class="quantity">0</span>
+<span class="value">0,00 COL$</span>
+</a>
+
+<div class="basket-mini-product zeynep">
+<div class="header row">
+<div class="col-2"></div>
+<div class="col-8 name">Cesta</div>
+<a class="col-2 close" href="#" title="Cerrar"></a>
+</div>
+
+<div class="basket">
+<div class="basket-header row">
+<div class="col-5 name">Producto</div>
+<div class="col-2 quantity">Cant</div>
+<div class="col-4 price">Precio</div>
+<div class="col-1 action"></div>
+</div>
+<div class="basket-body">
+<div class="product-item row prototype">
+<div class="col-5 name"></div>
+<div class="col-2 quantity"></div>
+<div class="col-4 price"></div>
+<div class="col-1 action"><a class="delete" href="#" title="Borrar"></a></div>
+</div>
+</div>
+<div class="basket-footer">
+<div class="delivery row">
+<div class="col-7 name">
+Envío</div>
+<div class="col-4 price">
+0,00 COL$</div>
+<div class="col-1 action"></div>
+</div>
+<div class="total row">
+<div class="col-7 name">
+Total</div>
+<div class="col-4 price">
+0,00 COL$</div>
+<div class="col-1 action"></div>
+</div>
+</div>
+</div>
+<div class="to-basket">
+<a class="btn btn-primary" href="/shop/basket?site=default">
+Cesta</a>
+</div>
+</div>
+</div>
+		</nav>
+
+		<div class="content">
+						<main>
+					<div class="section aimeos catalog-stage "
+data-jsonurl="http://exicompras.test/jsonapi?site=default">
+
+
+<div class="catalog-stage-breadcrumb container-xxl" aria-label="Ruta de navegación">
+
+
+<nav class="breadcrumb">
+<span class="title">Usted está aquí:</span>
+<ol>
+
+<li>
+<a class="back" href="#">
+Volver</a>
+</li>
+
+</ol>
+</nav>
+</div>
+
+</div>
+	<div class="container-fluid exicatalog-wrap">
+		<div class="row">
+			<aside class="col-lg-3 exicatalog-aside">
+				<div class="section aimeos catalog-filter" data-jsonurl="http://exicompras.test/jsonapi?site=default">
+
+<nav class="container-xxl">
+<form method="GET" action="/shop/search?site=default">
+
+
+<div class="section catalog-filter-search" aria-label="Búsqueda de producto">
+
+<div class="header-name">Buscar</div>
+<div class="search-lists">
+<div class="input-group">
+<input class="form-control value" autocomplete="off"
+name="f_search"
+title="Buscar"
+placeholder="Buscar"
+value=""
+data-url="/shop/suggest?f_search=_term_&site=default"
+data-hint="Por favor, introduzca al menos tres caracteres"
+><!--
+--><button class="btn reset" type="reset" title="Reiniciar"><span class="symbol"></span></button><!--
+--><button class="btn btn-search" type="submit" title="Buscar"></button>
+</div>
+</div>
+</div>
+<div class="section catalog-filter-price" aria-label="Filtro de precio">
+<div class="header-name">Precio</div>
+
+<div class="price-lists">
+<div class="price-input">
+<input type="number" class="price-low" data-name="f_price[0]"
+min="0" max="2850001" step="1"
+value="0"
+title="Precio más bajo">
+<input type="number" class="price-high" data-name="f_price[1]"
+min="0" max="2850001" step="1"
+value="2850001"
+title="Precio más alto">
+<input type="range" class="price-slider"
+min="0" max="2850001" step="1"
+value="2850001"
+title="Rango de precio">
+</div>
+<button type="submit" class="btn btn-primary">Guardar</button>
+</div>
+</div>
+<div class="section catalog-filter-supplier"
+aria-label="Listado de proveedores"
+data-counturl="/shop/count?count=supplier&site=default">
+
+<div class="header-name">Proveedores</div>
+
+<div class="supplier-lists">
+
+<input class="form-control search" placeholder="Buscar">
+
+<ul class="attr-list">
+
+
+<li class="attr-item prototype" data-id="">
+<input class="attr-item" type="checkbox" id="_supproto" value="" name="f_supid[]" disabled>
+<label class="attr-name" for="_supproto"><span></span></label>
+</li>
+
+</ul>
+</div>
+
+<noscript>
+<button class="filter btn btn-primary" type="submit">
+Mostrar</button>
+</noscript>
+
+</div>
+<div class="section catalog-filter-attribute"
+aria-label="Filtros del producto"
+data-counturl="/shop/count?count=attribute&site=default">
+
+<div class="attr-header header-name">Filtro</div>
+
+<div class="attribute-lists">
+
+
+
+<div class="fieldsets">
+
+
+</div>
+</div>
+
+<noscript>
+<button class="filter btn btn-primary" type="submit">
+Mostrar</button>
+</noscript>
+
+</div>
+
+</form>
+</nav>
+
+</div>
+				<div class="section aimeos catalog-session" data-jsonurl="http://exicompras.test/jsonapi?site=default">
+
+<div class="section catalog-session-pinned">
+<div class="container-xxl">
+<h2 class="header pinned">
+Productos marcados<span class="count">0</span>
+</h2>
+
+<ul class="pinned-items">
+</ul>
+</div>
+</div>
+<div class="section catalog-session-seen">
+<div class="container-xxl">
+<h2 class="header">
+Última/s vista/s<span class="count">0</span>
+</h2>
+
+<ul class="seen-items">
+</ul>
+</div>
+</div>
+
+</div>
+			</aside>
+			<div class="col-lg-9 exicatalog-main">
+				<div class="section aimeos catalog-list "
+data-jsonurl="http://exicompras.test/jsonapi?site=default">
+
+<div class="container-xxl">
+
+
+
+
+
+
+<div class="catalog-list-type">
+<a class="type-item type-grid" title="Vista en cuadrícula"
+href="/shop/search?site=default"></a>
+<a class="type-item type-list" title="Vista del listado"
+href="/shop/search?l_type=list&site=default"></a>
+</div>
+
+
+
+
+
+<nav class="pagination">
+
+<div class="sort" aria-label="Ordenar por">
+<span>Ordenar por:</span>
+<ul>
+<li>
+<a class="option-relevance active" href="/shop/search?f_sort=relevance&site=default">
+Relevancia</a>
+</li>
+<li>
+<a class="option-ctime " href="/shop/search?f_sort=-ctime&site=default">
+Últimos</a>
+</li>
+<li>
+<a class="option-name " href="/shop/search?f_sort=name&site=default">
+Nombre</a>
+</li>
+<li>
+<a class="option-price " href="/shop/search?f_sort=price&site=default">
+Precio</a>
+</li>
+<li>
+<a class="option-rating " href="/shop/search?f_sort=-rating&site=default">
+Clasificación</a>
+</li>
+</ul>
+</div>
+
+
+</nav>
+
+
+<div class="catalog-list-items product-list"
+data-infiniteurl=""
+data-pinned="[]">
+
+
+<div class="product row "
+data-prodid="3" data-reqstock="1"
+ itemscope itemtype="http://schema.org/Product">
+
+<div class="list-column col-12">
+
+<div class="badges">
+<span class="badge-item new">Nuevo</span>
+<span class="badge-item sale">Venta</span>
+</div>
+
+<a class="media-list "
+href="/shop/smartphone-samsung-galaxy-a55/0?site=default" title="Smartphone Samsung Galaxy A55">
+
+
+<noscript>
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="https://placehold.co/600x600/1a1f36/4a7eff?text=Samsung+A55"
+srcset="https://placehold.co/600x600/1a1f36/4a7eff?text=Samsung+A55 1w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Smartphone Samsung Galaxy A55"
+>
+</div>
+</noscript>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="https://placehold.co/600x600/1a1f36/4a7eff?text=Samsung+A55"
+srcset="https://placehold.co/600x600/1a1f36/4a7eff?text=Samsung+A55 1w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Smartphone Samsung Galaxy A55"
+>
+</div>
+
+
+</a>
+</div>
+
+<div class="list-column col-12">
+<a href="/shop/smartphone-samsung-galaxy-a55/0?site=default">
+
+<div class="product-info">
+
+<div class="rating"><!--
+--><span class="stars"></span><!--
+--></div>
+</div>
+
+<div class="text-list">
+<h2 class="name" itemprop="name">Smartphone Samsung Galaxy A55</h2>
+
+
+<div class="text-item" itemprop="description">
+Pantalla AMOLED 6.6", 128GB, cámara triple 50MP</div>
+
+
+</div>
+</a>
+
+<div class="offer" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+
+<div class="section">
+<div class="stock-list">
+<div class="articleitem stock-actual"
+data-prodid="3">
+</div>
+
+
+</div>
+
+<div class="price-list">
+<div class="articleitem price price-actual" data-prodid="3">
+
+
+<div class="price-item default" itemscope itemprop="priceSpecification" itemtype="http://schema.org/UnitPriceSpecification">
+
+<meta itemprop="valueAddedTaxIncluded" content="true">
+<meta itemprop="priceCurrency" content="COP">
+<meta itemprop="price" content="1299000.00">
+
+<span class="quantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+<meta itemprop="minValue" content="1">
+desde 1</span>
+
+
+<span class="value" itemscope itemprop="priceType" itemtype="http://schema.org/SalePrice">
+1.299.000,00 COL$</span>
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<form class="basket" method="POST" action="/shop/basket?site=default">
+<!-- catalog.lists.items.csrf --><input class="csrf-token" type="hidden" name="_token" value="LvYssUFDoRcN24uXnrkRnntexT77oQjt3cwzhuwW"><!-- catalog.lists.items.csrf -->
+
+
+<div class="items-attribute">
+
+<ul class="selection">
+
+
+</ul>
+
+
+<ul class="selection">
+
+
+</ul>
+
+</div>
+
+<div class="addbasket">
+<input type="hidden" value="add"
+name="b_action"
+>
+<input type="hidden" value="3"
+name="b_prod[0][prodid]"
+>
+<div class="input-group">
+<input type="number" max="2147483647"
+value="1"
+min="1"
+step="1"
+required="required" name="b_prod[0][quantity]"
+title="Cantidad"
+><!--
+--><button class="btn btn-primary btn-action" type="submit"
+title="Añadir a la cesta"
+ >
+</button><!--
+--><a class="btn-pin"
+href="/shop/pin?pin_action=add&pin_id=3&d_name=smartphone-samsung-galaxy-a55&site=default"
+data-rmurl="/shop/pin?pin_action=delete&pin_id=3&d_name=smartphone-samsung-galaxy-a55&site=default"
+title="Producto marcado">
+</a>
+</div>
+</div>
+
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+<div class="product row "
+data-prodid="4" data-reqstock="1"
+ itemscope itemtype="http://schema.org/Product">
+
+<div class="list-column col-12">
+
+<div class="badges">
+<span class="badge-item new">Nuevo</span>
+<span class="badge-item sale">Venta</span>
+</div>
+
+<a class="media-list "
+href="/shop/audifonos-bluetooth-sony-wh-1000xm5/1?site=default" title="Audífonos Bluetooth Sony WH-1000XM5">
+
+
+<noscript>
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="https://placehold.co/600x600/1a1f36/4a7eff?text=Sony+WH1000XM5"
+srcset="https://placehold.co/600x600/1a1f36/4a7eff?text=Sony+WH1000XM5 1w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Audífonos Bluetooth Sony WH-1000XM5"
+>
+</div>
+</noscript>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="https://placehold.co/600x600/1a1f36/4a7eff?text=Sony+WH1000XM5"
+srcset="https://placehold.co/600x600/1a1f36/4a7eff?text=Sony+WH1000XM5 1w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Audífonos Bluetooth Sony WH-1000XM5"
+>
+</div>
+
+
+</a>
+</div>
+
+<div class="list-column col-12">
+<a href="/shop/audifonos-bluetooth-sony-wh-1000xm5/1?site=default">
+
+<div class="product-info">
+
+<div class="rating"><!--
+--><span class="stars"></span><!--
+--></div>
+</div>
+
+<div class="text-list">
+<h2 class="name" itemprop="name">Audífonos Bluetooth Sony WH-1000XM5</h2>
+
+
+<div class="text-item" itemprop="description">
+Cancelación de ruido líder del sector, 30h batería</div>
+
+
+</div>
+</a>
+
+<div class="offer" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+
+<div class="section">
+<div class="stock-list">
+<div class="articleitem stock-actual"
+data-prodid="4">
+</div>
+
+
+</div>
+
+<div class="price-list">
+<div class="articleitem price price-actual" data-prodid="4">
+
+
+<div class="price-item default" itemscope itemprop="priceSpecification" itemtype="http://schema.org/UnitPriceSpecification">
+
+<meta itemprop="valueAddedTaxIncluded" content="true">
+<meta itemprop="priceCurrency" content="COP">
+<meta itemprop="price" content="1150000.00">
+
+<span class="quantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+<meta itemprop="minValue" content="1">
+desde 1</span>
+
+
+<span class="value" itemscope itemprop="priceType" itemtype="http://schema.org/SalePrice">
+1.150.000,00 COL$</span>
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<form class="basket" method="POST" action="/shop/basket?site=default">
+<!-- catalog.lists.items.csrf --><input class="csrf-token" type="hidden" name="_token" value="LvYssUFDoRcN24uXnrkRnntexT77oQjt3cwzhuwW"><!-- catalog.lists.items.csrf -->
+
+
+<div class="items-attribute">
+
+<ul class="selection">
+
+
+</ul>
+
+
+<ul class="selection">
+
+
+</ul>
+
+</div>
+
+<div class="addbasket">
+<input type="hidden" value="add"
+name="b_action"
+>
+<input type="hidden" value="4"
+name="b_prod[0][prodid]"
+>
+<div class="input-group">
+<input type="number" max="2147483647"
+value="1"
+min="1"
+step="1"
+required="required" name="b_prod[0][quantity]"
+title="Cantidad"
+><!--
+--><button class="btn btn-primary btn-action" type="submit"
+title="Añadir a la cesta"
+ >
+</button><!--
+--><a class="btn-pin"
+href="/shop/pin?pin_action=add&pin_id=4&d_name=audifonos-bluetooth-sony-wh-1000xm5&site=default"
+data-rmurl="/shop/pin?pin_action=delete&pin_id=4&d_name=audifonos-bluetooth-sony-wh-1000xm5&site=default"
+title="Producto marcado">
+</a>
+</div>
+</div>
+
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+<div class="product row "
+data-prodid="5" data-reqstock="1"
+ itemscope itemtype="http://schema.org/Product">
+
+<div class="list-column col-12">
+
+<div class="badges">
+<span class="badge-item new">Nuevo</span>
+<span class="badge-item sale">Venta</span>
+</div>
+
+<a class="media-list "
+href="/shop/tablet-ipad-air-11-m2/2?site=default" title="Tablet iPad Air 11" M2">
+
+
+<noscript>
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="https://placehold.co/600x600/1a1f36/4a7eff?text=iPad+Air+M2"
+srcset="https://placehold.co/600x600/1a1f36/4a7eff?text=iPad+Air+M2 1w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Tablet iPad Air 11&quot; M2"
+>
+</div>
+</noscript>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="https://placehold.co/600x600/1a1f36/4a7eff?text=iPad+Air+M2"
+srcset="https://placehold.co/600x600/1a1f36/4a7eff?text=iPad+Air+M2 1w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Tablet iPad Air 11&quot; M2"
+>
+</div>
+
+
+</a>
+</div>
+
+<div class="list-column col-12">
+<a href="/shop/tablet-ipad-air-11-m2/2?site=default">
+
+<div class="product-info">
+
+<div class="rating"><!--
+--><span class="stars"></span><!--
+--></div>
+</div>
+
+<div class="text-list">
+<h2 class="name" itemprop="name">Tablet iPad Air 11" M2</h2>
+
+
+<div class="text-item" itemprop="description">
+Chip M2, pantalla Liquid Retina 11", 256GB WiFi</div>
+
+
+</div>
+</a>
+
+<div class="offer" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+
+<div class="section">
+<div class="stock-list">
+<div class="articleitem stock-actual"
+data-prodid="5">
+</div>
+
+
+</div>
+
+<div class="price-list">
+<div class="articleitem price price-actual" data-prodid="5">
+
+
+<div class="price-item default" itemscope itemprop="priceSpecification" itemtype="http://schema.org/UnitPriceSpecification">
+
+<meta itemprop="valueAddedTaxIncluded" content="true">
+<meta itemprop="priceCurrency" content="COP">
+<meta itemprop="price" content="2850000.00">
+
+<span class="quantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+<meta itemprop="minValue" content="1">
+desde 1</span>
+
+
+<span class="value" itemscope itemprop="priceType" itemtype="http://schema.org/SalePrice">
+2.850.000,00 COL$</span>
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<form class="basket" method="POST" action="/shop/basket?site=default">
+<!-- catalog.lists.items.csrf --><input class="csrf-token" type="hidden" name="_token" value="LvYssUFDoRcN24uXnrkRnntexT77oQjt3cwzhuwW"><!-- catalog.lists.items.csrf -->
+
+
+<div class="items-attribute">
+
+<ul class="selection">
+
+
+</ul>
+
+
+<ul class="selection">
+
+
+</ul>
+
+</div>
+
+<div class="addbasket">
+<input type="hidden" value="add"
+name="b_action"
+>
+<input type="hidden" value="5"
+name="b_prod[0][prodid]"
+>
+<div class="input-group">
+<input type="number" max="2147483647"
+value="1"
+min="1"
+step="1"
+required="required" name="b_prod[0][quantity]"
+title="Cantidad"
+><!--
+--><button class="btn btn-primary btn-action" type="submit"
+title="Añadir a la cesta"
+ >
+</button><!--
+--><a class="btn-pin"
+href="/shop/pin?pin_action=add&pin_id=5&d_name=tablet-ipad-air-11-m2&site=default"
+data-rmurl="/shop/pin?pin_action=delete&pin_id=5&d_name=tablet-ipad-air-11-m2&site=default"
+title="Producto marcado">
+</a>
+</div>
+</div>
+
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+<div class="product row "
+data-prodid="6" data-reqstock="1"
+ itemscope itemtype="http://schema.org/Product">
+
+<div class="list-column col-12">
+
+<div class="badges">
+<span class="badge-item new">Nuevo</span>
+<span class="badge-item sale">Venta</span>
+</div>
+
+<a class="media-list "
+href="/shop/cafetera-nespresso-vertuo-pop/3?site=default" title="Cafetera Nespresso Vertuo Pop">
+
+
+<noscript>
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="https://placehold.co/600x600/1a1f36/ff6b35?text=Nespresso+Vertuo"
+srcset="https://placehold.co/600x600/1a1f36/ff6b35?text=Nespresso+Vertuo 1w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Cafetera Nespresso Vertuo Pop"
+>
+</div>
+</noscript>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="https://placehold.co/600x600/1a1f36/ff6b35?text=Nespresso+Vertuo"
+srcset="https://placehold.co/600x600/1a1f36/ff6b35?text=Nespresso+Vertuo 1w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Cafetera Nespresso Vertuo Pop"
+>
+</div>
+
+
+</a>
+</div>
+
+<div class="list-column col-12">
+<a href="/shop/cafetera-nespresso-vertuo-pop/3?site=default">
+
+<div class="product-info">
+
+<div class="rating"><!--
+--><span class="stars"></span><!--
+--></div>
+</div>
+
+<div class="text-list">
+<h2 class="name" itemprop="name">Cafetera Nespresso Vertuo Pop</h2>
+
+
+<div class="text-item" itemprop="description">
+Extracción por centrifugación, 5 tamaños de taza</div>
+
+
+</div>
+</a>
+
+<div class="offer" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+
+<div class="section">
+<div class="stock-list">
+<div class="articleitem stock-actual"
+data-prodid="6">
+</div>
+
+
+</div>
+
+<div class="price-list">
+<div class="articleitem price price-actual" data-prodid="6">
+
+
+<div class="price-item default" itemscope itemprop="priceSpecification" itemtype="http://schema.org/UnitPriceSpecification">
+
+<meta itemprop="valueAddedTaxIncluded" content="true">
+<meta itemprop="priceCurrency" content="COP">
+<meta itemprop="price" content="389000.00">
+
+<span class="quantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+<meta itemprop="minValue" content="1">
+desde 1</span>
+
+
+<span class="value" itemscope itemprop="priceType" itemtype="http://schema.org/SalePrice">
+389.000,00 COL$</span>
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<form class="basket" method="POST" action="/shop/basket?site=default">
+<!-- catalog.lists.items.csrf --><input class="csrf-token" type="hidden" name="_token" value="LvYssUFDoRcN24uXnrkRnntexT77oQjt3cwzhuwW"><!-- catalog.lists.items.csrf -->
+
+
+<div class="items-attribute">
+
+<ul class="selection">
+
+
+</ul>
+
+
+<ul class="selection">
+
+
+</ul>
+
+</div>
+
+<div class="addbasket">
+<input type="hidden" value="add"
+name="b_action"
+>
+<input type="hidden" value="6"
+name="b_prod[0][prodid]"
+>
+<div class="input-group">
+<input type="number" max="2147483647"
+value="1"
+min="1"
+step="1"
+required="required" name="b_prod[0][quantity]"
+title="Cantidad"
+><!--
+--><button class="btn btn-primary btn-action" type="submit"
+title="Añadir a la cesta"
+ >
+</button><!--
+--><a class="btn-pin"
+href="/shop/pin?pin_action=add&pin_id=6&d_name=cafetera-nespresso-vertuo-pop&site=default"
+data-rmurl="/shop/pin?pin_action=delete&pin_id=6&d_name=cafetera-nespresso-vertuo-pop&site=default"
+title="Producto marcado">
+</a>
+</div>
+</div>
+
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+<div class="product row "
+data-prodid="7" data-reqstock="1"
+ itemscope itemtype="http://schema.org/Product">
+
+<div class="list-column col-12">
+
+<div class="badges">
+<span class="badge-item new">Nuevo</span>
+<span class="badge-item sale">Venta</span>
+</div>
+
+<a class="media-list "
+href="/shop/lampara-de-piso-nordica-led/4?site=default" title="Lámpara de Piso Nórdica LED">
+
+
+<noscript>
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="https://placehold.co/600x600/1a1f36/ff6b35?text=Lampara+Nordic"
+srcset="https://placehold.co/600x600/1a1f36/ff6b35?text=Lampara+Nordic 1w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Lámpara de Piso Nórdica LED"
+>
+</div>
+</noscript>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="https://placehold.co/600x600/1a1f36/ff6b35?text=Lampara+Nordic"
+srcset="https://placehold.co/600x600/1a1f36/ff6b35?text=Lampara+Nordic 1w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Lámpara de Piso Nórdica LED"
+>
+</div>
+
+
+</a>
+</div>
+
+<div class="list-column col-12">
+<a href="/shop/lampara-de-piso-nordica-led/4?site=default">
+
+<div class="product-info">
+
+<div class="rating"><!--
+--><span class="stars"></span><!--
+--></div>
+</div>
+
+<div class="text-list">
+<h2 class="name" itemprop="name">Lámpara de Piso Nórdica LED</h2>
+
+
+<div class="text-item" itemprop="description">
+Diseño escandinavo, luz cálida regulable, base madera</div>
+
+
+</div>
+</a>
+
+<div class="offer" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+
+<div class="section">
+<div class="stock-list">
+<div class="articleitem stock-actual"
+data-prodid="7">
+</div>
+
+
+</div>
+
+<div class="price-list">
+<div class="articleitem price price-actual" data-prodid="7">
+
+
+<div class="price-item default" itemscope itemprop="priceSpecification" itemtype="http://schema.org/UnitPriceSpecification">
+
+<meta itemprop="valueAddedTaxIncluded" content="true">
+<meta itemprop="priceCurrency" content="COP">
+<meta itemprop="price" content="245000.00">
+
+<span class="quantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+<meta itemprop="minValue" content="1">
+desde 1</span>
+
+
+<span class="value" itemscope itemprop="priceType" itemtype="http://schema.org/SalePrice">
+245.000,00 COL$</span>
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<form class="basket" method="POST" action="/shop/basket?site=default">
+<!-- catalog.lists.items.csrf --><input class="csrf-token" type="hidden" name="_token" value="LvYssUFDoRcN24uXnrkRnntexT77oQjt3cwzhuwW"><!-- catalog.lists.items.csrf -->
+
+
+<div class="items-attribute">
+
+<ul class="selection">
+
+
+</ul>
+
+
+<ul class="selection">
+
+
+</ul>
+
+</div>
+
+<div class="addbasket">
+<input type="hidden" value="add"
+name="b_action"
+>
+<input type="hidden" value="7"
+name="b_prod[0][prodid]"
+>
+<div class="input-group">
+<input type="number" max="2147483647"
+value="1"
+min="1"
+step="1"
+required="required" name="b_prod[0][quantity]"
+title="Cantidad"
+><!--
+--><button class="btn btn-primary btn-action" type="submit"
+title="Añadir a la cesta"
+ >
+</button><!--
+--><a class="btn-pin"
+href="/shop/pin?pin_action=add&pin_id=7&d_name=lampara-de-piso-nordica-led&site=default"
+data-rmurl="/shop/pin?pin_action=delete&pin_id=7&d_name=lampara-de-piso-nordica-led&site=default"
+title="Producto marcado">
+</a>
+</div>
+</div>
+
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+<div class="product row "
+data-prodid="8" data-reqstock="1"
+ itemscope itemtype="http://schema.org/Product">
+
+<div class="list-column col-12">
+
+<div class="badges">
+<span class="badge-item new">Nuevo</span>
+<span class="badge-item sale">Venta</span>
+</div>
+
+<a class="media-list "
+href="/shop/tenis-nike-air-max-270/5?site=default" title="Tenis Nike Air Max 270">
+
+
+<noscript>
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="https://placehold.co/600x600/1a1f36/34d399?text=Nike+Air+Max"
+srcset="https://placehold.co/600x600/1a1f36/34d399?text=Nike+Air+Max 1w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Tenis Nike Air Max 270"
+>
+</div>
+</noscript>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="https://placehold.co/600x600/1a1f36/34d399?text=Nike+Air+Max"
+srcset="https://placehold.co/600x600/1a1f36/34d399?text=Nike+Air+Max 1w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Tenis Nike Air Max 270"
+>
+</div>
+
+
+</a>
+</div>
+
+<div class="list-column col-12">
+<a href="/shop/tenis-nike-air-max-270/5?site=default">
+
+<div class="product-info">
+
+<div class="rating"><!--
+--><span class="stars"></span><!--
+--></div>
+</div>
+
+<div class="text-list">
+<h2 class="name" itemprop="name">Tenis Nike Air Max 270</h2>
+
+
+<div class="text-item" itemprop="description">
+Unidad de aire Max 270 en el talón, ultra cómodos</div>
+
+
+</div>
+</a>
+
+<div class="offer" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+
+<div class="section">
+<div class="stock-list">
+<div class="articleitem stock-actual"
+data-prodid="8">
+</div>
+
+
+</div>
+
+<div class="price-list">
+<div class="articleitem price price-actual" data-prodid="8">
+
+
+<div class="price-item default" itemscope itemprop="priceSpecification" itemtype="http://schema.org/UnitPriceSpecification">
+
+<meta itemprop="valueAddedTaxIncluded" content="true">
+<meta itemprop="priceCurrency" content="COP">
+<meta itemprop="price" content="420000.00">
+
+<span class="quantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+<meta itemprop="minValue" content="1">
+desde 1</span>
+
+
+<span class="value" itemscope itemprop="priceType" itemtype="http://schema.org/SalePrice">
+420.000,00 COL$</span>
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<form class="basket" method="POST" action="/shop/basket?site=default">
+<!-- catalog.lists.items.csrf --><input class="csrf-token" type="hidden" name="_token" value="LvYssUFDoRcN24uXnrkRnntexT77oQjt3cwzhuwW"><!-- catalog.lists.items.csrf -->
+
+
+<div class="items-attribute">
+
+<ul class="selection">
+
+
+</ul>
+
+
+<ul class="selection">
+
+
+</ul>
+
+</div>
+
+<div class="addbasket">
+<input type="hidden" value="add"
+name="b_action"
+>
+<input type="hidden" value="8"
+name="b_prod[0][prodid]"
+>
+<div class="input-group">
+<input type="number" max="2147483647"
+value="1"
+min="1"
+step="1"
+required="required" name="b_prod[0][quantity]"
+title="Cantidad"
+><!--
+--><button class="btn btn-primary btn-action" type="submit"
+title="Añadir a la cesta"
+ >
+</button><!--
+--><a class="btn-pin"
+href="/shop/pin?pin_action=add&pin_id=8&d_name=tenis-nike-air-max-270&site=default"
+data-rmurl="/shop/pin?pin_action=delete&pin_id=8&d_name=tenis-nike-air-max-270&site=default"
+title="Producto marcado">
+</a>
+</div>
+</div>
+
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+<div class="product row "
+data-prodid="9" data-reqstock="1"
+ itemscope itemtype="http://schema.org/Product">
+
+<div class="list-column col-12">
+
+<div class="badges">
+<span class="badge-item new">Nuevo</span>
+<span class="badge-item sale">Venta</span>
+</div>
+
+<a class="media-list "
+href="/shop/colchoneta-yoga-antideslizante-6mm/6?site=default" title="Colchoneta Yoga Antideslizante 6mm">
+
+
+<noscript>
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="https://placehold.co/600x600/1a1f36/34d399?text=Colchoneta+Yoga"
+srcset="https://placehold.co/600x600/1a1f36/34d399?text=Colchoneta+Yoga 1w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Colchoneta Yoga Antideslizante 6mm"
+>
+</div>
+</noscript>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="https://placehold.co/600x600/1a1f36/34d399?text=Colchoneta+Yoga"
+srcset="https://placehold.co/600x600/1a1f36/34d399?text=Colchoneta+Yoga 1w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Colchoneta Yoga Antideslizante 6mm"
+>
+</div>
+
+
+</a>
+</div>
+
+<div class="list-column col-12">
+<a href="/shop/colchoneta-yoga-antideslizante-6mm/6?site=default">
+
+<div class="product-info">
+
+<div class="rating"><!--
+--><span class="stars"></span><!--
+--></div>
+</div>
+
+<div class="text-list">
+<h2 class="name" itemprop="name">Colchoneta Yoga Antideslizante 6mm</h2>
+
+
+<div class="text-item" itemprop="description">
+TPE ecológico, 183x61cm, bolso de transporte incluido</div>
+
+
+</div>
+</a>
+
+<div class="offer" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+
+<div class="section">
+<div class="stock-list">
+<div class="articleitem stock-actual"
+data-prodid="9">
+</div>
+
+
+</div>
+
+<div class="price-list">
+<div class="articleitem price price-actual" data-prodid="9">
+
+
+<div class="price-item default" itemscope itemprop="priceSpecification" itemtype="http://schema.org/UnitPriceSpecification">
+
+<meta itemprop="valueAddedTaxIncluded" content="true">
+<meta itemprop="priceCurrency" content="COP">
+<meta itemprop="price" content="89000.00">
+
+<span class="quantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+<meta itemprop="minValue" content="1">
+desde 1</span>
+
+
+<span class="value" itemscope itemprop="priceType" itemtype="http://schema.org/SalePrice">
+89.000,00 COL$</span>
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<form class="basket" method="POST" action="/shop/basket?site=default">
+<!-- catalog.lists.items.csrf --><input class="csrf-token" type="hidden" name="_token" value="LvYssUFDoRcN24uXnrkRnntexT77oQjt3cwzhuwW"><!-- catalog.lists.items.csrf -->
+
+
+<div class="items-attribute">
+
+<ul class="selection">
+
+
+</ul>
+
+
+<ul class="selection">
+
+
+</ul>
+
+</div>
+
+<div class="addbasket">
+<input type="hidden" value="add"
+name="b_action"
+>
+<input type="hidden" value="9"
+name="b_prod[0][prodid]"
+>
+<div class="input-group">
+<input type="number" max="2147483647"
+value="1"
+min="1"
+step="1"
+required="required" name="b_prod[0][quantity]"
+title="Cantidad"
+><!--
+--><button class="btn btn-primary btn-action" type="submit"
+title="Añadir a la cesta"
+ >
+</button><!--
+--><a class="btn-pin"
+href="/shop/pin?pin_action=add&pin_id=9&d_name=colchoneta-yoga-antideslizante-6mm&site=default"
+data-rmurl="/shop/pin?pin_action=delete&pin_id=9&d_name=colchoneta-yoga-antideslizante-6mm&site=default"
+title="Producto marcado">
+</a>
+</div>
+</div>
+
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+<div class="product row "
+data-prodid="10" data-reqstock="1"
+ itemscope itemtype="http://schema.org/Product">
+
+<div class="list-column col-12">
+
+<div class="badges">
+<span class="badge-item new">Nuevo</span>
+<span class="badge-item sale">Venta</span>
+</div>
+
+<a class="media-list "
+href="/shop/camiseta-oversize-algodon-premium/7?site=default" title="Camiseta Oversize Algodón Premium">
+
+
+<noscript>
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="https://placehold.co/600x600/1a1f36/a8b0cc?text=Camiseta+Oversize"
+srcset="https://placehold.co/600x600/1a1f36/a8b0cc?text=Camiseta+Oversize 1w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Camiseta Oversize Algodón Premium"
+>
+</div>
+</noscript>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="https://placehold.co/600x600/1a1f36/a8b0cc?text=Camiseta+Oversize"
+srcset="https://placehold.co/600x600/1a1f36/a8b0cc?text=Camiseta+Oversize 1w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Camiseta Oversize Algodón Premium"
+>
+</div>
+
+
+</a>
+</div>
+
+<div class="list-column col-12">
+<a href="/shop/camiseta-oversize-algodon-premium/7?site=default">
+
+<div class="product-info">
+
+<div class="rating"><!--
+--><span class="stars"></span><!--
+--></div>
+</div>
+
+<div class="text-list">
+<h2 class="name" itemprop="name">Camiseta Oversize Algodón Premium</h2>
+
+
+<div class="text-item" itemprop="description">
+100% algodón peinado 220g/m², corte holgado, 8 colores</div>
+
+
+</div>
+</a>
+
+<div class="offer" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+
+<div class="section">
+<div class="stock-list">
+<div class="articleitem stock-actual"
+data-prodid="10">
+</div>
+
+
+</div>
+
+<div class="price-list">
+<div class="articleitem price price-actual" data-prodid="10">
+
+
+<div class="price-item default" itemscope itemprop="priceSpecification" itemtype="http://schema.org/UnitPriceSpecification">
+
+<meta itemprop="valueAddedTaxIncluded" content="true">
+<meta itemprop="priceCurrency" content="COP">
+<meta itemprop="price" content="65000.00">
+
+<span class="quantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+<meta itemprop="minValue" content="1">
+desde 1</span>
+
+
+<span class="value" itemscope itemprop="priceType" itemtype="http://schema.org/SalePrice">
+65.000,00 COL$</span>
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<form class="basket" method="POST" action="/shop/basket?site=default">
+<!-- catalog.lists.items.csrf --><input class="csrf-token" type="hidden" name="_token" value="LvYssUFDoRcN24uXnrkRnntexT77oQjt3cwzhuwW"><!-- catalog.lists.items.csrf -->
+
+
+<div class="items-attribute">
+
+<ul class="selection">
+
+
+</ul>
+
+
+<ul class="selection">
+
+
+</ul>
+
+</div>
+
+<div class="addbasket">
+<input type="hidden" value="add"
+name="b_action"
+>
+<input type="hidden" value="10"
+name="b_prod[0][prodid]"
+>
+<div class="input-group">
+<input type="number" max="2147483647"
+value="1"
+min="1"
+step="1"
+required="required" name="b_prod[0][quantity]"
+title="Cantidad"
+><!--
+--><button class="btn btn-primary btn-action" type="submit"
+title="Añadir a la cesta"
+ >
+</button><!--
+--><a class="btn-pin"
+href="/shop/pin?pin_action=add&pin_id=10&d_name=camiseta-oversize-algodon-premium&site=default"
+data-rmurl="/shop/pin?pin_action=delete&pin_id=10&d_name=camiseta-oversize-algodon-premium&site=default"
+title="Producto marcado">
+</a>
+</div>
+</div>
+
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+<div class="product row "
+data-prodid="11" data-reqstock="1"
+ itemscope itemtype="http://schema.org/Product">
+
+<div class="list-column col-12">
+
+<div class="badges">
+<span class="badge-item new">Nuevo</span>
+<span class="badge-item sale">Venta</span>
+</div>
+
+<a class="media-list "
+href="/shop/jean-slim-fit-hombre-lavado-oscuro/8?site=default" title="Jean Slim Fit Hombre Lavado Oscuro">
+
+
+<noscript>
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="https://placehold.co/600x600/1a1f36/a8b0cc?text=Jean+Slim+Fit"
+srcset="https://placehold.co/600x600/1a1f36/a8b0cc?text=Jean+Slim+Fit 1w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Jean Slim Fit Hombre Lavado Oscuro"
+>
+</div>
+</noscript>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="https://placehold.co/600x600/1a1f36/a8b0cc?text=Jean+Slim+Fit"
+srcset="https://placehold.co/600x600/1a1f36/a8b0cc?text=Jean+Slim+Fit 1w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Jean Slim Fit Hombre Lavado Oscuro"
+>
+</div>
+
+
+</a>
+</div>
+
+<div class="list-column col-12">
+<a href="/shop/jean-slim-fit-hombre-lavado-oscuro/8?site=default">
+
+<div class="product-info">
+
+<div class="rating"><!--
+--><span class="stars"></span><!--
+--></div>
+</div>
+
+<div class="text-list">
+<h2 class="name" itemprop="name">Jean Slim Fit Hombre Lavado Oscuro</h2>
+
+
+<div class="text-item" itemprop="description">
+Denim 98% algodón 2% elastano, 5 bolsillos, tiro medio</div>
+
+
+</div>
+</a>
+
+<div class="offer" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+
+<div class="section">
+<div class="stock-list">
+<div class="articleitem stock-actual"
+data-prodid="11">
+</div>
+
+
+</div>
+
+<div class="price-list">
+<div class="articleitem price price-actual" data-prodid="11">
+
+
+<div class="price-item default" itemscope itemprop="priceSpecification" itemtype="http://schema.org/UnitPriceSpecification">
+
+<meta itemprop="valueAddedTaxIncluded" content="true">
+<meta itemprop="priceCurrency" content="COP">
+<meta itemprop="price" content="145000.00">
+
+<span class="quantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+<meta itemprop="minValue" content="1">
+desde 1</span>
+
+
+<span class="value" itemscope itemprop="priceType" itemtype="http://schema.org/SalePrice">
+145.000,00 COL$</span>
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<form class="basket" method="POST" action="/shop/basket?site=default">
+<!-- catalog.lists.items.csrf --><input class="csrf-token" type="hidden" name="_token" value="LvYssUFDoRcN24uXnrkRnntexT77oQjt3cwzhuwW"><!-- catalog.lists.items.csrf -->
+
+
+<div class="items-attribute">
+
+<ul class="selection">
+
+
+</ul>
+
+
+<ul class="selection">
+
+
+</ul>
+
+</div>
+
+<div class="addbasket">
+<input type="hidden" value="add"
+name="b_action"
+>
+<input type="hidden" value="11"
+name="b_prod[0][prodid]"
+>
+<div class="input-group">
+<input type="number" max="2147483647"
+value="1"
+min="1"
+step="1"
+required="required" name="b_prod[0][quantity]"
+title="Cantidad"
+><!--
+--><button class="btn btn-primary btn-action" type="submit"
+title="Añadir a la cesta"
+ >
+</button><!--
+--><a class="btn-pin"
+href="/shop/pin?pin_action=add&pin_id=11&d_name=jean-slim-fit-hombre-lavado-oscuro&site=default"
+data-rmurl="/shop/pin?pin_action=delete&pin_id=11&d_name=jean-slim-fit-hombre-lavado-oscuro&site=default"
+title="Producto marcado">
+</a>
+</div>
+</div>
+
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+<div class="product row "
+data-prodid="12" data-reqstock="1"
+ itemscope itemtype="http://schema.org/Product">
+
+<div class="list-column col-12">
+
+<div class="badges">
+<span class="badge-item new">Nuevo</span>
+<span class="badge-item sale">Venta</span>
+</div>
+
+<a class="media-list "
+href="/shop/bolso-tote-cuero-sintetico-mujer/9?site=default" title="Bolso Tote Cuero Sintético Mujer">
+
+
+<noscript>
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="https://placehold.co/600x600/1a1f36/a8b0cc?text=Bolso+Tote"
+srcset="https://placehold.co/600x600/1a1f36/a8b0cc?text=Bolso+Tote 1w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Bolso Tote Cuero Sintético Mujer"
+>
+</div>
+</noscript>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="https://placehold.co/600x600/1a1f36/a8b0cc?text=Bolso+Tote"
+srcset="https://placehold.co/600x600/1a1f36/a8b0cc?text=Bolso+Tote 1w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Bolso Tote Cuero Sintético Mujer"
+>
+</div>
+
+
+</a>
+</div>
+
+<div class="list-column col-12">
+<a href="/shop/bolso-tote-cuero-sintetico-mujer/9?site=default">
+
+<div class="product-info">
+
+<div class="rating"><!--
+--><span class="stars"></span><!--
+--></div>
+</div>
+
+<div class="text-list">
+<h2 class="name" itemprop="name">Bolso Tote Cuero Sintético Mujer</h2>
+
+
+<div class="text-item" itemprop="description">
+Interior forrado, asa larga, cierre magnético, color camel</div>
+
+
+</div>
+</a>
+
+<div class="offer" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+
+<div class="section">
+<div class="stock-list">
+<div class="articleitem stock-actual"
+data-prodid="12">
+</div>
+
+
+</div>
+
+<div class="price-list">
+<div class="articleitem price price-actual" data-prodid="12">
+
+
+<div class="price-item default" itemscope itemprop="priceSpecification" itemtype="http://schema.org/UnitPriceSpecification">
+
+<meta itemprop="valueAddedTaxIncluded" content="true">
+<meta itemprop="priceCurrency" content="COP">
+<meta itemprop="price" content="189000.00">
+
+<span class="quantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+<meta itemprop="minValue" content="1">
+desde 1</span>
+
+
+<span class="value" itemscope itemprop="priceType" itemtype="http://schema.org/SalePrice">
+189.000,00 COL$</span>
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<form class="basket" method="POST" action="/shop/basket?site=default">
+<!-- catalog.lists.items.csrf --><input class="csrf-token" type="hidden" name="_token" value="LvYssUFDoRcN24uXnrkRnntexT77oQjt3cwzhuwW"><!-- catalog.lists.items.csrf -->
+
+
+<div class="items-attribute">
+
+<ul class="selection">
+
+
+</ul>
+
+
+<ul class="selection">
+
+
+</ul>
+
+</div>
+
+<div class="addbasket">
+<input type="hidden" value="add"
+name="b_action"
+>
+<input type="hidden" value="12"
+name="b_prod[0][prodid]"
+>
+<div class="input-group">
+<input type="number" max="2147483647"
+value="1"
+min="1"
+step="1"
+required="required" name="b_prod[0][quantity]"
+title="Cantidad"
+><!--
+--><button class="btn btn-primary btn-action" type="submit"
+title="Añadir a la cesta"
+ >
+</button><!--
+--><a class="btn-pin"
+href="/shop/pin?pin_action=add&pin_id=12&d_name=bolso-tote-cuero-sintetico-mujer&site=default"
+data-rmurl="/shop/pin?pin_action=delete&pin_id=12&d_name=bolso-tote-cuero-sintetico-mujer&site=default"
+title="Producto marcado">
+</a>
+</div>
+</div>
+
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+<div class="product row "
+data-prodid="13" data-reqstock="1"
+ itemscope itemtype="http://schema.org/Product">
+
+<div class="list-column col-12">
+
+<div class="badges">
+<span class="badge-item new">Nuevo</span>
+<span class="badge-item sale">Venta</span>
+</div>
+
+<a class="media-list "
+href="/shop/set-skincare-hidratacion-profunda/10?site=default" title="Set Skincare Hidratación Profunda">
+
+
+<noscript>
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="https://placehold.co/600x600/1a1f36/7aa3ff?text=Set+Skincare"
+srcset="https://placehold.co/600x600/1a1f36/7aa3ff?text=Set+Skincare 1w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Set Skincare Hidratación Profunda"
+>
+</div>
+</noscript>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="https://placehold.co/600x600/1a1f36/7aa3ff?text=Set+Skincare"
+srcset="https://placehold.co/600x600/1a1f36/7aa3ff?text=Set+Skincare 1w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Set Skincare Hidratación Profunda"
+>
+</div>
+
+
+</a>
+</div>
+
+<div class="list-column col-12">
+<a href="/shop/set-skincare-hidratacion-profunda/10?site=default">
+
+<div class="product-info">
+
+<div class="rating"><!--
+--><span class="stars"></span><!--
+--></div>
+</div>
+
+<div class="text-list">
+<h2 class="name" itemprop="name">Set Skincare Hidratación Profunda</h2>
+
+
+<div class="text-item" itemprop="description">
+Sérum hialurónico + crema día SPF30 + contorno ojos</div>
+
+
+</div>
+</a>
+
+<div class="offer" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+
+<div class="section">
+<div class="stock-list">
+<div class="articleitem stock-actual"
+data-prodid="13">
+</div>
+
+
+</div>
+
+<div class="price-list">
+<div class="articleitem price price-actual" data-prodid="13">
+
+
+<div class="price-item default" itemscope itemprop="priceSpecification" itemtype="http://schema.org/UnitPriceSpecification">
+
+<meta itemprop="valueAddedTaxIncluded" content="true">
+<meta itemprop="priceCurrency" content="COP">
+<meta itemprop="price" content="178000.00">
+
+<span class="quantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+<meta itemprop="minValue" content="1">
+desde 1</span>
+
+
+<span class="value" itemscope itemprop="priceType" itemtype="http://schema.org/SalePrice">
+178.000,00 COL$</span>
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<form class="basket" method="POST" action="/shop/basket?site=default">
+<!-- catalog.lists.items.csrf --><input class="csrf-token" type="hidden" name="_token" value="LvYssUFDoRcN24uXnrkRnntexT77oQjt3cwzhuwW"><!-- catalog.lists.items.csrf -->
+
+
+<div class="items-attribute">
+
+<ul class="selection">
+
+
+</ul>
+
+
+<ul class="selection">
+
+
+</ul>
+
+</div>
+
+<div class="addbasket">
+<input type="hidden" value="add"
+name="b_action"
+>
+<input type="hidden" value="13"
+name="b_prod[0][prodid]"
+>
+<div class="input-group">
+<input type="number" max="2147483647"
+value="1"
+min="1"
+step="1"
+required="required" name="b_prod[0][quantity]"
+title="Cantidad"
+><!--
+--><button class="btn btn-primary btn-action" type="submit"
+title="Añadir a la cesta"
+ >
+</button><!--
+--><a class="btn-pin"
+href="/shop/pin?pin_action=add&pin_id=13&d_name=set-skincare-hidratacion-profunda&site=default"
+data-rmurl="/shop/pin?pin_action=delete&pin_id=13&d_name=set-skincare-hidratacion-profunda&site=default"
+title="Producto marcado">
+</a>
+</div>
+</div>
+
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+<div class="product row "
+data-prodid="14" data-reqstock="1"
+ itemscope itemtype="http://schema.org/Product">
+
+<div class="list-column col-12">
+
+<div class="badges">
+<span class="badge-item new">Nuevo</span>
+<span class="badge-item sale">Venta</span>
+</div>
+
+<a class="media-list "
+href="/shop/secador-de-cabello-ionico-2200w/11?site=default" title="Secador de Cabello Iónico 2200W">
+
+
+<noscript>
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="https://placehold.co/600x600/1a1f36/7aa3ff?text=Secador+Ionico"
+srcset="https://placehold.co/600x600/1a1f36/7aa3ff?text=Secador+Ionico 1w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Secador de Cabello Iónico 2200W"
+>
+</div>
+</noscript>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="https://placehold.co/600x600/1a1f36/7aa3ff?text=Secador+Ionico"
+srcset="https://placehold.co/600x600/1a1f36/7aa3ff?text=Secador+Ionico 1w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Secador de Cabello Iónico 2200W"
+>
+</div>
+
+
+</a>
+</div>
+
+<div class="list-column col-12">
+<a href="/shop/secador-de-cabello-ionico-2200w/11?site=default">
+
+<div class="product-info">
+
+<div class="rating"><!--
+--><span class="stars"></span><!--
+--></div>
+</div>
+
+<div class="text-list">
+<h2 class="name" itemprop="name">Secador de Cabello Iónico 2200W</h2>
+
+
+<div class="text-item" itemprop="description">
+Motor DC profesional, reduce el frizz 75%, difusor incluido</div>
+
+
+</div>
+</a>
+
+<div class="offer" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+
+<div class="section">
+<div class="stock-list">
+<div class="articleitem stock-actual"
+data-prodid="14">
+</div>
+
+
+</div>
+
+<div class="price-list">
+<div class="articleitem price price-actual" data-prodid="14">
+
+
+<div class="price-item default" itemscope itemprop="priceSpecification" itemtype="http://schema.org/UnitPriceSpecification">
+
+<meta itemprop="valueAddedTaxIncluded" content="true">
+<meta itemprop="priceCurrency" content="COP">
+<meta itemprop="price" content="135000.00">
+
+<span class="quantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+<meta itemprop="minValue" content="1">
+desde 1</span>
+
+
+<span class="value" itemscope itemprop="priceType" itemtype="http://schema.org/SalePrice">
+135.000,00 COL$</span>
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<form class="basket" method="POST" action="/shop/basket?site=default">
+<!-- catalog.lists.items.csrf --><input class="csrf-token" type="hidden" name="_token" value="LvYssUFDoRcN24uXnrkRnntexT77oQjt3cwzhuwW"><!-- catalog.lists.items.csrf -->
+
+
+<div class="items-attribute">
+
+<ul class="selection">
+
+
+</ul>
+
+
+<ul class="selection">
+
+
+</ul>
+
+</div>
+
+<div class="addbasket">
+<input type="hidden" value="add"
+name="b_action"
+>
+<input type="hidden" value="14"
+name="b_prod[0][prodid]"
+>
+<div class="input-group">
+<input type="number" max="2147483647"
+value="1"
+min="1"
+step="1"
+required="required" name="b_prod[0][quantity]"
+title="Cantidad"
+><!--
+--><button class="btn btn-primary btn-action" type="submit"
+title="Añadir a la cesta"
+ >
+</button><!--
+--><a class="btn-pin"
+href="/shop/pin?pin_action=add&pin_id=14&d_name=secador-de-cabello-ionico-2200w&site=default"
+data-rmurl="/shop/pin?pin_action=delete&pin_id=14&d_name=secador-de-cabello-ionico-2200w&site=default"
+title="Producto marcado">
+</a>
+</div>
+</div>
+
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+<div class="product row "
+data-prodid="15" data-reqstock="1"
+ itemscope itemtype="http://schema.org/Product">
+
+<div class="list-column col-12">
+
+<div class="badges">
+<span class="badge-item new">Nuevo</span>
+<span class="badge-item sale">Venta</span>
+</div>
+
+<a class="media-list multiple"
+href="/shop/bee-venom/12?site=default" title="Bee Venom Crema Facial Reafirmante Antiedad">
+
+
+<noscript>
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/b/7/b7244217_9d9177af_beevenom.webp?v=20260601154811"
+srcset="/aimeos/1.d/product/b/7/b7244217_9d9177af_beevenom.webp?v=20260601154811 240w, /aimeos/1.d/product/c/d/cdd34b79_9d9177af_beevenom.webp?v=20260601154811 480w, /aimeos/1.d/product/7/c/7c2686c4_9d9177af_beevenom.webp?v=20260601154811 960w, /aimeos/1.d/product/6/e/6e396970_9d9177af_beevenom.webp?v=20260601154811 832w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Bee Venom Crema Facial Reafirmante Antiedad"
+>
+</div>
+</noscript>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/b/7/b7244217_9d9177af_beevenom.webp?v=20260601154811"
+srcset="/aimeos/1.d/product/b/7/b7244217_9d9177af_beevenom.webp?v=20260601154811 240w, /aimeos/1.d/product/c/d/cdd34b79_9d9177af_beevenom.webp?v=20260601154811 480w, /aimeos/1.d/product/7/c/7c2686c4_9d9177af_beevenom.webp?v=20260601154811 960w, /aimeos/1.d/product/6/e/6e396970_9d9177af_beevenom.webp?v=20260601154811 832w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Bee Venom Crema Facial Reafirmante Antiedad"
+>
+</div>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/0/f/0f370422_697698cc_beevenom2.webp?v=20260601154811"
+srcset="/aimeos/1.d/product/0/f/0f370422_697698cc_beevenom2.webp?v=20260601154811 240w, /aimeos/1.d/product/c/0/c003ed7f_697698cc_beevenom2.webp?v=20260601154811 480w, /aimeos/1.d/product/1/c/1ce31a44_697698cc_beevenom2.webp?v=20260601154811 960w, /aimeos/1.d/product/8/0/80fc9d59_697698cc_beevenom2.webp?v=20260601154811 1536w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Bee Venom Crema Facial Reafirmante Antiedad"
+>
+</div>
+
+
+</a>
+</div>
+
+<div class="list-column col-12">
+<a href="/shop/bee-venom/12?site=default">
+
+<div class="product-info">
+
+<div class="rating"><!--
+--><span class="stars"></span><!--
+--></div>
+</div>
+
+<div class="text-list">
+<h2 class="name" itemprop="name">Bee Venom Crema Facial Reafirmante Antiedad</h2>
+
+
+<div class="text-item" itemprop="description">
+Crema antiedad con veneno de abeja cosmético para piel firme, hidratada y luminosa</div>
+
+
+</div>
+</a>
+
+<div class="offer" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+
+<div class="section">
+<div class="stock-list">
+<div class="articleitem stock-actual"
+data-prodid="15">
+</div>
+
+
+</div>
+
+<div class="price-list">
+<div class="articleitem price price-actual" data-prodid="15">
+
+
+<div class="price-item default" itemscope itemprop="priceSpecification" itemtype="http://schema.org/UnitPriceSpecification">
+
+<meta itemprop="valueAddedTaxIncluded" content="true">
+<meta itemprop="priceCurrency" content="COP">
+<meta itemprop="price" content="69900.00">
+
+<span class="quantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+<meta itemprop="minValue" content="1">
+desde 1</span>
+
+
+<span class="value" itemscope itemprop="priceType" itemtype="http://schema.org/SalePrice">
+69.900,00 COL$</span>
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<form class="basket" method="POST" action="/shop/basket?site=default">
+<!-- catalog.lists.items.csrf --><input class="csrf-token" type="hidden" name="_token" value="LvYssUFDoRcN24uXnrkRnntexT77oQjt3cwzhuwW"><!-- catalog.lists.items.csrf -->
+
+
+<div class="items-attribute">
+
+<ul class="selection">
+
+
+</ul>
+
+
+<ul class="selection">
+
+
+</ul>
+
+</div>
+
+<div class="addbasket">
+<input type="hidden" value="add"
+name="b_action"
+>
+<input type="hidden" value="15"
+name="b_prod[0][prodid]"
+>
+<div class="input-group">
+<input type="number" max="2147483647"
+value="1"
+min="1"
+step="1"
+required="required" name="b_prod[0][quantity]"
+title="Cantidad"
+><!--
+--><button class="btn btn-primary btn-action" type="submit"
+title="Añadir a la cesta"
+ >
+</button><!--
+--><a class="btn-pin"
+href="/shop/pin?pin_action=add&pin_id=15&d_name=bee-venom&site=default"
+data-rmurl="/shop/pin?pin_action=delete&pin_id=15&d_name=bee-venom&site=default"
+title="Producto marcado">
+</a>
+</div>
+</div>
+
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+<div class="product row "
+data-prodid="16" data-reqstock="1"
+ itemscope itemtype="http://schema.org/Product">
+
+<div class="list-column col-12">
+
+<div class="badges">
+<span class="badge-item new">Nuevo</span>
+<span class="badge-item sale">Venta</span>
+</div>
+
+<a class="media-list multiple"
+href="/shop/biq-fel-bebida-energizante-natural/13?site=default" title="BiQ FEL Bebida Energizante Natural">
+
+
+<noscript>
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/f/8/f8c8548d_22a3742b_biq-fel-bebida-energizante-1.webp?v=20260604165913"
+srcset="/aimeos/1.d/product/f/8/f8c8548d_22a3742b_biq-fel-bebida-energizante-1.webp?v=20260604165913 240w, /aimeos/1.d/product/f/b/fbc9af00_22a3742b_biq-fel-bebida-energizante-1.webp?v=20260604165913 480w, /aimeos/1.d/product/4/3/43d4429f_22a3742b_biq-fel-bebida-energizante-1.webp?v=20260604165913 960w, /aimeos/1.d/product/8/6/861d8ad7_22a3742b_biq-fel-bebida-energizante-1.webp?v=20260604165913 570w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="BiQ FEL Bebida Energizante Natural"
+>
+</div>
+</noscript>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/f/8/f8c8548d_22a3742b_biq-fel-bebida-energizante-1.webp?v=20260604165913"
+srcset="/aimeos/1.d/product/f/8/f8c8548d_22a3742b_biq-fel-bebida-energizante-1.webp?v=20260604165913 240w, /aimeos/1.d/product/f/b/fbc9af00_22a3742b_biq-fel-bebida-energizante-1.webp?v=20260604165913 480w, /aimeos/1.d/product/4/3/43d4429f_22a3742b_biq-fel-bebida-energizante-1.webp?v=20260604165913 960w, /aimeos/1.d/product/8/6/861d8ad7_22a3742b_biq-fel-bebida-energizante-1.webp?v=20260604165913 570w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="BiQ FEL Bebida Energizante Natural"
+>
+</div>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/2/1/217165b7_c5de93ae_biq-fel-bebida-energizante-2.webp?v=20260604165913"
+srcset="/aimeos/1.d/product/2/1/217165b7_c5de93ae_biq-fel-bebida-energizante-2.webp?v=20260604165913 240w, /aimeos/1.d/product/2/c/2c3252f2_c5de93ae_biq-fel-bebida-energizante-2.webp?v=20260604165913 480w, /aimeos/1.d/product/2/2/22d01fa2_c5de93ae_biq-fel-bebida-energizante-2.webp?v=20260604165913 960w, /aimeos/1.d/product/3/b/3bba509a_c5de93ae_biq-fel-bebida-energizante-2.webp?v=20260604165913 1536w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="BiQ FEL Bebida Energizante Natural"
+>
+</div>
+
+
+</a>
+</div>
+
+<div class="list-column col-12">
+<a href="/shop/biq-fel-bebida-energizante-natural/13?site=default">
+
+<div class="product-info">
+
+<div class="rating"><!--
+--><span class="stars"></span><!--
+--></div>
+</div>
+
+<div class="text-list">
+<h2 class="name" itemprop="name">BiQ FEL Bebida Energizante Natural</h2>
+
+
+<div class="text-item" itemprop="description">
+Bebida energizante con ingredientes naturales para rendimiento, vitalidad y bienestar.</div>
+
+
+</div>
+</a>
+
+<div class="offer" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+
+<div class="section">
+<div class="stock-list">
+<div class="articleitem stock-actual"
+data-prodid="16">
+</div>
+
+
+</div>
+
+<div class="price-list">
+<div class="articleitem price price-actual" data-prodid="16">
+
+
+<div class="price-item default" itemscope itemprop="priceSpecification" itemtype="http://schema.org/UnitPriceSpecification">
+
+<meta itemprop="valueAddedTaxIncluded" content="true">
+<meta itemprop="priceCurrency" content="COP">
+<meta itemprop="price" content="95000.00">
+
+<span class="quantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+<meta itemprop="minValue" content="1">
+desde 1</span>
+
+
+<span class="value" itemscope itemprop="priceType" itemtype="http://schema.org/SalePrice">
+95.000,00 COL$</span>
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<form class="basket" method="POST" action="/shop/basket?site=default">
+<!-- catalog.lists.items.csrf --><input class="csrf-token" type="hidden" name="_token" value="LvYssUFDoRcN24uXnrkRnntexT77oQjt3cwzhuwW"><!-- catalog.lists.items.csrf -->
+
+
+<div class="items-attribute">
+
+<ul class="selection">
+
+
+</ul>
+
+
+<ul class="selection">
+
+
+</ul>
+
+</div>
+
+<div class="addbasket">
+<input type="hidden" value="add"
+name="b_action"
+>
+<input type="hidden" value="16"
+name="b_prod[0][prodid]"
+>
+<div class="input-group">
+<input type="number" max="2147483647"
+value="1"
+min="1"
+step="1"
+required="required" name="b_prod[0][quantity]"
+title="Cantidad"
+><!--
+--><button class="btn btn-primary btn-action" type="submit"
+title="Añadir a la cesta"
+ >
+</button><!--
+--><a class="btn-pin"
+href="/shop/pin?pin_action=add&pin_id=16&d_name=biq-fel-bebida-energizante-natural&site=default"
+data-rmurl="/shop/pin?pin_action=delete&pin_id=16&d_name=biq-fel-bebida-energizante-natural&site=default"
+title="Producto marcado">
+</a>
+</div>
+</div>
+
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+<div class="product row "
+data-prodid="17" data-reqstock="1"
+ itemscope itemtype="http://schema.org/Product">
+
+<div class="list-column col-12">
+
+<div class="badges">
+<span class="badge-item new">Nuevo</span>
+<span class="badge-item sale">Venta</span>
+</div>
+
+<a class="media-list multiple"
+href="/shop/calmify-joyspring-suplemento-bienestar/14?site=default" title="Calmify Joyspring Suplemento para el Bienestar">
+
+
+<noscript>
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/a/f/afaad0b0_0ba9d57d_calmify-joyspring-1.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/a/f/afaad0b0_0ba9d57d_calmify-joyspring-1.webp?v=20260604170028 240w, /aimeos/1.d/product/b/e/be74180d_0ba9d57d_calmify-joyspring-1.webp?v=20260604170028 480w, /aimeos/1.d/product/1/0/10f5fc46_0ba9d57d_calmify-joyspring-1.webp?v=20260604170028 960w, /aimeos/1.d/product/4/3/43a20055_0ba9d57d_calmify-joyspring-1.webp?v=20260604170028 1200w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Calmify Joyspring Suplemento para el Bienestar"
+>
+</div>
+</noscript>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/a/f/afaad0b0_0ba9d57d_calmify-joyspring-1.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/a/f/afaad0b0_0ba9d57d_calmify-joyspring-1.webp?v=20260604170028 240w, /aimeos/1.d/product/b/e/be74180d_0ba9d57d_calmify-joyspring-1.webp?v=20260604170028 480w, /aimeos/1.d/product/1/0/10f5fc46_0ba9d57d_calmify-joyspring-1.webp?v=20260604170028 960w, /aimeos/1.d/product/4/3/43a20055_0ba9d57d_calmify-joyspring-1.webp?v=20260604170028 1200w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Calmify Joyspring Suplemento para el Bienestar"
+>
+</div>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/d/8/d8d127aa_cb23aa69_calmify-joyspring-2.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/d/8/d8d127aa_cb23aa69_calmify-joyspring-2.webp?v=20260604170028 240w, /aimeos/1.d/product/b/8/b8db42c9_cb23aa69_calmify-joyspring-2.webp?v=20260604170028 480w, /aimeos/1.d/product/0/0/00dd8050_cb23aa69_calmify-joyspring-2.webp?v=20260604170028 960w, /aimeos/1.d/product/d/0/d0801757_cb23aa69_calmify-joyspring-2.webp?v=20260604170028 832w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Calmify Joyspring Suplemento para el Bienestar"
+>
+</div>
+
+
+</a>
+</div>
+
+<div class="list-column col-12">
+<a href="/shop/calmify-joyspring-suplemento-bienestar/14?site=default">
+
+<div class="product-info">
+
+<div class="rating"><!--
+--><span class="stars"></span><!--
+--></div>
+</div>
+
+<div class="text-list">
+<h2 class="name" itemprop="name">Calmify Joyspring Suplemento para el Bienestar</h2>
+
+
+<div class="text-item" itemprop="description">
+Suplemento natural para el manejo del estrés, calma mental y bienestar emocional.</div>
+
+
+</div>
+</a>
+
+<div class="offer" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+
+<div class="section">
+<div class="stock-list">
+<div class="articleitem stock-actual"
+data-prodid="17">
+</div>
+
+
+</div>
+
+<div class="price-list">
+<div class="articleitem price price-actual" data-prodid="17">
+
+
+<div class="price-item default" itemscope itemprop="priceSpecification" itemtype="http://schema.org/UnitPriceSpecification">
+
+<meta itemprop="valueAddedTaxIncluded" content="true">
+<meta itemprop="priceCurrency" content="COP">
+<meta itemprop="price" content="120000.00">
+
+<span class="quantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+<meta itemprop="minValue" content="1">
+desde 1</span>
+
+
+<span class="value" itemscope itemprop="priceType" itemtype="http://schema.org/SalePrice">
+120.000,00 COL$</span>
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<form class="basket" method="POST" action="/shop/basket?site=default">
+<!-- catalog.lists.items.csrf --><input class="csrf-token" type="hidden" name="_token" value="LvYssUFDoRcN24uXnrkRnntexT77oQjt3cwzhuwW"><!-- catalog.lists.items.csrf -->
+
+
+<div class="items-attribute">
+
+<ul class="selection">
+
+
+</ul>
+
+
+<ul class="selection">
+
+
+</ul>
+
+</div>
+
+<div class="addbasket">
+<input type="hidden" value="add"
+name="b_action"
+>
+<input type="hidden" value="17"
+name="b_prod[0][prodid]"
+>
+<div class="input-group">
+<input type="number" max="2147483647"
+value="1"
+min="1"
+step="1"
+required="required" name="b_prod[0][quantity]"
+title="Cantidad"
+><!--
+--><button class="btn btn-primary btn-action" type="submit"
+title="Añadir a la cesta"
+ >
+</button><!--
+--><a class="btn-pin"
+href="/shop/pin?pin_action=add&pin_id=17&d_name=calmify-joyspring-suplemento-bienestar&site=default"
+data-rmurl="/shop/pin?pin_action=delete&pin_id=17&d_name=calmify-joyspring-suplemento-bienestar&site=default"
+title="Producto marcado">
+</a>
+</div>
+</div>
+
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+<div class="product row "
+data-prodid="18" data-reqstock="1"
+ itemscope itemtype="http://schema.org/Product">
+
+<div class="list-column col-12">
+
+<div class="badges">
+<span class="badge-item new">Nuevo</span>
+<span class="badge-item sale">Venta</span>
+</div>
+
+<a class="media-list multiple"
+href="/shop/calostro-bovino-softgel-con-invima/15?site=default" title="Calostro Bovino Softgel con INVIMA">
+
+
+<noscript>
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/1/7/1771f40d_6aa33f62_calostro-bovino-softgel-con-invima-1.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/1/7/1771f40d_6aa33f62_calostro-bovino-softgel-con-invima-1.webp?v=20260604170028 240w, /aimeos/1.d/product/e/8/e882a521_6aa33f62_calostro-bovino-softgel-con-invima-1.webp?v=20260604170028 480w, /aimeos/1.d/product/d/e/de69dcde_6aa33f62_calostro-bovino-softgel-con-invima-1.webp?v=20260604170028 960w, /aimeos/1.d/product/8/0/80953010_6aa33f62_calostro-bovino-softgel-con-invima-1.webp?v=20260604170028 639w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Calostro Bovino Softgel con INVIMA"
+>
+</div>
+</noscript>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/1/7/1771f40d_6aa33f62_calostro-bovino-softgel-con-invima-1.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/1/7/1771f40d_6aa33f62_calostro-bovino-softgel-con-invima-1.webp?v=20260604170028 240w, /aimeos/1.d/product/e/8/e882a521_6aa33f62_calostro-bovino-softgel-con-invima-1.webp?v=20260604170028 480w, /aimeos/1.d/product/d/e/de69dcde_6aa33f62_calostro-bovino-softgel-con-invima-1.webp?v=20260604170028 960w, /aimeos/1.d/product/8/0/80953010_6aa33f62_calostro-bovino-softgel-con-invima-1.webp?v=20260604170028 639w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Calostro Bovino Softgel con INVIMA"
+>
+</div>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/3/b/3b1cdbeb_938a6731_calostro-bovino-softgel-con-invima-2.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/3/b/3b1cdbeb_938a6731_calostro-bovino-softgel-con-invima-2.webp?v=20260604170028 240w, /aimeos/1.d/product/d/1/d12a7227_938a6731_calostro-bovino-softgel-con-invima-2.webp?v=20260604170028 480w, /aimeos/1.d/product/5/e/5ec5beef_938a6731_calostro-bovino-softgel-con-invima-2.webp?v=20260604170028 960w, /aimeos/1.d/product/8/f/8f5350bf_938a6731_calostro-bovino-softgel-con-invima-2.webp?v=20260604170028 1536w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Calostro Bovino Softgel con INVIMA"
+>
+</div>
+
+
+</a>
+</div>
+
+<div class="list-column col-12">
+<a href="/shop/calostro-bovino-softgel-con-invima/15?site=default">
+
+<div class="product-info">
+
+<div class="rating"><!--
+--><span class="stars"></span><!--
+--></div>
+</div>
+
+<div class="text-list">
+<h2 class="name" itemprop="name">Calostro Bovino Softgel con INVIMA</h2>
+
+
+<div class="text-item" itemprop="description">
+Suplemento inmunológico de calostro bovino en cápsulas softgel, aprobado por INVIMA.</div>
+
+
+</div>
+</a>
+
+<div class="offer" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+
+<div class="section">
+<div class="stock-list">
+<div class="articleitem stock-actual"
+data-prodid="18">
+</div>
+
+
+</div>
+
+<div class="price-list">
+<div class="articleitem price price-actual" data-prodid="18">
+
+
+<div class="price-item default" itemscope itemprop="priceSpecification" itemtype="http://schema.org/UnitPriceSpecification">
+
+<meta itemprop="valueAddedTaxIncluded" content="true">
+<meta itemprop="priceCurrency" content="COP">
+<meta itemprop="price" content="150000.00">
+
+<span class="quantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+<meta itemprop="minValue" content="1">
+desde 1</span>
+
+
+<span class="value" itemscope itemprop="priceType" itemtype="http://schema.org/SalePrice">
+150.000,00 COL$</span>
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<form class="basket" method="POST" action="/shop/basket?site=default">
+<!-- catalog.lists.items.csrf --><input class="csrf-token" type="hidden" name="_token" value="LvYssUFDoRcN24uXnrkRnntexT77oQjt3cwzhuwW"><!-- catalog.lists.items.csrf -->
+
+
+<div class="items-attribute">
+
+<ul class="selection">
+
+
+</ul>
+
+
+<ul class="selection">
+
+
+</ul>
+
+</div>
+
+<div class="addbasket">
+<input type="hidden" value="add"
+name="b_action"
+>
+<input type="hidden" value="18"
+name="b_prod[0][prodid]"
+>
+<div class="input-group">
+<input type="number" max="2147483647"
+value="1"
+min="1"
+step="1"
+required="required" name="b_prod[0][quantity]"
+title="Cantidad"
+><!--
+--><button class="btn btn-primary btn-action" type="submit"
+title="Añadir a la cesta"
+ >
+</button><!--
+--><a class="btn-pin"
+href="/shop/pin?pin_action=add&pin_id=18&d_name=calostro-bovino-softgel-con-invima&site=default"
+data-rmurl="/shop/pin?pin_action=delete&pin_id=18&d_name=calostro-bovino-softgel-con-invima&site=default"
+title="Producto marcado">
+</a>
+</div>
+</div>
+
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+<div class="product row "
+data-prodid="19" data-reqstock="1"
+ itemscope itemtype="http://schema.org/Product">
+
+<div class="list-column col-12">
+
+<div class="badges">
+<span class="badge-item new">Nuevo</span>
+<span class="badge-item sale">Venta</span>
+</div>
+
+<a class="media-list multiple"
+href="/shop/deos-body-deodorizing-supplement/16?site=default" title="DEOS Body Deodorizing Supplement">
+
+
+<noscript>
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/0/5/054b4bfb_cde3e1d6_deos-deodorizing-supplement-1.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/0/5/054b4bfb_cde3e1d6_deos-deodorizing-supplement-1.webp?v=20260604170028 240w, /aimeos/1.d/product/5/0/504e3b45_cde3e1d6_deos-deodorizing-supplement-1.webp?v=20260604170028 480w, /aimeos/1.d/product/4/b/4b91deba_cde3e1d6_deos-deodorizing-supplement-1.webp?v=20260604170028 960w, /aimeos/1.d/product/6/6/667b4407_cde3e1d6_deos-deodorizing-supplement-1.webp?v=20260604170028 832w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="DEOS Body Deodorizing Supplement"
+>
+</div>
+</noscript>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/0/5/054b4bfb_cde3e1d6_deos-deodorizing-supplement-1.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/0/5/054b4bfb_cde3e1d6_deos-deodorizing-supplement-1.webp?v=20260604170028 240w, /aimeos/1.d/product/5/0/504e3b45_cde3e1d6_deos-deodorizing-supplement-1.webp?v=20260604170028 480w, /aimeos/1.d/product/4/b/4b91deba_cde3e1d6_deos-deodorizing-supplement-1.webp?v=20260604170028 960w, /aimeos/1.d/product/6/6/667b4407_cde3e1d6_deos-deodorizing-supplement-1.webp?v=20260604170028 832w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="DEOS Body Deodorizing Supplement"
+>
+</div>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/d/e/def203f9_8ac3ba6a_deos-deodorizing-supplement-2.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/d/e/def203f9_8ac3ba6a_deos-deodorizing-supplement-2.webp?v=20260604170028 240w, /aimeos/1.d/product/7/8/78698a29_8ac3ba6a_deos-deodorizing-supplement-2.webp?v=20260604170028 480w, /aimeos/1.d/product/f/a/fac0b745_8ac3ba6a_deos-deodorizing-supplement-2.webp?v=20260604170028 960w, /aimeos/1.d/product/8/2/82615a6d_8ac3ba6a_deos-deodorizing-supplement-2.webp?v=20260604170028 768w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="DEOS Body Deodorizing Supplement"
+>
+</div>
+
+
+</a>
+</div>
+
+<div class="list-column col-12">
+<a href="/shop/deos-body-deodorizing-supplement/16?site=default">
+
+<div class="product-info">
+
+<div class="rating"><!--
+--><span class="stars"></span><!--
+--></div>
+</div>
+
+<div class="text-list">
+<h2 class="name" itemprop="name">DEOS Body Deodorizing Supplement</h2>
+
+
+<div class="text-item" itemprop="description">
+Suplemento oral para control del olor corporal desde adentro hacia afuera.</div>
+
+
+</div>
+</a>
+
+<div class="offer" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+
+<div class="section">
+<div class="stock-list">
+<div class="articleitem stock-actual"
+data-prodid="19">
+</div>
+
+
+</div>
+
+<div class="price-list">
+<div class="articleitem price price-actual" data-prodid="19">
+
+
+<div class="price-item default" itemscope itemprop="priceSpecification" itemtype="http://schema.org/UnitPriceSpecification">
+
+<meta itemprop="valueAddedTaxIncluded" content="true">
+<meta itemprop="priceCurrency" content="COP">
+<meta itemprop="price" content="80000.00">
+
+<span class="quantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+<meta itemprop="minValue" content="1">
+desde 1</span>
+
+
+<span class="value" itemscope itemprop="priceType" itemtype="http://schema.org/SalePrice">
+80.000,00 COL$</span>
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<form class="basket" method="POST" action="/shop/basket?site=default">
+<!-- catalog.lists.items.csrf --><input class="csrf-token" type="hidden" name="_token" value="LvYssUFDoRcN24uXnrkRnntexT77oQjt3cwzhuwW"><!-- catalog.lists.items.csrf -->
+
+
+<div class="items-attribute">
+
+<ul class="selection">
+
+
+</ul>
+
+
+<ul class="selection">
+
+
+</ul>
+
+</div>
+
+<div class="addbasket">
+<input type="hidden" value="add"
+name="b_action"
+>
+<input type="hidden" value="19"
+name="b_prod[0][prodid]"
+>
+<div class="input-group">
+<input type="number" max="2147483647"
+value="1"
+min="1"
+step="1"
+required="required" name="b_prod[0][quantity]"
+title="Cantidad"
+><!--
+--><button class="btn btn-primary btn-action" type="submit"
+title="Añadir a la cesta"
+ >
+</button><!--
+--><a class="btn-pin"
+href="/shop/pin?pin_action=add&pin_id=19&d_name=deos-body-deodorizing-supplement&site=default"
+data-rmurl="/shop/pin?pin_action=delete&pin_id=19&d_name=deos-body-deodorizing-supplement&site=default"
+title="Producto marcado">
+</a>
+</div>
+</div>
+
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+<div class="product row "
+data-prodid="20" data-reqstock="1"
+ itemscope itemtype="http://schema.org/Product">
+
+<div class="list-column col-12">
+
+<div class="badges">
+<span class="badge-item new">Nuevo</span>
+<span class="badge-item sale">Venta</span>
+</div>
+
+<a class="media-list multiple"
+href="/shop/fumarex-spray-ayuda-a-dejar-de-fumar/17?site=default" title="Fumarex Spray — Ayuda a Dejar de Fumar">
+
+
+<noscript>
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/f/8/f8358c9e_f092d582_fumarex-spray-1.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/f/8/f8358c9e_f092d582_fumarex-spray-1.webp?v=20260604170028 240w, /aimeos/1.d/product/5/e/5e4c1c81_f092d582_fumarex-spray-1.webp?v=20260604170028 480w, /aimeos/1.d/product/5/c/5c12e76b_f092d582_fumarex-spray-1.webp?v=20260604170028 960w, /aimeos/1.d/product/f/7/f7e964d0_f092d582_fumarex-spray-1.webp?v=20260604170028 1000w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Fumarex Spray — Ayuda a Dejar de Fumar"
+>
+</div>
+</noscript>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/f/8/f8358c9e_f092d582_fumarex-spray-1.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/f/8/f8358c9e_f092d582_fumarex-spray-1.webp?v=20260604170028 240w, /aimeos/1.d/product/5/e/5e4c1c81_f092d582_fumarex-spray-1.webp?v=20260604170028 480w, /aimeos/1.d/product/5/c/5c12e76b_f092d582_fumarex-spray-1.webp?v=20260604170028 960w, /aimeos/1.d/product/f/7/f7e964d0_f092d582_fumarex-spray-1.webp?v=20260604170028 1000w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Fumarex Spray — Ayuda a Dejar de Fumar"
+>
+</div>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/3/d/3d56f2aa_f3b3fc6c_fumarex-spray-2.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/3/d/3d56f2aa_f3b3fc6c_fumarex-spray-2.webp?v=20260604170028 240w, /aimeos/1.d/product/8/5/85e67315_f3b3fc6c_fumarex-spray-2.webp?v=20260604170028 480w, /aimeos/1.d/product/2/e/2ea16ac5_f3b3fc6c_fumarex-spray-2.webp?v=20260604170028 960w, /aimeos/1.d/product/0/f/0f109ff9_f3b3fc6c_fumarex-spray-2.webp?v=20260604170028 768w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Fumarex Spray — Ayuda a Dejar de Fumar"
+>
+</div>
+
+
+</a>
+</div>
+
+<div class="list-column col-12">
+<a href="/shop/fumarex-spray-ayuda-a-dejar-de-fumar/17?site=default">
+
+<div class="product-info">
+
+<div class="rating"><!--
+--><span class="stars"></span><!--
+--></div>
+</div>
+
+<div class="text-list">
+<h2 class="name" itemprop="name">Fumarex Spray — Ayuda a Dejar de Fumar</h2>
+
+
+<div class="text-item" itemprop="description">
+Spray oral para reducir el deseo de fumar y apoyar la cesación tabáquica.</div>
+
+
+</div>
+</a>
+
+<div class="offer" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+
+<div class="section">
+<div class="stock-list">
+<div class="articleitem stock-actual"
+data-prodid="20">
+</div>
+
+
+</div>
+
+<div class="price-list">
+<div class="articleitem price price-actual" data-prodid="20">
+
+
+<div class="price-item default" itemscope itemprop="priceSpecification" itemtype="http://schema.org/UnitPriceSpecification">
+
+<meta itemprop="valueAddedTaxIncluded" content="true">
+<meta itemprop="priceCurrency" content="COP">
+<meta itemprop="price" content="130000.00">
+
+<span class="quantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+<meta itemprop="minValue" content="1">
+desde 1</span>
+
+
+<span class="value" itemscope itemprop="priceType" itemtype="http://schema.org/SalePrice">
+130.000,00 COL$</span>
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<form class="basket" method="POST" action="/shop/basket?site=default">
+<!-- catalog.lists.items.csrf --><input class="csrf-token" type="hidden" name="_token" value="LvYssUFDoRcN24uXnrkRnntexT77oQjt3cwzhuwW"><!-- catalog.lists.items.csrf -->
+
+
+<div class="items-attribute">
+
+<ul class="selection">
+
+
+</ul>
+
+
+<ul class="selection">
+
+
+</ul>
+
+</div>
+
+<div class="addbasket">
+<input type="hidden" value="add"
+name="b_action"
+>
+<input type="hidden" value="20"
+name="b_prod[0][prodid]"
+>
+<div class="input-group">
+<input type="number" max="2147483647"
+value="1"
+min="1"
+step="1"
+required="required" name="b_prod[0][quantity]"
+title="Cantidad"
+><!--
+--><button class="btn btn-primary btn-action" type="submit"
+title="Añadir a la cesta"
+ >
+</button><!--
+--><a class="btn-pin"
+href="/shop/pin?pin_action=add&pin_id=20&d_name=fumarex-spray-ayuda-a-dejar-de-fumar&site=default"
+data-rmurl="/shop/pin?pin_action=delete&pin_id=20&d_name=fumarex-spray-ayuda-a-dejar-de-fumar&site=default"
+title="Producto marcado">
+</a>
+</div>
+</div>
+
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+<div class="product row "
+data-prodid="21" data-reqstock="1"
+ itemscope itemtype="http://schema.org/Product">
+
+<div class="list-column col-12">
+
+<div class="badges">
+<span class="badge-item new">Nuevo</span>
+<span class="badge-item sale">Venta</span>
+</div>
+
+<a class="media-list multiple"
+href="/shop/magnesium-complex-suplemento-de-magnesio/18?site=default" title="Magnesium Complex — Suplemento de Magnesio">
+
+
+<noscript>
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/9/e/9e065bbf_9a1d1218_magnesium-complex-1.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/9/e/9e065bbf_9a1d1218_magnesium-complex-1.webp?v=20260604170028 240w, /aimeos/1.d/product/6/5/6575cee6_9a1d1218_magnesium-complex-1.webp?v=20260604170028 480w, /aimeos/1.d/product/f/2/f2f8c8a1_9a1d1218_magnesium-complex-1.webp?v=20260604170028 960w, /aimeos/1.d/product/e/6/e692b2be_9a1d1218_magnesium-complex-1.webp?v=20260604170028 1004w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Magnesium Complex — Suplemento de Magnesio"
+>
+</div>
+</noscript>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/9/e/9e065bbf_9a1d1218_magnesium-complex-1.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/9/e/9e065bbf_9a1d1218_magnesium-complex-1.webp?v=20260604170028 240w, /aimeos/1.d/product/6/5/6575cee6_9a1d1218_magnesium-complex-1.webp?v=20260604170028 480w, /aimeos/1.d/product/f/2/f2f8c8a1_9a1d1218_magnesium-complex-1.webp?v=20260604170028 960w, /aimeos/1.d/product/e/6/e692b2be_9a1d1218_magnesium-complex-1.webp?v=20260604170028 1004w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Magnesium Complex — Suplemento de Magnesio"
+>
+</div>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/0/8/082e8b56_b92bd457_magnesium-complex-2.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/0/8/082e8b56_b92bd457_magnesium-complex-2.webp?v=20260604170028 240w, /aimeos/1.d/product/4/3/4324db41_b92bd457_magnesium-complex-2.webp?v=20260604170028 480w, /aimeos/1.d/product/b/e/be4db1cf_b92bd457_magnesium-complex-2.webp?v=20260604170028 960w, /aimeos/1.d/product/7/1/714b556c_b92bd457_magnesium-complex-2.webp?v=20260604170028 1536w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Magnesium Complex — Suplemento de Magnesio"
+>
+</div>
+
+
+</a>
+</div>
+
+<div class="list-column col-12">
+<a href="/shop/magnesium-complex-suplemento-de-magnesio/18?site=default">
+
+<div class="product-info">
+
+<div class="rating"><!--
+--><span class="stars"></span><!--
+--></div>
+</div>
+
+<div class="text-list">
+<h2 class="name" itemprop="name">Magnesium Complex — Suplemento de Magnesio</h2>
+
+
+<div class="text-item" itemprop="description">
+Complejo de magnesio de alta absorción para músculos, nervios y huesos fuertes.</div>
+
+
+</div>
+</a>
+
+<div class="offer" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+
+<div class="section">
+<div class="stock-list">
+<div class="articleitem stock-actual"
+data-prodid="21">
+</div>
+
+
+</div>
+
+<div class="price-list">
+<div class="articleitem price price-actual" data-prodid="21">
+
+
+<div class="price-item default" itemscope itemprop="priceSpecification" itemtype="http://schema.org/UnitPriceSpecification">
+
+<meta itemprop="valueAddedTaxIncluded" content="true">
+<meta itemprop="priceCurrency" content="COP">
+<meta itemprop="price" content="75000.00">
+
+<span class="quantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+<meta itemprop="minValue" content="1">
+desde 1</span>
+
+
+<span class="value" itemscope itemprop="priceType" itemtype="http://schema.org/SalePrice">
+75.000,00 COL$</span>
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<form class="basket" method="POST" action="/shop/basket?site=default">
+<!-- catalog.lists.items.csrf --><input class="csrf-token" type="hidden" name="_token" value="LvYssUFDoRcN24uXnrkRnntexT77oQjt3cwzhuwW"><!-- catalog.lists.items.csrf -->
+
+
+<div class="items-attribute">
+
+<ul class="selection">
+
+
+</ul>
+
+
+<ul class="selection">
+
+
+</ul>
+
+</div>
+
+<div class="addbasket">
+<input type="hidden" value="add"
+name="b_action"
+>
+<input type="hidden" value="21"
+name="b_prod[0][prodid]"
+>
+<div class="input-group">
+<input type="number" max="2147483647"
+value="1"
+min="1"
+step="1"
+required="required" name="b_prod[0][quantity]"
+title="Cantidad"
+><!--
+--><button class="btn btn-primary btn-action" type="submit"
+title="Añadir a la cesta"
+ >
+</button><!--
+--><a class="btn-pin"
+href="/shop/pin?pin_action=add&pin_id=21&d_name=magnesium-complex-suplemento-de-magnesio&site=default"
+data-rmurl="/shop/pin?pin_action=delete&pin_id=21&d_name=magnesium-complex-suplemento-de-magnesio&site=default"
+title="Producto marcado">
+</a>
+</div>
+</div>
+
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+<div class="product row "
+data-prodid="22" data-reqstock="1"
+ itemscope itemtype="http://schema.org/Product">
+
+<div class="list-column col-12">
+
+<div class="badges">
+<span class="badge-item new">Nuevo</span>
+<span class="badge-item sale">Venta</span>
+</div>
+
+<a class="media-list multiple"
+href="/shop/nad-resveratrol-antienvejecimiento/19?site=default" title="NAD+ Resveratrol — Suplemento Antienvejecimiento">
+
+
+<noscript>
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/6/d/6d64549b_ff709416_nad-resveratrol-1.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/6/d/6d64549b_ff709416_nad-resveratrol-1.webp?v=20260604170028 240w, /aimeos/1.d/product/a/4/a4c31208_ff709416_nad-resveratrol-1.webp?v=20260604170028 480w, /aimeos/1.d/product/3/a/3aac4ea7_ff709416_nad-resveratrol-1.webp?v=20260604170028 960w, /aimeos/1.d/product/3/7/37283756_ff709416_nad-resveratrol-1.webp?v=20260604170028 600w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="NAD+ Resveratrol — Suplemento Antienvejecimiento"
+>
+</div>
+</noscript>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/6/d/6d64549b_ff709416_nad-resveratrol-1.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/6/d/6d64549b_ff709416_nad-resveratrol-1.webp?v=20260604170028 240w, /aimeos/1.d/product/a/4/a4c31208_ff709416_nad-resveratrol-1.webp?v=20260604170028 480w, /aimeos/1.d/product/3/a/3aac4ea7_ff709416_nad-resveratrol-1.webp?v=20260604170028 960w, /aimeos/1.d/product/3/7/37283756_ff709416_nad-resveratrol-1.webp?v=20260604170028 600w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="NAD+ Resveratrol — Suplemento Antienvejecimiento"
+>
+</div>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/3/3/333667d9_de437e7f_nad-resveratrol-2.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/3/3/333667d9_de437e7f_nad-resveratrol-2.webp?v=20260604170028 240w, /aimeos/1.d/product/f/3/f35244fe_de437e7f_nad-resveratrol-2.webp?v=20260604170028 480w, /aimeos/1.d/product/8/d/8d49bdf8_de437e7f_nad-resveratrol-2.webp?v=20260604170028 960w, /aimeos/1.d/product/a/e/aed54598_de437e7f_nad-resveratrol-2.webp?v=20260604170028 1536w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="NAD+ Resveratrol — Suplemento Antienvejecimiento"
+>
+</div>
+
+
+</a>
+</div>
+
+<div class="list-column col-12">
+<a href="/shop/nad-resveratrol-antienvejecimiento/19?site=default">
+
+<div class="product-info">
+
+<div class="rating"><!--
+--><span class="stars"></span><!--
+--></div>
+</div>
+
+<div class="text-list">
+<h2 class="name" itemprop="name">NAD+ Resveratrol — Suplemento Antienvejecimiento</h2>
+
+
+<div class="text-item" itemprop="description">
+Suplemento premium con NAD+ y Resveratrol para longevidad y energía celular.</div>
+
+
+</div>
+</a>
+
+<div class="offer" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+
+<div class="section">
+<div class="stock-list">
+<div class="articleitem stock-actual"
+data-prodid="22">
+</div>
+
+
+</div>
+
+<div class="price-list">
+<div class="articleitem price price-actual" data-prodid="22">
+
+
+<div class="price-item default" itemscope itemprop="priceSpecification" itemtype="http://schema.org/UnitPriceSpecification">
+
+<meta itemprop="valueAddedTaxIncluded" content="true">
+<meta itemprop="priceCurrency" content="COP">
+<meta itemprop="price" content="200000.00">
+
+<span class="quantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+<meta itemprop="minValue" content="1">
+desde 1</span>
+
+
+<span class="value" itemscope itemprop="priceType" itemtype="http://schema.org/SalePrice">
+200.000,00 COL$</span>
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<form class="basket" method="POST" action="/shop/basket?site=default">
+<!-- catalog.lists.items.csrf --><input class="csrf-token" type="hidden" name="_token" value="LvYssUFDoRcN24uXnrkRnntexT77oQjt3cwzhuwW"><!-- catalog.lists.items.csrf -->
+
+
+<div class="items-attribute">
+
+<ul class="selection">
+
+
+</ul>
+
+
+<ul class="selection">
+
+
+</ul>
+
+</div>
+
+<div class="addbasket">
+<input type="hidden" value="add"
+name="b_action"
+>
+<input type="hidden" value="22"
+name="b_prod[0][prodid]"
+>
+<div class="input-group">
+<input type="number" max="2147483647"
+value="1"
+min="1"
+step="1"
+required="required" name="b_prod[0][quantity]"
+title="Cantidad"
+><!--
+--><button class="btn btn-primary btn-action" type="submit"
+title="Añadir a la cesta"
+ >
+</button><!--
+--><a class="btn-pin"
+href="/shop/pin?pin_action=add&pin_id=22&d_name=nad-resveratrol-antienvejecimiento&site=default"
+data-rmurl="/shop/pin?pin_action=delete&pin_id=22&d_name=nad-resveratrol-antienvejecimiento&site=default"
+title="Producto marcado">
+</a>
+</div>
+</div>
+
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+<div class="product row "
+data-prodid="23" data-reqstock="1"
+ itemscope itemtype="http://schema.org/Product">
+
+<div class="list-column col-12">
+
+<div class="badges">
+<span class="badge-item new">Nuevo</span>
+<span class="badge-item sale">Venta</span>
+</div>
+
+<a class="media-list multiple"
+href="/shop/neocell-collagen-suplemento-de-colageno/20?site=default" title="Neocell Collagen — Suplemento de Colágeno Hidrolizado">
+
+
+<noscript>
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/8/e/8e2e2e2b_c110be45_neocell-collagen-1.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/8/e/8e2e2e2b_c110be45_neocell-collagen-1.webp?v=20260604170028 240w, /aimeos/1.d/product/e/1/e1e332d3_c110be45_neocell-collagen-1.webp?v=20260604170028 480w, /aimeos/1.d/product/8/8/884156e2_c110be45_neocell-collagen-1.webp?v=20260604170028 960w, /aimeos/1.d/product/8/7/87c4fa48_c110be45_neocell-collagen-1.webp?v=20260604170028 768w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Neocell Collagen — Suplemento de Colágeno Hidrolizado"
+>
+</div>
+</noscript>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/8/e/8e2e2e2b_c110be45_neocell-collagen-1.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/8/e/8e2e2e2b_c110be45_neocell-collagen-1.webp?v=20260604170028 240w, /aimeos/1.d/product/e/1/e1e332d3_c110be45_neocell-collagen-1.webp?v=20260604170028 480w, /aimeos/1.d/product/8/8/884156e2_c110be45_neocell-collagen-1.webp?v=20260604170028 960w, /aimeos/1.d/product/8/7/87c4fa48_c110be45_neocell-collagen-1.webp?v=20260604170028 768w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Neocell Collagen — Suplemento de Colágeno Hidrolizado"
+>
+</div>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/6/a/6a2d6a07_38891780_neocell-collagen-2.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/6/a/6a2d6a07_38891780_neocell-collagen-2.webp?v=20260604170028 240w, /aimeos/1.d/product/8/7/878e4c1e_38891780_neocell-collagen-2.webp?v=20260604170028 480w, /aimeos/1.d/product/a/1/a1a0d830_38891780_neocell-collagen-2.webp?v=20260604170028 960w, /aimeos/1.d/product/9/7/97c62989_38891780_neocell-collagen-2.webp?v=20260604170028 768w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Neocell Collagen — Suplemento de Colágeno Hidrolizado"
+>
+</div>
+
+
+</a>
+</div>
+
+<div class="list-column col-12">
+<a href="/shop/neocell-collagen-suplemento-de-colageno/20?site=default">
+
+<div class="product-info">
+
+<div class="rating"><!--
+--><span class="stars"></span><!--
+--></div>
+</div>
+
+<div class="text-list">
+<h2 class="name" itemprop="name">Neocell Collagen — Suplemento de Colágeno Hidrolizado</h2>
+
+
+<div class="text-item" itemprop="description">
+Colágeno hidrolizado premium para articulaciones, piel y bienestar general.</div>
+
+
+</div>
+</a>
+
+<div class="offer" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+
+<div class="section">
+<div class="stock-list">
+<div class="articleitem stock-actual"
+data-prodid="23">
+</div>
+
+
+</div>
+
+<div class="price-list">
+<div class="articleitem price price-actual" data-prodid="23">
+
+
+<div class="price-item default" itemscope itemprop="priceSpecification" itemtype="http://schema.org/UnitPriceSpecification">
+
+<meta itemprop="valueAddedTaxIncluded" content="true">
+<meta itemprop="priceCurrency" content="COP">
+<meta itemprop="price" content="180000.00">
+
+<span class="quantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+<meta itemprop="minValue" content="1">
+desde 1</span>
+
+
+<span class="value" itemscope itemprop="priceType" itemtype="http://schema.org/SalePrice">
+180.000,00 COL$</span>
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<form class="basket" method="POST" action="/shop/basket?site=default">
+<!-- catalog.lists.items.csrf --><input class="csrf-token" type="hidden" name="_token" value="LvYssUFDoRcN24uXnrkRnntexT77oQjt3cwzhuwW"><!-- catalog.lists.items.csrf -->
+
+
+<div class="items-attribute">
+
+<ul class="selection">
+
+
+</ul>
+
+
+<ul class="selection">
+
+
+</ul>
+
+</div>
+
+<div class="addbasket">
+<input type="hidden" value="add"
+name="b_action"
+>
+<input type="hidden" value="23"
+name="b_prod[0][prodid]"
+>
+<div class="input-group">
+<input type="number" max="2147483647"
+value="1"
+min="1"
+step="1"
+required="required" name="b_prod[0][quantity]"
+title="Cantidad"
+><!--
+--><button class="btn btn-primary btn-action" type="submit"
+title="Añadir a la cesta"
+ >
+</button><!--
+--><a class="btn-pin"
+href="/shop/pin?pin_action=add&pin_id=23&d_name=neocell-collagen-suplemento-de-colageno&site=default"
+data-rmurl="/shop/pin?pin_action=delete&pin_id=23&d_name=neocell-collagen-suplemento-de-colageno&site=default"
+title="Producto marcado">
+</a>
+</div>
+</div>
+
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+<div class="product row "
+data-prodid="24" data-reqstock="1"
+ itemscope itemtype="http://schema.org/Product">
+
+<div class="list-column col-12">
+
+<div class="badges">
+<span class="badge-item new">Nuevo</span>
+<span class="badge-item sale">Venta</span>
+</div>
+
+<a class="media-list multiple"
+href="/shop/mercilen-crema-contorno-de-ojos/21?site=default" title="Mercilen — Crema Contorno de Ojos">
+
+
+<noscript>
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/1/a/1aa611dd_2c29300c_crema-contorno-de-ojos-mercilen-1.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/1/a/1aa611dd_2c29300c_crema-contorno-de-ojos-mercilen-1.webp?v=20260604170028 240w, /aimeos/1.d/product/1/5/153365b7_2c29300c_crema-contorno-de-ojos-mercilen-1.webp?v=20260604170028 480w, /aimeos/1.d/product/b/a/bae0d6e7_2c29300c_crema-contorno-de-ojos-mercilen-1.webp?v=20260604170028 960w, /aimeos/1.d/product/b/0/b036c1dd_2c29300c_crema-contorno-de-ojos-mercilen-1.webp?v=20260604170028 800w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Mercilen — Crema Contorno de Ojos"
+>
+</div>
+</noscript>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/1/a/1aa611dd_2c29300c_crema-contorno-de-ojos-mercilen-1.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/1/a/1aa611dd_2c29300c_crema-contorno-de-ojos-mercilen-1.webp?v=20260604170028 240w, /aimeos/1.d/product/1/5/153365b7_2c29300c_crema-contorno-de-ojos-mercilen-1.webp?v=20260604170028 480w, /aimeos/1.d/product/b/a/bae0d6e7_2c29300c_crema-contorno-de-ojos-mercilen-1.webp?v=20260604170028 960w, /aimeos/1.d/product/b/0/b036c1dd_2c29300c_crema-contorno-de-ojos-mercilen-1.webp?v=20260604170028 800w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Mercilen — Crema Contorno de Ojos"
+>
+</div>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/f/3/f3dadaab_523a1a98_crema-contorno-de-ojos-mercilen-2.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/f/3/f3dadaab_523a1a98_crema-contorno-de-ojos-mercilen-2.webp?v=20260604170028 240w, /aimeos/1.d/product/7/d/7db48341_523a1a98_crema-contorno-de-ojos-mercilen-2.webp?v=20260604170028 480w, /aimeos/1.d/product/d/b/dbc13662_523a1a98_crema-contorno-de-ojos-mercilen-2.webp?v=20260604170028 960w, /aimeos/1.d/product/5/e/5edbd190_523a1a98_crema-contorno-de-ojos-mercilen-2.webp?v=20260604170028 1792w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Mercilen — Crema Contorno de Ojos"
+>
+</div>
+
+
+</a>
+</div>
+
+<div class="list-column col-12">
+<a href="/shop/mercilen-crema-contorno-de-ojos/21?site=default">
+
+<div class="product-info">
+
+<div class="rating"><!--
+--><span class="stars"></span><!--
+--></div>
+</div>
+
+<div class="text-list">
+<h2 class="name" itemprop="name">Mercilen — Crema Contorno de Ojos</h2>
+
+
+<div class="text-item" itemprop="description">
+Crema especializada para el contorno de ojos, reduce ojeras y líneas finas.</div>
+
+
+</div>
+</a>
+
+<div class="offer" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+
+<div class="section">
+<div class="stock-list">
+<div class="articleitem stock-actual"
+data-prodid="24">
+</div>
+
+
+</div>
+
+<div class="price-list">
+<div class="articleitem price price-actual" data-prodid="24">
+
+
+<div class="price-item default" itemscope itemprop="priceSpecification" itemtype="http://schema.org/UnitPriceSpecification">
+
+<meta itemprop="valueAddedTaxIncluded" content="true">
+<meta itemprop="priceCurrency" content="COP">
+<meta itemprop="price" content="85000.00">
+
+<span class="quantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+<meta itemprop="minValue" content="1">
+desde 1</span>
+
+
+<span class="value" itemscope itemprop="priceType" itemtype="http://schema.org/SalePrice">
+85.000,00 COL$</span>
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<form class="basket" method="POST" action="/shop/basket?site=default">
+<!-- catalog.lists.items.csrf --><input class="csrf-token" type="hidden" name="_token" value="LvYssUFDoRcN24uXnrkRnntexT77oQjt3cwzhuwW"><!-- catalog.lists.items.csrf -->
+
+
+<div class="items-attribute">
+
+<ul class="selection">
+
+
+</ul>
+
+
+<ul class="selection">
+
+
+</ul>
+
+</div>
+
+<div class="addbasket">
+<input type="hidden" value="add"
+name="b_action"
+>
+<input type="hidden" value="24"
+name="b_prod[0][prodid]"
+>
+<div class="input-group">
+<input type="number" max="2147483647"
+value="1"
+min="1"
+step="1"
+required="required" name="b_prod[0][quantity]"
+title="Cantidad"
+><!--
+--><button class="btn btn-primary btn-action" type="submit"
+title="Añadir a la cesta"
+ >
+</button><!--
+--><a class="btn-pin"
+href="/shop/pin?pin_action=add&pin_id=24&d_name=mercilen-crema-contorno-de-ojos&site=default"
+data-rmurl="/shop/pin?pin_action=delete&pin_id=24&d_name=mercilen-crema-contorno-de-ojos&site=default"
+title="Producto marcado">
+</a>
+</div>
+</div>
+
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+<div class="product row "
+data-prodid="25" data-reqstock="1"
+ itemscope itemtype="http://schema.org/Product">
+
+<div class="list-column col-12">
+
+<div class="badges">
+<span class="badge-item new">Nuevo</span>
+<span class="badge-item sale">Venta</span>
+</div>
+
+<a class="media-list multiple"
+href="/shop/mercilen-crema-facial-reafirmante/22?site=default" title="Mercilen — Crema Facial Reafirmante">
+
+
+<noscript>
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/8/8/88945b8c_234225d3_crema-facial-reafirmante-mercilen-1.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/8/8/88945b8c_234225d3_crema-facial-reafirmante-mercilen-1.webp?v=20260604170028 240w, /aimeos/1.d/product/1/2/129cceff_234225d3_crema-facial-reafirmante-mercilen-1.webp?v=20260604170028 480w, /aimeos/1.d/product/4/8/48159dc0_234225d3_crema-facial-reafirmante-mercilen-1.webp?v=20260604170028 960w, /aimeos/1.d/product/0/8/082daac0_234225d3_crema-facial-reafirmante-mercilen-1.webp?v=20260604170028 800w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Mercilen — Crema Facial Reafirmante"
+>
+</div>
+</noscript>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/8/8/88945b8c_234225d3_crema-facial-reafirmante-mercilen-1.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/8/8/88945b8c_234225d3_crema-facial-reafirmante-mercilen-1.webp?v=20260604170028 240w, /aimeos/1.d/product/1/2/129cceff_234225d3_crema-facial-reafirmante-mercilen-1.webp?v=20260604170028 480w, /aimeos/1.d/product/4/8/48159dc0_234225d3_crema-facial-reafirmante-mercilen-1.webp?v=20260604170028 960w, /aimeos/1.d/product/0/8/082daac0_234225d3_crema-facial-reafirmante-mercilen-1.webp?v=20260604170028 800w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Mercilen — Crema Facial Reafirmante"
+>
+</div>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/2/2/22714229_f4e6f61d_crema-facial-reafirmante-mercilen-2.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/2/2/22714229_f4e6f61d_crema-facial-reafirmante-mercilen-2.webp?v=20260604170028 240w, /aimeos/1.d/product/0/0/00ca4913_f4e6f61d_crema-facial-reafirmante-mercilen-2.webp?v=20260604170028 480w, /aimeos/1.d/product/b/2/b2b03610_f4e6f61d_crema-facial-reafirmante-mercilen-2.webp?v=20260604170028 960w, /aimeos/1.d/product/c/4/c447b76b_f4e6f61d_crema-facial-reafirmante-mercilen-2.webp?v=20260604170028 768w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Mercilen — Crema Facial Reafirmante"
+>
+</div>
+
+
+</a>
+</div>
+
+<div class="list-column col-12">
+<a href="/shop/mercilen-crema-facial-reafirmante/22?site=default">
+
+<div class="product-info">
+
+<div class="rating"><!--
+--><span class="stars"></span><!--
+--></div>
+</div>
+
+<div class="text-list">
+<h2 class="name" itemprop="name">Mercilen — Crema Facial Reafirmante</h2>
+
+
+<div class="text-item" itemprop="description">
+Crema facial reafirmante con activos naturales para piel firme y luminosa.</div>
+
+
+</div>
+</a>
+
+<div class="offer" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+
+<div class="section">
+<div class="stock-list">
+<div class="articleitem stock-actual"
+data-prodid="25">
+</div>
+
+
+</div>
+
+<div class="price-list">
+<div class="articleitem price price-actual" data-prodid="25">
+
+
+<div class="price-item default" itemscope itemprop="priceSpecification" itemtype="http://schema.org/UnitPriceSpecification">
+
+<meta itemprop="valueAddedTaxIncluded" content="true">
+<meta itemprop="priceCurrency" content="COP">
+<meta itemprop="price" content="110000.00">
+
+<span class="quantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+<meta itemprop="minValue" content="1">
+desde 1</span>
+
+
+<span class="value" itemscope itemprop="priceType" itemtype="http://schema.org/SalePrice">
+110.000,00 COL$</span>
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<form class="basket" method="POST" action="/shop/basket?site=default">
+<!-- catalog.lists.items.csrf --><input class="csrf-token" type="hidden" name="_token" value="LvYssUFDoRcN24uXnrkRnntexT77oQjt3cwzhuwW"><!-- catalog.lists.items.csrf -->
+
+
+<div class="items-attribute">
+
+<ul class="selection">
+
+
+</ul>
+
+
+<ul class="selection">
+
+
+</ul>
+
+</div>
+
+<div class="addbasket">
+<input type="hidden" value="add"
+name="b_action"
+>
+<input type="hidden" value="25"
+name="b_prod[0][prodid]"
+>
+<div class="input-group">
+<input type="number" max="2147483647"
+value="1"
+min="1"
+step="1"
+required="required" name="b_prod[0][quantity]"
+title="Cantidad"
+><!--
+--><button class="btn btn-primary btn-action" type="submit"
+title="Añadir a la cesta"
+ >
+</button><!--
+--><a class="btn-pin"
+href="/shop/pin?pin_action=add&pin_id=25&d_name=mercilen-crema-facial-reafirmante&site=default"
+data-rmurl="/shop/pin?pin_action=delete&pin_id=25&d_name=mercilen-crema-facial-reafirmante&site=default"
+title="Producto marcado">
+</a>
+</div>
+</div>
+
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+<div class="product row "
+data-prodid="26" data-reqstock="1"
+ itemscope itemtype="http://schema.org/Product">
+
+<div class="list-column col-12">
+
+<div class="badges">
+<span class="badge-item new">Nuevo</span>
+<span class="badge-item sale">Venta</span>
+</div>
+
+<a class="media-list multiple"
+href="/shop/pasta-dental-nano-hidroxiapatita-7.5/23?site=default" title="Pasta Dental Nano-Hidroxiapatita 7.5%">
+
+
+<noscript>
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/2/b/2b973c36_b611cf1a_nano-hidroxiapatita-7.5-pasta-dental-1.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/2/b/2b973c36_b611cf1a_nano-hidroxiapatita-7.5-pasta-dental-1.webp?v=20260604170028 240w, /aimeos/1.d/product/4/a/4a705518_b611cf1a_nano-hidroxiapatita-7.5-pasta-dental-1.webp?v=20260604170028 480w, /aimeos/1.d/product/6/d/6d44a103_b611cf1a_nano-hidroxiapatita-7.5-pasta-dental-1.webp?v=20260604170028 960w, /aimeos/1.d/product/d/e/dedc448a_b611cf1a_nano-hidroxiapatita-7.5-pasta-dental-1.webp?v=20260604170028 500w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Pasta Dental Nano-Hidroxiapatita 7.5%"
+>
+</div>
+</noscript>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/2/b/2b973c36_b611cf1a_nano-hidroxiapatita-7.5-pasta-dental-1.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/2/b/2b973c36_b611cf1a_nano-hidroxiapatita-7.5-pasta-dental-1.webp?v=20260604170028 240w, /aimeos/1.d/product/4/a/4a705518_b611cf1a_nano-hidroxiapatita-7.5-pasta-dental-1.webp?v=20260604170028 480w, /aimeos/1.d/product/6/d/6d44a103_b611cf1a_nano-hidroxiapatita-7.5-pasta-dental-1.webp?v=20260604170028 960w, /aimeos/1.d/product/d/e/dedc448a_b611cf1a_nano-hidroxiapatita-7.5-pasta-dental-1.webp?v=20260604170028 500w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Pasta Dental Nano-Hidroxiapatita 7.5%"
+>
+</div>
+
+
+<div class="media-item">
+<img loading="lazy" itemprop="image"
+src="/aimeos/1.d/product/9/6/9684fff7_1f6be508_nano-hidroxiapatita-7.5-pasta-dental-2.webp?v=20260604170028"
+srcset="/aimeos/1.d/product/9/6/9684fff7_1f6be508_nano-hidroxiapatita-7.5-pasta-dental-2.webp?v=20260604170028 240w, /aimeos/1.d/product/5/5/559912ff_1f6be508_nano-hidroxiapatita-7.5-pasta-dental-2.webp?v=20260604170028 480w, /aimeos/1.d/product/b/3/b3eb68bc_1f6be508_nano-hidroxiapatita-7.5-pasta-dental-2.webp?v=20260604170028 960w, /aimeos/1.d/product/2/b/2ba3bc2f_1f6be508_nano-hidroxiapatita-7.5-pasta-dental-2.webp?v=20260604170028 768w"
+sizes="(min-width: 260px) 240px, 100vw"
+alt="Pasta Dental Nano-Hidroxiapatita 7.5%"
+>
+</div>
+
+
+</a>
+</div>
+
+<div class="list-column col-12">
+<a href="/shop/pasta-dental-nano-hidroxiapatita-7.5/23?site=default">
+
+<div class="product-info">
+
+<div class="rating"><!--
+--><span class="stars"></span><!--
+--></div>
+</div>
+
+<div class="text-list">
+<h2 class="name" itemprop="name">Pasta Dental Nano-Hidroxiapatita 7.5%</h2>
+
+
+<div class="text-item" itemprop="description">
+Pasta dental con nano-hidroxiapatita para remineralización y blanqueamiento natural.</div>
+
+
+</div>
+</a>
+
+<div class="offer" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+
+<div class="section">
+<div class="stock-list">
+<div class="articleitem stock-actual"
+data-prodid="26">
+</div>
+
+
+</div>
+
+<div class="price-list">
+<div class="articleitem price price-actual" data-prodid="26">
+
+
+<div class="price-item default" itemscope itemprop="priceSpecification" itemtype="http://schema.org/UnitPriceSpecification">
+
+<meta itemprop="valueAddedTaxIncluded" content="true">
+<meta itemprop="priceCurrency" content="COP">
+<meta itemprop="price" content="65000.00">
+
+<span class="quantity" itemscope itemtype="http://schema.org/QuantitativeValue">
+<meta itemprop="minValue" content="1">
+desde 1</span>
+
+
+<span class="value" itemscope itemprop="priceType" itemtype="http://schema.org/SalePrice">
+65.000,00 COL$</span>
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<form class="basket" method="POST" action="/shop/basket?site=default">
+<!-- catalog.lists.items.csrf --><input class="csrf-token" type="hidden" name="_token" value="LvYssUFDoRcN24uXnrkRnntexT77oQjt3cwzhuwW"><!-- catalog.lists.items.csrf -->
+
+
+<div class="items-attribute">
+
+<ul class="selection">
+
+
+</ul>
+
+
+<ul class="selection">
+
+
+</ul>
+
+</div>
+
+<div class="addbasket">
+<input type="hidden" value="add"
+name="b_action"
+>
+<input type="hidden" value="26"
+name="b_prod[0][prodid]"
+>
+<div class="input-group">
+<input type="number" max="2147483647"
+value="1"
+min="1"
+step="1"
+required="required" name="b_prod[0][quantity]"
+title="Cantidad"
+><!--
+--><button class="btn btn-primary btn-action" type="submit"
+title="Añadir a la cesta"
+ >
+</button><!--
+--><a class="btn-pin"
+href="/shop/pin?pin_action=add&pin_id=26&d_name=pasta-dental-nano-hidroxiapatita-7.5&site=default"
+data-rmurl="/shop/pin?pin_action=delete&pin_id=26&d_name=pasta-dental-nano-hidroxiapatita-7.5&site=default"
+title="Producto marcado">
+</a>
+</div>
+</div>
+
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+</div>
+
+
+<nav class="pagination">
+
+<div class="sort" aria-label="Ordenar por">
+<span>Ordenar por:</span>
+<ul>
+<li>
+<a class="option-relevance active" href="/shop/search?f_sort=relevance&site=default">
+Relevancia</a>
+</li>
+<li>
+<a class="option-ctime " href="/shop/search?f_sort=-ctime&site=default">
+Últimos</a>
+</li>
+<li>
+<a class="option-name " href="/shop/search?f_sort=name&site=default">
+Nombre</a>
+</li>
+<li>
+<a class="option-price " href="/shop/search?f_sort=price&site=default">
+Precio</a>
+</li>
+<li>
+<a class="option-rating " href="/shop/search?f_sort=-rating&site=default">
+Clasificación</a>
+</li>
+</ul>
+</div>
+
+
+</nav>
+
+
+
+</div>
+</div>
+			</div>
+		</div>
+	</div>
+							</main>
+		</div>
+
+
+		<footer>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="row">
+							<div class="col-sm-6 footer-left">
+								<div class="footer-block">
+									<h2 class="pb-3" aria-label="Legal information">LEGAL</h2>
+									<p><a href="http://exicompras.test/p/terms">Terms &amp; Conditions</a></p>
+									<p><a href="http://exicompras.test/p/privacy">Privacy Notice</a></p>
+									<p><a href="http://exicompras.test/p/cancel">Cancellation</a></p>
+								</div>
+							</div>
+							<div class="col-sm-6 footer-center">
+								<div class="footer-block">
+									<h2 class="pb-3" aria-label="About the company">ABOUT US</h2>
+									<p><a href="http://exicompras.test/p/contact">Contact us</a></p>
+									<p><a href="http://exicompras.test/p/about">Company</a></p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 footer-right">
+						<div class="footer-block">
+							<a class="logo" href="/" title="To the home page">
+								<img src="http://exicompras.test/aimeos/1.d/logo1528.webp" class="footer-logo" alt="To the home page">
+							</a>
+							<div class="social" aria-label="Social media links">
+								<p><a href="#" class="sm facebook" title="Facebook" rel="noopener">Facebook</a></p>
+								<p><a href="#" class="sm twitter" title="Twitter" rel="noopener">Twitter</a></p>
+								<p><a href="#" class="sm instagram" title="Instagram" rel="noopener">Instagram</a></p>
+								<p><a href="#" class="sm youtube" title="Youtube" rel="noopener">Youtube</a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+
+
+		<a id="toTop" class="back-to-top" href="#" title="Back to top">
+			<div class="top-icon"></div>
+		</a>
+
+		<!-- Scripts -->
+		<script src="http://exicompras.test/vendor/shop/themes/default/app.js?v=12"></script>
+		<script src="http://exicompras.test/vendor/shop/themes/default/aimeos.js?v=12"></script>
+			</body>
+</html>

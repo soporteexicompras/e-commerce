@@ -1,0 +1,785 @@
+/* ══════════════════════════════════════════════════════════
+   EXICOMPRAS — NAVBAR  (layout 2 filas tipo Amazon/MercadoLibre)
+   --------------------------------------------------------------
+   Fila 1 (principal): [toggler] [logo] [search grande] [acciones]
+   Fila 2 (sub):       [categorías scrollables]
+   Mobile:  drawer off-canvas toma el control
+   --------------------------------------------------------------
+   Cargado desde base.blade.php (no condicional).
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Sentinel (IntersectionObserver target) ───────────── */
+.exi-navbar-sentinel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+/* ── Shell principal: contenedor flex column ─────────── */
+.exi-navbar-shell {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+    gap: 0 !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+    min-height: 60px !important;
+    background-color: var(--ai-nav-bg, #FFFFFF) !important;
+    border-bottom: 1px solid rgba(0,0,0,.08) !important;
+    color: var(--ai-nav-text, #1A1F36) !important;
+    transition: padding .2s ease-out, box-shadow .25s ease, background-color .25s ease;
+    position: sticky;
+    top: 0;
+    z-index: 1040;
+    margin: 0 !important;
+}
+
+/* ── Filas: ambas full-width, padding lateral mínimo ── */
+.exi-navbar-row {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    /* Padding lateral uniforme: el contenido va casi edge-to-edge */
+    padding-left: clamp(.75rem, 1.6vw, 1.25rem) !important;
+    padding-right: clamp(.75rem, 1.6vw, 1.25rem) !important;
+    margin: 0 !important;
+    gap: clamp(.5rem, 1.2vw, 1rem) !important;
+}
+
+/* ── Fila 1: principal — GRID 3 columnas (logo | search | acciones) ── */
+.exi-navbar-row--main {
+    display: grid !important;
+    grid-template-columns: auto minmax(0, 1fr) auto !important;
+    align-items: center !important;
+    /* Min-height se adapta a la altura real del logo + padding vertical.
+       Si el logo es 64px → fila ≈ 84px (64 + 20 padding). */
+    min-height: calc(var(--ai-logo-h, 40px) + 1.25rem) !important;
+    padding-top: .625rem !important;
+    padding-bottom: .625rem !important;
+    position: relative;
+    gap: clamp(.5rem, 1.2vw, 1rem) !important;
+}
+.exi-navbar-row--main > * { min-width: 0; }
+
+/* Posicionar cada hijo en su columna */
+.exi-navbar-row--main > .exi-navbar-toggler { grid-column: 1; justify-self: start; }
+.exi-navbar-row--main > .navbar-brand        { grid-column: 1; justify-self: start; }
+.exi-navbar-row--main > .exi-search-wrap     { grid-column: 2; justify-self: stretch; width: 100%; }
+.exi-navbar-row--main > .exi-navbar-actions  { grid-column: 3; justify-self: end; }
+
+/* ── Fila 2: categorías (sub) ─────────────────────────── */
+.exi-navbar-row--sub {
+    background-color: var(--ai-nav-bg-alt, #F8FAFC) !important;
+    border-top: 1px solid rgba(0,0,0,.06) !important;
+    min-height: 44px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    overflow: hidden;
+}
+
+/* ── Quitar border inferior duplicado de Aimeos ──────── */
+.exi-navbar-shell.navbar.navbar-top {
+    border-bottom: 1px solid rgba(0,0,0,.08) !important;
+}
+
+/* ── Logo: ancho fijo, no encoge ─────────────────────── */
+.exi-navbar-shell .navbar-brand {
+    flex: 0 0 auto !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-width: 0;
+    /* Flex para que el <img> se centre verticalmente en la celda del grid */
+    display: flex !important;
+    align-items: center !important;
+    line-height: 0 !important;          /* mata el espacio residual de line-height en <a> inline */
+}
+.exi-navbar-shell .navbar-brand .navbar-logo {
+    height: var(--ai-logo-h, 40px) !important;
+    width: auto !important;
+    max-width: var(--ai-logo-max-w, 200px);
+    display: block;
+    transition: height .25s ease-out, max-width .25s ease-out;
+}
+
+/* ── Search wrap: FLEX-GROW, toma todo el espacio ──── */
+.exi-navbar-shell .exi-search-wrap {
+    flex: 1 1 auto !important;
+    flex-grow: 1 !important;
+    flex-shrink: 1 !important;
+    min-width: 0 !important;
+    max-width: 720px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 !important;
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Override AGRESIVO sobre Aimeos catalog-filter.css ──── */
+/* Aimeos colapsa el search a width:0 con position:absolute;right:100%.
+   Forzamos a que el search ocupe el 100% de su columna siempre. */
+.exi-navbar-row--main .exi-search-wrap,
+.exi-navbar-row--main .exi-search-wrap .catalog-filter-search,
+.exi-navbar-row--main .exi-search-wrap .catalog-filter-search > *,
+.exi-navbar-row--main .exi-search-wrap .catalog-filter-search form,
+.exi-navbar-row--main .exi-search-wrap .catalog-filter-search .search-lists,
+.exi-navbar-row--main .exi-search-wrap .catalog-filter-search .input-group,
+.exi-navbar-row--main .exi-search-wrap .catalog-filter-search .input-group > input.form-control,
+.exi-navbar-row--main .exi-search-wrap .catalog-filter-search .input-group > input.value,
+.exi-navbar-row--main .exi-search-wrap .catalog-filter-search .input-group input[name="f_search"] {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    position: relative !important;
+    right: auto !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    float: none !important;
+}
+
+/* ── Acciones: ancho fijo, alineadas a la derecha ─── */
+.exi-navbar-shell .exi-navbar-actions {
+    flex: 0 0 auto !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: clamp(.15rem, .4vw, .35rem) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* ── Sticky shrink on scroll ──────────────────────────── */
+.exi-navbar-shell.exi-shrunk {
+    box-shadow: 0 1px 8px rgba(0,0,0,.06);
+}
+.exi-navbar-shell.exi-shrunk .exi-navbar-row--main { min-height: calc(var(--ai-logo-h-tablet, 32px) + 1rem) !important; }
+.exi-navbar-shell.exi-shrunk .navbar-brand .navbar-logo {
+    height: var(--ai-logo-h-tablet, 32px) !important;
+    max-width: var(--ai-logo-h-tablet, 32px);
+    max-width: calc(var(--ai-logo-h, 40px) * 2.5);
+}
+
+/* ══════════════════════════════════════════════════════════
+   FILA 2 — CATEGORÍAS (horizontal en desktop)
+   ══════════════════════════════════════════════════════════ */
+.exi-navbar-row--sub .exi-navbar-collapse {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    overflow: hidden;
+    visibility: visible !important;
+    width: 100% !important;
+    max-width: none !important;
+    flex-basis: auto !important;
+    text-align: left !important;
+}
+/* Quitar TODA constraint de los contenedores intermedios de Aimeos */
+.exi-navbar-row--sub .exi-navbar-collapse,
+.exi-navbar-row--sub .exi-navbar-collapse > .section,
+.exi-navbar-row--sub .exi-navbar-collapse > .section.catalog-filter,
+.exi-navbar-row--sub .exi-navbar-collapse > .section > nav,
+.exi-navbar-row--sub .exi-navbar-collapse > .section > nav.container-xxl,
+.exi-navbar-row--sub .exi-navbar-collapse .container-xxl,
+.exi-navbar-row--sub .exi-navbar-collapse .container {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: left !important;
+    float: none !important;
+    display: block !important;
+}
+
+/* Categorías — fila scrollable horizontal */
+.exi-navbar-row--sub .catalog-filter-tree {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    text-align: left !important;
+}
+.exi-navbar-row--sub .catalog-filter-tree .level-1 {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    gap: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    align-items: center;
+    justify-content: center !important;        /* categorías centradas */
+    -webkit-overflow-scrolling: touch;
+    width: 100% !important;
+    max-width: none !important;
+    text-align: left !important;
+    list-style: none !important;
+    /* Truco para que con overflow el contenido se centre visualmente:
+       padding lateral = (viewport - contenido) / 2. Si no hay overflow
+       no afecta (el padding solo aplica cuando el contenido es más ancho). */
+    padding-inline: max(0px, calc((100% - max-content) / 2)) !important;
+}
+.exi-navbar-row--sub .catalog-filter-tree .level-1::-webkit-scrollbar { display: none; }
+
+.exi-navbar-row--sub .catalog-filter-tree .cat-item {
+    display: inline-flex !important;
+    align-items: center !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative;
+}
+.exi-navbar-row--sub .catalog-filter-tree .cat-item .item-links,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item .item-links > .cat-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    width: auto !important;
+    padding: .55rem .9rem !important;
+    white-space: nowrap !important;
+    gap: .2rem;
+    color: var(--ai-nav-text, #1A1F36) !important;
+    font-weight: 500 !important;
+    font-size: .875rem !important;
+    letter-spacing: .01em;
+    border-radius: 6px;
+    transition: color .18s ease, background-color .18s ease;
+}
+.exi-navbar-row--sub .catalog-filter-tree .cat-item .item-links > .cat-link:hover,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item .item-links > .cat-link:focus {
+    color: var(--ai-nav-text-hover, #4A7EFF) !important;
+    background-color: transparent;
+    text-decoration: none !important;
+}
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.active > .item-links > .cat-link {
+    color: var(--ai-nav-text-hover, #4A7EFF) !important;
+}
+.exi-navbar-row--sub .catalog-filter-tree .cat-name { line-height: 1.2; }
+.exi-navbar-row--sub .catalog-filter-tree .cat-count {
+    font-size: 80%;
+    opacity: .65;
+    margin-inline-start: .15rem;
+    color: var(--ai-nav-icon, #5A6378);
+}
+
+/* Ocultar elementos off-canvas en desktop */
+.exi-navbar-row--sub .catalog-filter-tree .row.header,
+.exi-navbar-row--sub .catalog-filter-tree .aimeos-overlay-offscreen,
+.exi-navbar-row--sub .catalog-filter-tree > .menu {
+    display: none !important;
+}
+
+/* ── Mega-menú (sub-categorías) ─────────────────────── */
+.exi-navbar-row--sub .catalog-filter-tree .cat-item > .submenu,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item > .megamenu,
+.exi-navbar-row--sub .catalog-filter-tree .megamenu {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: auto !important;
+    width: 100vw !important;
+    margin-left: calc(50% - 50vw) !important;
+    background: var(--ai-nav-bg-elevated, #FFFFFF) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,.12) !important;
+    border: 1px solid rgba(0,0,0,.06);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    padding: 1.5rem clamp(1rem, 4vw, 3rem) !important;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms;
+    z-index: 1030;
+    pointer-events: none;
+}
+.exi-navbar-row--sub .catalog-filter-tree .cat-item:hover > .submenu,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item:hover > .megamenu,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item:focus-within > .submenu,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item:focus-within > .megamenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+.exi-navbar-row--sub .catalog-filter-tree .level-2 {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem 1.5rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+@media (max-width: 1199px) {
+    .exi-navbar-row--sub .catalog-filter-tree .level-2 { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 991px) {
+    .exi-navbar-row--sub .catalog-filter-tree .level-2 { grid-template-columns: repeat(2, 1fr); }
+}
+.exi-navbar-row--sub .catalog-filter-tree .level-2 > .cat-item { display: block !important; }
+.exi-navbar-row--sub .catalog-filter-tree .level-2 > .cat-item > .item-links,
+.exi-navbar-row--sub .catalog-filter-tree .level-2 > .cat-item > .item-links > .cat-link {
+    display: block !important;
+    width: auto !important;
+    padding: .35rem 0 !important;
+    color: var(--ai-nav-dropdown-text, #1A1F36) !important;
+    font-size: .875rem !important;
+    font-weight: 600 !important;
+    border-radius: 0;
+    background: transparent !important;
+}
+.exi-navbar-row--sub .catalog-filter-tree .level-2 > .cat-item > .item-links > .cat-link:hover {
+    color: var(--ai-nav-text-hover, #4A7EFF) !important;
+}
+.exi-navbar-row--sub .catalog-filter-tree .level-3 > .cat-item > .item-links > .cat-link {
+    color: var(--ai-nav-icon, #5A6378) !important;
+    font-weight: 400 !important;
+    font-size: .82rem !important;
+}
+.exi-navbar-row--sub .catalog-filter-tree .level-3 > .cat-item > .item-links > .cat-link:hover {
+    color: var(--ai-nav-text-hover, #4A7EFF) !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   SEARCH PILL (FILA 1) — Grande y prominente
+   ══════════════════════════════════════════════════════════ */
+.exi-navbar-actions .exi-search-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
+}
+.exi-navbar-actions .catalog-filter-search {
+    display: flex !important;
+    align-items: center;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
+}
+.exi-navbar-actions .catalog-filter-search .header-name { display: none !important; }
+.exi-navbar-actions .catalog-filter-search .search-lists {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100%;
+    display: block !important;
+}
+.exi-navbar-actions .catalog-filter-search .input-group {
+    display: flex !important;
+    align-items: center !important;
+    flex-direction: row !important;
+    background-color: #F4F6F9 !important;
+    border: 1px solid transparent !important;
+    border-radius: 9999px !important;
+    overflow: hidden !important;
+    transition: border-color .18s ease, box-shadow .18s ease, background-color .18s ease;
+    width: 100% !important;
+    height: 44px !important;
+    margin: 0 !important;
+    padding: 0 .35rem !important;
+    position: relative !important;
+    right: auto !important;
+    top: auto !important;
+    box-shadow: 0 1px 2px rgba(15,23,42,.04);
+}
+.exi-navbar-actions .catalog-filter-search .input-group:focus-within {
+    border-color: var(--ai-nav-text-hover, #4A7EFF) !important;
+    background-color: #fff !important;
+    box-shadow: 0 0 0 3px rgba(74,126,255,.15);
+}
+.exi-navbar-actions .catalog-filter-search .input-group > .form-control,
+.exi-navbar-actions .catalog-filter-search .input-group input.value {
+    flex: 1 1 auto !important;
+    background: transparent !important;
+    border: none !important;
+    color: var(--ai-nav-text, #1A1F36) !important;
+    font-size: .9375rem !important;
+    padding: .55rem 1rem !important;
+    min-width: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    box-shadow: none !important;
+    outline: none !important;
+    line-height: 1.4 !important;
+    position: relative !important;
+    right: auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+.exi-navbar-actions .catalog-filter-search .input-group input.value::placeholder {
+    color: #94A3B8;
+}
+.exi-navbar-actions .catalog-filter-search .input-group .btn {
+    background: transparent !important;
+    border: none !important;
+    color: var(--ai-nav-icon, #5A6378) !important;
+    padding: .45rem .85rem !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+    box-shadow: none !important;
+    border-radius: 9999px;
+    transition: color .18s ease, background-color .18s ease;
+    flex: 0 0 auto !important;
+    cursor: pointer;
+}
+.exi-navbar-actions .catalog-filter-search .input-group .btn:hover {
+    color: var(--ai-nav-text-hover, #4A7EFF) !important;
+    background-color: rgba(74,126,255,.08);
+}
+.exi-navbar-actions .catalog-filter-search .reset { display: none !important; }
+.exi-navbar-actions .catalog-filter-search .btn-search::after {
+    font-family: "bootstrap-icons";
+    content: "\F52A";
+    font-size: 1.05rem;
+    line-height: 1;
+    color: inherit;
+}
+
+/* ══════════════════════════════════════════════════════════
+   LOCALE SELECT COMPACTO (ES / COP en columna)
+   ══════════════════════════════════════════════════════════ */
+.exi-locale-wrap {
+    margin: 0 !important;
+    padding: 0 !important;
+    flex: 0 0 auto;
+}
+.exi-locale-wrap .locale-select {
+    display: inline-flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: .15rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.exi-locale-wrap .locale-select .header { display: none !important; }
+.exi-locale-wrap .locale-select ul.select-menu {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: .1rem !important;
+    align-items: center !important;
+}
+.exi-locale-wrap .locale-select li.select-dropdown { display: inline-block !important; }
+.exi-locale-wrap .locale-select li.select-dropdown > a {
+    color: var(--ai-nav-icon, #5A6378) !important;
+    font-size: .68rem !important;
+    font-weight: 600 !important;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    padding: .15rem .4rem !important;
+    line-height: 1.2 !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 4px;
+    transition: color .18s ease;
+    text-decoration: none !important;
+    position: relative;
+}
+/* Ocultar el indicador » que Aimeos inyecta como texto */
+.exi-locale-wrap .locale-select li.select-dropdown > a::before,
+.exi-locale-wrap .locale-select li.select-dropdown > a::after {
+    content: none !important;
+    display: none !important;
+}
+.exi-locale-wrap .locale-select li.select-dropdown > a:hover {
+    color: var(--ai-nav-text-hover, #4A7EFF) !important;
+}
+.exi-locale-wrap .locale-select li.select-dropdown ul {
+    background-color: var(--ai-nav-dropdown-bg, #FFFFFF) !important;
+    border: 1px solid rgba(0,0,0,.08) !important;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.12);
+    padding: .35rem !important;
+    min-width: 7rem;
+}
+.exi-locale-wrap .locale-select li.select-dropdown ul a {
+    color: var(--ai-nav-dropdown-text, #1A1F36) !important;
+    padding: .35rem .65rem !important;
+    border-radius: 4px;
+    font-size: .82rem !important;
+    text-decoration: none !important;
+}
+.exi-locale-wrap .locale-select li.select-dropdown ul a:hover {
+    background-color: #F4F6F9 !important;
+    color: var(--ai-nav-text-hover, #4A7EFF) !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   WISHLIST ICON + BADGE
+   ══════════════════════════════════════════════════════════ */
+.exi-wishlist {
+    position: relative;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    color: var(--ai-nav-icon, #5A6378) !important;
+    text-decoration: none !important;
+    transition: color .18s ease, background-color .18s ease, transform .18s ease;
+    margin: 0 !important;
+    flex: 0 0 auto;
+}
+.exi-wishlist:hover {
+    color: var(--ai-nav-text-hover, #4A7EFF) !important;
+    background-color: rgba(74,126,255,.08);
+    transform: translateY(-1px);
+}
+.exi-wishlist i { font-size: 1.2rem; line-height: 1; }
+.exi-wishlist .badge {
+    position: absolute;
+    top: 4px;
+    right: 2px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 .35rem;
+    background-color: #FF6B35;
+    color: #fff;
+    font-size: .65rem;
+    font-weight: 700;
+    line-height: 18px;
+    text-align: center;
+    border-radius: 9999px;
+    box-shadow: 0 0 0 2px var(--ai-nav-bg, #FFFFFF);
+}
+.exi-wishlist[data-count="0"] .badge { display: none; }
+
+/* ══════════════════════════════════════════════════════════
+   ACCOUNT (login/profile)
+   ══════════════════════════════════════════════════════════ */
+.exi-account {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: .1rem;
+    flex: 0 0 auto;
+}
+.exi-account .nav-item { list-style: none; }
+.exi-account .nav-item > .nav-link {
+    color: var(--ai-nav-icon, #5A6378) !important;
+    padding: .5rem !important;
+    transition: color .18s ease, background-color .18s ease;
+    display: inline-flex !important;
+    align-items: center;
+    border-radius: 8px;
+    text-decoration: none !important;
+}
+.exi-account .nav-item > .nav-link:hover {
+    color: var(--ai-nav-text-hover, #4A7EFF) !important;
+    background-color: rgba(74,126,255,.08);
+}
+.exi-account .dropdown-menu {
+    background-color: var(--ai-nav-dropdown-bg, #FFFFFF) !important;
+    border: 1px solid rgba(0,0,0,.08);
+    box-shadow: 0 12px 32px rgba(0,0,0,.12);
+    border-radius: 8px;
+    padding: .35rem;
+    min-width: 12rem;
+}
+.exi-account .dropdown-item {
+    color: var(--ai-nav-dropdown-text, #1A1F36) !important;
+    border-radius: 6px;
+    padding: .55rem .85rem !important;
+    font-size: .875rem;
+    transition: background-color .18s, color .18s;
+}
+.exi-account .dropdown-item:hover,
+.exi-account .dropdown-item:focus {
+    background-color: #F4F6F9 !important;
+    color: var(--ai-nav-text-hover, #4A7EFF) !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   CARRITO
+   ══════════════════════════════════════════════════════════ */
+.exi-navbar-actions .basket-mini { margin: 0 !important; padding: 0 !important; flex: 0 0 auto; }
+.exi-navbar-actions .basket-mini .menu {
+    color: var(--ai-nav-icon, #5A6378) !important;
+    padding: .5rem !important;
+    border-radius: 8px;
+    transition: color .18s ease, background-color .18s ease;
+    display: inline-flex !important;
+    align-items: center;
+    position: relative;
+}
+.exi-navbar-actions .basket-mini .menu:hover {
+    color: var(--ai-nav-text-hover, #4A7EFF) !important;
+    background-color: rgba(74,126,255,.08);
+}
+.exi-navbar-actions .basket-mini .menu:after { color: inherit !important; }
+.exi-navbar-actions .basket-mini-main .quantity {
+    background-color: #FF6B35 !important;
+    color: #fff !important;
+    box-shadow: 0 0 0 2px var(--ai-nav-bg, #FFFFFF);
+}
+
+/* ══════════════════════════════════════════════════════════
+   TOGGLER (botón hamburguesa)
+   ══════════════════════════════════════════════════════════ */
+.exi-navbar-shell .exi-navbar-toggler {
+    flex: 0 0 auto;
+    flex-shrink: 0;
+    display: none;
+    border: 1px solid rgba(0,0,0,.1) !important;
+    border-radius: 8px;
+    padding: .55rem .7rem;
+    color: var(--ai-nav-icon, #5A6378) !important;
+    background: transparent !important;
+    transition: color .18s ease, border-color .18s ease, background-color .18s ease;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    min-width: 42px;
+    min-height: 42px;
+    line-height: 1;
+}
+.exi-navbar-shell .exi-navbar-toggler i {
+    font-size: 1.4rem;
+    line-height: 1;
+    color: inherit;
+}
+.exi-navbar-shell .exi-navbar-toggler:hover,
+.exi-navbar-shell .exi-navbar-toggler:focus {
+    color: var(--ai-nav-text-hover, #4A7EFF) !important;
+    border-color: var(--ai-nav-text-hover, #4A7EFF) !important;
+    background-color: rgba(74,126,255,.08);
+}
+
+/* ══════════════════════════════════════════════════════════
+   FOCUS VISIBLE (accesibilidad)
+   ══════════════════════════════════════════════════════════ */
+.exi-navbar-shell a:focus-visible,
+.exi-navbar-shell button:focus-visible,
+.exi-navbar-shell input:focus-visible {
+    outline: 2px solid var(--ai-nav-text-hover, #4A7EFF);
+    outline-offset: 2px;
+}
+
+/* ══════════════════════════════════════════════════════════
+   BREAKPOINTS — 100% responsive
+   ══════════════════════════════════════════════════════════ */
+
+/* Restricción de max-width del search dentro de la columna 2 del grid
+   (la columna es 1fr; aquí limitamos el ancho visual del search) */
+.exi-navbar-row--main > .exi-search-wrap {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+/* ≥1400px (desktop grande): search ancho completo */
+@media (min-width: 1400px) {
+    .exi-navbar-row--main > .exi-search-wrap { max-width: 720px; }
+}
+
+/* 1200-1399px (desktop medio): search más compacto */
+@media (max-width: 1399px) and (min-width: 1200px) {
+    .exi-navbar-row--main > .exi-search-wrap { max-width: 560px; }
+}
+
+/* 1100-1199px (desktop pequeño): ocultar locale */
+@media (max-width: 1199px) and (min-width: 1100px) {
+    .exi-navbar-row--main > .exi-search-wrap { max-width: 460px; }
+    .exi-locale-wrap { display: none !important; }
+}
+
+/* 992-1099px: search + acciones compactas */
+@media (max-width: 1099px) and (min-width: 992px) {
+    .exi-navbar-row--main > .exi-search-wrap { max-width: 360px; }
+    .exi-locale-wrap { display: none !important; }
+    .exi-navbar-shell .exi-navbar-actions { gap: .15rem !important; }
+}
+
+/* 768-991px (tablet): categorías en drawer, sin locale, search full-width */
+@media (max-width: 991px) {
+    .exi-navbar-row--sub { display: none !important; }
+    .exi-navbar-row--main { min-height: 60px !important; }
+    .exi-locale-wrap { display: none !important; }
+    .exi-navbar-row--main > .exi-search-wrap { max-width: none; }
+    .exi-navbar-shell .exi-navbar-toggler { display: inline-flex !important; }
+    /* Móvil/tablet: el toggler ocupa la col 1, brand col 1 (justificado al medio si no hay toggler) */
+    .exi-navbar-row--main {
+        grid-template-columns: auto minmax(0, 1fr) auto !important;
+    }
+}
+
+/* <768px (móvil): solo toggler + logo + carrito */
+@media (max-width: 767px) {
+    .exi-navbar-row--sub { display: none !important; }
+    .exi-navbar-row--main {
+        min-height: calc(var(--ai-logo-h-mobile, 32px) + 1rem) !important;
+        gap: .5rem !important;
+        padding-left: .75rem !important;
+        padding-right: .75rem !important;
+        padding-top: .5rem !important;
+        padding-bottom: .5rem !important;
+        grid-template-columns: auto 1fr auto !important;
+    }
+    /* Móvil: ocultar todo menos toggler, logo, carrito */
+    .exi-navbar-row--main > .exi-search-wrap,
+    .exi-locale-wrap,
+    .exi-wishlist,
+    .exi-account {
+        display: none !important;
+    }
+    .exi-navbar-row--main > .exi-navbar-toggler {
+        display: inline-flex !important;
+        grid-column: 1;
+        justify-self: start;
+    }
+    .exi-navbar-row--main > .navbar-brand {
+        grid-column: 2;
+        justify-self: center;
+        text-align: center;
+    }
+    .exi-navbar-row--main > .exi-navbar-actions {
+        grid-column: 3;
+        justify-self: end;
+    }
+    .exi-navbar-shell .navbar-brand .navbar-logo {
+        height: var(--ai-logo-h-mobile, 32px) !important;
+        max-width: var(--ai-logo-h-mobile, 32px);
+        max-width: calc(var(--ai-logo-h, 40px) * 2.2);
+        margin: 0 auto;
+    }
+    /* Solo mostrar el basket en mobile */
+    .exi-navbar-shell .exi-navbar-actions .basket-mini { display: inline-flex !important; }
+    .exi-navbar-shell .exi-navbar-actions > *:not(.basket-mini) { display: none !important; }
+}
+
+/* ≥768px: toggler oculto y navbar completo */
+@media (min-width: 768px) {
+    .exi-navbar-shell .exi-navbar-toggler { display: none !important; }
+}
+
+/* Safe area insets para iOS notch */
+@supports (padding: max(0px)) {
+    .exi-navbar-row {
+        padding-left: max(.75rem, env(safe-area-inset-left)) !important;
+        padding-right: max(.75rem, env(safe-area-inset-right)) !important;
+    }
+}

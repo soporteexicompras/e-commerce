@@ -1,0 +1,94 @@
+/* ══════════════════════════════════════════════════════════
+   EXICOMPRAS — NAVBAR GLOBAL
+   Reglas que aplican al navbar en TODAS las páginas,
+   garantizando consistencia entre home, list, tree, detail.
+   Cargado desde base.blade.php (no condicional).
+
+   Estrategia: selectores sin prefijo de página y !important
+   selectivo solo donde hace falta pisar reglas de Aimeos.
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Bloque base: reset del árbol dentro del navbar (FILA 2) ── */
+.exi-navbar-row--sub .catalog-filter-tree .zeynep,
+.exi-navbar-row--sub .catalog-filter-tree .list-container.zeynep {
+    position: static !important;
+    width: auto !important;
+    left: 0 !important;
+    right: auto !important;
+    transform: none !important;
+    pointer-events: auto !important;
+    background: transparent !important;
+    overflow: visible !important;
+}
+
+/* ── Categorías — fila horizontal (override Aimeos) ─────── */
+.exi-navbar-row--sub .catalog-filter-tree .level-1 {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.exi-navbar-row--sub .catalog-filter-tree .cat-item {
+    display: inline-flex !important;
+    align-items: center !important;
+    width: auto !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.exi-navbar-row--sub .catalog-filter-tree .cat-item .item-links,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item .item-links > .cat-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    width: auto !important;
+    padding: .55rem .9rem !important;
+    white-space: nowrap !important;
+    gap: .15rem;
+}
+.exi-navbar-row--sub .catalog-filter-tree .cat-name { line-height: 1.2; }
+
+/* ── Conteo (n) — paréntesis generados por Aimeos ──────── */
+.exi-navbar-row--sub .catalog-filter-tree .cat-count {
+    font-size: 85%;
+    opacity: .9;
+    margin-inline-start: .15rem;
+}
+
+/* ── Ocultar elementos del modo off-canvas en desktop ───── */
+.exi-navbar-row--sub .catalog-filter-tree .row.header,
+.exi-navbar-row--sub .catalog-filter-tree .aimeos-overlay-offscreen {
+    display: none !important;
+}
+
+/* ── Search colapsado (solo para variantes legacy en otros lugares) ── */
+.exi-navbar-row--main .catalog-filter-search .input-group {
+    border: none !important;
+    margin: 0 !important;
+}
+.exi-navbar-row--main .catalog-filter-search .header-name { display: none !important; }
+.exi-navbar-row--main .catalog-filter-search .search-lists { padding: 0 !important; margin: 0 !important; }
+
+/* ── Locale-select compacto (ES / COP en columna) ───────── */
+.exi-navbar-row--main .locale-select { display: inline-flex; flex-direction: column; }
+.exi-navbar-row--main .locale-select .header { display: none !important; }
+.exi-navbar-row--main .locale-select ul.select-menu {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: .25rem !important;
+}
+.exi-navbar-row--main .locale-select .select-dropdown > a,
+.exi-navbar-row--main .locale-select li.select-dropdown > a {
+    padding: .15rem .5rem !important;
+    font-size: 80% !important;
+    line-height: 1.2 !important;
+}
+
+/* ── Forzar visibilidad del navbar-toggler en móvil ────── */
+@media (max-width: 991px) {
+    .exi-navbar-shell .exi-navbar-toggler { display: inline-flex !important; }
+}

@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+		<meta name="csrf-token" content="uYx94U78DmtUbBAO8iQ9OE2tbXCunbDmbHKVKoIK">
+		<meta name="theme-color" content="#E3E7EB">
+
+		
+							<link type="text/css" rel="stylesheet" href="http://exicompras.test/vendor/shop/themes/default/app.css?v=12">
+				<link type="text/css" rel="stylesheet" href="http://exicompras.test/vendor/shop/themes/default/aimeos.css?v=12">
+
+			<link rel="stylesheet" href="/vendor/shop/themes/default/locale-select.css?v=1">
+<script defer src="/vendor/shop/themes/default/locale-select.js?v=1"></script>
+	<link rel="stylesheet" href="/vendor/shop/themes/default/basket-mini.css?v=1">
+<script defer src="/vendor/shop/themes/default/basket-mini.js?v=1"></script>
+
+	<link rel="stylesheet" href="http://127.0.0.1:8000/vendor/shop/themes/default/catalog-filter.css?v=2">
+<script defer src="http://127.0.0.1:8000/vendor/shop/themes/default/catalog-filter.js?v=2"></script>
+	<link rel="stylesheet" href="http://127.0.0.1:8000/vendor/shop/themes/default/catalog-filter.css?v=2">
+<script defer src="http://127.0.0.1:8000/vendor/shop/themes/default/catalog-filter.js?v=2"></script>
+
+				<style nonce="4whg7DSFFzbN3BT9hGEWxQ==">
+			:root {
+									--ai-bg: #E3E7EB;
+									--ai-bg-alt: #FFFFFF;
+									--ai-primary: #1A1F36;
+									--ai-primary-alt: #5A6378;
+									--ai-secondary: #FF6B35;
+									--ai-secondary-alt: #E0552B;
+									--ai-tertiary: #4A7EFF;
+									--ai-tertiary-alt: #3A6AE0;
+									--ai-danger: #E53E3E;
+									--ai-success: #2F855A;
+									--ai-warning: #B7791F;
+									--ai-radius: 8;
+									--bs-menu-bg: #1A1F36;
+									--bs-menu-alt-bg: #141828;
+									--bs-menu: #F0F2FF;
+									--bs-menu-alt: #A8B0CC;
+									--ai-nav-bg: #FFFFFF;
+									--ai-nav-text: #1A1F36;
+									--ai-nav-text-hover: #4A7EFF;
+									--ai-nav-icon: #1A1F36;
+									--ai-nav-dropdown-bg: #FFFFFF;
+									--ai-nav-dropdown-text: #1A1F36;
+							}
+		/* ── Responsive global ── */
+		*, *::before, *::after { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+		body { overflow-x: hidden; }
+		img { max-width: 100%; height: auto; }
+
+		/* ── Navbar: forzar layout horizontal en desktop ── */
+		/* (Respaldo si Bootstrap navbar-expand-md no aplica por algún motivo) */
+		@media (min-width: 768px) {
+			.navbar.navbar-expand-md .navbar-collapse { display: flex !important; flex-basis: auto !important; }
+			.navbar.navbar-expand-md .navbar-toggler { display: none !important; }
+			.navbar.navbar-expand-md .navbar-nav { flex-direction: row !important; }
+		}
+
+		/* ── Navbar altura: override del min-height:10rem de aimeos.css ── */
+		/* Desktop: usar la altura del logo + padding vertical */
+		@media (min-width: 992px) {
+			.navbar { min-height: calc(64px + 1.25rem) !important; }
+		}
+		/* Tablet */
+		@media (min-width: 576px) and (max-width: 991px) {
+			.navbar { min-height: calc(51px + 1rem) !important; }
+		}
+		/* Móvil */
+		@media (max-width: 575px) {
+			.navbar { min-height: calc(42px + 0.875rem) !important; }
+		}
+
+		/* ── Logo: override del width:120px;height:auto de aimeos.css ── */
+		/* Se usa .navbar-brand .navbar-logo para mayor especificidad */
+		.navbar-brand .navbar-logo { height: 42px !important; width: auto !important; max-width: 180px; }
+		@media (min-width: 576px)  { .navbar-brand .navbar-logo { height: 51px !important; max-width: 220px; } }
+		@media (min-width: 992px)  { .navbar-brand .navbar-logo { height: 64px !important; max-width: 280px; } }
+		@media (min-width: 1400px) { .navbar-brand .navbar-logo { height: 74px !important; max-width: 320px; } }
+
+		/* ── body margin-top: compensar navbar fija ── */
+		body > .content, body .main-section {
+			margin-top: calc(42px + 0.875rem) !important;
+		}
+		@media (min-width: 576px) {
+			body > .content, body .main-section {
+				margin-top: calc(51px + 1rem) !important;
+			}
+		}
+		@media (min-width: 992px) {
+			body > .content, body .main-section {
+				margin-top: calc(64px + 1.25rem) !important;
+			}
+		}
+
+		/* ── Logo footer — tamaño fijo independiente del navbar ── */
+		.footer-logo { height: 48px; width: auto; max-width: 160px; display: block; margin-bottom: .75rem; }
+		@media (min-width: 576px)  { .footer-logo { height: 56px; max-width: 180px; } }
+		@media (min-width: 992px)  { .footer-logo { height: 60px; max-width: 200px; } }
+
+		/* Footer responsive */
+		footer .container-fluid { padding-left: clamp(.875rem,4vw,1.5rem); padding-right: clamp(.875rem,4vw,1.5rem); }
+		footer .row { row-gap: 1.5rem; }
+		@media (max-width: 767px) {
+			footer .col-md-8, footer .col-md-4 { width: 100%; }
+			footer .col-sm-6 { width: 50%; }
+		}
+		@media (max-width: 400px) {
+			footer .col-sm-6 { width: 100%; }
+		}
+		/* Safe area insets para notch/island en iOS */
+		.navbar { padding-left: max(.75rem, env(safe-area-inset-left)); padding-right: max(.75rem, env(safe-area-inset-right)); }
+		footer   { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
+
+						body { background-image: none; background-color: #FFFFFF; }
+		.navbar { background-color: #FFFFFF !important; }
+		.navbar.scroll { background-color: #FFFFFF !important; }
+			.navbar-light .navbar-nav .nav-link,
+			.navbar-default .navbar-nav .nav-link,
+			.navbar-default-transition .navbar-nav .nav-link { color: #1A1F36 !important; }
+			.navbar-light .navbar-nav .nav-link:hover,
+			.navbar-default .navbar-nav .nav-link:hover,
+			.navbar-default-transition .navbar-nav .nav-link:hover { color: #4A7EFF !important; }
+			/* Iconos navbar: login, register, profile, carrito */
+			.navbar-nav .login > .nav-link::before,
+			.navbar-nav .register > .nav-link::before,
+			.navbar-nav .profile > .nav-link::before { color: #1A1F36 !important; }
+			.basket-mini .menu:after { color: #1A1F36 !important; }
+			/* Lupa de búsqueda */
+			.navbar .catalog-filter-search .input-group .btn-search { color: #1A1F36 !important; }
+			/* Selector idioma / moneda — texto visible */
+			.locale-select ul.select-menu a,
+			.locale-select ul.select-menu a:link,
+			.locale-select ul.select-menu a:visited { color: #1A1F36 !important; }
+			/* Dropdown Cuenta — fondo y texto */
+						.navbar-nav .dropdown-menu { background-color: #FFFFFF !important; border-color: #1A1F36 !important; }
+			.navbar-nav .dropdown-menu,
+			.navbar-nav .dropdown-menu .nav-link,
+			.navbar-nav .dropdown-item,
+			.navbar-nav .dropdown-menu button { color: #1A1F36 !important; }
+			.navbar-nav .dropdown-item:hover,
+			.navbar-nav .dropdown-item:focus { background-color: #FF6B35 !important; color: #1A1F36 !important; }
+			/* Dropdown idioma / moneda — fondo y texto */
+			.locale-select ul.select-menu ul { background-color: #FFFFFF !important; border-color: #1A1F36 !important; }
+			.locale-select ul.select-menu ul a,
+			.locale-select ul.select-menu ul a:link,
+			.locale-select ul.select-menu ul a:visited { color: #1A1F36 !important; }
+			.locale-select li.select-dropdown ul.select-dropdown li:hover a { color: #1A1F36 !important; }
+						/* ── Categorías en el menú (catalog-filter-tree) ── */
+						.catalog-filter-tree a.cat-link,
+			.catalog-filter-tree a.cat-link:link,
+			.catalog-filter-tree a.cat-link:visited { color: #1A1F36 !important; }
+			.catalog-filter-tree a.cat-link:hover,
+			.catalog-filter-tree a.cat-link:link:hover,
+			.catalog-filter-tree a.cat-link:visited:hover { color: #4A7EFF !important; }
+			.catalog-filter-tree .list-container,
+			.catalog-filter-tree .zeynep { background-color: #FFFFFF !important; }
+			.catalog-filter-tree .row.header,
+			.catalog-filter-tree .row.header .name { color: #1A1F36 !important; }
+		</style>
+
+				<link rel="stylesheet" href="http://exicompras.test/css/exihome.css?v=1">
+		
+		<link rel="icon" href="http://exicompras.test/aimeos/1.d/icon.png">
+
+		<link rel="preload" href="http://exicompras.test/vendor/shop/themes/default/assets/roboto-condensed-v19-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="http://exicompras.test/vendor/shop/themes/default/assets/roboto-condensed-v19-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="http://exicompras.test/vendor/shop/themes/default/assets/bootstrap-icons.woff2" as="font" type="font/woff2" crossorigin>
+	</head>
+	<body class="page-catalog-home">
+		<nav class="navbar navbar-expand-md navbar-top">
+			<a class="navbar-brand" href="/" title="To the home page">
+				<img src="http://exicompras.test/aimeos/1.d/logo1528.webp" class="navbar-logo" alt="To the home page">
+			</a>
+
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-top" aria-controls="navbar-top" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbar-top">
+					<div class="section aimeos catalog-filter" data-jsonurl="http://127.0.0.1:8000/jsonapi?site=default">
+
+<nav class="container-xxl">
+<form method="GET" action="/shop/search?site=default">
+
+
+
+<div class="section catalog-filter-tree catalog-filter-count"
+aria-label="Categorías del producto"
+data-counturl="/shop/count?count=tree&site=default">
+
+<div class="aimeos-overlay-offscreen"></div>
+<a class="menu" href="#" title="Categorías"><span class="icon"></span></a>
+<div class="zeynep list-container level-0 catcode-home ">
+
+<div class="row header">
+<div class="col-2"></div>
+<div class="col-8 name">Categorías</div>
+<div class="col-2 close" data-submenu-close="1"></div>
+</div>
+
+
+<div class="list-container level-1">
+
+
+<div class="cat-item catid-2 nochild catcode-electronica "
+data-id="2">
+
+<div class="item-links row">
+<a class="col-10 cat-link name "
+href="/shop/electronica~2?site=default">
+<div class="media-list">
+</div>
+<span class="cat-name">Electrónica</span>
+</a>
+<div class="col-2"></div>
+</div>
+
+
+</div>
+
+<div class="cat-item catid-3 nochild catcode-ropa "
+data-id="3">
+
+<div class="item-links row">
+<a class="col-10 cat-link name "
+href="/shop/ropa-y-accesorios~3?site=default">
+<div class="media-list">
+</div>
+<span class="cat-name">Ropa y Accesorios</span>
+</a>
+<div class="col-2"></div>
+</div>
+
+
+</div>
+
+<div class="cat-item catid-4 nochild catcode-hogar "
+data-id="4">
+
+<div class="item-links row">
+<a class="col-10 cat-link name "
+href="/shop/hogar-y-decoracion~4?site=default">
+<div class="media-list">
+</div>
+<span class="cat-name">Hogar y Decoración</span>
+</a>
+<div class="col-2"></div>
+</div>
+
+
+</div>
+
+<div class="cat-item catid-5 nochild catcode-deportes "
+data-id="5">
+
+<div class="item-links row">
+<a class="col-10 cat-link name "
+href="/shop/deportes-y-fitness~5?site=default">
+<div class="media-list">
+</div>
+<span class="cat-name">Deportes y Fitness</span>
+</a>
+<div class="col-2"></div>
+</div>
+
+
+</div>
+
+<div class="cat-item catid-6 nochild catcode-belleza "
+data-id="6">
+
+<div class="item-links row">
+<a class="col-10 cat-link name "
+href="/shop/belleza-y-cuidado~6?site=default">
+<div class="media-list">
+</div>
+<span class="cat-name">Belleza y Cuidado</span>
+</a>
+<div class="col-2"></div>
+</div>
+
+
+</div>
+
+<div class="cat-item catid-9 nochild catcode-salud "
+data-id="9">
+
+<div class="item-links row">
+<a class="col-10 cat-link name "
+href="/shop/salud-y-suplementos~9?site=default">
+<div class="media-list">
+</div>
+<span class="cat-name">Salud y Suplementos</span>
+</a>
+<div class="col-2"></div>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+
+
+</form>
+</nav>
+
+</div>
+			</div>
+
+				<div class="section aimeos locale-select" data-jsonurl="http://exicompras.test/jsonapi?site=default">
+
+<div class="locale-select-language">
+<h2 class="header">Seleccionar idioma</h2>
+
+<ul class="select-menu">
+<li class="select-dropdown select-current"><a href="#">es</a>
+<ul class="select-dropdown">
+
+<li class="select-item active">
+<a href="/?locale=es&currency=COP&site=default"
+title="es">
+Español</a>
+</li>
+<li class="select-item ">
+<a href="/?locale=en&currency=USD&site=default"
+title="en">
+Inglés</a>
+</li>
+
+</ul>
+</li>
+</ul>
+
+</div>
+<div class="locale-select-currency">
+<h2 class="header">Seleccionar divisa</h2>
+
+<ul class="select-menu">
+<li class="select-dropdown select-current"><a href="#">COP</a>
+<ul class="select-dropdown">
+
+<li class="select-item active">
+<a href="/?locale=es&currency=COP&site=default"
+title="COP">
+COL$</a>
+</li>
+
+</ul>
+</li>
+</ul>
+
+</div>
+
+</div>
+				<div class="section aimeos catalog-filter" data-jsonurl="http://127.0.0.1:8000/jsonapi?site=default">
+
+<nav class="container-xxl">
+<form method="GET" action="/shop/search?site=default">
+
+
+<div class="section catalog-filter-search" aria-label="Búsqueda de producto">
+
+<div class="header-name">Buscar</div>
+<div class="search-lists">
+<div class="input-group">
+<input class="form-control value" autocomplete="off"
+name="f_search"
+title="Buscar"
+placeholder="Buscar"
+value=""
+data-url="/shop/suggest?f_search=_term_&site=default"
+data-hint="Por favor, introduzca al menos tres caracteres"
+><!--
+--><button class="btn reset" type="reset" title="Reiniciar"><span class="symbol"></span></button><!--
+--><button class="btn btn-search" type="submit" title="Buscar"></button>
+</div>
+</div>
+</div>
+
+</form>
+</nav>
+
+</div>
+
+			<ul class="navbar-nav">
+													<li class="nav-item login"><a class="nav-link" href="http://exicompras.test/login" title="Iniciar sesión"><span class="name">Iniciar sesión</span></a></li>
+							</ul>
+
+				
+<div class="section aimeos basket-mini" data-jsonurl="http://exicompras.test/jsonapi?site=default">
+
+
+<div class="aimeos-overlay-offscreen"></div>
+
+<a class="basket-mini-main menu" href="#">
+<span class="quantity">0</span>
+<span class="value">0,00 COL$</span>
+</a>
+
+<div class="basket-mini-product zeynep">
+<div class="header row">
+<div class="col-2"></div>
+<div class="col-8 name">Cesta</div>
+<a class="col-2 close" href="#" title="Cerrar"></a>
+</div>
+
+<div class="basket">
+<div class="basket-header row">
+<div class="col-5 name">Producto</div>
+<div class="col-2 quantity">Cant</div>
+<div class="col-4 price">Precio</div>
+<div class="col-1 action"></div>
+</div>
+<div class="basket-body">
+<div class="product-item row prototype">
+<div class="col-5 name"></div>
+<div class="col-2 quantity"></div>
+<div class="col-4 price"></div>
+<div class="col-1 action"><a class="delete" href="#" title="Borrar"></a></div>
+</div>
+</div>
+<div class="basket-footer">
+<div class="delivery row">
+<div class="col-7 name">
+Envío</div>
+<div class="col-4 price">
+0,00 COL$</div>
+<div class="col-1 action"></div>
+</div>
+<div class="total row">
+<div class="col-7 name">
+Total</div>
+<div class="col-4 price">
+0,00 COL$</div>
+<div class="col-1 action"></div>
+</div>
+</div>
+</div>
+<div class="to-basket">
+<a class="btn btn-primary" href="/shop/basket?site=default">
+Cesta</a>
+</div>
+</div>
+</div>
+		</nav>
+
+		<div class="content">
+						<main>
+				
+
+<section class="exihome-hero">
+    <div class="exihero-slider" id="heroSlider">
+
+        
+        <div class="exihero-slide active exihero-slide--image" style="padding: 0;">
+            <img
+                src="http://exicompras.test/images/banner-1.webp"
+                srcset="http://exicompras.test/images/banner-1.webp 1584w"
+                sizes="(max-width: 768px) 100vw, (max-width: 1400px) 100vw, 1400px"
+                alt="Repara y renueva tu piel con nuestra crema premium"
+                width="1584"
+                height="672"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+                class="exihero-img"
+            >
+        </div>
+
+        
+        <div class="exihero-slide" style="background: linear-gradient(135deg, #1a0a2e 0%, #2d1456 50%, #1a0a2e 100%);">
+            <div class="exihero-content">
+                <div class="exihero-text">
+                    <span class="exihero-badge" style="background:#FF6B35">🌸 Nueva temporada</span>
+                    <h1>Moda &amp;<br><span style="color:#ff8fab">Accesorios</span></h1>
+                    <p>Descubre las últimas tendencias en ropa y accesorios de moda</p>
+                    <a href="http://exicompras.test/shop/ropa-y-accesorios~3" class="exihero-btn" style="background:#FF6B35">
+                        Ver Moda →
+                    </a>
+                </div>
+                <div class="exihero-visual">
+                    <div class="exihero-mockup fashion">
+                        <div class="mock-garment">👗</div>
+                        <div class="mock-badge" style="background:#ff8fab; color:#1a0a2e">NUEVO</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="exihero-slide" style="background: linear-gradient(135deg, #0a1f0f 0%, #163d1c 50%, #0a2812 100%);">
+            <div class="exihero-content">
+                <div class="exihero-text">
+                    <span class="exihero-badge" style="background:#38a169">🏠 Hogar ideal</span>
+                    <h1>Tu hogar,<br><span style="color:#68d391">tu estilo</span></h1>
+                    <p>Decora y equipa cada rincón de tu hogar con los mejores productos</p>
+                    <a href="http://exicompras.test/shop/hogar-y-decoracion~4" class="exihero-btn" style="background:#38a169">
+                        Ver Hogar →
+                    </a>
+                </div>
+                <div class="exihero-visual">
+                    <div class="exihero-mockup home">
+                        <div class="mock-house">🏡</div>
+                        <div class="mock-badge" style="background:#38a169">HOT</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    
+    <button class="exihero-prev" onclick="heroSlide(-1)" aria-label="Anterior slide">&#8592;</button>
+    <button class="exihero-next" onclick="heroSlide(1)" aria-label="Siguiente slide">&#8594;</button>
+    <div class="exihero-dots" role="group" aria-label="Navegación de slides">
+        <button class="exidot active" onclick="heroGoTo(0)" aria-label="Slide 1" aria-pressed="true" type="button"></button>
+        <button class="exidot" onclick="heroGoTo(1)" aria-label="Slide 2" aria-pressed="false" type="button"></button>
+        <button class="exidot" onclick="heroGoTo(2)" aria-label="Slide 3" aria-pressed="false" type="button"></button>
+    </div>
+</section>
+
+
+<section class="exihome-trust">
+    <div class="exitrust-rail">
+        <div class="exitrust-item">
+            <div class="exitrust-mark">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M3 7h11v8H3z"/><path d="M14 10h4l3 3v2h-7"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>
+                </svg>
+            </div>
+            <div class="exitrust-text">
+                <strong>Envío gratis desde $150.000</strong>
+                <small>Cobertura nacional 2 a 5 días hábiles</small>
+            </div>
+        </div>
+
+        <div class="exitrust-divider" aria-hidden="true"></div>
+
+        <div class="exitrust-item">
+            <div class="exitrust-mark">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/>
+                </svg>
+            </div>
+            <div class="exitrust-text">
+                <strong>Paga como prefieras</strong>
+                <small>PSE, Nequi, Daviplata y tarjetas</small>
+            </div>
+        </div>
+
+        <div class="exitrust-divider" aria-hidden="true"></div>
+
+        <div class="exitrust-item">
+            <div class="exitrust-mark">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/>
+                </svg>
+            </div>
+            <div class="exitrust-text">
+                <strong>Cambios sin complicaciones</strong>
+                <small>30 días para arrepentirte, sin preguntas</small>
+            </div>
+        </div>
+
+        <div class="exitrust-divider" aria-hidden="true"></div>
+
+        <div class="exitrust-item">
+            <div class="exitrust-mark">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"/><path d="M9 12l2 2 4-4"/>
+                </svg>
+            </div>
+            <div class="exitrust-text">
+                <strong>Compra siempre protegida</strong>
+                <small>Productos originales con garantía oficial</small>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="exihome-section">
+    <div class="exisection-header">
+        <h2>Explorar por categoría</h2>
+        <a href="http://exicompras.test/shop/search" class="exisee-all">Ver todo →</a>
+    </div>
+    <div class="exicat-grid">
+                <a href="http://exicompras.test/shop/electronica~2" class="exicat-card">
+            <div class="exicat-icon" style="background: #4a7eff22; border-color: #4a7eff44;">
+                <span class="exicat-emoji">🖥️</span>
+            </div>
+            <span class="exicat-name">Electrónica</span>
+            <span class="exicat-count">6 productos</span>
+        </a>
+                <a href="http://exicompras.test/shop/ropa-y-accesorios~3" class="exicat-card">
+            <div class="exicat-icon" style="background: #ff6b3522; border-color: #ff6b3544;">
+                <span class="exicat-emoji">👗</span>
+            </div>
+            <span class="exicat-name">Ropa y Accesorios</span>
+            <span class="exicat-count">6 productos</span>
+        </a>
+                <a href="http://exicompras.test/shop/hogar-y-decoracion~4" class="exicat-card">
+            <div class="exicat-icon" style="background: #38a16922; border-color: #38a16944;">
+                <span class="exicat-emoji">🏠</span>
+            </div>
+            <span class="exicat-name">Hogar y Decoración</span>
+            <span class="exicat-count">4 productos</span>
+        </a>
+                <a href="http://exicompras.test/shop/deportes-y-fitness~5" class="exicat-card">
+            <div class="exicat-icon" style="background: #d69e2e22; border-color: #d69e2e44;">
+                <span class="exicat-emoji">🏋️</span>
+            </div>
+            <span class="exicat-name">Deportes y Fitness</span>
+            <span class="exicat-count">4 productos</span>
+        </a>
+                <a href="http://exicompras.test/shop/belleza-y-cuidado~6" class="exicat-card">
+            <div class="exicat-icon" style="background: #e53e3e22; border-color: #e53e3e44;">
+                <span class="exicat-emoji">💄</span>
+            </div>
+            <span class="exicat-name">Belleza y Cuidado</span>
+            <span class="exicat-count">12 productos</span>
+        </a>
+            </div>
+</section>
+
+
+<section class="exihome-section">
+    <div class="exisection-header">
+        <h2>🔥 Ofertas destacadas</h2>
+        <a href="http://exicompras.test/shop/search" class="exisee-all">Ver todas →</a>
+    </div>
+    <div class="exiprod-grid">
+                        <a href="http://exicompras.test/shop/smartphone-samsung-galaxy-a55/0/3" class="exiprod-card">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                                        <span class="exiprod-emoji">🖥️</span>
+                </div>
+                <span class="exiprod-badge">-40%</span>
+            </div>
+            <div class="exiprod-info">
+                <span class="exiprod-cat">Electrónica</span>
+                <h3 class="exiprod-name">Smartphone Samsung Galaxy A55</h3>
+                                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$1.299.000</span>
+                    <span class="exiprod-old">$2.165.000</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐ <small>(70)</small></div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/smartphone-samsung-galaxy-a55/0/3" class="exiprod-card">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                                        <span class="exiprod-emoji">🖥️</span>
+                </div>
+                <span class="exiprod-badge">-40%</span>
+            </div>
+            <div class="exiprod-info">
+                <span class="exiprod-cat">Electrónica</span>
+                <h3 class="exiprod-name">Smartphone Samsung Galaxy A55</h3>
+                                <p class="exiprod-short">Pantalla AMOLED 6.6&quot;, 128GB, cámara triple 50MP</p>
+                                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$1.299.000</span>
+                    <span class="exiprod-old">$2.165.000</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐ <small>(57)</small></div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/aud%C3%ADfonos-bluetooth-sony-wh-1000xm5/0/4" class="exiprod-card">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                                        <span class="exiprod-emoji">🖥️</span>
+                </div>
+                <span class="exiprod-badge">-25%</span>
+            </div>
+            <div class="exiprod-info">
+                <span class="exiprod-cat">Electrónica</span>
+                <h3 class="exiprod-name">Audífonos Bluetooth Sony WH-1000XM5</h3>
+                                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$1.150.000</span>
+                    <span class="exiprod-old">$1.533.333</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐ <small>(63)</small></div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/aud%C3%ADfonos-bluetooth-sony-wh-1000xm5/0/4" class="exiprod-card">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                                        <span class="exiprod-emoji">🖥️</span>
+                </div>
+                <span class="exiprod-badge">-25%</span>
+            </div>
+            <div class="exiprod-info">
+                <span class="exiprod-cat">Electrónica</span>
+                <h3 class="exiprod-name">Audífonos Bluetooth Sony WH-1000XM5</h3>
+                                <p class="exiprod-short">Cancelación de ruido líder del sector, 30h batería</p>
+                                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$1.150.000</span>
+                    <span class="exiprod-old">$1.533.333</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐ <small>(67)</small></div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/tablet-ipad-air-11%22-m2/0/5" class="exiprod-card">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                                        <span class="exiprod-emoji">🖥️</span>
+                </div>
+                <span class="exiprod-badge">-25%</span>
+            </div>
+            <div class="exiprod-info">
+                <span class="exiprod-cat">Electrónica</span>
+                <h3 class="exiprod-name">Tablet iPad Air 11&quot; M2</h3>
+                                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$2.850.000</span>
+                    <span class="exiprod-old">$3.800.000</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐ <small>(39)</small></div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/tablet-ipad-air-11%22-m2/0/5" class="exiprod-card">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                                        <span class="exiprod-emoji">🖥️</span>
+                </div>
+                <span class="exiprod-badge">-25%</span>
+            </div>
+            <div class="exiprod-info">
+                <span class="exiprod-cat">Electrónica</span>
+                <h3 class="exiprod-name">Tablet iPad Air 11&quot; M2</h3>
+                                <p class="exiprod-short">Chip M2, pantalla Liquid Retina 11&quot;, 256GB WiFi</p>
+                                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$2.850.000</span>
+                    <span class="exiprod-old">$3.800.000</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐ <small>(97)</small></div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/camiseta-oversize-algod%C3%B3n-premium/0/10" class="exiprod-card">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                                        <span class="exiprod-emoji">👗</span>
+                </div>
+                <span class="exiprod-badge">-35%</span>
+            </div>
+            <div class="exiprod-info">
+                <span class="exiprod-cat">Ropa y Accesorios</span>
+                <h3 class="exiprod-name">Camiseta Oversize Algodón Premium</h3>
+                                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$65.000</span>
+                    <span class="exiprod-old">$100.000</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐ <small>(40)</small></div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/camiseta-oversize-algod%C3%B3n-premium/0/10" class="exiprod-card">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                                        <span class="exiprod-emoji">👗</span>
+                </div>
+                <span class="exiprod-badge">-35%</span>
+            </div>
+            <div class="exiprod-info">
+                <span class="exiprod-cat">Ropa y Accesorios</span>
+                <h3 class="exiprod-name">Camiseta Oversize Algodón Premium</h3>
+                                <p class="exiprod-short">100% algodón peinado 220g/m², corte holgado, 8 colores</p>
+                                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$65.000</span>
+                    <span class="exiprod-old">$100.000</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐ <small>(62)</small></div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+            </div>
+</section>
+
+
+<section class="exihome-banners">
+    <a href="http://exicompras.test/shop/deportes-y-fitness~5" class="exibanner-card" style="background: linear-gradient(135deg, #2a0a1a 0%, #4a1430 100%);">
+        <div class="exibanner-text">
+            <span class="exibanner-tag">💪 Actívate</span>
+            <h3>Deportes<br>&amp; Fitness</h3>
+            <p>Equipate para alcanzar tus metas</p>
+            <span class="exibanner-cta">Comprar ahora →</span>
+        </div>
+        <div class="exibanner-emoji">🏋️</div>
+    </a>
+    <a href="http://exicompras.test/shop/belleza-y-cuidado~6" class="exibanner-card" style="background: linear-gradient(135deg, #2a0a1a 0%, #4a1430 100%);">
+        <div class="exibanner-text">
+            <span class="exibanner-tag" style="background:#e53e3e">🌸 Cuídate</span>
+            <h3>Belleza<br>&amp; Cuidado</h3>
+            <p>Los mejores productos para tu rutina</p>
+            <span class="exibanner-cta" style="color:#ff8fab">Explorar →</span>
+        </div>
+        <div class="exibanner-emoji">💄</div>
+    </a>
+</section>
+
+
+<section class="exihome-section">
+    <div class="exisection-header">
+        <h2><span style="color:#4a7eff">🖥️</span> Electrónica</h2>
+        <a href="http://exicompras.test/shop/electronica~2" class="exisee-all">Ver todo →</a>
+    </div>
+    <div class="exiprod-row">
+                        <a href="http://exicompras.test/shop/smartphone-samsung-galaxy-a55/0/3" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">🖥️</span>
+                </div>
+                <span class="exiprod-badge">-40%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Smartphone Samsung Galaxy A55</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$1.299.000</span>
+                    <span class="exiprod-old">$2.165.000</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/smartphone-samsung-galaxy-a55/0/3" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">🖥️</span>
+                </div>
+                <span class="exiprod-badge">-40%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Smartphone Samsung Galaxy A55</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$1.299.000</span>
+                    <span class="exiprod-old">$2.165.000</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/aud%C3%ADfonos-bluetooth-sony-wh-1000xm5/0/4" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">🖥️</span>
+                </div>
+                <span class="exiprod-badge">-25%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Audífonos Bluetooth Sony WH-1000XM5</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$1.150.000</span>
+                    <span class="exiprod-old">$1.533.333</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/aud%C3%ADfonos-bluetooth-sony-wh-1000xm5/0/4" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">🖥️</span>
+                </div>
+                <span class="exiprod-badge">-25%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Audífonos Bluetooth Sony WH-1000XM5</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$1.150.000</span>
+                    <span class="exiprod-old">$1.533.333</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/tablet-ipad-air-11%22-m2/0/5" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">🖥️</span>
+                </div>
+                <span class="exiprod-badge">-25%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Tablet iPad Air 11&quot; M2</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$2.850.000</span>
+                    <span class="exiprod-old">$3.800.000</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/tablet-ipad-air-11%22-m2/0/5" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">🖥️</span>
+                </div>
+                <span class="exiprod-badge">-25%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Tablet iPad Air 11&quot; M2</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$2.850.000</span>
+                    <span class="exiprod-old">$3.800.000</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+        
+        
+        <a href="http://exicompras.test/shop/electronica~2" class="exiprod-card exiprod-card--more">
+            <div class="eximore-inner">
+                <span style="font-size:2.5rem">⚡</span>
+                <span>Ver más<br>Electrónica</span>
+                <span style="font-size:1.5rem">→</span>
+            </div>
+        </a>
+    </div>
+</section>
+<section class="exihome-section">
+    <div class="exisection-header">
+        <h2><span style="color:#ff6b35">👗</span> Ropa y Accesorios</h2>
+        <a href="http://exicompras.test/shop/ropa-y-accesorios~3" class="exisee-all">Ver todo →</a>
+    </div>
+    <div class="exiprod-row">
+                        <a href="http://exicompras.test/shop/camiseta-oversize-algod%C3%B3n-premium/0/10" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">👗</span>
+                </div>
+                <span class="exiprod-badge">-35%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Camiseta Oversize Algodón Premium</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$65.000</span>
+                    <span class="exiprod-old">$100.000</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/camiseta-oversize-algod%C3%B3n-premium/0/10" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">👗</span>
+                </div>
+                <span class="exiprod-badge">-35%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Camiseta Oversize Algodón Premium</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$65.000</span>
+                    <span class="exiprod-old">$100.000</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/jean-slim-fit-hombre-lavado-oscuro/0/11" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">👗</span>
+                </div>
+                <span class="exiprod-badge">-40%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Jean Slim Fit Hombre Lavado Oscuro</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$145.000</span>
+                    <span class="exiprod-old">$241.667</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/jean-slim-fit-hombre-lavado-oscuro/0/11" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">👗</span>
+                </div>
+                <span class="exiprod-badge">-40%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Jean Slim Fit Hombre Lavado Oscuro</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$145.000</span>
+                    <span class="exiprod-old">$241.667</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/bolso-tote-cuero-sint%C3%A9tico-mujer/0/12" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">👗</span>
+                </div>
+                <span class="exiprod-badge">-35%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Bolso Tote Cuero Sintético Mujer</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$189.000</span>
+                    <span class="exiprod-old">$290.769</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/bolso-tote-cuero-sint%C3%A9tico-mujer/0/12" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">👗</span>
+                </div>
+                <span class="exiprod-badge">-35%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Bolso Tote Cuero Sintético Mujer</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$189.000</span>
+                    <span class="exiprod-old">$290.769</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+        
+        
+        <a href="http://exicompras.test/shop/ropa-y-accesorios~3" class="exiprod-card exiprod-card--more">
+            <div class="eximore-inner">
+                <span style="font-size:2.5rem">✨</span>
+                <span>Ver más<br>Ropa y Accesorios</span>
+                <span style="font-size:1.5rem">→</span>
+            </div>
+        </a>
+    </div>
+</section>
+<section class="exihome-section">
+    <div class="exisection-header">
+        <h2><span style="color:#38a169">🏠</span> Hogar y Decoración</h2>
+        <a href="http://exicompras.test/shop/hogar-y-decoracion~4" class="exisee-all">Ver todo →</a>
+    </div>
+    <div class="exiprod-row">
+                        <a href="http://exicompras.test/shop/cafetera-nespresso-vertuo-pop/0/6" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">🏠</span>
+                </div>
+                <span class="exiprod-badge">-30%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Cafetera Nespresso Vertuo Pop</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$389.000</span>
+                    <span class="exiprod-old">$555.714</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/cafetera-nespresso-vertuo-pop/0/6" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">🏠</span>
+                </div>
+                <span class="exiprod-badge">-30%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Cafetera Nespresso Vertuo Pop</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$389.000</span>
+                    <span class="exiprod-old">$555.714</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/l%C3%A1mpara-de-piso-n%C3%B3rdica-led/0/7" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">🏠</span>
+                </div>
+                <span class="exiprod-badge">-25%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Lámpara de Piso Nórdica LED</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$245.000</span>
+                    <span class="exiprod-old">$326.667</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/l%C3%A1mpara-de-piso-n%C3%B3rdica-led/0/7" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">🏠</span>
+                </div>
+                <span class="exiprod-badge">-25%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Lámpara de Piso Nórdica LED</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$245.000</span>
+                    <span class="exiprod-old">$326.667</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+        
+        
+        <a href="http://exicompras.test/shop/hogar-y-decoracion~4" class="exiprod-card exiprod-card--more">
+            <div class="eximore-inner">
+                <span style="font-size:2.5rem">🏡</span>
+                <span>Ver más<br>Hogar y Decoración</span>
+                <span style="font-size:1.5rem">→</span>
+            </div>
+        </a>
+    </div>
+</section>
+<section class="exihome-section">
+    <div class="exisection-header">
+        <h2><span style="color:#d69e2e">🏋️</span> Deportes y Fitness</h2>
+        <a href="http://exicompras.test/shop/deportes-y-fitness~5" class="exisee-all">Ver todo →</a>
+    </div>
+    <div class="exiprod-row">
+                        <a href="http://exicompras.test/shop/tenis-nike-air-max-270/0/8" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">🏋️</span>
+                </div>
+                <span class="exiprod-badge">-30%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Tenis Nike Air Max 270</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$420.000</span>
+                    <span class="exiprod-old">$600.000</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/tenis-nike-air-max-270/0/8" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">🏋️</span>
+                </div>
+                <span class="exiprod-badge">-30%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Tenis Nike Air Max 270</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$420.000</span>
+                    <span class="exiprod-old">$600.000</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/colchoneta-yoga-antideslizante-6mm/0/9" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">🏋️</span>
+                </div>
+                <span class="exiprod-badge">-35%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Colchoneta Yoga Antideslizante 6mm</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$89.000</span>
+                    <span class="exiprod-old">$136.923</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/colchoneta-yoga-antideslizante-6mm/0/9" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">🏋️</span>
+                </div>
+                <span class="exiprod-badge">-35%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Colchoneta Yoga Antideslizante 6mm</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$89.000</span>
+                    <span class="exiprod-old">$136.923</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+        
+        
+        <a href="http://exicompras.test/shop/deportes-y-fitness~5" class="exiprod-card exiprod-card--more">
+            <div class="eximore-inner">
+                <span style="font-size:2.5rem">💪</span>
+                <span>Ver más<br>Deportes y Fitness</span>
+                <span style="font-size:1.5rem">→</span>
+            </div>
+        </a>
+    </div>
+</section>
+<section class="exihome-section">
+    <div class="exisection-header">
+        <h2><span style="color:#e53e3e">💄</span> Belleza y Cuidado</h2>
+        <a href="http://exicompras.test/shop/belleza-y-cuidado~6" class="exisee-all">Ver todo →</a>
+    </div>
+    <div class="exiprod-row">
+                        <a href="http://exicompras.test/shop/set-skincare-hidrataci%C3%B3n-profunda/0/13" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">💄</span>
+                </div>
+                <span class="exiprod-badge">-35%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Set Skincare Hidratación Profunda</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$178.000</span>
+                    <span class="exiprod-old">$273.846</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/set-skincare-hidrataci%C3%B3n-profunda/0/13" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">💄</span>
+                </div>
+                <span class="exiprod-badge">-35%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Set Skincare Hidratación Profunda</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$178.000</span>
+                    <span class="exiprod-old">$273.846</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/secador-de-cabello-i%C3%B3nico-2200w/0/14" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">💄</span>
+                </div>
+                <span class="exiprod-badge">-30%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Secador de Cabello Iónico 2200W</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$135.000</span>
+                    <span class="exiprod-old">$192.857</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/secador-de-cabello-i%C3%B3nico-2200w/0/14" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">💄</span>
+                </div>
+                <span class="exiprod-badge">-30%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Secador de Cabello Iónico 2200W</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$135.000</span>
+                    <span class="exiprod-old">$192.857</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/bee-venom/0/15" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">💄</span>
+                </div>
+                <span class="exiprod-badge">-35%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Bee Venom</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$69.900</span>
+                    <span class="exiprod-old">$107.538</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/bee-venom/0/15" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">💄</span>
+                </div>
+                <span class="exiprod-badge">-35%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Bee Venom</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$69.900</span>
+                    <span class="exiprod-old">$107.538</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/mercilen-crema-contorno-de-ojos/0/24" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">💄</span>
+                </div>
+                <span class="exiprod-badge">-35%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Mercilen Crema Contorno de Ojos</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$85.000</span>
+                    <span class="exiprod-old">$130.769</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/mercilen-crema-contorno-de-ojos/0/24" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">💄</span>
+                </div>
+                <span class="exiprod-badge">-35%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Mercilen Crema Contorno de Ojos</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$85.000</span>
+                    <span class="exiprod-old">$130.769</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/mercilen-crema-facial-reafirmante/0/25" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">💄</span>
+                </div>
+                <span class="exiprod-badge">-35%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Mercilen Crema Facial Reafirmante</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$110.000</span>
+                    <span class="exiprod-old">$169.231</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/mercilen-crema-facial-reafirmante/0/25" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">💄</span>
+                </div>
+                <span class="exiprod-badge">-35%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Mercilen Crema Facial Reafirmante</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$110.000</span>
+                    <span class="exiprod-old">$169.231</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/pasta-dental-nano-hidroxiapatita-7.5%25/0/26" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">💄</span>
+                </div>
+                <span class="exiprod-badge">-35%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Pasta Dental Nano-Hidroxiapatita 7.5%</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$65.000</span>
+                    <span class="exiprod-old">$100.000</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+                        <a href="http://exicompras.test/shop/pasta-dental-nano-hidroxiapatita-7.5%25/0/26" class="exiprod-card exiprod-card--sm">
+            <div class="exiprod-img-wrap">
+                <div class="exiprod-img-placeholder">
+                    <span class="exiprod-emoji">💄</span>
+                </div>
+                <span class="exiprod-badge">-35%</span>
+            </div>
+            <div class="exiprod-info">
+                <h3 class="exiprod-name">Pasta Dental Nano-Hidroxiapatita 7.5%</h3>
+                <div class="exiprod-pricing">
+                    <span class="exiprod-price">$65.000</span>
+                    <span class="exiprod-old">$100.000</span>
+                </div>
+                <div class="exiprod-stars">⭐⭐⭐⭐⭐</div>
+                <div class="exiprod-ship">🚚 Envío gratis</div>
+            </div>
+        </a>
+        
+        
+        <a href="http://exicompras.test/shop/belleza-y-cuidado~6" class="exiprod-card exiprod-card--more">
+            <div class="eximore-inner">
+                <span style="font-size:2.5rem">🌸</span>
+                <span>Ver más<br>Belleza y Cuidado</span>
+                <span style="font-size:1.5rem">→</span>
+            </div>
+        </a>
+    </div>
+</section>
+
+
+<section class="exihome-cta">
+    <div class="exicta-inner">
+        <div class="exicta-text">
+            <h2>🎁 ¿Primera compra?</h2>
+            <p>Regístrate y obtén <strong style="color:#FF6B35">10% de descuento</strong> en tu primer pedido. ¡Más de 10.000 colombianos ya confían en Exicompras!</p>
+                        <div class="exicta-btns">
+                <a href="http://exicompras.test/register" class="exicta-btn-primary">Crear cuenta gratis</a>
+                <a href="http://exicompras.test/login" class="exicta-btn-secondary">Ya tengo cuenta</a>
+            </div>
+                    </div>
+        <div class="exicta-badges">
+            <div class="exicta-stat"><span>10K+</span><small>Clientes</small></div>
+            <div class="exicta-stat"><span>5★</span><small>Calificación</small></div>
+            <div class="exicta-stat"><span>24h</span><small>Despacho</small></div>
+            <div class="exicta-stat"><span>🔒</span><small>Seguro</small></div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+(function() {
+    var slider  = document.getElementById('heroSlider');
+    var slides  = document.querySelectorAll('.exihero-slide');
+    var dots    = document.querySelectorAll('.exidot');
+    var current = 0;
+    var timer;
+    var touchStartX = 0;
+    var touchDiff   = 0;
+
+    function goTo(n) {
+        slides[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        dots[current].setAttribute('aria-pressed', 'false');
+        current = (n + slides.length) % slides.length;
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
+        dots[current].setAttribute('aria-pressed', 'true');
+    }
+
+    window.heroSlide = function(dir) { clearInterval(timer); goTo(current + dir); startAuto(); };
+    window.heroGoTo  = function(n)   { clearInterval(timer); goTo(n); startAuto(); };
+
+    /* Soporte swipe táctil */
+    slider.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    slider.addEventListener('touchend', function(e) {
+        touchDiff = e.changedTouches[0].screenX - touchStartX;
+        if (Math.abs(touchDiff) > 40) {
+            clearInterval(timer);
+            goTo(current + (touchDiff < 0 ? 1 : -1));
+            startAuto();
+        }
+    }, { passive: true });
+
+    /* Pausa al hover (desktop) */
+    slider.addEventListener('mouseenter', function() { clearInterval(timer); });
+    slider.addEventListener('mouseleave', startAuto);
+
+    function startAuto() {
+        timer = setInterval(function() { goTo(current + 1); }, 5000);
+    }
+    startAuto();
+})();
+</script>
+							</main>
+		</div>
+
+
+		<footer>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="row">
+							<div class="col-sm-6 footer-left">
+								<div class="footer-block">
+									<h2 class="pb-3" aria-label="Legal information">LEGAL</h2>
+									<p><a href="http://exicompras.test/p/terms">Terms &amp; Conditions</a></p>
+									<p><a href="http://exicompras.test/p/privacy">Privacy Notice</a></p>
+									<p><a href="http://exicompras.test/p/cancel">Cancellation</a></p>
+								</div>
+							</div>
+							<div class="col-sm-6 footer-center">
+								<div class="footer-block">
+									<h2 class="pb-3" aria-label="About the company">ABOUT US</h2>
+									<p><a href="http://exicompras.test/p/contact">Contact us</a></p>
+									<p><a href="http://exicompras.test/p/about">Company</a></p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 footer-right">
+						<div class="footer-block">
+							<a class="logo" href="/" title="To the home page">
+								<img src="http://exicompras.test/aimeos/1.d/logo1528.webp" class="footer-logo" alt="To the home page">
+							</a>
+							<div class="social" aria-label="Social media links">
+								<p><a href="#" class="sm facebook" title="Facebook" rel="noopener">Facebook</a></p>
+								<p><a href="#" class="sm twitter" title="Twitter" rel="noopener">Twitter</a></p>
+								<p><a href="#" class="sm instagram" title="Instagram" rel="noopener">Instagram</a></p>
+								<p><a href="#" class="sm youtube" title="Youtube" rel="noopener">Youtube</a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+
+
+		<a id="toTop" class="back-to-top" href="#" title="Back to top">
+			<div class="top-icon"></div>
+		</a>
+
+		<!-- Scripts -->
+		<script src="http://exicompras.test/vendor/shop/themes/default/app.js?v=12"></script>
+		<script src="http://exicompras.test/vendor/shop/themes/default/aimeos.js?v=12"></script>
+			</body>
+</html>

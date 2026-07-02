@@ -1,0 +1,165 @@
+/* ══════════════════════════════════════════════════════════
+   EXICOMPRAS — SEARCH OVERRIDE (CARGAR AL FINAL)
+   Este archivo DEBE cargarse después de catalog-filter.css
+   de Aimeos para ganar la batalla de especificidad.
+   Hace que el input del search en el navbar sea siempre
+   visible y funcional, no colapsado.
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Wrapper del search en navbar ─────────────────────── */
+.exi-navbar-row--main .exi-search-wrap,
+.exi-navbar-actions .exi-search-wrap {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* ── Override del input-group de Aimeos (navbar) ──────── */
+.exi-navbar-row--main .catalog-filter-search .input-group,
+.exi-navbar-actions .catalog-filter-search .input-group,
+.exi-navbar-row--main .navbar .catalog-filter-search .input-group {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    width: 100% !important;
+    height: 44px !important;
+    min-width: 0 !important;
+    position: relative !important;
+    right: auto !important;
+    top: auto !important;
+    margin: 0 !important;
+    padding: 0 .35rem !important;
+    background-color: #F4F6F9 !important;
+    border: 1px solid transparent !important;
+    border-radius: 9999px !important;
+    overflow: hidden !important;
+    transition: border-color .18s ease, box-shadow .18s ease, background-color .18s ease;
+    box-shadow: 0 1px 2px rgba(15,23,42,.04);
+}
+.exi-navbar-row--main .catalog-filter-search .input-group:focus-within,
+.exi-navbar-actions .catalog-filter-search .input-group:focus-within {
+    border-color: #4A7EFF !important;
+    background-color: #fff !important;
+    box-shadow: 0 0 0 3px rgba(74,126,255,.15);
+}
+
+/* ── Input (lo que estaba width:0 ahora siempre visible) ── */
+.exi-navbar-row--main .catalog-filter-search .input-group > input.form-control,
+.exi-navbar-row--main .catalog-filter-search .input-group > input.value,
+.exi-navbar-row--main .catalog-filter-search .input-group input[value],
+.exi-navbar-row--main .catalog-filter-search .input-group input[name="f_search"],
+.exi-navbar-actions .catalog-filter-search .input-group > input.form-control,
+.exi-navbar-actions .catalog-filter-search .input-group > input.value,
+.exi-navbar-actions .catalog-filter-search .input-group input[value],
+.exi-navbar-actions .catalog-filter-search .input-group input[name="f_search"] {
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: auto !important;
+    padding: .55rem 1rem !important;
+    background: transparent !important;
+    border: none !important;
+    color: #1A1F36 !important;
+    font-size: .9375rem !important;
+    line-height: 1.4 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    position: relative !important;
+    right: auto !important;
+    top: auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transition: none !important;
+}
+.exi-navbar-row--main .catalog-filter-search .input-group input::placeholder,
+.exi-navbar-actions .catalog-filter-search .input-group input::placeholder {
+    color: #94A3B8;
+    opacity: 1;
+}
+
+/* ── Botones (lupa + reset) ────────────────────────────── */
+.exi-navbar-row--main .catalog-filter-search .input-group .btn,
+.exi-navbar-row--main .catalog-filter-search .input-group > button,
+.exi-navbar-actions .catalog-filter-search .input-group .btn,
+.exi-navbar-actions .catalog-filter-search .input-group > button {
+    flex: 0 0 auto !important;
+    background: transparent !important;
+    border: none !important;
+    color: #5A6378 !important;
+    padding: .45rem .85rem !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+    box-shadow: none !important;
+    border-radius: 9999px !important;
+    cursor: pointer;
+    transition: color .18s ease, background-color .18s ease;
+}
+.exi-navbar-row--main .catalog-filter-search .input-group .btn:hover,
+.exi-navbar-row--main .catalog-filter-search .input-group > button:hover,
+.exi-navbar-actions .catalog-filter-search .input-group .btn:hover,
+.exi-navbar-actions .catalog-filter-search .input-group > button:hover {
+    color: #4A7EFF !important;
+    background-color: rgba(74,126,255,.08) !important;
+}
+
+/* Reset button (X) — solo mostrar cuando hay valor */
+.exi-navbar-row--main .catalog-filter-search .input-group .reset,
+.exi-navbar-actions .catalog-filter-search .input-group .reset {
+    display: none !important;
+}
+
+/* Ícono lupa via ::after en el btn-search */
+.exi-navbar-row--main .catalog-filter-search .input-group .btn-search::after,
+.exi-navbar-actions .catalog-filter-search .input-group .btn-search::after {
+    font-family: "bootstrap-icons";
+    content: "\F52A" !important;
+    font-size: 1.05rem;
+    line-height: 1;
+    color: inherit;
+}
+
+/* ── Quitar header "Buscar" y dar padding correcto al search-lists ── */
+.exi-navbar-row--main .catalog-filter-search .header-name,
+.exi-navbar-actions .catalog-filter-search .header-name {
+    display: none !important;
+}
+.exi-navbar-row--main .catalog-filter-search .search-lists,
+.exi-navbar-actions .catalog-filter-search .search-lists {
+    display: block !important;
+    width: 100%;
+    padding: 0 !important;
+    margin: 0 !important;
+    z-index: auto !important;
+}
+
+/* ── El form debe ser flex y full-width ────────────────── */
+.exi-navbar-row--main .catalog-filter-search form,
+.exi-navbar-actions .catalog-filter-search form {
+    display: flex !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* ── Tablet (768-991px): search más compacto ──────────── */
+@media (max-width: 991px) and (min-width: 768px) {
+    .exi-navbar-row--main .catalog-filter-search .input-group,
+    .exi-navbar-actions .catalog-filter-search .input-group {
+        height: 40px !important;
+    }
+    .exi-navbar-row--main .catalog-filter-search .input-group > input,
+    .exi-navbar-actions .catalog-filter-search .input-group > input {
+        font-size: .875rem !important;
+        padding: .45rem .8rem !important;
+    }
+}
+
+/* ── Móvil (<768px): search oculto, va al drawer ─────── */
+@media (max-width: 767px) {
+    .exi-navbar-row--main .exi-search-wrap,
+    .exi-navbar-actions .exi-search-wrap {
+        display: none !important;
+    }
+}
