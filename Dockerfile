@@ -39,6 +39,9 @@ COPY composer.json composer.lock ./
 
 # --no-scripts: no ejecuta "post-autoload-dump" aquí (lo hará el entrypoint)
 # --no-autoloader: lo generamos tras copiar el código (mejor para cache)
+# En el stage vendor (composer:2.7) NO tenemos las extensiones PHP del runtime
+# (intl, gd, zip, etc.); las extensiones estan en el stage 'app'. Por eso
+# ignoramos los platform-reqs en este stage; se validan en runtime.
 RUN composer update \
         --no-dev \
         --no-scripts \
@@ -47,8 +50,7 @@ RUN composer update \
         --with-all-dependencies \
         --no-interaction \
         --no-progress \
-        --ignore-platform-req=ext-intl \
-        --ignore-platform-req=lib-icu
+        --ignore-platform-req=*
 
 # Copiamos el código y regeneramos el autoloader optimizado
 COPY . .
