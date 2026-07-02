@@ -59,7 +59,6 @@ Dockerfile
 Dockerfile.*
 docker-compose*.yml
 .dockerignore
-docker/
 
 # ── DB local de dev ────────────────────────────────
 /database/database.sqlite
