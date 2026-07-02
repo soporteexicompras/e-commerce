@@ -45,7 +45,9 @@ RUN composer install \
         --no-autoloader \
         --prefer-dist \
         --no-interaction \
-        --no-progress
+        --no-progress \
+        --ignore-platform-req=ext-intl \
+        --ignore-platform-req=lib-icu
 
 # Copiamos el código y regeneramos el autoloader optimizado
 COPY . .
