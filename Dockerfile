@@ -39,11 +39,12 @@ COPY composer.json composer.lock ./
 
 # --no-scripts: no ejecuta "post-autoload-dump" aquí (lo hará el entrypoint)
 # --no-autoloader: lo generamos tras copiar el código (mejor para cache)
-RUN composer install \
+RUN composer update \
         --no-dev \
         --no-scripts \
         --no-autoloader \
         --prefer-dist \
+        --with-all-dependencies \
         --no-interaction \
         --no-progress \
         --ignore-platform-req=ext-intl \
