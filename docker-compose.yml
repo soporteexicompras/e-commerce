@@ -63,15 +63,12 @@ services:
   #  nginx — Web server
   # ──────────────────────────────────────────────────────────────────
   nginx:
-    image: nginx:1.27-alpine
+    build:
+      context: ./docker/nginx
+      dockerfile: Dockerfile
+    image: exicompras/nginx:latest
     container_name: exicompras-nginx
     restart: unless-stopped
-    volumes:
-      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-      # ⚠️ Importante: NO montar ./public aquí porque nginx lo lee directamente
-      # desde el container app vía la red (a través de php-fpm). Si tuvieras
-      # archivos estáticos servidos por nginx, monta solo /public/build.
     depends_on:
       app:
         condition: service_healthy
