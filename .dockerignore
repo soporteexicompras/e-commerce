@@ -1,0 +1,66 @@
+# ── Git / IDE ───────────────────────────────────────
+.git
+.gitignore
+.gitattributes
+.github
+.idea
+.vscode
+.cursor
+.claude
+.zed
+.nova
+.phpunit.result.cache
+.phpunit.cache
+.phpactor.json
+
+# ── Dependencias (se instalan dentro del container) ──
+node_modules
+vendor
+/public/build
+/public/hot
+/public/storage
+/public/fonts-manifest.dev.json
+
+# ── Storage runtime (se monta como volumen) ─────────
+/storage/framework/cache
+/storage/framework/sessions
+/storage/framework/views
+/storage/framework/testing
+/storage/framework/pail
+/storage/logs
+/storage/app/public
+/storage/*.key
+
+# ── Entorno y secretos ─────────────────────────────
+.env
+.env.backup
+.env.production
+.env.docker
+auth.json
+
+# ── Tests y artefactos ─────────────────────────────
+/tests/coverage
+*.log
+*.swp
+*.tmp
+Thumbs.db
+.DS_Store
+Homestead.json
+Homestead.yaml
+
+# ── Documentación (no se copia al container) ───────
+*.md
+!README.md
+LICENSE
+CONTRIBUTING.md
+
+# ── Docker (no recursión infinita) ─────────────────
+Dockerfile
+Dockerfile.*
+docker-compose*.yml
+.dockerignore
+docker/
+
+# ── DB local de dev ────────────────────────────────
+/database/database.sqlite
+/database/*.sqlite

@@ -1,0 +1,79 @@
+# ════════════════════════════════════════════════════════════════════════════
+#  Exicompras — Docker Compose OVERRIDE para DESARROLLO
+# ════════════════════════════════════════════════════════════════════════════
+#  Para activarlo:
+#    cp docker-compose.override.yml.example docker-compose.override.yml
+#    docker compose up -d
+#
+#  Docker Compose carga automáticamente docker-compose.override.yml
+#  cuando existe. Este archivo:
+#    - Usa la imagen `dev` (target del Dockerfile con Xdebug)
+#    - Monta el código fuente como volumen (hot reload)
+#    - Expone Xdebug en el host
+#    - Levanta Vite dev server con HMR
+# ════════════════════════════════════════════════════════════════════════════
+
+services:
+
+  app:
+    build:
+      target: dev                # ← usa el stage con Xdebug
+    image: exicompras/app:dev
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - XDEBUG_MODE=debug
+    volumes:
+      # ← Código fuente como volumen (los cambios se ven al instante)
+      - ./:/var/www/html
+      - /var/www/html/vendor    # vendor lo gestiona el Dockerfile
+      - /var/www/html/node_modules
+      - /var/www/html/public/build
+      # storage y bootstrap/cache sí se persisten
+      - app-storage:/var/www/html/storage
+      - app-cache:/var/www/html/bootstrap/cache
+    ports:
+      - "9000:9000"              # expone php-fpm por si necesitas depurar
+
+  nginx:
+    ports:
+      - "${HTTP_PORT:-8080}:80"  # usa 8080 para no chocar con Laragon en :80
+
+  # ──────────────────────────────────────────────────────────────────
+  #  vite — Dev server con HMR (opcional)
+  # ──────────────────────────────────────────────────────────────────
+  vite:
+    image: node:20-alpine
+    container_name: exicompras-vite
+    working_dir: /app
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"              # HMR disponible en http://localhost:5173
+    networks: [exicompras]
+
+  queue:
+    build:
+      target: dev
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+    volumes:
+      - ./:/var/www/html
+      - /var/www/html/vendor
+
+  scheduler:
+    build:
+      target: dev
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+    volumes:
+      - ./:/var/www/html
+      - /var/www/html/vendor
+
+  db:
+    ports:
+      - "3306:3306"              # expuesto para usar TablePlus/DBeaver

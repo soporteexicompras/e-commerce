@@ -1,0 +1,219 @@
+# ════════════════════════════════════════════════════════════════════════════
+#  Exicompras — Docker Compose (producción)
+#
+#  Servicios:
+#    app         → PHP-FPM (la aplicación)
+#    nginx       → Reverse proxy / servidor web
+#    queue       → Worker de colas (php artisan queue:work)
+#    scheduler   → Cron interno de Laravel (schedule:run cada 60s)
+#    db          → MySQL 8.0 (opcional, puedes usar uno externo)
+#    redis       → Cache + sesiones + colas (opcional)
+#
+#  Uso:
+#    cp .env.docker.example .env
+#    docker compose up -d
+#    docker compose exec app php artisan migrate --force
+#
+#  Para Coolify / Laravel Cloud: este mismo archivo funciona.
+# ════════════════════════════════════════════════════════════════════════════
+
+services:
+
+  # ──────────────────────────────────────────────────────────────────
+  #  app — PHP-FPM
+  # ──────────────────────────────────────────────────────────────────
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: app                # usa el stage de producción
+    image: exicompras/app:latest
+    container_name: exicompras-app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    env_file: [.env]
+    environment:
+      # Forzar variables que el container necesita
+      - APP_ENV=production
+      - RUN_MIGRATIONS=${RUN_MIGRATIONS:-false}
+    volumes:
+      # Solo storage y bootstrap/cache se montan (para logs/cache persistentes)
+      - app-storage:/var/www/html/storage
+      - app-cache:/var/www/html/bootstrap/cache
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks: [exicompras]
+    healthcheck:
+      test: ["CMD-SHELL", "php -r 'exit(0);' || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          memory: 256M
+
+  # ──────────────────────────────────────────────────────────────────
+  #  nginx — Web server
+  # ──────────────────────────────────────────────────────────────────
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: exicompras-nginx
+    restart: unless-stopped
+    ports:
+      - "${HTTP_PORT:-80}:80"
+      - "${HTTPS_PORT:-443}:443"
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      # ⚠️ Importante: NO montar ./public aquí porque nginx lo lee directamente
+      # desde el container app vía la red (a través de php-fpm). Si tuvieras
+      # archivos estáticos servidos por nginx, monta solo /public/build.
+    depends_on:
+      app:
+        condition: service_healthy
+    networks: [exicompras]
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost/up"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
+  # ──────────────────────────────────────────────────────────────────
+  #  queue — Worker de colas
+  # ──────────────────────────────────────────────────────────────────
+  queue:
+    image: exicompras/app:latest           # reusa la imagen de app
+    container_name: exicompras-queue
+    restart: unless-stopped
+    working_dir: /var/www/html
+    env_file: [.env]
+    environment:
+      - APP_ENV=production
+    volumes:
+      - app-storage:/var/www/html/storage
+      - app-cache:/var/www/html/bootstrap/cache
+    entrypoint: ["/var/www/html/docker/queue-entrypoint.sh"]
+    command: []
+    depends_on:
+      app:
+        condition: service_healthy
+    networks: [exicompras]
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 128M
+    # Permite escalar horizontalmente
+    #   docker compose up -d --scale queue=3
+
+  # ──────────────────────────────────────────────────────────────────
+  #  scheduler — Cron de Laravel (schedule:run cada 60s)
+  # ──────────────────────────────────────────────────────────────────
+  scheduler:
+    image: exicompras/app:latest
+    container_name: exicompras-scheduler
+    restart: unless-stopped
+    working_dir: /var/www/html
+    env_file: [.env]
+    environment:
+      - APP_ENV=production
+    volumes:
+      - app-storage:/var/www/html/storage
+      - app-cache:/var/www/html/bootstrap/cache
+    command: >
+      sh -c "while true; do
+                php artisan schedule:run --no-interaction;
+                sleep 60;
+              done"
+    depends_on:
+      app:
+        condition: service_healthy
+    networks: [exicompras]
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
+  # ──────────────────────────────────────────────────────────────────
+  #  db — MySQL 8.0 (opcional — comentar si usas DB gestionada)
+  # ──────────────────────────────────────────────────────────────────
+  db:
+    image: mysql:8.0
+    container_name: exicompras-db
+    restart: unless-stopped
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-authentication-plugin=mysql_native_password
+      - --innodb-buffer-pool-size=512M
+      - --max-connections=200
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootpass}
+      MYSQL_DATABASE:      ${DB_DATABASE:-exicompras}
+      MYSQL_USER:          ${DB_USERNAME:-exicompras}
+      MYSQL_PASSWORD:      ${DB_PASSWORD:-secret}
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "${DB_PORT:-3306}:3306"     # exponer solo si necesitas acceso externo
+    networks: [exicompras]
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p${DB_ROOT_PASSWORD:-rootpass}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+
+  # ──────────────────────────────────────────────────────────────────
+  #  redis — Cache + sesiones + colas (opcional)
+  # ──────────────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: exicompras-redis
+    restart: unless-stopped
+    command: >
+      redis-server
+        --appendonly yes
+        --maxmemory 256mb
+        --maxmemory-policy allkeys-lru
+    volumes:
+      - redisdata:/data
+    networks: [exicompras]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+# ──────────────────────────────────────────────────────────────────
+#  Volúmenes persistentes
+# ──────────────────────────────────────────────────────────────────
+volumes:
+  app-storage:
+  app-cache:
+  dbdata:
+  redisdata:
+
+# ──────────────────────────────────────────────────────────────────
+#  Red interna
+# ──────────────────────────────────────────────────────────────────
+networks:
+  exicompras:
+    driver: bridge
