@@ -72,7 +72,22 @@ services:
     depends_on:
       app:
         condition: service_healthy
-    networks: [exicompras]
+    networks:
+      - exicompras
+      - coolify
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.{{ .Service }}.loadbalancer.server.port=80"
+      - "traefik.http.routers.{{ .Service }}.rule=Host(`qnbygzoq32luuws2cv6d6zbl.149.130.187.189.sslip.io`)"
+      - "traefik.http.routers.{{ .Service }}.entryPoints=http"
+      - "coolify.managed=true"
+      - "coolify.pullRequestId=0"
+      - "coolify.type=application"
+      - "coolify.serviceName=exicompras-e-commerce"
+      - "coolify.applicationId=1"
+      - "coolify.environmentName=production"
+      - "coolify.projectName=my-first-project"
+      - "coolify.resourceName=exicompras-e-commerce"""""
     healthcheck:
       test: ["CMD", "wget", "--spider", "-q", "http://localhost/up"]
       interval: 30s
