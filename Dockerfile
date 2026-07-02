@@ -30,7 +30,7 @@ RUN npm run build
 # ──────────────────────────────────────────────────────────────
 # Stage 2 — Instalar dependencias PHP con Composer
 # ──────────────────────────────────────────────────────────────
-FROM composer:2.7 AS vendor
+FROM composer:2.8 AS vendor
 
 WORKDIR /app
 
@@ -63,7 +63,7 @@ RUN composer dump-autoload \
 # ──────────────────────────────────────────────────────────────
 # Stage 3 — Extensiones PHP base (compartido por dev y app)
 # ──────────────────────────────────────────────────────────────
-FROM php:8.3-fpm-bookworm AS php-base
+FROM php:8.4-fpm-bookworm AS php-base
 
 # Argumentos para el usuario final (no root)
 ARG WWW_USER=www-data
