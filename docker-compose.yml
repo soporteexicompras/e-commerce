@@ -104,7 +104,7 @@ services:
       - app-storage:/var/www/html/storage
       - app-cache:/var/www/html/bootstrap/cache
     entrypoint: ["/var/www/html/docker/queue-entrypoint.sh"]
-    command: []
+    command: ~
     depends_on:
       app:
         condition: service_healthy
