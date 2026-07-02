@@ -172,6 +172,7 @@ COPY --from=vendor --chown=${WWW_USER}:${WWW_GROUP} /app/vendor ./vendor
 
 # Copiar código fuente de la app
 COPY --chown=${WWW_USER}:${WWW_GROUP} . .
+RUN chmod +x /var/www/html/docker/queue-entrypoint.sh /var/www/html/docker/entrypoint.sh 2>/dev/null || true
 
 # Copiar assets ya compilados por Vite (sobrescribe public/build)
 COPY --from=node-builder --chown=${WWW_USER}:${WWW_GROUP} /app/public/build ./public/build
