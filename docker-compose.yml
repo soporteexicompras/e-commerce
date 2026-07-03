@@ -38,8 +38,7 @@ services:
       - RUN_MIGRATIONS=${RUN_MIGRATIONS:-false}
     volumes:
       # Solo storage y bootstrap/cache se montan (para logs/cache persistentes)
-      - app-storage:/var/www/html/storage
-      - app-cache:/var/www/html/bootstrap/cache
+      - app-storage:/var/www/html/storage/app
     depends_on:
       db:
         condition: service_healthy
@@ -105,8 +104,7 @@ services:
     environment:
       - APP_ENV=production
     volumes:
-      - app-storage:/var/www/html/storage
-      - app-cache:/var/www/html/bootstrap/cache
+      - app-storage:/var/www/html/storage/app
     entrypoint: ["/var/www/html/docker/queue-entrypoint.sh"]
     command: ~
     depends_on:
@@ -134,8 +132,7 @@ services:
     environment:
       - APP_ENV=production
     volumes:
-      - app-storage:/var/www/html/storage
-      - app-cache:/var/www/html/bootstrap/cache
+      - app-storage:/var/www/html/storage/app
     command: >
       sh -c "while true; do
                 php artisan schedule:run --no-interaction;
@@ -209,7 +206,6 @@ services:
 # ──────────────────────────────────────────────────────────────────
 volumes:
   app-storage:
-  app-cache:
   dbdata:
   redisdata:
 
