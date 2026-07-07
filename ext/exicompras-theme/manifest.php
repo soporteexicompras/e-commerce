@@ -9,5 +9,8 @@ return [
 		'admin/jqadm/templates' => [
 			'templates/admin/jqadm',
 		],
+		'client/html/templates' => [
+			'templates/client/html',
+		],
 	],
 ];
