@@ -26,6 +26,7 @@
 9. [HTTPS / SSL](#9-https--ssl)
 10. [Backups](#10-backups)
 11. [Troubleshooting](#11-troubleshooting)
+12. [Notas de despliegue en Coolify (dockercompose)](#12-notas-de-despliegue-en-coolify-dockercompose)
 
 ---
 
@@ -954,6 +955,308 @@ docker compose up -d --build
 docker compose exec app php artisan migrate --force --seed
 docker compose exec app php artisan aimeos:account
 ```
+
+
+---
+
+## 12. Notas de despliegue en Coolify (dockercompose)
+
+> **Contexto:** Este repositorio fue desplegado exitosamente en **Coolify v4.0.0-beta.474** sobre Ubuntu 22 con Traefik v3.6 como proxy. Esta seccion documenta los issues especificos que encontramos y como se resolvieron en el repo, asi no se repiten en futuros deploys.
+
+### 12.1 Compatibilidad de versiones
+
+| Componente | Version minima | Notas |
+|---|---|---|
+| **PHP** | 8.4 (Aimeos 2025.10) | `aimeos-core 2025.10.x` requiere `php >= 8.4.1` en su `composer.json`; PHP 8.3 falla con `Please provide a valid cache path` por incompatibilidad de plataforma |
+| **Composer** | 2.8 (para PHP 8.4) | `composer:2.7` (base del stage `vendor`) tiene PHP 8.3 — usar `2.8` para coherencia |
+| **nginx** | 1.27-alpine | El usuario del worker es `nginx` (no `www-data` como en Debian) |
+| **Coolify** | 4.0+ | v3.x no soporta `docker_compose_domains` ni el formato de `docker_compose_raw` |
+
+### 12.2 Dockerfile — fixes criticos
+
+#### `composer install` falla en el stage `vendor`
+
+**Sintoma:** `aimeos/aimeos-base 2025.10.2 requires ext-intl * -> it is missing from your system`
+
+**Causa:** El stage `vendor` usa `composer:2.7` (PHP 8.3) que NO tiene `ext-intl`. Aimeos la exige.
+
+**Fix:** Usar `composer update` (no `install`) con `--ignore-platform-req=*` en ese stage, ya que el runtime stage (`php:8.4-fpm-bookworm`) SI tiene las extensiones.
+
+```dockerfile
+RUN composer update \
+        --no-dev \
+        --with-all-dependencies \
+        --ignore-platform-req=* \
+        ...
+```
+
+> **Por que `update` y no `install`?** El `composer.lock` que viene en el repo estaba desincronizado con `aimeos-core 2025.10.4` (resoluble solo via `update --with-all-dependencies`).
+
+#### `docker-php-ext-install gd` no compila con JPEG/WebP/Freetype
+
+**Sintoma:** `Intervention\Image\Drivers\Gd\Encoders\imagewebp()` undefined al subir un logo desde el admin.
+
+**Causa:** El `docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype` solo actualiza los flags del build, pero `docker-php-ext-install gd` (corrido antes) **no recompila**. Resultado: `php -r 'var_dump(gd_info())'` muestra `JPEG Support: false`, `WebP Support: false`.
+
+**Fix:** Combinar `configure + install` en el mismo `RUN`:
+
+```dockerfile
+RUN docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype \
+    && docker-php-ext-install -j"$(nproc)" gd
+```
+
+#### Extension `pdo_sqlite` requiere `libsqlite3-dev`
+
+**Sintoma:** `configure: error: Package requirements (sqlite3 >= 3.7.7) were not met`
+
+**Fix:** Agregar `libsqlite3-dev` al `apt-get install` block:
+
+```dockerfile
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        ... \
+        libsqlite3-dev \
+        tzdata \
+```
+
+#### `.dockerignore` excluye `docker/` pero el Dockerfile lo necesita
+
+**Sintoma:** `failed to solve: "/docker/entrypoint.sh": not found`
+
+**Causa:** El `.dockerignore` del repo tiene `docker/` excluido (asumiendo que el compose monta por bind-mount los archivos de `docker/`). Pero al hacer `docker compose build` en Coolify, el contexto de build es el directorio del repo y necesita todos los archivos del Dockerfile (`docker/entrypoint.sh`, `docker/php/*.ini`, etc.).
+
+**Fix:** Quitar la linea `docker/` del `.dockerignore` (no tocar `Dockerfile`/`docker-compose.yml`/`docker-compose.*.yml` que siguen excluidos).
+
+### 12.3 docker-compose.yml — fixes criticos
+
+#### `command: []` falla el validador de Coolify
+
+**Sintoma:** `validating /artifacts/.../docker-compose.yml: services.queue.command must be a null`
+
+**Fix:** Cambiar `command: []` a `command: ~` (YAML para `null`).
+
+#### Bind-mounts a `/etc/nginx/nginx.conf` fallan con overlay2
+
+**Sintoma:** `failed to set up container: failed to create shim task: ... cannot create subdirectories in ".../merged/etc/nginx/nginx.conf": not a directory`
+
+**Causa:** Alguna incompatibilidad entre el driver `overlay2` de Docker y la imagen `nginx:1.27-alpine` cuando se bind-mountea sobre `/etc/nginx/*.conf`. (El error ocurre incluso montando un archivo regular sobre `/etc/nginx/nginx.conf`.)
+
+**Fix:** Crear un Dockerfile dedicado para nginx que bakee las configs:
+
+```dockerfile
+# docker/nginx/Dockerfile
+FROM nginx:1.27-alpine
+COPY docker/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY public/vendor /var/www/html/public/vendor
+COPY public/css /var/www/html/public/css
+...
+```
+
+Y referenciarlo desde el compose:
+
+```yaml
+nginx:
+  build:
+    context: .                    # contexto en root del repo
+    dockerfile: docker/nginx/Dockerfile
+```
+
+> **Nota:** El `context: .` permite que el Dockerfile acceda a `public/vendor`, `public/css`, etc. desde el root del repo. Esos assets se sirven directamente desde nginx (sin roundtrip a PHP-FPM), acelerando la primera carga.
+
+#### `app-storage` montado en `/var/www/html/storage` borra subdirs
+
+**Sintoma:** `Please provide a valid cache path.` desde PHP-FPM. `storage/framework/` solo tiene `.gitignore` y `storage/framework/views/` no existe.
+
+**Causa:** El compose original monta `app-storage:/var/www/html/storage` (sobre el directorio entero), lo que **reemplaza** el contenido del directorio `storage` en la imagen — incluyendo los subdirectorios que Laravel espera (`framework/cache`, `framework/sessions`, `framework/views`, etc.).
+
+**Fix:** Montar `app-storage` en `/var/www/html/storage/app` (solo user uploads), no en todo `/storage`. Tambien eliminar el volumen `app-cache` (no es stateful, Laravel lo regenera).
+
+```yaml
+volumes:
+  - 'app-storage:/var/www/html/storage/app'    # solo uploads del usuario
+  # - 'app-cache:/var/www/html/bootstrap/cache' # ELIMINADO
+```
+
+Adicionalmente, el `entrypoint.sh` debe crear los subdirs faltantes si no existen:
+
+```bash
+mkdir -p /var/www/html/storage/framework/{cache/data,sessions,testing,views}
+chown -R www-data:www-data /var/www/html/storage
+```
+
+#### Conflicto de puertos host con Coolify
+
+**Sintoma:** `Bind for 0.0.0.0:3306 failed: port is already allocated` y `0.0.0.0:80`.
+
+**Causa:** Coolify ya usa los puertos 80/443 (Traefik) y 3306 (MySQL de Coolify si esta habilitado).
+
+**Fix:** Quitar los `ports:` a host del compose. Coolify enruta via Traefik labels (red `coolify`); los containers solo necesitan escuchar en `0.0.0.0` interno.
+
+```yaml
+# Eliminar del compose:
+nginx:
+  ports:
+    - "${HTTP_PORT:-80}:80"     # ❌ ELIMINADO
+    - "${HTTPS_PORT:-443}:443"  # ❌ ELIMINADO
+db:
+  ports:
+    - "${DB_PORT:-3306}:3306"   # ❌ ELIMINADO
+```
+
+#### Traefik labels automaticos para Coolify
+
+**Sintoma:** Las requests a `https://<app>.sslip.io` devuelven `404 page not found` de Traefik, aun con los labels correctos en el container.
+
+**Causa:** El container nginx esta en dos redes (`coolify` y la del proyecto). Sin `traefik.docker.network=coolify`, Traefik elige una red arbitraria para resolver el service URL y falla.
+
+**Fix:** Agregar la label `traefik.docker.network=coolify` y prioridad alta:
+
+```yaml
+nginx:
+  labels:
+    - "traefik.enable=true"
+    - "traefik.docker.network=coolify"
+    - "traefik.http.routers.exicompras-nginx.rule=Host(`<tu-dominio>`)"
+    - "traefik.http.routers.exicompras-nginx.entryPoints=http"
+    - "traefik.http.routers.exicompras-nginx.priority=100"
+    - "traefik.http.services.exicompras-nginx.loadbalancer.server.port=80"
+    - "coolify.managed=true"
+    - "coolify.type=application"
+```
+
+> **Tambien:** el container nginx debe estar conectado a la red `coolify`:
+> ```yaml
+> networks:
+>   - exicompras
+>   - coolify      # ← necesario para Traefik
+> ```
+
+### 12.4 nginx — fixes criticos
+
+#### `user www-data;` no existe en alpine
+
+**Sintoma:** `getpwnam("www-data") failed in /etc/nginx/nginx.conf`
+
+**Fix:** Cambiar a `user nginx;` (default de `nginx:1.27-alpine`).
+
+#### `try_files $uri =404` rompe el flujo a fastcgi
+
+**Sintoma:** `File not found.` desde PHP-FPM (no Laravel), o `404 page not found` desde nginx directamente.
+
+**Causa:** El `try_files $uri =404` en el bloque `location ~ \.php$` chequea si el archivo existe en el filesystem local del container nginx. Como nginx no tiene los archivos PHP (viven en el container `app`), siempre devuelve 404 antes de llamar a fastcgi.
+
+**Fix:** Quitar el `try_files` del bloque PHP:
+
+```nginx
+location ~ \.php$ {
+    fastcgi_split_path_info  ^(.+\.php)(/.+)$;
+    fastcgi_pass             app:9000;
+    fastcgi_index            index.php;
+    fastcgi_param            SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+    fastcgi_param            DOCUMENT_ROOT    $document_root;
+    include                   fastcgi_params;
+}
+```
+
+#### `$realpath_root` se evalua a cadena vacia
+
+**Sintoma:** `File not found.` con `SCRIPT_FILENAME=/index.php` en PHP-FPM (en lugar de `/var/www/html/public/index.php`).
+
+**Causa:** `$realpath_root` ejecuta `realpath($document_root)`. Como `/var/www/html/public` no existe en el container nginx, devuelve `false` (cadena vacia en nginx), entonces `SCRIPT_FILENAME = "" + "/index.php" = "/index.php"`.
+
+**Fix:** Usar `$document_root` (literal) en vez de `$realpath_root`:
+
+```nginx
+fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+fastcgi_param  DOCUMENT_ROOT    $document_root;
+```
+
+#### Regex location gana sobre prefix location para assets
+
+**Sintoma:** `404` en `GET /vendor/shop/themes/default/style.css`.
+
+**Causa:** nginx prioriza `location ~* \.(css|js)$` (regex) sobre `location /vendor/shop/` (prefix). La regex hace `try_files $uri =404` que falla localmente.
+
+**Fix:** Marcar los prefix locations de Aimeos con `^~`:
+
+```nginx
+location ^~ /vendor/shop/   { try_files $uri $uri/ /index.php?$query_string; }
+location ^~ /packages/      { try_files $uri $uri/ /index.php?$query_string; }
+location ^~ /admin/         { try_files $uri $uri/ /index.php?$query_string; }
+```
+
+### 12.5 Aimeos — requisitos especificos
+
+#### `php artisan migrate` no es suficiente
+
+**Sintoma:** `SQLSTATE[42S02]: Base table or view not found: 1146 Table 'exicompras.mshop_locale_site' doesn't exist`
+
+**Causa:** Aimeos tiene su propio sistema de migrations separado (`vendor/aimeos/aimeos-core/setup/*.php`) que NO se ejecutan con `php artisan migrate`. Solo `aimeos:setup` los corre.
+
+**Fix:** Agregar al `entrypoint.sh` despues de `migrate`:
+
+```bash
+if [ "${RUN_MIGRATIONS:-false}" = "true" ]; then
+    echo "🗄️  Ejecutando migraciones Laravel..."
+    php artisan migrate --force --no-interaction
+    echo "🗄️  Ejecutando setup Aimeos..."
+    php artisan aimeos:setup --no-interaction 2>&1 | tail -5
+fi
+```
+
+#### Faltan archivos de configuracion Laravel
+
+**Sintoma:** `Please provide a valid cache path` (aunque los subdirs de storage existen) — `config('view.compiled')` evalua a `false` (string vacio).
+
+**Causa:** El repo no incluye `config/view.php` (raro pero pasa).
+
+**Fix:** Agregar `config/view.php` al repo:
+
+```php
+<?php
+return [
+    'paths' => [resource_path('views')],
+    'compiled' => env('VIEW_COMPILED_PATH', storage_path('framework/views')),
+];
+```
+
+> **Nota:** `realpath()` en el `compiled` original falla si el dir no existe — usar `storage_path()` directo.
+
+### 12.6 Workflow de primer deploy
+
+Para un deploy desde cero en Coolify con este repo:
+
+1. **Crear deploy key en Coolify** y subir la publica como deploy key en GitHub (read-only)
+2. **Crear la aplicacion** en Coolify como `dockercompose` con:
+   - `project_uuid`: del proyecto donde vivira la app
+   - `server_uuid`: el server donde corre Coolify
+   - `private_key_uuid`: la deploy key SSH
+   - `git_repository`: `git@github.com:<owner>/<repo>.git`
+   - `git_branch`: `main`
+   - `build_pack`: `dockercompose`
+   - `docker_compose_location`: `/docker-compose.yml` (con leading `/`)
+   - `ports_exposes`: `80`
+3. **Setear env vars** via API:
+   ```
+   APP_KEY, DB_DATABASE, DB_USERNAME, DB_PASSWORD, DB_ROOT_PASSWORD,
+   DB_HOST=db, REDIS_HOST=redis, DB_CONNECTION=mysql,
+   CACHE_STORE=redis, SESSION_DRIVER=redis, QUEUE_CONNECTION=redis,
+   RUN_MIGRATIONS=true, APP_ENV=production (runtime only),
+   APP_DEBUG=false, HTTP_PORT=80
+   ```
+4. **Trigger deploy** (`POST /api/v1/applications/{uuid}/start`)
+5. **Post-deploy manual** (una sola vez): `php artisan aimeos:setup` dentro del container app (o esperar al `entrypoint.sh` con `RUN_MIGRATIONS=true`)
+
+### 12.7 Checklist post-deploy
+
+- [ ] `GET /up` → HTTP 200 (healthcheck Laravel)
+- [ ] `GET /` → HTTP 200 (~30 KB HTML)
+- [ ] `GET /css/exinavbar.css` → HTTP 200, `Content-Type: text/css`
+- [ ] `GET /js/exinavbar.js` → HTTP 200, `Content-Type: application/javascript`
+- [ ] `GET /vendor/shop/themes/default/aimeos.css` → HTTP 200
+- [ ] Containers `app`, `nginx`, `queue`, `scheduler`, `db`, `redis` en estado `healthy`/`running`
+- [ ] `php artisan aimeos:setup` ejecutado al menos una vez (crea tablas `mshop_*`)
+- [ ] Login en `/admin` funciona con el usuario `superuser=1`
 
 ---
 
