@@ -49,8 +49,10 @@ chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache 2
 
 # ── 5. Migraciones automáticas (solo si se habilita explícitamente) ─────
 if [ "${RUN_MIGRATIONS:-false}" = "true" ]; then
-    echo "🗄️  Ejecutando migraciones..."
+    echo "🗄️  Ejecutando migraciones Laravel..."
     php artisan migrate --force --no-interaction
+    echo "🗄️  Ejecutando setup Aimeos (crea tablas mshop_*, índices, etc.)..."
+    php artisan aimeos:setup --no-interaction 2>&1 | tail -5 || echo "⚠️ aimeos:setup fallo (puede ser normal si ya estaba aplicado)"
 fi
 
 # ── 6. Aimeos: publicar assets del paquete si no existen ───────────────
