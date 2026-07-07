@@ -121,8 +121,11 @@ RUN docker-php-ext-install -j"$(nproc)" \
         exif \
         fileinfo
 
-# Configurar GD con soporte para JPEG, WEBP, FREETYPE
-RUN docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype
+# Configurar y recompilar GD con soporte para JPEG, WEBP, FREETYPE
+# IMPORTANTE: hay que correr configure + install en el mismo RUN, sino el configure
+# no tiene efecto (configure solo actualiza flags, install recompila).
+RUN docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype \
+    && docker-php-ext-install -j"$(nproc)" gd
 
 # Extensión PECL: Redis (cliente phpredis — más rápido que predis)
 RUN pecl install redis \
