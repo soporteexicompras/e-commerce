@@ -76,9 +76,11 @@ services:
       - coolify
     labels:
       - "traefik.enable=true"
+      - "traefik.docker.network=coolify"
       - "traefik.http.services.exicompras-nginx.loadbalancer.server.port=80"
       - "traefik.http.routers.exicompras-nginx.rule=Host(`qnbygzoq32luuws2cv6d6zbl.149.130.187.189.sslip.io`)"
       - "traefik.http.routers.exicompras-nginx.entryPoints=http"
+      - "traefik.http.routers.exicompras-nginx.priority=100"
       - "coolify.managed=true"
       - "coolify.pullRequestId=0"
       - "coolify.type=application"
