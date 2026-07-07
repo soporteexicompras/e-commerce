@@ -63,8 +63,8 @@ services:
   # ──────────────────────────────────────────────────────────────────
   nginx:
     build:
-      context: ./docker/nginx
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: docker/nginx/Dockerfile
     image: exicompras/nginx:latest
     container_name: exicompras-nginx
     restart: unless-stopped
