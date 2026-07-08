@@ -38,6 +38,18 @@ if [ -z "$APP_KEY" ]; then
     php artisan key:generate --force --no-interaction
 fi
 
+# ── 2.5 Asegurar subdirs de storage/framework ────────────────────────────
+# Cuando storage/ se monta como volumen Docker, los subdirs cache/sessions/
+# views/ que Laravel necesita para tmp files desaparecen. Sin esto,
+# tempnam() falla con "file created in the system's temporary directory"
+# y todas las requests devuelven 500. Ver DEPLOYMENT.md §12.5.
+mkdir -p \
+    /var/www/html/storage/framework/cache/data \
+    /var/www/html/storage/framework/sessions \
+    /var/www/html/storage/framework/testing \
+    /var/www/html/storage/framework/views \
+    /var/www/html/storage/logs
+
 # ── 3. Storage symlink (idempotente) ─────────────────────────────────────
 if [ ! -L /var/www/html/public/storage ]; then
     echo "🔗 Creando storage symlink..."
