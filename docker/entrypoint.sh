@@ -73,6 +73,21 @@ if [ ! -d /var/www/html/public/vendor/shop/themes/default/assets ] && [ -d /var/
     php artisan vendor:publish --tag=public --force --no-interaction || true
 fi
 
+# ── 6.5 Seeders custom Exicompras (idempotentes: skip si ya estan) ──────
+if [ "${RUN_SEEDERS:-true}" = "true" ]; then
+    if php artisan list 2>/dev/null | grep -q 'exi:seed-special-categories'; then
+        echo "🌱 Ejecutando exi:seed-special-categories (idempotente)..."
+        php artisan exi:seed-special-categories --no-interaction 2>&1 | tail -5 || true
+    fi
+    if php artisan list 2>/dev/null | grep -q 'exi:seed-special-products'; then
+        echo "🌱 Ejecutando exi:seed-special-products (idempotente)..."
+        php artisan exi:seed-special-products --no-interaction 2>&1 | tail -5 || true
+    fi
+    # Reconstruir indice de busqueda Aimeos tras seeds
+    echo "🔄 Reconstruyendo indice Aimeos..."
+    php artisan aimeos:jobs index/rebuild 2>&1 | tail -3 || true
+fi
+
 # ── 7. Optimización de cachés en producción ──────────────────────────────
 if [ "${APP_ENV}" = "production" ]; then
     echo "⚡ Optimizando cachés para producción..."
