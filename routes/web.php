@@ -3,10 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-// Home: muestra el catálogo principal de Exicompras
-Route::group(['middleware' => ['web']], function () {
-    Route::get('/', '\Aimeos\Shop\Controller\CatalogController@homeAction')->name('aimeos_home');
-});
+// Home (/) se registra automáticamente desde
+// vendor/aimeos/aimeos-laravel/routes/aimeos.php (Route::match GET|POST '/' as 'aimeos_home').
+// No redeclararla aquí: route:cache falla con "Another route has already been assigned name [aimeos_home]".
 
 // Redirección si alguien accede a /dashboard directamente
 Route::get('/dashboard', function () {
