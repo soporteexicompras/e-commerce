@@ -1364,3 +1364,115 @@ body:not(.catalog-home) .exicatalog-aside .catalog-session .session-items a {
         padding-bottom: max(.85rem, env(safe-area-inset-bottom)) !important;
     }
 }
+
+/* ══════════════════════════════════════════════════════════
+   INFLUENCERS — Hero fullscreen + stagger reveal
+   Solo aplica cuando tree.blade.php detecta la categoria.
+   ══════════════════════════════════════════════════════════ */
+
+.exi-influencers-hero {
+    position: relative;
+    overflow: hidden;
+    min-height: clamp(280px, 40vh, 480px);
+    margin: 0 0 1.5rem;
+    border-radius: var(--exi-radius-lg, 18px);
+    background: linear-gradient(135deg, #1A1F36 0%, #2d1456 50%, #1A1F36 100%);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.5rem;
+    text-align: center;
+}
+.exi-influencers-hero-bg {
+    position: absolute; inset: 0;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(255, 180, 0, .25) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(74, 126, 255, .25) 0%, transparent 50%);
+    animation: exi-influencers-bg-pan 8s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+@keyframes exi-influencers-bg-pan {
+    0%   { transform: scale(1)   translate(0, 0); }
+    100% { transform: scale(1.1) translate(-2%, -2%); }
+}
+.exi-influencers-hero-content {
+    position: relative;
+    max-width: 600px;
+    animation: exi-influencers-reveal .8s cubic-bezier(.4,0,.2,1) both;
+}
+@keyframes exi-influencers-reveal {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.exi-influencers-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #FFB400 0%, #FF6B35 100%);
+    color: #1A1F36;
+    font-size: clamp(.7rem, 1.6vw, .85rem);
+    font-weight: 800;
+    letter-spacing: 2px;
+    padding: .4rem 1.1rem;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 16px rgba(255, 107, 53, .35);
+    animation: exi-influencers-badge-pulse 2s ease-in-out infinite;
+}
+@keyframes exi-influencers-badge-pulse {
+    0%, 100% { transform: scale(1);    }
+    50%      { transform: scale(1.05); }
+}
+.exi-influencers-title {
+    font-size: clamp(1.8rem, 6vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    margin: 0 0 .75rem;
+    letter-spacing: -0.02em;
+    color: #fff;
+}
+.exi-influencers-title span {
+    background: linear-gradient(135deg, #FFB400 0%, #FF6B35 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+.exi-influencers-subtitle {
+    font-size: clamp(.9rem, 2vw, 1.1rem);
+    color: rgba(255, 255, 255, .8);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Stagger reveal de productos solo en Influencers */
+.exicatalog-main--influencers .catalog-list-items > * {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: exi-product-reveal .5s cubic-bezier(.4,0,.2,1) forwards;
+}
+.exicatalog-main--influencers .catalog-list-items > *:nth-child(1)  { animation-delay: .30s; }
+.exicatalog-main--influencers .catalog-list-items > *:nth-child(2)  { animation-delay: .36s; }
+.exicatalog-main--influencers .catalog-list-items > *:nth-child(3)  { animation-delay: .42s; }
+.exicatalog-main--influencers .catalog-list-items > *:nth-child(4)  { animation-delay: .48s; }
+.exicatalog-main--influencers .catalog-list-items > *:nth-child(5)  { animation-delay: .54s; }
+.exicatalog-main--influencers .catalog-list-items > *:nth-child(6)  { animation-delay: .60s; }
+.exicatalog-main--influencers .catalog-list-items > *:nth-child(7)  { animation-delay: .66s; }
+.exicatalog-main--influencers .catalog-list-items > *:nth-child(8)  { animation-delay: .72s; }
+.exicatalog-main--influencers .catalog-list-items > *:nth-child(9)  { animation-delay: .78s; }
+.exicatalog-main--influencers .catalog-list-items > *:nth-child(10) { animation-delay: .84s; }
+.exicatalog-main--influencers .catalog-list-items > *:nth-child(11) { animation-delay: .90s; }
+.exicatalog-main--influencers .catalog-list-items > *:nth-child(12) { animation-delay: .96s; }
+@keyframes exi-product-reveal {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .exi-influencers-hero-bg,
+    .exi-influencers-hero-content,
+    .exi-influencers-badge,
+    .exicatalog-main--influencers .catalog-list-items > * {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}

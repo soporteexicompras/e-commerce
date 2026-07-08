@@ -34,13 +34,19 @@
 @stop
 
 @section('aimeos_body')
-	<div class="container-fluid exicatalog-wrap">
+	@php
+		$isInfluencers = request()->is('*influencers*') || request()->input('f_name') === 'influencers';
+	@endphp
+	<div class="container-fluid exicatalog-wrap @if($isInfluencers) exicatalog-wrap--influencers @endif">
 		<div class="row">
 			<aside class="col-lg-3 exicatalog-aside">
 				<?= $aibody['catalog/filter'] ?? '' ?>
 				<?= $aibody['catalog/session'] ?? '' ?>
 			</aside>
-			<div class="col-lg-9 exicatalog-main">
+			<div class="col-lg-9 exicatalog-main @if($isInfluencers) exicatalog-main--influencers @endif">
+				@if($isInfluencers)
+					@include('shop::catalog.partials.exi-influencers-hero')
+				@endif
 				<?= $aibody['catalog/lists'] ?? '' ?>
 				<?= $aibody['cms/page'] ?? '' ?>
 			</div>

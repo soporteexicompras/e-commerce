@@ -61,13 +61,26 @@ $products = DB::table('mshop_product as p')
 
 $byCategory = $products->groupBy('cat_id');
 
-$categories = [
-    2 => ['label'=>'Electrónica',        'code'=>'electronica',  'icon'=>'🖥️',  'emoji'=>'⚡', 'color'=>'#4a7eff'],
-    3 => ['label'=>'Ropa y Accesorios',  'code'=>'ropa-y-accesorios','icon'=>'👗','emoji'=>'✨', 'color'=>'#ff6b35'],
-    4 => ['label'=>'Hogar y Decoración', 'code'=>'hogar-y-decoracion','icon'=>'🏠','emoji'=>'🏡','color'=>'#38a169'],
-    5 => ['label'=>'Deportes y Fitness', 'code'=>'deportes-y-fitness','icon'=>'🏋️','emoji'=>'💪','color'=>'#d69e2e'],
-    6 => ['label'=>'Belleza y Cuidado',  'code'=>'belleza-y-cuidado','icon'=>'💄','emoji'=>'🌸','color'=>'#e53e3e'],
-];
+// Resolver IDs reales de las categorias especiales (pueden no ser 7/8 si ya hay otras)
+$_specialIds = DB::table('mshop_catalog')
+    ->where('siteid', '1.')
+    ->whereIn('code', ['influencers', 'coleccionistas'])
+    ->pluck('id', 'code');
+$_influencersId     = $_specialIds['influencers']     ?? null;
+$_coleccionistasId  = $_specialIds['coleccionistas']  ?? null;
+
+$categories = [];
+if ($_influencersId) {
+    $categories[$_influencersId] = ['label'=>'Influencers', 'code'=>'influencers', 'icon'=>'⭐', 'emoji'=>'🌟', 'color'=>'#FFB400', 'special'=>'influencer'];
+}
+$categories[2] = ['label'=>'Electrónica',        'code'=>'electronica',  'icon'=>'🖥️',  'emoji'=>'⚡', 'color'=>'#4a7eff'];
+$categories[3] = ['label'=>'Ropa y Accesorios',  'code'=>'ropa-y-accesorios','icon'=>'👗','emoji'=>'✨', 'color'=>'#ff6b35'];
+$categories[4] = ['label'=>'Hogar y Decoración', 'code'=>'hogar-y-decoracion','icon'=>'🏠','emoji'=>'🏡','color'=>'#38a169'];
+$categories[5] = ['label'=>'Deportes y Fitness', 'code'=>'deportes-y-fitness','icon'=>'🏋️','emoji'=>'💪','color'=>'#d69e2e'];
+$categories[6] = ['label'=>'Belleza y Cuidado',  'code'=>'belleza-y-cuidado','icon'=>'💄','emoji'=>'🌸','color'=>'#e53e3e'];
+if ($_coleccionistasId) {
+    $categories[$_coleccionistasId] = ['label'=>'Coleccionistas', 'code'=>'coleccionistas', 'icon'=>'🏆', 'emoji'=>'🎖️', 'color'=>'#9B59B6'];
+}
 
 function fmtCOP($val) {
     return '$' . number_format((float)$val, 0, ',', '.');
@@ -225,7 +238,14 @@ function fakeOldPrice($price) {
     </div>
     <div class="exicat-grid">
         @foreach($categories as $catId => $cat)
-        <a href="{{ route('aimeos_shop_tree', ['f_name'=>$cat['code'], 'f_catid'=>$catId]) }}" class="exicat-card">
+        <a href="{{ route('aimeos_shop_tree', ['f_name'=>$cat['code'], 'f_catid'=>$catId]) }}"
+           @class([
+               'exicat-card',
+               'exicat-card--' . ($cat['special'] ?? '') => !empty($cat['special']),
+           ])>
+            @if(($cat['special'] ?? null) === 'influencer')
+                <span class="exicat-special-badge" aria-label="Categoria especial Influencers">INFLUENCERS</span>
+            @endif
             <div class="exicat-icon" style="background: {{ $cat['color'] }}22; border-color: {{ $cat['color'] }}44;">
                 <span class="exicat-emoji">{{ $cat['icon'] }}</span>
             </div>
@@ -255,7 +275,7 @@ function fakeOldPrice($price) {
             <div class="exiprod-img-wrap">
                 <div class="exiprod-img-placeholder">
                     @php
-                        $emojis = ['🖥️'=>[2],'📱'=>[2],'🎧'=>[2],'👗'=>[3],'👖'=>[3],'👜'=>[3],'☕'=>[4],'💡'=>[4],'👟'=>[5],'🧘'=>[5],'💆'=>[6],'💇'=>[6]];
+                        $emojis = ['🖥️'=>[2],'📱'=>[2],'🎧'=>[2],'👗'=>[3],'👖'=>[3],'👜'=>[3],'☕'=>[4],'💡'=>[4],'👟'=>[5],'🧘'=>[5],'💆'=>[6],'💇'=>[6],'⭐'=>[$_influencersId],'🌟'=>[$_influencersId],'🏆'=>[$_coleccionistasId],'🎖️'=>[$_coleccionistasId]];
                         $catEmoji = '🛒';
                         foreach($emojis as $em => $cats) { if(in_array($prod->cat_id, $cats)) { $catEmoji = $em; break; } }
                     @endphp
@@ -344,7 +364,7 @@ function fakeOldPrice($price) {
         {{-- Ver más de esta categoría --}}
         <a href="{{ route('aimeos_shop_tree', ['f_name'=>$cat['code'], 'f_catid'=>$catId]) }}" class="exiprod-card exiprod-card--more">
             <div class="eximore-inner">
-                <span style="font-size:2.5rem">{{ $cat['emoji'] }}</span>
+                <span style="font-size:2.5rem">{{ $cat['emoji'] ?? $cat['icon'] }}</span>
                 <span>Ver más<br>{{ $cat['label'] }}</span>
                 <span style="font-size:1.5rem">→</span>
             </div>
@@ -389,7 +409,8 @@ function fakeOldPrice($price) {
     var current = 0;
     var timer;
     var touchStartX = 0;
-    var touchDiff   = 0;
+    var touchStartY = 0;
+    var tracking    = false;
 
     function goTo(n) {
         slides[current].classList.remove('active');
@@ -404,18 +425,41 @@ function fakeOldPrice($price) {
     window.heroSlide = function(dir) { clearInterval(timer); goTo(current + dir); startAuto(); };
     window.heroGoTo  = function(n)   { clearInterval(timer); goTo(n); startAuto(); };
 
-    /* Soporte swipe táctil */
+    /* Soporte swipe táctil.
+       touch-action: pan-y en el CSS deja el scroll vertical al navegador,
+       así que aquí solo procesamos movimiento horizontal. */
     slider.addEventListener('touchstart', function(e) {
-        touchStartX = e.changedTouches[0].screenX;
+        var t = e.changedTouches[0];
+        touchStartX = t.screenX;
+        touchStartY = t.screenY;
+        tracking    = true;
     }, { passive: true });
+
+    slider.addEventListener('touchmove', function(e) {
+        if (!tracking) return;
+        var t = e.changedTouches[0];
+        var dx = Math.abs(t.screenX - touchStartX);
+        var dy = Math.abs(t.screenY - touchStartY);
+        /* Si el usuario se mueve claramente en vertical, soltamos el tracking
+           para que el scroll de la pagina fluya sin interference */
+        if (dy > dx * 1.5) {
+            tracking = false;
+        }
+    }, { passive: true });
+
     slider.addEventListener('touchend', function(e) {
-        touchDiff = e.changedTouches[0].screenX - touchStartX;
-        if (Math.abs(touchDiff) > 40) {
+        if (!tracking) return;
+        tracking = false;
+        var dx = e.changedTouches[0].screenX - touchStartX;
+        /* Threshold 30px: suficientemente permisivo en móvil sin disparar falsos positivos */
+        if (Math.abs(dx) > 30) {
             clearInterval(timer);
-            goTo(current + (touchDiff < 0 ? 1 : -1));
+            goTo(current + (dx < 0 ? 1 : -1));
             startAuto();
         }
     }, { passive: true });
+
+    slider.addEventListener('touchcancel', function() { tracking = false; }, { passive: true });
 
     /* Pausa al hover (desktop) */
     slider.addEventListener('mouseenter', function() { clearInterval(timer); });

@@ -131,7 +131,7 @@
 		</style>
 
 		@if( ($page ?? '') === 'catalog-home' || request()->is('/') )
-		<link rel="stylesheet" href="{{ asset('css/exihome.css?v=5') }}">
+		<link rel="stylesheet" href="{{ asset('css/exihome.css?v=8') }}">
 		@endif
 
 		<link rel="icon" href="{{ asset( app( 'aimeos.context' )->get()->config()->get( 'resource/fs-media/baseurl' ) . '/' . ( app( 'aimeos.context' )->get()->locale()->getSiteItem()->getIcon() ?: '../vendor/shop/themes/default/assets/icon.png' ) ) }}">

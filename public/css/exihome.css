@@ -46,7 +46,12 @@ body.page-catalog-home {
     margin-bottom: 0;
 }
 
-.exihero-slider { position: relative; width: 100%; height: 100%; }
+.exihero-slider {
+    position: relative; width: 100%; height: 100%;
+    /* touch-action: pan-y deja al navegador el scroll vertical de la pagina
+       y permite que JS detecte el swipe horizontal sobre el hero */
+    touch-action: pan-y;
+}
 
 .exihero-slide {
     position: absolute; inset: 0;
@@ -201,39 +206,41 @@ body.page-catalog-home {
 .exihero-dots {
     position: absolute; bottom: .85rem; left: 50%;
     transform: translateX(-50%);
-    display: flex; align-items: center; gap: .45rem; z-index: 10;
-    padding: .5rem .25rem;       /* área táctil amplia sin afectar visual */
+    display: flex; align-items: center; gap: .5rem;
+    /* z-index alto para quedar sobre el gradiente del trust bar (.exihome-trust::before, z-index 5) */
+    z-index: 15;
 }
 
-/* Dots — tamaños forzados con !important para que Bootstrap no los pise */
+/* Dots — tamaño original (7 px). El box-shadow sutil da contraste sobre el
+   gradiente blanco del trust bar sin necesidad de pill oscuro detrás. */
 .exidot {
     display: block !important;
-    width: 7px  !important;
+    width: 7px !important;
     height: 7px !important;
-    min-width: 0  !important;
+    min-width: 0 !important;
     min-height: 0 !important;
     flex-shrink: 0;
-    border-radius: 50px !important;
-    background: rgba(255,255,255,.4) !important;
-    cursor: pointer;
-    /* reset total de estilos nativos <button> */
     border: none !important;
-    padding: 0   !important;
-    margin: 0    !important;
-    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
     outline: none;
     -webkit-appearance: none;
     appearance: none;
-    /* transición suave ancho → pill */
+    cursor: pointer;
+    border-radius: 50px !important;
+    background: rgba(255, 255, 255, .7) !important;
+    /* Outline 1px + sombra suave = visible sobre cualquier fondo (incluido el
+       gradiente blanco del trust bar). */
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .35), 0 1px 3px rgba(0, 0, 0, .3) !important;
     transition: background .22s ease, width .22s ease;
 }
 .exidot:focus-visible {
-    outline: 2px solid rgba(255,255,255,.65);
-    outline-offset: 3px;
+    outline: 2px solid rgba(255, 255, 255, .9);
+    outline-offset: 2px;
 }
 .exidot.active {
     background: #fff !important;
-    width: 20px !important;   /* pill de 20×7 px — elegante y proporcional */
+    width: 20px !important;   /* pill 20×7 px — tamaño original */
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -449,6 +456,11 @@ body.page-catalog-home {
 }
 .exisee-all:hover { color: var(--ai-secondary, #ff6b35) !important; }
 
+/* Respeta usuarios con reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    .exicat-special-badge { animation: none !important; }
+}
+
 /* ══════════════════════════════════════════════════════════
    GRID DE CATEGORÍAS — Mobile-first
    ══════════════════════════════════════════════════════════ */
@@ -475,6 +487,37 @@ body.page-catalog-home {
     transform: translateY(-4px);
     box-shadow: 0 12px 28px rgba(0,0,0,.10), 0 4px 8px rgba(0,0,0,.05);
     border-color: rgba(0,0,0,.08);
+}
+
+/* ── Card Influencers: misma grilla, badge animado que la distingue ── */
+.exicat-card--influencer {
+    position: relative;
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFF8E1 100%) !important;
+    border: 1.5px solid #FFB400 !important;
+}
+.exicat-card--influencer:hover {
+    border-color: #FF8C00 !important;
+    box-shadow: 0 12px 28px rgba(255, 140, 0, .25), 0 4px 8px rgba(0, 0, 0, .05) !important;
+}
+.exicat-special-badge {
+    position: absolute;
+    top: -.55rem;
+    right: -.3rem;
+    background: linear-gradient(135deg, #FFB400 0%, #FF6B35 100%);
+    color: #1A1F36;
+    font-size: .55rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    padding: .28rem .6rem;
+    border-radius: 50px;
+    box-shadow: 0 2px 8px rgba(255, 107, 53, .4);
+    z-index: 2;
+    white-space: nowrap;
+    animation: exi-influencer-badge-pulse 2s ease-in-out infinite;
+}
+@keyframes exi-influencer-badge-pulse {
+    0%, 100% { transform: scale(1);    box-shadow: 0 2px 8px rgba(255, 107, 53, .4); }
+    50%      { transform: scale(1.06); box-shadow: 0 4px 16px rgba(255, 107, 53, .7); }
 }
 
 .exicat-icon {
@@ -829,19 +872,9 @@ body.page-catalog-home {
     overflow-x: hidden;
 }
 
-/* Touch target mínimo 44px para botones pequeños */
+/* Touch target mínimo 44px para flechas (los .exidot ya tienen ~28×28 via padding) */
 .exihero-prev,
-.exihero-next,
-.exidot {
+.exihero-next {
     min-width: 44px;
     min-height: 44px;
-}
-.exidot {
-    /* puntos más fáciles de tocar en móvil */
-    width: 10px; height: 10px;
-    padding: 10px;
-    background-clip: content-box;
-    background-size: 10px 10px;
-    background-repeat: no-repeat;
-    background-position: center;
 }
