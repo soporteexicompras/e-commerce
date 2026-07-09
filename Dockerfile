@@ -131,11 +131,11 @@ RUN docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype \
 RUN pecl install redis \
     && docker-php-ext-enable redis
 
-# Composer (binario)
-COPY --from=composer:2.7 /usr/bin/composer /usr/bin/composer
+# Composer (binario) — misma version que el stage vendor para coherencia
+COPY --from=composer:2.8 /usr/bin/composer /usr/bin/composer
 
-# Zona horaria por defecto (puede sobreescribirse con TZ en runtime)
-ENV TZ=UTC
+# Zona horaria por defecto — Colombia (puede sobreescribirse con TZ en runtime)
+ENV TZ=America/Bogota
 
 # Directorio de la app
 WORKDIR /var/www/html

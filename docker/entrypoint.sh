@@ -13,7 +13,7 @@ if [ -n "$DB_HOST" ] && [ "$DB_CONNECTION" != "sqlite" ]; then
     until php -r "
         try {
             new PDO(
-                'mysql:host='.getenv('DB_HOST').';port='.getenv('DB_PORT', 3306),
+                'mysql:host='.getenv('DB_HOST').';port='.(getenv('DB_PORT') ?: 3306),
                 getenv('DB_USERNAME'),
                 getenv('DB_PASSWORD')
             );

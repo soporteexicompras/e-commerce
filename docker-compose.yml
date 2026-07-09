@@ -3,18 +3,37 @@
 #
 #  Servicios:
 #    app         → PHP-FPM (la aplicación)
-#    nginx       → Reverse proxy / servidor web
+#    nginx       → Reverse proxy / servidor web (punto de entrada HTTP)
 #    queue       → Worker de colas (php artisan queue:work)
 #    scheduler   → Cron interno de Laravel (schedule:run cada 60s)
 #    db          → MySQL 8.0 (opcional, puedes usar uno externo)
 #    redis       → Cache + sesiones + colas (opcional)
 #
-#  Uso:
+#  ── Uso local ─────────────────────────────────────────────────────
 #    cp .env.docker.example .env
+#    docker network create coolify     # solo si vas a usar el stack completo con Traefik
 #    docker compose up -d
-#    docker compose exec app php artisan migrate --force
+#    docker compose exec app php artisan aimeos:setup
 #
-#  Para Coolify / Laravel Cloud: este mismo archivo funciona.
+#  ── Coolify v4.x (build pack: Docker Compose) ────────────────────
+#    Coolify provisiona la red `coolify` automáticamente, inyecta
+#    sus propias Traefik labels (router por dominio configurado en
+#    el dashboard) y lee el .env desde el panel Environment Variables.
+#
+#    Settings de Coolify para este repo:
+#      • Build Pack        : Docker Compose
+#      • Docker Compose    : /docker-compose.yml
+#      • Port Exposes      : 80   (nginx)
+#      • Base Directory    : /   (raíz del repo)
+#      • Domains           : 1 dominio (ej. shop.exicompras.com)
+#      • Environment Vars  : inyectar las claves de .env.docker.example
+#                            + APP_KEY (auto-generable en primer arranque)
+#      • Docker Network    : crear la red `coolify` (Coolify ya la gestiona)
+#
+#    Traefik labels de este compose son genéricas (sin dominio
+#    hardcodeado) para que Coolify pueda sobrescribir el router con
+#    el dominio configurado en su dashboard. Solo se mantienen las
+#    labels de infraestructura (enable, network).
 # ════════════════════════════════════════════════════════════════════════════
 
 services:
@@ -36,17 +55,23 @@ services:
       # Forzar variables que el container necesita
       - APP_ENV=production
       - RUN_MIGRATIONS=${RUN_MIGRATIONS:-false}
+      - RUN_SEEDERS=${RUN_SEEDERS:-true}
     volumes:
-      # Solo storage y bootstrap/cache se montan (para logs/cache persistentes)
+      # Solo storage/app se monta (uploads del usuario). El resto de
+      # storage/ se conserva desde la imagen y el entrypoint crea los
+      # subdirs faltantes (cache/sessions/views) en cada arranque.
       - app-storage:/var/www/html/storage/app
     depends_on:
       db:
         condition: service_healthy
       redis:
-        condition: service_started
+        condition: service_healthy
     networks: [exicompras]
     healthcheck:
-      test: ["CMD-SHELL", "php -r 'exit(0);' || exit 1"]
+      # Comprueba que PHP-FPM escucha en :9000 (sin HTTP porque es FastCGI).
+      # Si el puerto responde, el worker está listo para aceptar requests
+      # de nginx. /up lo chequea nginx (siguiente servicio).
+      test: ["CMD-SHELL", "(echo > /dev/tcp/127.0.0.1/9000) >/dev/null 2>&1 || exit 1"]
       interval: 30s
       timeout: 5s
       retries: 3
@@ -59,7 +84,7 @@ services:
           memory: 256M
 
   # ──────────────────────────────────────────────────────────────────
-  #  nginx — Web server
+  #  nginx — Web server (único puerto expuesto: 80)
   # ──────────────────────────────────────────────────────────────────
   nginx:
     build:
@@ -75,12 +100,11 @@ services:
       - exicompras
       - coolify
     labels:
+      # Infra Traefik — no incluyen router/rule para que Coolify lo
+      # inyecte desde su dashboard. Si necesitas un router manual,
+      # duplica la lógica en Coolify (Domains) y elimina el hardcode.
       - "traefik.enable=true"
       - "traefik.docker.network=coolify"
-      - "traefik.http.services.exicompras-nginx.loadbalancer.server.port=80"
-      - "traefik.http.routers.exicompras-nginx.rule=Host(`qnbygzoq32luuws2cv6d6zbl.149.130.187.189.sslip.io`)"
-      - "traefik.http.routers.exicompras-nginx.entryPoints=http"
-      - "traefik.http.routers.exicompras-nginx.priority=100"
       - "coolify.managed=true"
       - "coolify.pullRequestId=0"
       - "coolify.type=application"
@@ -108,6 +132,8 @@ services:
     volumes:
       - app-storage:/var/www/html/storage/app
     entrypoint: ["/var/www/html/docker/queue-entrypoint.sh"]
+    # `command: ~` (YAML null) requerido por el validador de Coolify
+    # que rechaza `command: []`. El entrypoint hace exec al worker.
     command: ~
     depends_on:
       app:
@@ -212,8 +238,16 @@ volumes:
   redisdata:
 
 # ──────────────────────────────────────────────────────────────────
-#  Red interna
+#  Redes
 # ──────────────────────────────────────────────────────────────────
 networks:
   exicompras:
     driver: bridge
+  # La red `coolify` la crea Coolify automáticamente en su host.
+  # En local (`docker compose up`), créala manualmente:
+  #   docker network create coolify
+  # Si no existe y nginx la referencia, el servicio no arrancará.
+  coolify:
+    external: true
+    name: coolify
+
