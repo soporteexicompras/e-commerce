@@ -1,7 +1,8 @@
 /* ══════════════════════════════════════════════════════════
-   EXICOMPRAS — Page Loader (Influencers)
+   EXICOMPRAS — Page Loader (Influencers / Artistas)
    Overlay full-viewport premium que se monta solo cuando el
-   usuario hace clic en un link a /shop/influencers*. Trigger JS.
+   usuario hace clic en un link a /shop/influencers* o
+   /shop/artistas*. Trigger JS.
    ══════════════════════════════════════════════════════════ */
 
 .exi-page-loader {
@@ -17,6 +18,9 @@
     visibility: hidden;
     pointer-events: none;
     transition: opacity .35s ease, visibility 0s linear .35s;
+}
+.exi-page-loader--artista {
+    background: linear-gradient(135deg, #1A0612 0%, #2A0E1E 45%, #5C0E3B 100%);
 }
 .exi-page-loader.is-active {
     opacity: 1;

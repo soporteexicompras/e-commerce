@@ -110,6 +110,24 @@
     transition: height .25s ease-out, max-width .25s ease-out;
 }
 
+/* ── Wordmark "Exicompras" junto al logo ──────────────── */
+.exi-navbar-shell .navbar-brand .exi-brand-text {
+    font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 800;
+    font-size: calc(var(--ai-logo-h, 40px) * 0.55);
+    line-height: 1;
+    letter-spacing: -.018em;
+    color: var(--ai-nav-text, #1A1F36);
+    margin-left: .55rem;
+    white-space: nowrap;
+    transition: font-size .25s ease-out, color .25s ease-out;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.exi-navbar-shell.exi-shrunk .navbar-brand .exi-brand-text {
+    font-size: calc(var(--ai-logo-h-tablet, 32px) * 0.55);
+}
+
 /* ── Search wrap: FLEX-GROW, toma todo el espacio ──── */
 .exi-navbar-shell .exi-search-wrap {
     flex: 1 1 auto !important;
@@ -721,9 +739,19 @@
     .exi-locale-wrap { display: none !important; }
     .exi-navbar-row--main > .exi-search-wrap { max-width: none; }
     .exi-navbar-shell .exi-navbar-toggler { display: inline-flex !important; }
-    /* Móvil/tablet: el toggler ocupa la col 1, brand col 1 (justificado al medio si no hay toggler) */
+    /* Toggler col 1, brand col 2 (izquierda, junto al toggler), search col 2 (mismo slot, ajustada), actions col 3 */
     .exi-navbar-row--main {
-        grid-template-columns: auto minmax(0, 1fr) auto !important;
+        grid-template-columns: auto auto minmax(0, 1fr) auto !important;
+    }
+    .exi-navbar-row--main > .navbar-brand {
+        grid-column: 2;
+        justify-self: start;
+    }
+    .exi-navbar-row--main > .exi-search-wrap {
+        grid-column: 3;
+    }
+    .exi-navbar-row--main > .exi-navbar-actions {
+        grid-column: 4;
     }
 }
 
@@ -766,13 +794,15 @@
         max-width: calc(var(--ai-logo-h, 40px) * 2.2);
         margin: 0 auto;
     }
+    /* Ocultar wordmark en móvil: el logo ya va centrado, no hay espacio */
+    .exi-navbar-shell .navbar-brand .exi-brand-text { display: none; }
     /* Solo mostrar el basket en mobile */
     .exi-navbar-shell .exi-navbar-actions .basket-mini { display: inline-flex !important; }
     .exi-navbar-shell .exi-navbar-actions > *:not(.basket-mini) { display: none !important; }
 }
 
-/* ≥768px: toggler oculto y navbar completo */
-@media (min-width: 768px) {
+/* ≥992px: navbar completo con categorías inline, toggler oculto */
+@media (min-width: 992px) {
     .exi-navbar-shell .exi-navbar-toggler { display: none !important; }
 }
 
@@ -785,7 +815,7 @@
 }
 
 /* ──────────────────────────────────────────────────────────
-   Categorías especiales: Influencers + Coleccionistas
+   Categorías especiales: Influencers + Coleccionistas + Artistas
    Color distintivo + underline animado al hover + chip
    "ESPECIAL" sutil al lado del nombre.
    ────────────────────────────────────────────────────────── */
@@ -793,11 +823,13 @@
 /* Base compartida: tipografía un poco más pesada + ancho del
    área de pulsado extendido para acomodar el chip. */
 .exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-influencers,
-.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas {
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-artistas {
     position: relative;
 }
 .exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-influencers .cat-link,
-.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas .cat-link {
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas .cat-link,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-artistas .cat-link {
     font-weight: 700 !important;
     letter-spacing: .01em;
     position: relative;
@@ -824,10 +856,21 @@
     color: #9B59B6 !important;
 }
 
+/* === Artistas — rosa-magenta de escenario === */
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-artistas .cat-link {
+    color: #AD1457 !important;
+}
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-artistas .cat-link:hover,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-artistas .cat-link:focus,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-artistas.active > .item-links > .cat-link {
+    color: #E91E63 !important;
+}
+
 /* === Underline animado al hover (slide-in de izquierda a derecha) ===
    Se posiciona absolutamente debajo del texto y se expande. */
 .exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-influencers .cat-link::after,
-.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas .cat-link::after {
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas .cat-link::after,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-artistas .cat-link::after {
     content: '';
     position: absolute;
     left: .9rem;
@@ -843,17 +886,21 @@
 .exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-influencers:hover .cat-link::after,
 .exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-influencers:focus-within .cat-link::after,
 .exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas:hover .cat-link::after,
-.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas:focus-within .cat-link::after {
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas:focus-within .cat-link::after,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-artistas:hover .cat-link::after,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-artistas:focus-within .cat-link::after {
     transform: scaleX(1);
 }
 
 /* === Chip "Especial" sutil a la izquierda del nombre === */
 .exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-influencers .cat-link,
-.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas .cat-link {
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas .cat-link,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-artistas .cat-link {
     padding-left: 1.55rem !important;
 }
 .exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-influencers .cat-link::before,
-.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas .cat-link::before {
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas .cat-link::before,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-artistas .cat-link::before {
     content: '';
     position: absolute;
     left: .65rem;
@@ -867,19 +914,25 @@
     transition: box-shadow .25s ease;
 }
 .exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-influencers:hover .cat-link::before,
-.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas:hover .cat-link::before {
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas:hover .cat-link::before,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-artistas:hover .cat-link::before {
     box-shadow: 0 0 0 3px rgba(255, 107, 53, .15);
 }
 .exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas:hover .cat-link::before {
     box-shadow: 0 0 0 3px rgba(155, 89, 182, .15);
+}
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-artistas:hover .cat-link::before {
+    box-shadow: 0 0 0 3px rgba(233, 30, 99, .18);
 }
 
 /* === Reduced motion === */
 @media (prefers-reduced-motion: reduce) {
     .exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-influencers .cat-link::after,
     .exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas .cat-link::after,
+    .exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-artistas .cat-link::after,
     .exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-influencers .cat-link::before,
-    .exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas .cat-link::before {
+    .exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas .cat-link::before,
+    .exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-artistas .cat-link::before {
         transition: none !important;
     }
 }

@@ -64,10 +64,11 @@ $byCategory = $products->groupBy('cat_id');
 // Resolver IDs reales de las categorias especiales (pueden no ser 7/8 si ya hay otras)
 $_specialIds = DB::table('mshop_catalog')
     ->where('siteid', '1.')
-    ->whereIn('code', ['influencers', 'coleccionistas'])
+    ->whereIn('code', ['influencers', 'coleccionistas', 'artistas'])
     ->pluck('id', 'code');
 $_influencersId     = $_specialIds['influencers']     ?? null;
 $_coleccionistasId  = $_specialIds['coleccionistas']  ?? null;
+$_artistasId        = $_specialIds['artistas']        ?? null;
 
 $categories = [];
 if ($_influencersId) {
@@ -78,6 +79,9 @@ $categories[3] = ['label'=>'Ropa y Accesorios',  'code'=>'ropa-y-accesorios','ic
 $categories[4] = ['label'=>'Hogar y Decoración', 'code'=>'hogar-y-decoracion','icon'=>'🏠','emoji'=>'🏡','color'=>'#38a169'];
 $categories[5] = ['label'=>'Deportes y Fitness', 'code'=>'deportes-y-fitness','icon'=>'🏋️','emoji'=>'💪','color'=>'#d69e2e'];
 $categories[6] = ['label'=>'Belleza y Cuidado',  'code'=>'belleza-y-cuidado','icon'=>'💄','emoji'=>'🌸','color'=>'#e53e3e'];
+if ($_artistasId) {
+    $categories[$_artistasId] = ['label'=>'Artistas', 'code'=>'artistas', 'icon'=>'🎤', 'emoji'=>'🎶', 'color'=>'#E91E63', 'special'=>'artista'];
+}
 if ($_coleccionistasId) {
     $categories[$_coleccionistasId] = ['label'=>'Coleccionistas', 'code'=>'coleccionistas', 'icon'=>'🏆', 'emoji'=>'🎖️', 'color'=>'#9B59B6'];
 }
@@ -245,6 +249,8 @@ function fakeOldPrice($price) {
            ])>
             @if(($cat['special'] ?? null) === 'influencer')
                 <span class="exicat-special-badge" aria-label="Categoria especial Influencers">INFLUENCERS</span>
+            @elseif(($cat['special'] ?? null) === 'artista')
+                <span class="exicat-special-badge exicat-special-badge--artista" aria-label="Categoria especial Artistas">ARTISTAS</span>
             @endif
             <div class="exicat-icon" style="background: {{ $cat['color'] }}22; border-color: {{ $cat['color'] }}44;">
                 <span class="exicat-emoji">{{ $cat['icon'] }}</span>
@@ -275,7 +281,7 @@ function fakeOldPrice($price) {
             <div class="exiprod-img-wrap">
                 <div class="exiprod-img-placeholder">
                     @php
-                        $emojis = ['🖥️'=>[2],'📱'=>[2],'🎧'=>[2],'👗'=>[3],'👖'=>[3],'👜'=>[3],'☕'=>[4],'💡'=>[4],'👟'=>[5],'🧘'=>[5],'💆'=>[6],'💇'=>[6],'⭐'=>[$_influencersId],'🌟'=>[$_influencersId],'🏆'=>[$_coleccionistasId],'🎖️'=>[$_coleccionistasId]];
+                        $emojis = ['🖥️'=>[2],'📱'=>[2],'🎧'=>[2],'👗'=>[3],'👖'=>[3],'👜'=>[3],'☕'=>[4],'💡'=>[4],'👟'=>[5],'🧘'=>[5],'💆'=>[6],'💇'=>[6],'⭐'=>[$_influencersId],'🌟'=>[$_influencersId],'🏆'=>[$_coleccionistasId],'🎖️'=>[$_coleccionistasId],'🎤'=>[$_artistasId],'🎶'=>[$_artistasId],'🎸'=>[$_artistasId],'🎬'=>[$_artistasId]];
                         $catEmoji = '🛒';
                         foreach($emojis as $em => $cats) { if(in_array($prod->cat_id, $cats)) { $catEmoji = $em; break; } }
                     @endphp

@@ -499,6 +499,16 @@ body.page-catalog-home {
     border-color: #FF8C00 !important;
     box-shadow: 0 12px 28px rgba(255, 140, 0, .25), 0 4px 8px rgba(0, 0, 0, .05) !important;
 }
+/* ── Card Artistas: gradiente rosa-magenta, badge con pulso magenta ── */
+.exicat-card--artista {
+    position: relative;
+    background: linear-gradient(135deg, #FFFFFF 0%, #FCE4EC 100%) !important;
+    border: 1.5px solid #E91E63 !important;
+}
+.exicat-card--artista:hover {
+    border-color: #AD1457 !important;
+    box-shadow: 0 12px 28px rgba(173, 20, 87, .25), 0 4px 8px rgba(0, 0, 0, .05) !important;
+}
 .exicat-special-badge {
     position: absolute;
     top: -.55rem;
@@ -515,9 +525,19 @@ body.page-catalog-home {
     white-space: nowrap;
     animation: exi-influencer-badge-pulse 2s ease-in-out infinite;
 }
+.exicat-special-badge--artista {
+    background: linear-gradient(135deg, #E91E63 0%, #FF4081 100%);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(233, 30, 99, .45);
+    animation: exi-artista-badge-pulse 2s ease-in-out infinite;
+}
 @keyframes exi-influencer-badge-pulse {
     0%, 100% { transform: scale(1);    box-shadow: 0 2px 8px rgba(255, 107, 53, .4); }
     50%      { transform: scale(1.06); box-shadow: 0 4px 16px rgba(255, 107, 53, .7); }
+}
+@keyframes exi-artista-badge-pulse {
+    0%, 100% { transform: scale(1);    box-shadow: 0 2px 8px rgba(233, 30, 99, .4); }
+    50%      { transform: scale(1.06); box-shadow: 0 4px 16px rgba(233, 30, 99, .7); }
 }
 
 .exicat-icon {

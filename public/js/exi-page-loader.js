@@ -29,6 +29,26 @@
         }
     }
 
+    function matchArtistasHref(href) {
+        if (!href) return false;
+        try {
+            var u = new URL(href, window.location.origin);
+            return /\/shop\/artistas(\b|~|\/|\.|$)/i.test(u.pathname);
+        } catch (e) {
+            return false;
+        }
+    }
+
+    function isSpecialHref(href) {
+        return matchInfluencersHref(href) || matchArtistasHref(href);
+    }
+
+    function specialTitle(href) {
+        if (matchInfluencersHref(href)) return 'Influencers';
+        if (matchArtistasHref(href))    return 'Artistas';
+        return '';
+    }
+
     function isSamePage(href) {
         try {
             var u = new URL(href, window.location.origin);
@@ -39,10 +59,15 @@
         }
     }
 
-    function buildOverlay() {
+    function buildOverlay(title) {
         if (overlay) return overlay;
+        var isArtista = title === 'Artistas';
+        var heartColor = isArtista ? '#FF4081' : '#FF6B35';
+        var tagline    = isArtista
+            ? 'Merch oficial, vinilos y piezas únicas de tus artistas favoritos'
+            : 'Donde el estilo se encuentra con el producto perfecto';
         overlay = document.createElement('div');
-        overlay.className = 'exi-page-loader';
+        overlay.className = 'exi-page-loader' + (isArtista ? ' exi-page-loader--artista' : '');
         overlay.setAttribute('aria-hidden', 'true');
         overlay.setAttribute('role', 'status');
         overlay.setAttribute('aria-live', 'polite');
@@ -50,15 +75,15 @@
             '<div class="exi-page-loader__bg" aria-hidden="true"></div>',
             '<div class="exi-page-loader__container">',
                 '<p class="exi-page-loader__kicker">Cargando</p>',
-                '<h2 class="exi-page-loader__title">Influencers</h2>',
+                '<h2 class="exi-page-loader__title">' + title + '</h2>',
                 '<div class="exi-page-loader__art" aria-hidden="true">',
                     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="76" height="76" fill="none" aria-hidden="true">',
                         '<path class="exi-art__bolsa" d="M14 22 L50 22 Q54 22 54 26 L54 56 Q54 60 50 60 L14 60 Q10 60 10 56 L10 26 Q10 22 14 22 Z" stroke="#ffffff" stroke-width="2.5" stroke-linejoin="round" fill="none" />',
                         '<path class="exi-art__asa" d="M22 22 Q22 12 32 12 Q42 12 42 22" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none" />',
-                        '<path class="exi-art__corazon" d="M32 46 C20 36 16 30 16 24 C16 19.6 19 16 23 16 C26 16 29.5 17.5 32 21 C34.5 17.5 38 16 41 16 C45 16 48 19.6 48 24 C48 30 44 36 32 46 Z" fill="#FF6B35" style="transform-origin: 32px 24px; transform: scale(0);" />',
+                        '<path class="exi-art__corazon" d="M32 46 C20 36 16 30 16 24 C16 19.6 19 16 23 16 C26 16 29.5 17.5 32 21 C34.5 17.5 38 16 41 16 C45 16 48 19.6 48 24 C48 30 44 36 32 46 Z" fill="' + heartColor + '" style="transform-origin: 32px 24px; transform: scale(0);" />',
                     '</svg>',
                 '</div>',
-                '<p class="exi-page-loader__tagline">Donde el estilo se encuentra con el producto perfecto</p>',
+                '<p class="exi-page-loader__tagline">' + tagline + '</p>',
             '</div>',
             '<div class="exi-page-loader__bar"><div class="exi-page-loader__progress"></div></div>'
         ].join('');
@@ -131,7 +156,7 @@
 
         // 2. Render overlay + arm Esc-to-cancel
         try {
-            buildOverlay();
+            buildOverlay(specialTitle(url));
             overlay.classList.add('is-active');
             overlay.setAttribute('aria-hidden', 'false');
             triggerAnimations();
@@ -155,7 +180,7 @@
         if (!a) return;
         if (a.target === '_blank') return;
         if (typeof a.href !== 'string') return;
-        if (!matchInfluencersHref(a.href)) return;
+        if (!isSpecialHref(a.href)) return;
         if (isSamePage(a.href)) return;
 
         e.preventDefault();

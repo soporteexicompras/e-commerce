@@ -1457,7 +1457,8 @@ body:not(.catalog-home) .exicatalog-aside .catalog-session .session-items a {
 /* Estado pre-animacion: invisible + 20px abajo.
    La clase `js-ready` solo se anade si JS esta disponible,
    asi no afectamos a clientes sin JS. */
-.js-ready .exicatalog-main--influencers .catalog-list-items:not(.is-loaded) > * {
+.js-ready .exicatalog-main--influencers .catalog-list-items:not(.is-loaded) > *,
+.js-ready .exicatalog-main--artistas .catalog-list-items:not(.is-loaded) > * {
     opacity: 0;
     transform: translateY(20px);
     will-change: opacity, transform;
@@ -1465,7 +1466,8 @@ body:not(.catalog-home) .exicatalog-aside .catalog-session .session-items a {
 
 /* Cuando el JS anade `is-loaded`, dispara la animacion con stagger
    calculado por variable CSS `--exi-stagger-i` (asignada por JS). */
-.exicatalog-main--influencers .catalog-list-items.is-loaded > * {
+.exicatalog-main--influencers .catalog-list-items.is-loaded > *,
+.exicatalog-main--artistas .catalog-list-items.is-loaded > * {
     animation: exi-product-reveal .65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     animation-delay: calc(var(--exi-stagger-i, 0) * 90ms + 80ms);
 }
@@ -1479,6 +1481,97 @@ body:not(.catalog-home) .exicatalog-aside .catalog-session .session-items a {
     .exi-influencers-hero-content,
     .exi-influencers-badge,
     .exicatalog-main--influencers .catalog-list-items > * {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+/* ══════════════════════════════════════════════════════════
+   ARTISTAS — Hero fullscreen + stagger reveal
+   Misma estructura visual que Influencers, con paleta
+   rosa-magenta para evocar la energía del escenario.
+   Solo aplica cuando tree.blade.php detecta la categoria.
+   ══════════════════════════════════════════════════════════ */
+
+.exi-artistas-hero {
+    position: relative;
+    overflow: hidden;
+    min-height: clamp(280px, 40vh, 480px);
+    margin: 0 0 1.5rem;
+    border-radius: var(--exi-radius-lg, 18px);
+    background: linear-gradient(135deg, #2A0E1E 0%, #5C0E3B 50%, #2A0E1E 100%);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.5rem;
+    text-align: center;
+}
+.exi-artistas-hero-bg {
+    position: absolute; inset: 0;
+    background:
+        radial-gradient(circle at 25% 25%, rgba(233, 30, 99, .30) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(255, 64, 129, .25) 0%, transparent 50%);
+    animation: exi-artistas-bg-pan 8s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+@keyframes exi-artistas-bg-pan {
+    0%   { transform: scale(1)   translate(0, 0); }
+    100% { transform: scale(1.1) translate(2%, -2%); }
+}
+.exi-artistas-hero-content {
+    position: relative;
+    max-width: 600px;
+    animation: exi-artistas-reveal .8s cubic-bezier(.4,0,.2,1) both;
+}
+@keyframes exi-artistas-reveal {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.exi-artistas-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #E91E63 0%, #FF4081 100%);
+    color: #fff;
+    font-size: clamp(.7rem, 1.6vw, .85rem);
+    font-weight: 800;
+    letter-spacing: 2px;
+    padding: .4rem 1.1rem;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 16px rgba(233, 30, 99, .35);
+    animation: exi-artistas-badge-pulse 2s ease-in-out infinite;
+}
+@keyframes exi-artistas-badge-pulse {
+    0%, 100% { transform: scale(1);    }
+    50%      { transform: scale(1.05); }
+}
+.exi-artistas-title {
+    font-size: clamp(1.8rem, 6vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    margin: 0 0 .75rem;
+    letter-spacing: -0.02em;
+    color: #fff;
+}
+.exi-artistas-title span {
+    background: linear-gradient(135deg, #E91E63 0%, #FF4081 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+.exi-artistas-subtitle {
+    font-size: clamp(.9rem, 2vw, 1.1rem);
+    color: rgba(255, 255, 255, .85);
+    margin: 0;
+    line-height: 1.4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .exi-artistas-hero-bg,
+    .exi-artistas-hero-content,
+    .exi-artistas-badge,
+    .exicatalog-main--artistas .catalog-list-items > * {
         animation: none !important;
         opacity: 1 !important;
         transform: none !important;

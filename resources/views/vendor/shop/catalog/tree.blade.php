@@ -35,15 +35,18 @@
 @section('aimeos_body')
 	@php
 		$isInfluencers = request()->is('*influencers*') || request()->input('f_name') === 'influencers';
+		$isArtistas    = request()->is('*artistas*')    || request()->input('f_name') === 'artistas';
 	@endphp
-	<div class="container-fluid exicatalog-wrap @if($isInfluencers) exicatalog-wrap--influencers @endif">
+	<div class="container-fluid exicatalog-wrap @if($isInfluencers) exicatalog-wrap--influencers @elseif($isArtistas) exicatalog-wrap--artistas @endif">
 		<div class="row">
 			<aside class="col-lg-3 exicatalog-aside">
 				<?= $aibody['catalog/filter'] ?? '' ?>
 			</aside>
-			<div class="col-lg-9 exicatalog-main @if($isInfluencers) exicatalog-main--influencers @endif">
+			<div class="col-lg-9 exicatalog-main @if($isInfluencers) exicatalog-main--influencers @elseif($isArtistas) exicatalog-main--artistas @endif">
 				@if($isInfluencers)
 					@include('shop::catalog.partials.exi-influencers-hero')
+				@elseif($isArtistas)
+					@include('shop::catalog.partials.exi-artistas-hero')
 				@endif
 				<?= $aibody['catalog/lists'] ?? '' ?>
 				<?= $aibody['cms/page'] ?? '' ?>
@@ -51,9 +54,9 @@
 		</div>
 	</div>
 
-	@if($isInfluencers)
+	@if($isInfluencers || $isArtistas)
 		{{--
-			Premium staggered entrance para los productos de Influencers.
+			Premium staggered entrance para los productos de Influencers / Artistas.
 			Estrategia:
 			- Marca <html class="js-ready"> para que el CSS aplique el estado pre-animacion.
 			- Asigna --exi-stagger-i a cada producto (0..n).
@@ -69,8 +72,9 @@
 			if (!document.documentElement.classList) return;
 			document.documentElement.classList.add('js-ready');
 
-			// 2. Localizar el grid de productos
-			var root = document.querySelector('.exicatalog-main--influencers .catalog-list-items');
+			// 2. Localizar el grid de productos (Influencers o Artistas)
+			var root = document.querySelector('.exicatalog-main--influencers .catalog-list-items')
+				|| document.querySelector('.exicatalog-main--artistas .catalog-list-items');
 			if (!root) return;
 
 			// 3. Respetar prefers-reduced-motion

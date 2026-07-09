@@ -12,7 +12,7 @@ class SeedSpecialCategories extends Command
 {
     protected $signature = 'exi:seed-special-categories {--bump-theme : Bump theme_version after seeding}';
 
-    protected $description = 'Crea (idempotente) las categorias especiales: Influencers y Coleccionistas';
+    protected $description = 'Crea (idempotente) las categorias especiales: Influencers, Coleccionistas y Artistas';
 
     private string $siteid = '1.';
 
@@ -35,6 +35,13 @@ class SeedSpecialCategories extends Command
             code: 'coleccionistas',
             label: 'Coleccionistas',
             url: 'coleccionistas',
+        );
+
+        $this->ensureCategory(
+            $context,
+            code: 'artistas',
+            label: 'Artistas',
+            url: 'artistas',
         );
 
         if ($this->option('bump-theme')) {

@@ -21,6 +21,10 @@
 			<link type="text/css" rel="stylesheet" href="{{ asset('vendor/shop/themes/default/app.css?v=' . $_ver ) }}">
 		@endif
 		<link type="text/css" rel="stylesheet" href="{{ asset('vendor/shop/themes/default/aimeos.css?v=' . $_ver ) }}">
+		{{-- Wordmark Exicompras: tipografía bold moderna similar a Poppins, con fallback a system stack --}}
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@800;900&display=swap">
 		{{-- Navbar global — garantiza consistencia entre home, list, tree, detail --}}
 		<link type="text/css" rel="stylesheet" href="{{ asset('css/exinavbar.css?v=' . $_ver) }}">
 		{{-- 2-row layout + sticky shrink + mega-menú + search prominente + wishlist --}}
@@ -28,7 +32,7 @@
 		{{-- Drawer móvil (off-canvas) --}}
 		<link type="text/css" rel="stylesheet" href="{{ asset('css/exinavbar.drawer.css?v=' . $_ver) }}">
 		{{-- Footer rediseñado + páginas legales (Terminos, Privacidad, etc.) --}}
-		<link type="text/css" rel="stylesheet" href="{{ asset('css/exifooter.css?v=1') }}">
+		<link type="text/css" rel="stylesheet" href="{{ asset('css/exifooter.css?v=2') }}">
 		{{-- Page loader premium para categoria Influencers --}}
 		<link type="text/css" rel="stylesheet" href="{{ asset('css/exi-page-loader.css?v=1') }}">
 
@@ -161,6 +165,7 @@
 
 				<a class="navbar-brand" href="/" title="{{ __('To the home page') }}">
 					<img src="{{ asset( app( 'aimeos.context' )->get()->config()->get( 'resource/fs-media/baseurl' ) . '/' . ( app( 'aimeos.context' )->get()->locale()->getSiteItem()->getLogo() ?: '../vendor/shop/themes/default/assets/logo.png' ) ) }}" class="navbar-logo" alt="{{ __('To the home page') }}">
+					<span class="exi-brand-text">Exicompras</span>
 				</a>
 
 				<div class="exi-search-wrap" role="search">
@@ -229,6 +234,7 @@
 						@endphp
 						<a href="{{ route('aimeos_home') }}" title="Ir al inicio" class="exicom-footer__logo-link" aria-label="Exicompras — ir al inicio">
 							<img src="{{ asset($_logoUrl) }}" alt="Exicompras" loading="lazy" class="exicom-footer__logo">
+							<span class="exicom-footer__brand-text">Exicompras</span>
 						</a>
 						<p class="exicom-footer__tagline">El marketplace colombiano para comprar productos únicos con pagos seguros y envíos trazables.</p>
 

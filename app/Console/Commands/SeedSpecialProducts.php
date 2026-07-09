@@ -12,7 +12,7 @@ class SeedSpecialProducts extends Command
 {
     protected $signature = 'exi:seed-special-products';
 
-    protected $description = 'Crea (idempotente) productos de ejemplo para Influencers y Coleccionistas';
+    protected $description = 'Crea (idempotente) productos de ejemplo para Influencers, Coleccionistas y Artistas';
 
     private string $siteid = '1.';
     private string $now;
@@ -134,15 +134,71 @@ class SeedSpecialProducts extends Command
         ],
     ];
 
+    /**
+     * Productos de marca propia para Artistas — cantantes, actores, etc.
+     * Merchandising oficial y ediciones especiales firmadas.
+     */
+    private array $artistasProducts = [
+        [
+            'code'  => 'ART-001',
+            'label' => 'Camiseta Luna Vega Tour 2025',
+            'name'  => 'Camiseta Oficial Luna Vega Tour 2025 — Merch Oficial',
+            'short' => 'Camiseta oficial del tour de Luna Vega 2025, edicion limitada.',
+            'long'  => 'Camiseta oficial del nuevo tour de la cantante colombiana Luna Vega. Algodon 100% organico peinado de 180g, corte unisex relaxed fit, estampado en serigrafia de alta calidad con tintas al agua (ecologicas). Diseno exclusivo del tour con la tipografia caracteristica de la artista en el frente y la lista de ciudades en la espalda. Edicion limitada: solo 2.000 unidades worldwide. Cada camiseta viene con una tarjeta firmada por la artista y un codigo QR para acceder a contenido exclusivo (backstage, audio sin editar). Lavar en agua fria, del reves.',
+            'price' => 159000,
+        ],
+        [
+            'code'  => 'ART-002',
+            'label' => 'Vinilo Andrés Maya — Acústico',
+            'name'  => 'Vinilo Andrés Maya Acústico — Edicion Numerada 180g',
+            'short' => 'Vinilo del album acustico de Andres Maya, edicion numerada 180g.',
+            'long'  => 'Edicion en vinilo de 180 gramos del album acustico del cantautor colombiano Andres Maya. Grabado en directo en una sola toma en los estudios de Aimeos Records, prensado en vinilo negro de alta densidad con masterizacion analogica. Incluye 2 LPs con las 14 canciones del repertorio acustico, un booklet de 24 paginas con fotografias del making-of y las letras manuscritas por el artista. Edicion limitada y numerada (1.500 unidades worldwide) con certificado de autenticidad. Cada vinilo es una pieza unica para coleccionistas y fanaticos de la buena musica.',
+            'price' => 289000,
+        ],
+        [
+            'code'  => 'ART-003',
+            'label' => 'Poster Firmado Camila Reyes',
+            'name'  => 'Poster Autografiado Camila Reyes — Tour Mariposas',
+            'short' => 'Poster firmado a mano por Camila Reyes, edicion limitada certificada.',
+            'long'  => 'Poster oficial del Tour Mariposas de la cantante urbana Camila Reyes, firmado a mano por la artista y certificado de autenticidad por estudio independiente. Impreso en papel couche de 250g con terminacion mate, tamano 60x90 cm, incluye marco de madera natural hecho a mano. Cada poster esta numerado (1/500) y viene con un certificado holografico antifraude. Ideal para coleccionistas o para enmarcar y exhibir en tu rincon favorito. La firma se aplica en la esquina inferior derecha para no interferir con la imagen principal.',
+            'price' => 195000,
+        ],
+        [
+            'code'  => 'ART-004',
+            'label' => 'Tote Bag Dante Orozco',
+            'name'  => 'Tote Bag Oficial Dante Orozco — Lona Premium',
+            'short' => 'Tote bag oficial del cantautor Dante Orozco, lona premium con forro interior.',
+            'long'  => 'Tote bag oficial del cantautor Dante Orozco, fabricado en lona de algodon 100% de 12oz con forro interior en color crudo. Tamano generoso 38x42x12 cm con bolsillo interno con cierre, asas reforzadas en cinta de algodon de 2.5cm y remaches metalicos en los puntos de tension. Estampado serigrafico con el logo caracteristico del artista y la frase "Cancion sin tiempo" en la parte inferior. Perfecto para llevar libros, vinilos, el laptop o lo que necesites. Lavable a maquina en ciclo suave. Una pieza practica con diseno autentico.',
+            'price' => 89000,
+        ],
+        [
+            'code'  => 'ART-005',
+            'label' => 'Gorra Sofía Cruz — Nueva Película',
+            'name'  => 'Gorra Oficial Sofia Cruz Estreno Pelicula — Bordada',
+            'short' => 'Gorra bordada edicion especial por el estreno de la nueva pelicula de Sofia Cruz.',
+            'long'  => 'Gorra oficial de edicion especial lanzada por el estreno de la nueva pelicula de la actriz colombiana Sofia Cruz. Estructura trucker clasica con frente de algodon 100% y malla trasera transpirable, cierre ajustable con hebilla metalica. Logo de la pelicula bordado en 3D en el frente y la firma caracteristica de Sofia bordada en la lateral. Correa interior con la frase de la pelicula. Una pieza unica que conecta el cine con la moda, perfecta para llevar a las funciones, al dia a dia o como coleccion. Edicion numerada (1.000 unidades).',
+            'price' => 119000,
+        ],
+        [
+            'code'  => 'ART-006',
+            'label' => 'Set Pulseras Luna Vega Official',
+            'name'  => 'Set 3 Pulseras Luna Vega Official — Coleccion Gira',
+            'short' => 'Set de 3 pulseras oficiales de la gira de Luna Vega, piedras naturales.',
+            'long'  => 'Set de tres pulseras oficiales de la gira mundial de Luna Vega, cada una representa una cancion del nuevo album: "Luna Nueva" (cuarzo blanco), "Mar Adentro" (piedra luna) y "Brillo Eterno" (ojo de tigre). Cuentas de piedras naturales de 8mm ensartadas a mano en hilo elastico de alta resistencia, con dije de acero inoxidable grabado con el nombre de la cancion. Se pueden usar juntas o separadas. Caja de presentacion premium con el logo de la gira. Un regalo perfecto para cualquier fan de la artista o para coleccionar piezas con significado.',
+            'price' => 145000,
+        ],
+    ];
+
     public function handle(): int
     {
         $this->now = now()->format('Y-m-d H:i:s');
 
-        $influencersId = $this->getCategoryId('influencers');
+        $influencersId    = $this->getCategoryId('influencers');
         $coleccionistasId = $this->getCategoryId('coleccionistas');
+        $artistasId       = $this->getCategoryId('artistas');
 
-        if (! $influencersId || ! $coleccionistasId) {
-            $this->error('Las categorias Influencers o Coleccionistas no existen. Corre primero:');
+        if (! $influencersId || ! $coleccionistasId || ! $artistasId) {
+            $this->error('Faltan categorias especiales. Corre primero:');
             $this->error('  php artisan exi:seed-special-categories');
             return self::FAILURE;
         }
@@ -155,6 +211,11 @@ class SeedSpecialProducts extends Command
         $this->info('Importando productos de Coleccionistas...');
         foreach ($this->coleccionistasProducts as $p) {
             $this->importProduct($p, $coleccionistasId);
+        }
+
+        $this->info('Importando productos de Artistas...');
+        foreach ($this->artistasProducts as $p) {
+            $this->importProduct($p, $artistasId);
         }
 
         $this->info('Reconstruyendo indice de busqueda...');

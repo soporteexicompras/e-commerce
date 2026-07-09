@@ -35,18 +35,36 @@
 
 /* Brand column */
 .exicom-footer__brand .exicom-footer__logo-link {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: .85rem;
     margin-bottom: .85rem;
+    text-decoration: none;
 }
 .exicom-footer__brand .exicom-footer__logo {
     height: 56px;
     width: auto;
     max-width: 220px;
     display: block;
+    flex: 0 0 auto;
+}
+.exicom-footer__brand .exicom-footer__brand-text {
+    font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 800;
+    font-size: 1.875rem;
+    line-height: 1;
+    letter-spacing: -.018em;
+    color: #fff;
+    white-space: nowrap;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 @media (max-width: 575px) {
     .exicom-footer__brand .exicom-footer__logo {
         height: 48px;
+    }
+    .exicom-footer__brand .exicom-footer__brand-text {
+        font-size: 1.5rem;
     }
 }
 .exicom-footer__tagline {

@@ -23,7 +23,7 @@
 | 11 | Comando `exi:import-products` | Artisan command | `app/Console/Commands/ImportProducts.php` |
 | 12 | Drawer + icono wishlist en parciales | Blade parcials | `resources/views/vendor/shop/partials/exi-*.blade.php` |
 | 13 | Sugerencias automatizadas (`aimeos:jobs`) | Hook en comando import | `ImportProducts.php` (linea 56) |
-| 14 | Categorias especiales Influencers + Coleccionistas | Comando artisan + card destacada + hero animado | ver seccion 14 abajo |
+| 14 | Categorias especiales Influencers + Artistas + Coleccionistas | Comando artisan + card destacada + hero animado | ver seccion 14 abajo |
 | 15 | Sidebar de categoria sin `pinned`/`last-seen` | Config Aimeos + overrides Blade | `config/shop.php`, `resources/views/vendor/shop/catalog/{tree,list}.blade.php` |
 | 16 | Sidebar de filtros pulido (cosmético) | Override Aimeos ext + CSS | `ext/exicompras-theme/templates/client/html/catalog/filter/*.php`, `public/css/exicatalog.css` |
 | 17 | Footer rediseado + páginas legales colombianas | Vistas Blade nativas + CSS + rutas | `resources/views/legal/`, `resources/views/vendor/shop/base.blade.php`, `public/css/exifooter.css`, `routes/web.php` |
@@ -264,13 +264,14 @@ Cualquier otro comando que cree/modifique productos deberia llamar el mismo job 
 
 ---
 
-## 14. Categorias especiales: Influencers y Coleccionistas
+## 14. Categorias especiales: Influencers, Coleccionistas y Artistas
 
-Dos verticales adicionales del catalogo:
+Tres verticales adicionales del catalogo:
 
 | Categoria | Code | Nivel de tratamiento | URL |
 |---|---|---|---|
 | **Influencers** | `influencers` | **Especial** — card con badge animado dorado en el home + hero fullscreen con animacion de entrada + stagger reveal de productos al cargar | `/shop/influencers~{id}` |
+| **Artistas** | `artistas` | **Especial** — card con badge animado magenta en el home + hero fullscreen con animacion de entrada + stagger reveal de productos al cargar (mismo patron que Influencers, paleta rosa-magenta) | `/shop/artistas~{id}` |
 | **Coleccionistas** | `coleccionistas` | **Regular** — se muestra como una categoria mas en el grid, sin badge ni animacion | `/shop/coleccionistas~{id}` |
 
 ### Setup (primera vez)
@@ -279,9 +280,7 @@ Dos verticales adicionales del catalogo:
 php artisan exi:seed-special-categories --bump-theme
 ```
 
-Crea las 2 categorias (idempotente: si ya existen las deja igual), las pone como hijas de Home (`id=1`), y opcionalmente bumpea `theme_version` para forzar recarga del CSS.
-
-Los IDs reales se imprimen en consola. `home.blade.php` los resuelve por `code` en runtime, asi que no es necesario ajustar el array hardcoded aunque cambien.
+Crea las 3 categorias (idempotente: si ya existen las deja igual), las pone como hijas de Home (`id=1`), y opcionalmente bumpea `theme_version` para forzar recarga del CSS.
 
 ### Productos de ejemplo
 
@@ -289,60 +288,74 @@ Los IDs reales se imprimen en consola. `home.blade.php` los resuelve por `code` 
 php artisan exi:seed-special-products
 ```
 
-Inserta 13 productos demo (idempotente: si ya existe el `code` lo salta) y reconstruye el indice de busqueda:
+Inserta 19 productos demo (idempotente: si ya existe el `code` lo salta) y reconstruye el indice de busqueda:
 
 | Categoria | Codigos | Nichos |
 |---|---|---|
 | **Influencers** (6) | `INF-001` a `INF-006` | Skincare coreano, auriculares retro, camara instantanea, lentes vintage, zapatillas streetwear, difusor ceramica |
 | **Coleccionistas** (7) | `COL-001` a `COL-007` | Figura edicion limitada, moneda plata 999, comic primera edicion, carta calificada PSA, muneca anos 80, postal 1920s, miniatura diecast |
+| **Artistas** (6) | `ART-001` a `ART-006` | Camiseta de gira, vinilo acustico, poster firmado, tote bag, gorra de pelicula, set de pulseras |
 
-Los productos **no incluyen imagenes** (no se suben archivos). Salen con el placeholder emoji del home (estrella para Influencers, trofeo para Coleccionistas) y sin preview en la pagina de detalle. Para agregar imagenes: admin entra a `/admin/default/jqadm/product`, edita el producto, tab **Media** -> sube. El script `ImportProducts` (`exi:import-products`) si maneja thumbnails automaticos; este es solo data basica para llenar el catalogo rapido.
+Los productos **no incluyen imagenes** (no se suben archivos). Salen con el placeholder emoji del home (estrella para Influencers, trofeo para Coleccionistas, microfono para Artistas) y sin preview en la pagina de detalle. Para agregar imagenes: admin entra a `/admin/default/jqadm/product`, edita el producto, tab **Media** -> sube. El script `ImportProducts` (`exi:import-products`) si maneja thumbnails automaticos; este es solo data basica para llenar el catalogo rapido.
 
 ### Asignacion de productos
 
 **Manual desde el panel admin** (la intencion acordada). El superuser/admin:
 1. Entra a `/admin/default/jqadm/product`.
 2. Edita el producto.
-3. En la pestana **Catalog** lo agrega a la categoria `influencers` o `coleccionistas`.
+3. En la pestana **Catalog** lo agrega a la categoria `influencers`, `artistas` o `coleccionistas`.
 
 `home.blade.php` consulta el join con `mshop_product_list` (dominio `catalog`), asi que los productos aparecen automaticamente en la seccion de la categoria correspondiente y en el grid del home.
 
-### Card Influencers en el home
+### Card Influencers y Artistas en el home
 
-`home.blade.php:227-237` agrega la clase `exicat-card--influencer` a la card y un `<span class="exicat-special-badge">INFLUENCERS</span>`. La card va PRIMERA en el array de `$categories` para que aparezca al inicio del grid.
+`home.blade.php:227-237` agrega la clase `exicat-card--influencer` o `exicat-card--artista` a la card correspondiente, y un `<span class="exicat-special-badge">INFLUENCERS</span>` o `<span class="exicat-special-badge exicat-special-badge--artista">ARTISTAS</span>`. Las cards especiales van PRIMERAS en el array de `$categories` para que aparezcan al inicio del grid.
 
 Estilos en `exihome.css`:
-- Borde dorado 1.5px, fondo con gradiente sutil hacia amarillo claro.
-- Badge dorado-naranja con `animation: exi-influencer-badge-pulse 2s infinite` (escala + sombra).
-- Hover: borde mas oscuro y sombra dorada.
+- **Influencers**: borde dorado 1.5px, fondo con gradiente sutil hacia amarillo claro. Badge dorado-naranja con `animation: exi-influencer-badge-pulse 2s infinite` (escala + sombra). Hover: borde mas oscuro y sombra dorada.
+- **Artistas**: borde rosa-magenta 1.5px, fondo con gradiente sutil hacia rosado claro. Badge magenta con `animation: exi-artista-badge-pulse 2s infinite`. Hover: borde mas oscuro y sombra magenta.
 
-`prefers-reduced-motion: reduce` desactiva la animacion del badge.
+`prefers-reduced-motion: reduce` desactiva las animaciones de los badges.
 
-### Hero de Influencers en la categoria
+### Hero de Influencers y Artistas en la categoria
 
-`tree.blade.php:36-58` detecta la categoria via `request()->is('*influencers*')` y:
-- Anade `exicatalog-wrap--influencers` al wrap y `exicatalog-main--influencers` al main.
-- Incluye `resources/views/vendor/shop/catalog/partials/exi-influencers-hero.blade.php` antes del listado.
+`tree.blade.php` detecta la categoria via `request()->is('*influencers*')` o `*artistas*` (o `f_name=influencers|artistas`) y:
+- Anade `exicatalog-wrap--influencers` / `exicatalog-wrap--artistas` al wrap y `exicatalog-main--influencers` / `exicatalog-main--artistas` al main.
+- Incluye `resources/views/vendor/shop/catalog/partials/exi-influencers-hero.blade.php` o `exi-artistas-hero.blade.php` antes del listado.
 
-El hero (`exicatalog.css:1367-1453`):
-- Fondo `linear-gradient(135deg, #1A1F36 0%, #2d1456 50%, #1A1F36 100%)` con dos `radial-gradient` superpuestos que se mueven lento (`exi-influencers-bg-pan 8s`).
-- Badge "⭐ INFLUENCERS" pulsante.
-- Titulo "Compras con **personalidad**" con la 2da palabra en gradiente dorado-naranja via `background-clip: text`.
-- Contenido aparece con `exi-influencers-reveal` (fade + slide-up 30px) en 0.8s.
+El hero en `exicatalog.css`:
+- **Influencers** (`exicatalog.css:1367-1453`): fondo `linear-gradient(135deg, #1A1F36 0%, #2d1456 50%, #1A1F36 100%)` con dos `radial-gradient` superpuestos que se mueven lento (`exi-influencers-bg-pan 8s`). Badge "⭐ INFLUENCERS" pulsante. Titulo "Compras con **personalidad**" con la 2da palabra en gradiente dorado-naranja via `background-clip: text`. Contenido aparece con `exi-influencers-reveal` (fade + slide-up 30px) en 0.8s.
+- **Artistas** (`exicatalog.css:1490-1577`): mismo patron con paleta magenta. Fondo `linear-gradient(135deg, #2A0E1E 0%, #5C0E3B 50%, #2A0E1E 100%)`. Badge "🎤 ARTISTAS" pulsante. Titulo "Merch oficial de **tus artistas**" con la 2da palabra en gradiente rosa-magenta. Animacion `exi-artistas-reveal` equivalente.
 
 ### Stagger reveal de productos
 
-`exicatalog.css:1455-1478`: cada producto del listado en Influencers arranca `opacity: 0; transform: translateY(20px)` y se anima con delay incremental via `nth-child` (`.30s, .36s, .42s, ...`). El primer producto sale 0.3s despues del hero para que se note la cascada.
+Aplica tanto a Influencers como a Artistas (`exicatalog.css:1457-1477`): cada producto del listado arranca `opacity: 0; transform: translateY(20px)` y se anima con delay incremental via `var(--exi-stagger-i)`. El JS consolidad en `tree.blade.php` asigna el indice a cada hijo del grid y dispara la animacion con IntersectionObserver (con fallback rAF + timeout 800ms). El primer producto sale 80ms despues del trigger para que se note la cascada.
 
 ### Inclusiones para mantener consistencia
 
 - `home.blade.php` resuelve los IDs reales por `code` (no hardcoded) — si el seed los asigna diferente a 7/8, funciona igual.
-- Las nuevas categorias entran en el `array $emojis` del home (estrellas para Influencers, trofeo para Coleccionistas) para que los productos tengan icono apropiado en "Ofertas destacadas".
-- Si en el futuro se agregan mas sub-categorias dentro de Influencers/Coleccionistas, el hero se mantendra porque la deteccion es por `f_name=influencers` o `*influencers*` en la URL, no por ID.
+- Las nuevas categorias entran en el `array $emojis` del home (estrellas para Influencers, microfono para Artistas, trofeo para Coleccionistas) para que los productos tengan icono apropiado en "Ofertas destacadas".
+- Si en el futuro se agregan mas sub-categorias dentro de Influencers/Artistas/Coleccionistas, el hero se mantendra porque la deteccion es por `f_name=...` o `*...*` en la URL, no por ID.
 
 ### Cache-bust
 
 `exicatalog.css` carga con `?v={theme_version}`. Al seedear con `--bump-theme` se incrementa, forzando la recarga. Si no, ejecutar `php artisan aimeos:clear` despues del seed.
+
+### Estilo en el navbar (categorias especiales)
+
+Las tres categorias especiales tienen trato diferenciado en la fila de categorias del navbar (`exi-navbar-row--sub`):
+
+| Categoria | Color reposo | Color hover/active | Dot al hover |
+|---|---|---|---|
+| **Influencers** | `#B25E16` (dorado-naranja apagado) | `#FF6B35` (naranja de marca) | `rgba(255, 107, 53, .15)` |
+| **Artistas** | `#AD1457` (magenta oscuro) | `#E91E63` (rosa-magenta) | `rgba(233, 30, 99, .18)` |
+| **Coleccionistas** | `#6E368F` (morado apagado) | `#9B59B6` (morado premium) | `rgba(155, 89, 182, .15)` |
+
+Estilos en `exinavbar.dark.css` (selector `.cat-item.catcode-{code}`):
+- Tipografia mas pesada (`font-weight: 700`) que el resto de categorias para destacar.
+- Dot pulsante (`::before`, 6px) a la izquierda del nombre como "chip Especial" sutil.
+- Underline animado al hover (`::after`, slide-in de izquierda a derecha, 300ms).
+- Padding-left ampliado (1.55rem) para acomodar el dot.
 
 ---
 
