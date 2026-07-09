@@ -83,9 +83,7 @@ $action  = $enc->attr( $this->link( $linkKey, $params->all() ) );
 
 					<div class="exi-filter-drawer-body">
 						<?= $this->block()->get( 'catalog/filter/tree' ) ?>
-						<?= $this->block()->get( 'catalog/filter/search' ) ?>
 						<?= $this->block()->get( 'catalog/filter/price' ) ?>
-						<?= $this->block()->get( 'catalog/filter/supplier' ) ?>
 						<?= $this->block()->get( 'catalog/filter/attribute' ) ?>
 					</div>
 
@@ -146,6 +144,63 @@ $action  = $enc->attr( $this->link( $linkKey, $params->all() ) );
 			});
 		});
 	})();
+
+		// Exicompras: collapse sidebar sections (header-name rows + exi-section-header)
+		// Only collapses sections that opted-in via data-exi-toggle="next" or are
+		// inside a desktop sidebar. The drawer keeps sections always open.
+		(function() {
+			var STORAGE_KEY = 'exi_filter_collapsed';
+			var mem = {};
+			try { mem = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}') || {}; } catch(e) {}
+
+			// Selector applies to .exi-section-header (attribute-body override)
+			// AND to .header-name (price-body override) — but only outside the
+			// drawer so the mobile UI always shows content.
+			var heads = document.querySelectorAll(
+				'.exicatalog-aside .exi-section-header,' +
+				'.exicatalog-aside .section > .header-name'
+			);
+
+			heads.forEach(function(head) {
+				var key = head.textContent.trim();
+				head.setAttribute('role', 'button');
+				head.setAttribute('tabindex', '0');
+
+				// Find the content to collapse — siblings of the header
+				var next = head.nextElementSibling;
+				if (!next || !(next.classList.contains('exi-price-lists') || next.classList.contains('exi-attr-lists') || next.classList.contains('price-lists') || next.classList.contains('attribute-lists'))) {
+					return;
+				}
+
+				function apply(state) {
+					if (state) {
+						head.classList.add('is-collapsed');
+						next.classList.add('is-collapsed');
+						head.setAttribute('aria-expanded', 'false');
+					} else {
+						head.classList.remove('is-collapsed');
+						next.classList.remove('is-collapsed');
+						head.setAttribute('aria-expanded', 'true');
+					}
+				}
+				apply(!!mem[key]);
+
+				function toggle() {
+					var isColl = head.classList.contains('is-collapsed');
+					var newState = !isColl;
+					apply(newState);
+					mem[key] = newState;
+					try { localStorage.setItem(STORAGE_KEY, JSON.stringify(mem)); } catch(e) {}
+				}
+				head.addEventListener('click', toggle);
+				head.addEventListener('keydown', function(e) {
+					if (e.key === 'Enter' || e.key === ' ') {
+						e.preventDefault();
+						toggle();
+					}
+				});
+			});
+		})();
 	</script>
 
 <?php else : ?>
@@ -154,9 +209,7 @@ $action  = $enc->attr( $this->link( $linkKey, $params->all() ) );
 		<nav class="container-xxl">
 			<form method="GET" action="<?= $action ?>">
 				<?= $this->block()->get( 'catalog/filter/tree' ) ?>
-				<?= $this->block()->get( 'catalog/filter/search' ) ?>
 				<?= $this->block()->get( 'catalog/filter/price' ) ?>
-				<?= $this->block()->get( 'catalog/filter/supplier' ) ?>
 				<?= $this->block()->get( 'catalog/filter/attribute' ) ?>
 			</form>
 		</nav>

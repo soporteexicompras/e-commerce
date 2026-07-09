@@ -1443,24 +1443,32 @@ body:not(.catalog-home) .exicatalog-aside .catalog-session .session-items a {
     line-height: 1.4;
 }
 
-/* Stagger reveal de productos solo en Influencers */
-.exicatalog-main--influencers .catalog-list-items > * {
+/* Stagger reveal de productos solo en Influencers.
+   Selector con specificity (0,4,0) para ganar a .aimeos:not(.cms-page) .product-list .product
+   que también define animation en .product. Si gana la del .product general, el
+   `forwards` no aplica y los productos quedan invisibles (opacity: 0 estatico). */
+/* ══════════════════════════════════════════════════════════
+   STAGGER REVEAL — Productos de Influencers
+   Premium staggered entrance con trigger JS (IntersectionObserver).
+   Solo se oculta el contenido si `js-ready` esta en <html>; si JS
+   falla, los productos quedan visibles (graceful degradation).
+   ══════════════════════════════════════════════════════════ */
+
+/* Estado pre-animacion: invisible + 20px abajo.
+   La clase `js-ready` solo se anade si JS esta disponible,
+   asi no afectamos a clientes sin JS. */
+.js-ready .exicatalog-main--influencers .catalog-list-items:not(.is-loaded) > * {
     opacity: 0;
     transform: translateY(20px);
-    animation: exi-product-reveal .5s cubic-bezier(.4,0,.2,1) forwards;
+    will-change: opacity, transform;
 }
-.exicatalog-main--influencers .catalog-list-items > *:nth-child(1)  { animation-delay: .30s; }
-.exicatalog-main--influencers .catalog-list-items > *:nth-child(2)  { animation-delay: .36s; }
-.exicatalog-main--influencers .catalog-list-items > *:nth-child(3)  { animation-delay: .42s; }
-.exicatalog-main--influencers .catalog-list-items > *:nth-child(4)  { animation-delay: .48s; }
-.exicatalog-main--influencers .catalog-list-items > *:nth-child(5)  { animation-delay: .54s; }
-.exicatalog-main--influencers .catalog-list-items > *:nth-child(6)  { animation-delay: .60s; }
-.exicatalog-main--influencers .catalog-list-items > *:nth-child(7)  { animation-delay: .66s; }
-.exicatalog-main--influencers .catalog-list-items > *:nth-child(8)  { animation-delay: .72s; }
-.exicatalog-main--influencers .catalog-list-items > *:nth-child(9)  { animation-delay: .78s; }
-.exicatalog-main--influencers .catalog-list-items > *:nth-child(10) { animation-delay: .84s; }
-.exicatalog-main--influencers .catalog-list-items > *:nth-child(11) { animation-delay: .90s; }
-.exicatalog-main--influencers .catalog-list-items > *:nth-child(12) { animation-delay: .96s; }
+
+/* Cuando el JS anade `is-loaded`, dispara la animacion con stagger
+   calculado por variable CSS `--exi-stagger-i` (asignada por JS). */
+.exicatalog-main--influencers .catalog-list-items.is-loaded > * {
+    animation: exi-product-reveal .65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: calc(var(--exi-stagger-i, 0) * 90ms + 80ms);
+}
 @keyframes exi-product-reveal {
     from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -1475,4 +1483,414 @@ body:not(.catalog-home) .exicatalog-aside .catalog-session .session-items a {
         opacity: 1 !important;
         transform: none !important;
     }
+}
+
+/* ══════════════════════════════════════════════════════════
+   FILTROS — Refinamiento visual (cosmético mínimo)
+   - Quita FILTRO cuando está vacío (sólo aparece wrapper con fieldsets vacíos)
+   - Botón Aplicar pasa de filled naranja a outline sutil
+   - Header-name más moderno (sin uppercase agresivo)
+   - Sin border-top entre secciones (card unificada con divider sutil)
+   - Slider de precio con etiqueta visual de valor formateado
+   ══════════════════════════════════════════════════════════ */
+
+body:not(.catalog-home) .exicatalog-aside .catalog-filter {
+    border-top: none !important;
+}
+
+/* Oculta el bloque "Filtro" cuando no tiene ningún fieldset real dentro. */
+body:not(.catalog-home) .exicatalog-aside .catalog-filter-attribute:not(:has(fieldset)) {
+    display: none !important;
+}
+
+/* Header-name — sin uppercase, color más suave */
+body:not(.catalog-home) .exicatalog-aside .catalog-filter .header-name {
+    font-size: .78rem !important;
+    font-weight: 600 !important;
+    color: #6b7280 !important;
+    text-transform: none !important;
+    letter-spacing: .2px !important;
+    padding: 1rem 1.1rem .55rem !important;
+    border-bottom: none !important;
+}
+
+/* Quitar border-top entre secciones — divider más sutil (solo entre) */
+body:not(.catalog-home) .exicatalog-aside .catalog-filter .section {
+    border-top: 1px solid #F3F4F6 !important;
+}
+body:not(.catalog-home) .exicatalog-aside .catalog-filter .section:first-of-type {
+    border-top: none !important;
+}
+
+/* Botón Aplicar — de filled a outline sutil */
+body:not(.catalog-home) .exicatalog-aside .catalog-filter-price .exi-price-actions {
+    margin-top: .25rem !important;
+}
+body:not(.catalog-home) .exicatalog-aside .catalog-filter-price button[type="submit"] {
+    background: transparent !important;
+    color: #FF6B35 !important;
+    border: 1.5px solid #FF6B35 !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    font-weight: 600 !important;
+}
+body:not(.catalog-home) .exicatalog-aside .catalog-filter-price button[type="submit"]:hover {
+    background: #FF6B35 !important;
+    color: #ffffff !important;
+}
+
+/* Etiqueta visual del valor del slider — formato COP */
+.exi-price-readout {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin: .25rem 0 .65rem !important;
+    font-size: .82rem !important;
+    color: #1A1F36 !important;
+    font-variant-numeric: tabular-nums;
+}
+.exi-price-readout .exi-price-readout-label {
+    color: #9ca3af !important;
+    font-weight: 400 !important;
+}
+.exi-price-readout .exi-price-readout-value {
+    font-weight: 700 !important;
+    color: #FF6B35 !important;
+}
+
+/* Slider más delgado y moderno */
+body:not(.catalog-home) .exicatalog-aside .catalog-filter-price input[type="range"].price-slider {
+    height: 4px !important;
+    margin: .25rem 0 .65rem !important;
+    border-radius: 999px !important;
+}
+body:not(.catalog-home) .exicatalog-aside .catalog-filter-price input[type="range"].price-slider::-webkit-slider-thumb {
+    width: 18px !important;
+    height: 18px !important;
+    background: #ffffff !important;
+    border: 3px solid #FF6B35 !important;
+    box-shadow: 0 1px 4px rgba(255,107,53,.35) !important;
+    cursor: pointer !important;
+    transition: transform .1s ease !important;
+}
+body:not(.catalog-home) .exicatalog-aside .catalog-filter-price input[type="range"].price-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15) !important;
+}
+body:not(.catalog-home) .exicatalog-aside .catalog-filter-price input[type="range"].price-slider::-moz-range-thumb {
+    width: 18px !important;
+    height: 18px !important;
+    background: #ffffff !important;
+    border: 3px solid #FF6B35 !important;
+    box-shadow: 0 1px 4px rgba(255,107,53,.35) !important;
+    cursor: pointer !important;
+}
+
+/* Header del filtro un poco más prominente en el drawer (móvil) */
+.exi-filter-drawer .catalog-filter .header-name {
+    color: #1A1F36 !important;
+    font-size: .85rem !important;
+    padding: 1.1rem 1.25rem .65rem !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   FILTROS — Rediseño completo (Nivel C)
+   - Card más cohesiva (sombra suave, radio consistente)
+   - Section header colapsable con chevron animado
+   - Slider custom (track plano naranja/naranja-claro,
+     thumb circular blanco con borde y sombra)
+   - Presets de rango rápido (pills clickeables)
+   - Chips de atributos (toggle pills multi-select)
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Card del sidebar (más cohesiva) ── */
+body:not(.catalog-home) .exicatalog-aside .catalog-filter,
+body:not(.catalog-home) .exicatalog-aside .exi-filter-root {
+    background: #ffffff !important;
+    border: 1px solid #E5E7EB !important;
+    border-radius: 14px !important;
+    box-shadow: 0 2px 12px rgba(15,23,42,.04), 0 1px 3px rgba(15,23,42,.03) !important;
+    overflow: hidden;
+    margin: 0 0 1.25rem !important;
+    padding: 0 !important;
+}
+
+/* ── Section header colapsable ── */
+body:not(.catalog-home) .exicatalog-aside .catalog-filter .section .header-name,
+body:not(.catalog-home) .exicatalog-aside .catalog-filter .exi-section-header {
+    font-size: .72rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.1px !important;
+    color: #9ca3af !important;
+    padding: 1.05rem 1.25rem .7rem !important;
+    margin: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    border-top: 1px solid #F3F4F6 !important;
+    border-radius: 0 !important;
+    text-align: left !important;
+    cursor: default;
+    user-select: none;
+    line-height: 1.3 !important;
+}
+body:not(.catalog-home) .exicatalog-aside .catalog-filter .section:first-of-type > .header-name,
+body:not(.catalog-home) .exicatalog-aside .catalog-filter .section:first-of-type > .exi-section-header {
+    border-top: none !important;
+}
+
+/* Chevron rotativo en section-header colapsable */
+.exi-section-header {
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: .5rem;
+}
+
+/* Header-name en sidebar colapsable (cursor pointer) */
+body:not(.catalog-home) .exicatalog-aside .catalog-filter .section > .header-name[role="button"] {
+    cursor: pointer !important;
+}
+body:not(.catalog-home) .exicatalog-aside .catalog-filter .section > .header-name[role="button"]:hover {
+    color: #1A1F36 !important;
+}
+.exi-section-header .exi-section-chevron {
+    transition: transform .25s ease !important;
+    color: #9ca3af !important;
+}
+.exi-section-header.is-collapsed .exi-section-chevron {
+    transform: rotate(-90deg) !important;
+}
+body:not(.catalog-home) .exicatalog-aside .catalog-filter .is-collapsed + .exi-price-lists,
+body:not(.catalog-home) .exicatalog-aside .catalog-filter .is-collapsed + .exi-attr-lists,
+.exi-attr-lists.is-collapsed,
+.exi-price-lists.is-collapsed {
+    display: none !important;
+}
+
+/* ── Precio: slider custom ── */
+body:not(.catalog-home) .exicatalog-aside .catalog-filter-price input[type="range"].price-slider {
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    width: 100% !important;
+    height: 4px !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: .5rem 0 1rem !important;
+    border-radius: 999px !important;
+    outline: none !important;
+    cursor: pointer !important;
+}
+body:not(.catalog-home) .exicatalog-aside .catalog-filter-price input[type="range"].price-slider::-webkit-slider-runnable-track {
+    height: 4px !important;
+    background: linear-gradient(to right, #FF6B35 0%, #FF6B35 var(--exi-slider-fill, 100%), #E5E7EB var(--exi-slider-fill, 100%), #E5E7EB 100%) !important;
+    border-radius: 999px !important;
+    border: none !important;
+}
+body:not(.catalog-home) .exicatalog-aside .catalog-filter-price input[type="range"].price-slider::-moz-range-track {
+    height: 4px !important;
+    background: #E5E7EB !important;
+    border-radius: 999px !important;
+    border: none !important;
+}
+body:not(.catalog-home) .exicatalog-aside .catalog-filter-price input[type="range"].price-slider::-moz-range-progress {
+    height: 4px !important;
+    background: #FF6B35 !important;
+    border-radius: 999px !important;
+}
+body:not(.catalog-home) .exicatalog-aside .catalog-filter-price input[type="range"].price-slider::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    width: 20px !important;
+    height: 20px !important;
+    background: #ffffff !important;
+    border: 3px solid #FF6B35 !important;
+    border-radius: 50% !important;
+    box-shadow: 0 2px 6px rgba(255,107,53,.45) !important;
+    cursor: grab !important;
+    transition: transform .12s ease, box-shadow .12s ease !important;
+    margin-top: -8px !important;
+}
+body:not(.catalog-home) .exicatalog-aside .catalog-filter-price input[type="range"].price-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15) !important;
+    box-shadow: 0 3px 10px rgba(255,107,53,.6) !important;
+}
+body:not(.catalog-home) .exicatalog-aside .catalog-filter-price input[type="range"].price-slider::-webkit-slider-thumb:active {
+    cursor: grabbing !important;
+    transform: scale(1.05) !important;
+}
+body:not(.catalog-home) .exicatalog-aside .catalog-filter-price input[type="range"].price-slider::-moz-range-thumb {
+    width: 20px !important;
+    height: 20px !important;
+    background: #ffffff !important;
+    border: 3px solid #FF6B35 !important;
+    border-radius: 50% !important;
+    box-shadow: 0 2px 6px rgba(255,107,53,.45) !important;
+    cursor: grab !important;
+}
+
+/* ── Precio: presets (pills) ── */
+.exi-price-presets {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: .4rem .5rem !important;
+    margin: .25rem 0 1rem !important;
+}
+.exi-price-preset {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: .4rem .7rem !important;
+    border-radius: 999px !important;
+    background: #F8F9FA !important;
+    color: #1A1F36 !important;
+    font-size: .76rem !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    border: 1px solid transparent !important;
+    transition: background .15s ease, color .15s ease, border-color .15s ease !important;
+    line-height: 1.2 !important;
+}
+.exi-price-preset:hover {
+    background: rgba(255,107,53,.08) !important;
+    color: #FF6B35 !important;
+    border-color: rgba(255,107,53,.2) !important;
+}
+.exi-price-preset.is-active {
+    background: #1A1F36 !important;
+    color: #ffffff !important;
+    border-color: #1A1F36 !important;
+}
+.exi-price-preset--disabled {
+    opacity: .35 !important;
+    pointer-events: none !important;
+}
+
+/* ── Chip group (atributos) ── */
+.exi-attr-lists {
+    padding: .55rem 1.25rem 1.2rem !important;
+}
+.exi-attr-group + .exi-attr-group {
+    margin-top: 1rem !important;
+}
+.exi-attr-type {
+    font-size: .7rem !important;
+    font-weight: 600 !important;
+    color: #6b7280 !important;
+    text-transform: uppercase !important;
+    letter-spacing: .8px !important;
+    margin-bottom: .5rem !important;
+}
+.exi-chips {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: .35rem .35rem !important;
+}
+.exi-chip {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: .35rem !important;
+    padding: .35rem .7rem !important;
+    border-radius: 999px !important;
+    background: #F8F9FA !important;
+    color: #1A1F36 !important;
+    font-size: .78rem !important;
+    font-weight: 500 !important;
+    border: 1px solid #E5E7EB !important;
+    cursor: pointer !important;
+    transition: background .15s ease, color .15s ease, border-color .15s ease, transform .12s ease !important;
+    line-height: 1.2 !important;
+    user-select: none;
+}
+.exi-chip:hover {
+    border-color: #FF6B35 !important;
+    color: #FF6B35 !important;
+}
+.exi-chip-input {
+    position: absolute !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: 0 !important;
+}
+.exi-chip.is-active {
+    background: #FF6B35 !important;
+    color: #ffffff !important;
+    border-color: #FF6B35 !important;
+}
+.exi-chip.is-active:hover {
+    background: #E0552B !important;
+    border-color: #E0552B !important;
+    color: #ffffff !important;
+}
+.exi-chip-icon {
+    width: 16px !important;
+    height: 16px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
+}
+.exi-chip-icon img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+.exi-chip-label {
+    line-height: 1.2 !important;
+}
+
+/* Reset link dentro de Atributos */
+.exi-attr-reset {
+    display: inline-block !important;
+    margin-bottom: .85rem !important;
+    font-size: .78rem !important;
+    color: #FF6B35 !important;
+    text-decoration: none !important;
+}
+.exi-attr-reset:hover {
+    text-decoration: underline !important;
+}
+
+/* ── Drawer (móvil): header más compacto ── */
+.exi-filter-drawer .exi-section-header {
+    padding: 1rem 1.25rem .55rem !important;
+}
+.exi-filter-drawer .exi-attr-lists {
+    padding: .25rem 1.25rem 1rem !important;
+}
+
+/* ── Botón Aplicar — outline (mantenido del bloque anterior) ── */
+body:not(.catalog-home) .exicatalog-aside .catalog-filter-price button[type="submit"] {
+    background: transparent !important;
+    color: #FF6B35 !important;
+    border: 1.5px solid #FF6B35 !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    font-weight: 600 !important;
+}
+body:not(.catalog-home) .exicatalog-aside .catalog-filter-price button[type="submit"]:hover {
+    background: #FF6B35 !important;
+    color: #ffffff !important;
+}
+
+/* ── Inputs min/max (mín afecta al thumb en el slider via JS inline) ── */
+body:not(.catalog-home) .exicatalog-aside .catalog-filter-price input[type="number"] {
+    border: 1.5px solid #E5E7EB !important;
+    border-radius: 8px !important;
+    padding: .5rem .65rem !important;
+    font-size: .82rem !important;
+    color: #1A1F36 !important;
+    background: #ffffff !important;
+    font-variant-numeric: tabular-nums;
+}
+body:not(.catalog-home) .exicatalog-aside .catalog-filter-price input[type="number"]:focus {
+    border-color: #FF6B35 !important;
+    box-shadow: 0 0 0 3px rgba(255,107,53,.10) !important;
+    outline: none !important;
 }

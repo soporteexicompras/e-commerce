@@ -1,0 +1,535 @@
+/* ══════════════════════════════════════════════════════════
+   EXICOMPRAS — Footer rediseñado + páginas legales
+   - Footer moderno, en español, con identidad de marca
+   - Páginas legales con TOC lateral, tipografía premium,
+     tablas, formulario, cards y separación clara.
+   ══════════════════════════════════════════════════════════ */
+
+/* ──────────────────────────────────────────────────────────
+   FOOTER
+   ────────────────────────────────────────────────────────── */
+
+.exicom-footer {
+    background: #0F1424;
+    color: rgba(255, 255, 255, .82);
+    padding: 3.5rem 0 2rem;
+    margin-top: 4rem;
+    font-size: .875rem;
+    line-height: 1.55;
+}
+.exicom-footer .exicom-footer__container {
+    width: min(1280px, 100% - clamp(1rem, 4vw, 2.5rem));
+    margin: 0 auto;
+}
+.exicom-footer .exicom-footer__grid {
+    display: grid;
+    grid-template-columns: 1.2fr repeat(4, 1fr);
+    gap: 2.25rem;
+}
+@media (max-width: 1024px) {
+    .exicom-footer .exicom-footer__grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+}
+@media (max-width: 640px) {
+    .exicom-footer .exicom-footer__grid { grid-template-columns: 1fr; gap: 1.75rem; }
+}
+
+/* Brand column */
+.exicom-footer__brand .exicom-footer__logo-link {
+    display: inline-block;
+    margin-bottom: .85rem;
+}
+.exicom-footer__brand .exicom-footer__logo {
+    height: 56px;
+    width: auto;
+    max-width: 220px;
+    display: block;
+}
+@media (max-width: 575px) {
+    .exicom-footer__brand .exicom-footer__logo {
+        height: 48px;
+    }
+}
+.exicom-footer__tagline {
+    color: rgba(255, 255, 255, .55);
+    font-size: .82rem;
+    margin: 0 0 1.25rem;
+    max-width: 24rem;
+}
+.exicom-footer__contact {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+    font-size: .82rem;
+    color: rgba(255, 255, 255, .68);
+}
+.exicom-footer__contact a {
+    color: rgba(255, 255, 255, .82);
+    text-decoration: none;
+    transition: color .15s ease;
+}
+.exicom-footer__contact a:hover { color: #FF6B35; }
+
+.exicom-footer__socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+.exicom-footer__social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .06);
+    color: rgba(255, 255, 255, .78);
+    text-decoration: none;
+    transition: background .15s ease, color .15s ease, transform .12s ease;
+}
+.exicom-footer__social:hover {
+    background: #FF6B35;
+    color: #fff;
+    transform: translateY(-1px);
+}
+.exicom-footer__social svg { display: block; }
+
+/* Column heading + list */
+.exicom-footer__col h4 {
+    color: #fff;
+    font-size: .72rem;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 0 0 1.1rem;
+}
+.exicom-footer__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .55rem;
+}
+.exicom-footer__list a {
+    color: rgba(255, 255, 255, .72);
+    text-decoration: none;
+    transition: color .15s ease;
+    font-size: .85rem;
+}
+.exicom-footer__list a:hover { color: #FF6B35; }
+
+/* Payments row */
+.exicom-footer__pay {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem .55rem;
+    margin-top: 1.1rem;
+}
+.exicom-footer__pay-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    padding: .25rem .55rem;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, .07);
+    color: rgba(255, 255, 255, .82);
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: .3px;
+    text-transform: uppercase;
+}
+
+/* Bottom bar */
+.exicom-footer__bottom {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, .08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: .76rem;
+    color: rgba(255, 255, 255, .52);
+}
+.exicom-footer__legal-line {
+    display: block;
+    color: rgba(255, 255, 255, .42);
+    font-size: .72rem;
+    margin-top: .25rem;
+}
+.exicom-footer__legal-line strong { color: rgba(255, 255, 255, .68); font-weight: 600; }
+.exicom-footer__bottom-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.exicom-footer__bottom-links a {
+    color: rgba(255, 255, 255, .55);
+    text-decoration: none;
+}
+.exicom-footer__bottom-links a:hover { color: #FF6B35; }
+
+/* ──────────────────────────────────────────────────────────
+   PÁGINAS LEGALES
+   ────────────────────────────────────────────────────────── */
+
+.exicom-legal {
+    background: linear-gradient(180deg, #FFFFFF 0%, #F7F8FB 100%);
+    color: #1A1F36;
+    padding: 2rem 0 4rem;
+}
+.exicom-legal__container {
+    width: min(1080px, 100% - clamp(1rem, 4vw, 2.5rem));
+    margin: 0 auto;
+}
+.exicom-legal__breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: .82rem;
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+}
+.exicom-legal__crumb {
+    color: #6b7280;
+    text-decoration: none;
+    transition: color .15s ease;
+}
+.exicom-legal__crumb:hover { color: #FF6B35; }
+.exicom-legal__crumb.is-current { color: #1A1F36; font-weight: 500; }
+.exicom-legal__crumb-sep { color: #cbd5e0; }
+
+.exicom-legal__hero {
+    background: linear-gradient(135deg, #1A1F36 0%, #2d1456 100%);
+    color: #fff;
+    border-radius: 18px;
+    padding: 2.5rem 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 32px rgba(15, 23, 42, .12);
+}
+.exicom-legal__kicker {
+    display: inline-block;
+    font-size: .7rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background: rgba(255, 107, 53, .18);
+    color: #FFB89A;
+    padding: .3rem .7rem;
+    border-radius: 999px;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+.exicom-legal__title {
+    font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+    font-weight: 800;
+    margin: 0 0 .65rem;
+    line-height: 1.15;
+    letter-spacing: -.01em;
+}
+.exicom-legal__subtitle {
+    font-size: clamp(.95rem, 2vw, 1.1rem);
+    color: rgba(255, 255, 255, .82);
+    margin: 0 0 1rem;
+    max-width: 56rem;
+    line-height: 1.5;
+}
+.exicom-legal__updated {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-size: .76rem;
+    color: rgba(255, 255, 255, .6);
+    margin: 0;
+}
+.exicom-legal__updated svg { vertical-align: middle; }
+
+.exicom-legal__layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 2.5rem;
+    align-items: start;
+}
+@media (max-width: 900px) {
+    .exicom-legal__layout { grid-template-columns: 1fr; }
+}
+
+.exicom-legal__sidebar {
+    position: sticky;
+    top: 1rem;
+    background: #fff;
+    border: 1px solid #ECEEF2;
+    border-radius: 14px;
+    padding: 1.25rem 1rem;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, .04);
+}
+@media (max-width: 900px) { .exicom-legal__sidebar { position: static; } }
+.exicom-legal__sidebar-title {
+    font-size: .68rem;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: #9ca3af;
+    font-weight: 700;
+    margin: 0 0 .85rem;
+}
+.exicom-legal__toc {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    counter-reset: toc;
+    font-size: .82rem;
+}
+.exicom-legal__toc li {
+    counter-increment: toc;
+}
+.exicom-legal__toc a {
+    display: block;
+    padding: .35rem .55rem;
+    border-radius: 8px;
+    color: #4b5563;
+    text-decoration: none;
+    line-height: 1.3;
+    transition: background .15s ease, color .15s ease;
+}
+.exicom-legal__toc a:hover {
+    background: rgba(255, 107, 53, .08);
+    color: #FF6B35;
+}
+.exicom-legal__toc a::before {
+    content: counter(toc) ".";
+    color: #cbd5e0;
+    font-weight: 600;
+    margin-right: .35rem;
+}
+
+.exicom-legal__body {
+    background: #fff;
+    border: 1px solid #ECEEF2;
+    border-radius: 14px;
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    box-shadow: 0 4px 16px rgba(15, 23, 42, .04);
+}
+.exicom-legal__body h2 {
+    font-size: clamp(1.15rem, 2.4vw, 1.4rem);
+    font-weight: 700;
+    color: #1A1F36;
+    margin: 2.25rem 0 .85rem;
+    padding-top: 1rem;
+    border-top: 1px solid #F0F1F3;
+}
+.exicom-legal__body h2:first-of-type,
+.exicom-legal__body > p:first-of-type + h2 { margin-top: 1.25rem; }
+.exicom-legal__body > p:first-of-type + h2,
+.exicom-legal__body > h2:first-child { border-top: none; padding-top: 0; }
+.exicom-legal__body p {
+    margin: 0 0 1rem;
+    font-size: .92rem;
+    line-height: 1.65;
+    color: #2d3648;
+}
+.exicom-legal__body ul, .exicom-legal__body ol {
+    margin: 0 0 1.1rem;
+    padding-left: 1.4rem;
+    font-size: .92rem;
+    line-height: 1.65;
+    color: #2d3648;
+}
+.exicom-legal__body li { margin: 0 0 .35rem; }
+.exicom-legal__body a {
+    color: #FF6B35;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 107, 53, .25);
+    transition: border-color .15s ease;
+}
+.exicom-legal__body a:hover { border-bottom-color: #FF6B35; }
+.exicom-legal__body strong { color: #1A1F36; font-weight: 600; }
+.exicom-legal__body em { color: #4b5563; }
+
+.exicom-legal__table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0 1.4rem;
+    font-size: .88rem;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #ECEEF2;
+}
+.exicom-legal__table th, .exicom-legal__table td {
+    text-align: left;
+    padding: .8rem 1rem;
+    border-bottom: 1px solid #F0F1F3;
+}
+.exicom-legal__table thead th {
+    background: #F7F8FB;
+    color: #1A1F36;
+    font-weight: 700;
+    font-size: .76rem;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+}
+.exicom-legal__table tbody tr:last-child td { border-bottom: none; }
+.exicom-legal__table tbody tr:hover td { background: rgba(255, 107, 53, .03); }
+
+.exicom-legal__sep {
+    border: none;
+    border-top: 1px solid #ECEEF2;
+    margin: 2rem 0 1.25rem;
+}
+
+.exicom-legal__closing {
+    font-size: .88rem !important;
+    color: #4b5563 !important;
+    font-style: italic;
+    background: rgba(255, 107, 53, .05);
+    border-left: 3px solid #FF6B35;
+    padding: .85rem 1rem;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 0 !important;
+}
+
+/* Cards (contacto) */
+.exicom-legal__cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin: 0 0 1.5rem;
+}
+.exicom-legal__card {
+    background: #FAFBFE;
+    border: 1px solid #ECEEF2;
+    border-radius: 12px;
+    padding: 1.15rem;
+    transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+.exicom-legal__card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 107, 53, .35);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, .08);
+}
+.exicom-legal__card-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    font-size: 1.2rem;
+    background: #fff;
+    border-radius: 10px;
+    margin-bottom: .65rem;
+    border: 1px solid #ECEEF2;
+}
+.exicom-legal__card h3 {
+    font-size: .9rem;
+    font-weight: 700;
+    color: #1A1F36;
+    margin: 0 0 .25rem;
+}
+.exicom-legal__card p {
+    margin: 0 !important;
+    font-size: .85rem !important;
+    line-height: 1.4 !important;
+}
+.exicom-legal__card a {
+    color: #FF6B35 !important;
+    border-bottom: 1px solid rgba(255, 107, 53, .25) !important;
+}
+
+/* Forms (reclamaciones + contacto) */
+.exicom-legal__form {
+    margin: 1.25rem 0 1.5rem;
+    background: #FAFBFE;
+    border: 1px solid #ECEEF2;
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+.exicom-legal__form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+@media (max-width: 600px) {
+    .exicom-legal__form-grid { grid-template-columns: 1fr; }
+}
+.exicom-legal__form-full { grid-column: 1 / -1; }
+.exicom-legal__form label {
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+    font-size: .85rem;
+}
+.exicom-legal__form-label {
+    color: #1A1F36;
+    font-weight: 600;
+    font-size: .78rem;
+    letter-spacing: .2px;
+}
+.exicom-legal__form-label em {
+    color: #FF6B35;
+    font-style: normal;
+    margin-left: .15rem;
+}
+.exicom-legal__form input, .exicom-legal__form select, .exicom-legal__form textarea {
+    width: 100%;
+    border: 1.5px solid #E5E7EB;
+    border-radius: 8px;
+    padding: .55rem .75rem;
+    font-size: .9rem;
+    color: #1A1F36;
+    background: #fff;
+    font-family: inherit;
+    transition: border-color .15s ease, box-shadow .15s ease;
+}
+.exicom-legal__form input:focus, .exicom-legal__form select:focus, .exicom-legal__form textarea:focus {
+    outline: none;
+    border-color: #FF6B35;
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, .12);
+}
+.exicom-legal__form textarea { resize: vertical; min-height: 120px; }
+.exicom-legal__form-check {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: .55rem;
+    font-size: .82rem;
+    color: #4b5563;
+    grid-column: 1 / -1;
+}
+.exicom-legal__form-check input {
+    width: 18px;
+    height: 18px;
+    margin: .15rem 0 0;
+    flex: 0 0 auto;
+    accent-color: #FF6B35;
+}
+.exicom-legal__form-actions {
+    margin: 1.25rem 0 .25rem;
+    text-align: right;
+}
+.exicom-legal__form-submit {
+    background: #FF6B35;
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: .7rem 1.6rem;
+    font-size: .9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s ease, transform .1s ease;
+    box-shadow: 0 4px 16px rgba(255, 107, 53, .25);
+}
+.exicom-legal__form-submit:hover { background: #E0552B; }
+.exicom-legal__form-submit:active { transform: scale(.98); }
+.exicom-legal__form-feedback {
+    margin: 1rem 0 0;
+    padding: .85rem 1rem;
+    background: rgba(34, 197, 94, .08);
+    border-left: 3px solid #16a34a;
+    border-radius: 8px;
+    color: #15803d;
+    font-size: .85rem;
+}

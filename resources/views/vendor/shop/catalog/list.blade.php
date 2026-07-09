@@ -8,7 +8,6 @@
 	<?= $aiheader['catalog/filter'] ?? '' ?>
 	<?= $aiheader['catalog/tree'] ?? '' ?>
 	<?= $aiheader['catalog/stage'] ?? '' ?>
-	<?= $aiheader['catalog/session'] ?? '' ?>
 	<?= $aiheader['catalog/lists'] ?? '' ?>
 	<link type="text/css" rel="stylesheet" href="{{ asset('css/exicatalog.css?v=' . $_exiV) }}">
 @stop
@@ -35,7 +34,6 @@
 		<div class="row">
 			<aside class="col-lg-3 exicatalog-aside">
 				<?= $aibody['catalog/filter'] ?? '' ?>
-				<?= $aibody['catalog/session'] ?? '' ?>
 			</aside>
 			<div class="col-lg-9 exicatalog-main">
 				<?= $aibody['catalog/lists'] ?>

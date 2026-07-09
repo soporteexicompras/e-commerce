@@ -1,0 +1,166 @@
+/* ══════════════════════════════════════════════════════════
+   EXICOMPRAS — Page Loader (Influencers)
+   Overlay full-viewport premium que se monta solo cuando el
+   usuario hace clic en un link a /shop/influencers*. Trigger JS.
+   ══════════════════════════════════════════════════════════ */
+
+.exi-page-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0F1424 0%, #1A1F36 45%, #2d1456 100%);
+    color: #fff;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .35s ease, visibility 0s linear .35s;
+}
+.exi-page-loader.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity .35s ease;
+}
+
+/* Gradient blobs animados */
+.exi-page-loader__bg { position: absolute; inset: 0; overflow: hidden; }
+.exi-page-loader__bg::before,
+.exi-page-loader__bg::after {
+    content: '';
+    position: absolute;
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0;
+    transform: scale(.7);
+    transition: opacity 1s ease, transform 2.5s cubic-bezier(.22, 1, .36, 1);
+}
+.exi-page-loader__bg::before {
+    background: radial-gradient(circle, #FF6B35 0%, transparent 70%);
+    top: -150px;
+    left: -120px;
+}
+.exi-page-loader__bg::after {
+    background: radial-gradient(circle, #4A7EFF 0%, transparent 70%);
+    bottom: -200px;
+    right: -100px;
+}
+.exi-page-loader.is-active .exi-page-loader__bg::before,
+.exi-page-loader.is-active .exi-page-loader__bg::after {
+    opacity: .35;
+    transform: scale(1);
+}
+
+/* Stack central */
+.exi-page-loader__container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .85rem;
+    padding: 2rem;
+    text-align: center;
+}
+
+.exi-page-loader__kicker {
+    font-size: .68rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .5);
+    font-weight: 600;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .5s ease .35s, transform .5s ease .35s;
+}
+.exi-page-loader.is-active .exi-page-loader__kicker {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.exi-page-loader__title {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -.02em;
+    color: #fff;
+    margin: 0;
+    line-height: 1.1;
+    opacity: 0;
+    transform: scale(.94) translateY(20px);
+    transition: opacity .7s ease .75s, transform .7s cubic-bezier(.22, 1, .36, 1) .75s;
+}
+.exi-page-loader.is-active .exi-page-loader__title {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+.exi-page-loader__art {
+    margin: .25rem 0;
+    width: 96px;
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(.92);
+    transition: opacity .5s ease 1s, transform .6s cubic-bezier(.22, 1, .36, 1) 1s;
+}
+.exi-page-loader.is-active .exi-page-loader__art {
+    opacity: 1;
+    transform: scale(1);
+}
+.exi-page-loader__art svg { display: block; overflow: visible; }
+
+.exi-page-loader__tagline {
+    font-size: .9rem;
+    color: rgba(255, 255, 255, .7);
+    margin: 0;
+    max-width: 28rem;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .5s ease 1.5s, transform .5s ease 1.5s;
+}
+.exi-page-loader.is-active .exi-page-loader__tagline {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.exi-page-loader__bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: rgba(255, 255, 255, .08);
+    overflow: hidden;
+}
+.exi-page-loader__progress {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #FF6B35 0%, #FFB400 100%);
+    box-shadow: 0 0 12px rgba(255, 107, 53, .6);
+    transition: width 2.4s cubic-bezier(.4, 0, .2, 1);
+}
+.exi-page-loader.is-active .exi-page-loader__progress {
+    width: 100%;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .exi-page-loader,
+    .exi-page-loader__kicker,
+    .exi-page-loader__title,
+    .exi-page-loader__art,
+    .exi-page-loader__art *,
+    .exi-page-loader__tagline,
+    .exi-page-loader__bg::before,
+    .exi-page-loader__bg::after,
+    .exi-page-loader__progress {
+        transition: none !important;
+    }
+}

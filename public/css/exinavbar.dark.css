@@ -783,3 +783,103 @@
         padding-right: max(.75rem, env(safe-area-inset-right)) !important;
     }
 }
+
+/* ──────────────────────────────────────────────────────────
+   Categorías especiales: Influencers + Coleccionistas
+   Color distintivo + underline animado al hover + chip
+   "ESPECIAL" sutil al lado del nombre.
+   ────────────────────────────────────────────────────────── */
+
+/* Base compartida: tipografía un poco más pesada + ancho del
+   área de pulsado extendido para acomodar el chip. */
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-influencers,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas {
+    position: relative;
+}
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-influencers .cat-link,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas .cat-link {
+    font-weight: 700 !important;
+    letter-spacing: .01em;
+    position: relative;
+    transition: color .2s ease;
+}
+
+/* === Influencers — color naranja de marca === */
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-influencers .cat-link {
+    color: #B25E16 !important; /* tono dorado-naranja apagado en reposo */
+}
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-influencers .cat-link:hover,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-influencers .cat-link:focus,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-influencers.active > .item-links > .cat-link {
+    color: #FF6B35 !important;
+}
+
+/* === Coleccionistas — morado premium === */
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas .cat-link {
+    color: #6E368F !important;
+}
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas .cat-link:hover,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas .cat-link:focus,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas.active > .item-links > .cat-link {
+    color: #9B59B6 !important;
+}
+
+/* === Underline animado al hover (slide-in de izquierda a derecha) ===
+   Se posiciona absolutamente debajo del texto y se expande. */
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-influencers .cat-link::after,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas .cat-link::after {
+    content: '';
+    position: absolute;
+    left: .9rem;
+    right: .9rem;
+    bottom: .35rem;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform .3s cubic-bezier(.4,0,.2,1);
+}
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-influencers:hover .cat-link::after,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-influencers:focus-within .cat-link::after,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas:hover .cat-link::after,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas:focus-within .cat-link::after {
+    transform: scaleX(1);
+}
+
+/* === Chip "Especial" sutil a la izquierda del nombre === */
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-influencers .cat-link,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas .cat-link {
+    padding-left: 1.55rem !important;
+}
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-influencers .cat-link::before,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas .cat-link::before {
+    content: '';
+    position: absolute;
+    left: .65rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 0 0 currentColor;
+    transition: box-shadow .25s ease;
+}
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-influencers:hover .cat-link::before,
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas:hover .cat-link::before {
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, .15);
+}
+.exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas:hover .cat-link::before {
+    box-shadow: 0 0 0 3px rgba(155, 89, 182, .15);
+}
+
+/* === Reduced motion === */
+@media (prefers-reduced-motion: reduce) {
+    .exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-influencers .cat-link::after,
+    .exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas .cat-link::after,
+    .exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-influencers .cat-link::before,
+    .exi-navbar-row--sub .catalog-filter-tree .cat-item.catcode-coleccionistas .cat-link::before {
+        transition: none !important;
+    }
+}

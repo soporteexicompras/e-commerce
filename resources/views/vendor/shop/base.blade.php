@@ -22,11 +22,15 @@
 		@endif
 		<link type="text/css" rel="stylesheet" href="{{ asset('vendor/shop/themes/default/aimeos.css?v=' . $_ver ) }}">
 		{{-- Navbar global — garantiza consistencia entre home, list, tree, detail --}}
-		<link type="text/css" rel="stylesheet" href="{{ asset('css/exinavbar.css?v=2') }}">
+		<link type="text/css" rel="stylesheet" href="{{ asset('css/exinavbar.css?v=' . $_ver) }}">
 		{{-- 2-row layout + sticky shrink + mega-menú + search prominente + wishlist --}}
-		<link type="text/css" rel="stylesheet" href="{{ asset('css/exinavbar.dark.css?v=23') }}">
+		<link type="text/css" rel="stylesheet" href="{{ asset('css/exinavbar.dark.css?v=' . $_ver) }}">
 		{{-- Drawer móvil (off-canvas) --}}
-		<link type="text/css" rel="stylesheet" href="{{ asset('css/exinavbar.drawer.css?v=6') }}">
+		<link type="text/css" rel="stylesheet" href="{{ asset('css/exinavbar.drawer.css?v=' . $_ver) }}">
+		{{-- Footer rediseñado + páginas legales (Terminos, Privacidad, etc.) --}}
+		<link type="text/css" rel="stylesheet" href="{{ asset('css/exifooter.css?v=1') }}">
+		{{-- Page loader premium para categoria Influencers --}}
+		<link type="text/css" rel="stylesheet" href="{{ asset('css/exi-page-loader.css?v=1') }}">
 
 		@yield('aimeos_header')
 
@@ -210,42 +214,123 @@
 		</div>
 
 
-		<footer>
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-8">
-						<div class="row">
-							<div class="col-sm-6 footer-left">
-								<div class="footer-block">
-									<h2 class="pb-3" aria-label="{{ __('Legal information') }}">{{ __( 'LEGAL' ) }}</h2>
-									<p><a href="{{ airoute(config('shop.client.html.cms.page.url.target', 'aimeos_page'), ['path' => 'terms']) }}">{{ __( 'Terms & Conditions' ) }}</a></p>
-									<p><a href="{{ airoute(config('shop.client.html.cms.page.url.target', 'aimeos_page'), ['path' => 'privacy']) }}">{{ __( 'Privacy Notice' ) }}</a></p>
-									<p><a href="{{ airoute(config('shop.client.html.cms.page.url.target', 'aimeos_page'), ['path' => 'cancel']) }}">{{ __( 'Cancellation' ) }}</a></p>
-								</div>
-							</div>
-							<div class="col-sm-6 footer-center">
-								<div class="footer-block">
-									<h2 class="pb-3" aria-label="{{ __('About the company') }}">{{ __( 'ABOUT US' ) }}</h2>
-									<p><a href="{{ airoute(config('shop.client.html.cms.page.url.target', 'aimeos_page'), ['path' => 'contact']) }}">{{ __( 'Contact us' ) }}</a></p>
-									<p><a href="{{ airoute(config('shop.client.html.cms.page.url.target', 'aimeos_page'), ['path' => 'about']) }}">{{ __( 'Company' ) }}</a></p>
-								</div>
-							</div>
+		<footer class="exicom-footer" aria-label="Pie de página">
+			<div class="exicom-footer__container">
+
+				<div class="exicom-footer__grid">
+
+					{{-- Columna 1: marca + contacto + redes --}}
+					<div class="exicom-footer__brand">
+						@php
+							$_siteLogo = trim((string) app( 'aimeos.context' )->get()->locale()->getSiteItem()->getLogo());
+							$_logoUrl  = $_siteLogo !== ''
+							    ? app( 'aimeos.context' )->get()->config()->get( 'resource/fs-media/baseurl' ) . '/' . $_siteLogo
+							    : 'vendor/shop/themes/default/assets/logo.png';
+						@endphp
+						<a href="{{ route('aimeos_home') }}" title="Ir al inicio" class="exicom-footer__logo-link" aria-label="Exicompras — ir al inicio">
+							<img src="{{ asset($_logoUrl) }}" alt="Exicompras" loading="lazy" class="exicom-footer__logo">
+						</a>
+						<p class="exicom-footer__tagline">El marketplace colombiano para comprar productos únicos con pagos seguros y envíos trazables.</p>
+
+						<ul class="exicom-footer__contact">
+							<li>📍 <span>Carrera 1 # 2-3, Bogotá D.C., Colombia</span></li>
+							<li>✉️ <a href="mailto:atencion@exicompras.com">atencion@exicompras.com</a></li>
+							<li>📞 <a href="tel:+5710000000">+57 (1) 000 0000</a></li>
+							<li><small>NIT 900.000.000-0 · Exicompras S.A.S.</small></li>
+						</ul>
+
+						<div class="exicom-footer__socials" aria-label="Redes sociales">
+							<a href="#" class="exicom-footer__social" title="Facebook"  rel="noopener" aria-label="Facebook">
+								<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 22v-8h2.8l.4-3H13V8.9c0-1 .2-1.6 1.6-1.6H16V4.6c-.3 0-1.4-.1-2.6-.1-2.6 0-4.4 1.6-4.4 4.5v2.5H6.5V14H9v8h4z"/></svg>
+							</a>
+							<a href="#" class="exicom-footer__social" title="Instagram" rel="noopener" aria-label="Instagram">
+								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+							</a>
+							<a href="#" class="exicom-footer__social" title="TikTok" rel="noopener" aria-label="TikTok">
+								<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5 3c.3 1.7 1.4 3.2 3 4v3a8.4 8.4 0 0 1-4-1.1v6.6a5.6 5.6 0 1 1-5.6-5.6c.3 0 .7 0 1 .1v3.1a2.6 2.6 0 1 0 1.6 2.4V3h4z"/></svg>
+							</a>
+							<a href="#" class="exicom-footer__social" title="YouTube" rel="noopener" aria-label="YouTube">
+								<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 8s-.2-1.4-.8-2c-.8-.8-1.6-.8-2-.9-2.8-.2-7.2-.2-7.2-.2s-4.4 0-7.2.2c-.4 0-1.2 0-2 .9C2.2 6.6 2 8 2 8S1.8 9.6 1.8 11.2v1.6c0 1.6.2 3.2.2 3.2s.2 1.4.8 2c.8.8 1.8.8 2.3.9 1.6.2 7.1.2 7.1.2s4.4 0 7.2-.2c.4 0 1.2-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.6c0-1.6-.2-3.2-.2-3.2zM10 14V9l5 2.5L10 14z"/></svg>
+							</a>
+							<a href="#" class="exicom-footer__social" title="X (Twitter)" rel="noopener" aria-label="X (Twitter)">
+								<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.2 3H21l-6.5 7.4L22 21h-6l-4.7-6.1L5.8 21H3l7-8L2.5 3h6.2l4.3 5.7L18.2 3z"/></svg>
+							</a>
 						</div>
 					</div>
-					<div class="col-md-4 footer-right">
-						<div class="footer-block">
-							<a class="logo" href="/" title="{{ __('To the home page') }}">
-								<img src="{{ asset( app( 'aimeos.context' )->get()->config()->get( 'resource/fs-media/baseurl' ) . '/' . ( app( 'aimeos.context' )->get()->locale()->getSiteItem()->getLogo() ?: '../vendor/shop/themes/default/assets/logo.png' ) ) }}" class="footer-logo" alt="{{ __('To the home page') }}">
-							</a>
-							<div class="social" aria-label="{{ __('Social media links') }}">
-								<p><a href="#" class="sm facebook" title="Facebook" rel="noopener">Facebook</a></p>
-								<p><a href="#" class="sm twitter" title="Twitter" rel="noopener">Twitter</a></p>
-								<p><a href="#" class="sm instagram" title="Instagram" rel="noopener">Instagram</a></p>
-								<p><a href="#" class="sm youtube" title="Youtube" rel="noopener">Youtube</a></p>
-							</div>
+
+					{{-- Columna 2: Comprar --}}
+					<div class="exicom-footer__col">
+						<h4>Comprar</h4>
+						<ul class="exicom-footer__list">
+							<li><a href="{{ route('aimeos_shop_list') }}">Catálogo</a></li>
+							<li><a href="{{ route('legal.terminos') }}">Ofertas y promociones</a></li>
+							<li><a href="{{ route('legal.terminos') }}">Nuevos productos</a></li>
+							<li><a href="{{ route('favorites.index') }}">Mis favoritos</a></li>
+						</ul>
+					</div>
+
+					{{-- Columna 3: Atención al cliente --}}
+					<div class="exicom-footer__col">
+						<h4>Atención</h4>
+						<ul class="exicom-footer__list">
+							<li><a href="{{ route('legal.contacto') }}">Centro de ayuda</a></li>
+							<li><a href="{{ route('legal.reclamaciones') }}">Libro de reclamaciones</a></li>
+							<li><a href="{{ route('legal.reclamaciones') }}">Peticiones, quejas y reclamos</a></li>
+							<li><a href="{{ route('legal.envios') }}">Seguimiento de envío</a></li>
+						</ul>
+					</div>
+
+					{{-- Columna 4: Legal --}}
+					<div class="exicom-footer__col">
+						<h4>Legal</h4>
+						<ul class="exicom-footer__list">
+							<li><a href="{{ route('legal.terminos') }}">Términos y Condiciones</a></li>
+							<li><a href="{{ route('legal.privacidad') }}">Política de Privacidad</a></li>
+							<li><a href="{{ route('legal.cancelaciones') }}">Cancelaciones y retracto</a></li>
+							<li><a href="{{ route('legal.envios') }}">Política de Envíos</a></li>
+							<li><a href="{{ route('legal.garantias') }}">Garantía Legal</a></li>
+							<li><a href="{{ route('legal.reclamaciones') }}">Libro de Reclamaciones</a></li>
+						</ul>
+					</div>
+
+					{{-- Columna 5: Empresa --}}
+					<div class="exicom-footer__col">
+						<h4>Empresa</h4>
+						<ul class="exicom-footer__list">
+							<li><a href="{{ route('legal.sobre-nosotros') }}">Sobre Exicompras</a></li>
+							<li><a href="{{ route('legal.contacto') }}">Contacto</a></li>
+							<li><a href="mailto:vendedores@exicompras.com">Vende en Exicompras</a></li>
+						</ul>
+
+						<div class="exicom-footer__pay" aria-label="Medios de pago aceptados">
+							<span class="exicom-footer__pay-chip">Visa</span>
+							<span class="exicom-footer__pay-chip">Mastercard</span>
+							<span class="exicom-footer__pay-chip">Amex</span>
+							<span class="exicom-footer__pay-chip">PSE</span>
+							<span class="exicom-footer__pay-chip">Nequi</span>
+							<span class="exicom-footer__pay-chip">Daviplata</span>
 						</div>
+					</div>
+
+				</div>
+
+				<div class="exicom-footer__bottom">
+					<div>
+						<strong>© {{ date('Y') }} Exicompras S.A.S.</strong> · Todos los derechos reservados.
+						<span class="exicom-footer__legal-line">
+							Cumple con la <strong>Ley 1480 de 2011</strong> (Estatuto del Consumidor) ·
+							<strong>Ley 1581 de 2012</strong> (Protección de Datos Personales) ·
+							<strong>Decreto 735 de 2013</strong> (Libro de Reclamaciones Virtual).
+						</span>
+					</div>
+					<div class="exicom-footer__bottom-links">
+						<a href="{{ route('legal.terminos') }}">Términos</a>
+						<a href="{{ route('legal.privacidad') }}">Privacidad</a>
+						<a href="{{ route('legal.garantias') }}">Garantía</a>
+						<a href="{{ route('legal.contacto') }}">Contacto</a>
 					</div>
 				</div>
+
 			</div>
 		</footer>
 
@@ -260,6 +345,8 @@
 		<script src="{{ asset('vendor/shop/themes/default/aimeos.js?v=' . $_ver ) }}"></script>
 		{{-- Navbar: drawer, sticky shrink, wishlist AJAX, clonado categorías --}}
 		<script src="{{ asset('js/exinavbar.js?v=2') }}" defer></script>
+		{{-- Page loader premium para categoria Influencers --}}
+		<script src="{{ asset('js/exi-page-loader.js?v=1') }}" defer></script>
 		@yield('aimeos_scripts')
 	</body>
 </html>

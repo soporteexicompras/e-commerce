@@ -30,4 +30,16 @@ Route::middleware(['web'])->prefix('favorites')->name('favorites.')->group(funct
     Route::post('/sync',    [\App\Http\Controllers\FavoriteController::class, 'sync'])->middleware('auth')->name('sync');
 });
 
+// Paginas legales / institucionales (estaticas, accesibles publicamente)
+Route::middleware(['web'])->name('legal.')->group(function () {
+    Route::view('/terminos',         'legal.terminos')->name('terminos');
+    Route::view('/privacidad',       'legal.privacidad')->name('privacidad');
+    Route::view('/cancelaciones',    'legal.cancelaciones')->name('cancelaciones');
+    Route::view('/envios',           'legal.envios')->name('envios');
+    Route::view('/garantias',        'legal.garantias')->name('garantias');
+    Route::view('/reclamaciones',    'legal.reclamaciones')->name('reclamaciones');
+    Route::view('/contacto',         'legal.contacto')->name('contacto');
+    Route::view('/sobre-nosotros',   'legal.sobre-nosotros')->name('sobre-nosotros');
+});
+
 require __DIR__.'/auth.php';
