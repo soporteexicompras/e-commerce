@@ -106,14 +106,35 @@ services:
       - exicompras
       - coolify
     labels:
-      # Infra Traefik — no incluyen router/rule para que Coolify lo
-      # inyecte desde su dashboard. Si necesitas un router manual,
-      # duplica la lógica en Coolify (Domains) y elimina el hardcode.
+      # Router Traefik (HTTP). Como no hay dominio propio configurado
+      # en Coolify (docker_compose_domains=[]), restauramos manualmente
+      # el dominio sslip.io autogenerado para que la web sea accesible
+      # desde http://<uuid>.<IP>.sslip.io. Si configuras un dominio real
+      # en Coolify (Domains), podes eliminar este bloque.
       - "traefik.enable=true"
       - "traefik.docker.network=coolify"
       - "coolify.managed=true"
       - "coolify.pullRequestId=0"
       - "coolify.type=application"
+      - "traefik.http.services.exicompras-nginx.loadbalancer.server.port=80"
+      - "traefik.http.routers.exicompras-nginx.rule=Host(`qnbygzoq32luuws2cv6d6zbl.149.130.187.189.sslip.io`)"
+      - "traefik.http.routers.exicompras-nginx.entryPoints=http"
+      - "traefik.http.routers.exicompras-nginx.priority=100"
+      - "traefik.http.routers.exicompras-nginx.service=exicompras-nginx"
+      # Router HTTPS con cert de Let's Encrypt (mismo Host)
+      - "traefik.http.routers.exicompras-nginx-secure.rule=Host(`qnbygzoq32luuws2cv6d6zbl.149.130.187.189.sslip.io`)"
+      - "traefik.http.routers.exicompras-nginx-secure.entryPoints=https"
+      - "traefik.http.routers.exicompras-nginx-secure.tls=true"
+      - "traefik.http.routers.exicompras-nginx-secure.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.exicompras-nginx-secure.priority=100"
+      - "traefik.http.routers.exicompras-nginx-secure.service=exicompras-nginx"
+      # Redirige HTTP -> HTTPS
+      - "traefik.http.routers.exicompras-nginx-http2https.rule=Host(`qnbygzoq32luuws2cv6d6zbl.149.130.187.189.sslip.io`)"
+      - "traefik.http.routers.exicompras-nginx-http2https.entryPoints=http"
+      - "traefik.http.routers.exicompras-nginx-http2https.middlewares=redirect-to-https"
+      - "traefik.http.routers.exicompras-nginx-http2https.priority=200"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
     healthcheck:
       test: ["CMD", "wget", "--spider", "-q", "http://localhost/up"]
       interval: 30s
