@@ -71,7 +71,13 @@ services:
       # Comprueba que PHP-FPM escucha en :9000 (sin HTTP porque es FastCGI).
       # Si el puerto responde, el worker está listo para aceptar requests
       # de nginx. /up lo chequea nginx (siguiente servicio).
-      test: ["CMD-SHELL", "(echo > /dev/tcp/127.0.0.1/9000) >/dev/null 2>&1 || exit 1"]
+      #
+      # NOTA: se envuelve en `bash -c` porque /dev/tcp/host/puerto es un
+      # builtin exclusivo de bash. La imagen base usa Debian 12 con
+      # /bin/sh -> dash, y Docker ejecuta el healthcheck con `/bin/sh -c`,
+      # lo que hacía que fallara siempre y el contenedor quedara
+      # "unhealthy" pese a que php-fpm sí estaba escuchando.
+      test: ["CMD-SHELL", "bash -c '(echo > /dev/tcp/127.0.0.1/9000) >/dev/null 2>&1 || exit 1'"]
       interval: 30s
       timeout: 5s
       retries: 3
